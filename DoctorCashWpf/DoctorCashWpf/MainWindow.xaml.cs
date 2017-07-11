@@ -27,6 +27,7 @@ namespace DoctorCashWpf
 
         private void CashInButton_Click(object sender, RoutedEventArgs e)
         {
+            // Opens a new Modal Window
             CashInWindow modalWindow = new CashInWindow();
             modalWindow.ShowDialog();
         }
