@@ -24,5 +24,26 @@ namespace DoctorCashWpf
         {
             InitializeComponent();
         }
+
+        private void CashInButton_Click(object sender, RoutedEventArgs e)
+        {
+            CashInWindow modalWindow = new CashInWindow();
+            modalWindow.ShowDialog();
+        }
+
+        private void CashOutButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RefundButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CloseDateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
