@@ -10,14 +10,74 @@ namespace DoctorCashWpf
     class transactionService : transaction
     {
 
-        public DataTable getTransactions()
+        public List<transaction> getTransactions()
         {
             DataTable data = new DataTable();
+            var list = new List<transaction>();
 
+            var queryService = new sqlQueryService();
 
+            var columns = new List<string>();
+            columns.Add("trn_ID");
+            columns.Add("trn_User_ID");
+            columns.Add("trn_DateRegistered");
+            columns.Add("trn_Comment");
+            columns.Add("trn_Type");
+            columns.Add("trn_AmountCharged");
+            columns.Add("trn_Cash");
+            columns.Add("trn_Credit");
+            columns.Add("trn_Check");
+            columns.Add("trn_CheckNumber");
+            columns.Add("trn_Change");
+            columns.Add("trn_PatientFirstName");
+            columns.Add("trn_Copayment");
+            columns.Add("trn_SelfPay");
+            columns.Add("trn_Deductible");
+            columns.Add("trn_Labs");
+            columns.Add("trn_Other");
+            columns.Add("trn_OtherComments");
+            columns.Add("trn_Closed");
+            columns.Add("trn_RegisterID");
+            columns.Add("trn_ModifiedBy_ID");
+            columns.Add("trn_ModificationDate");
+            
+            var listTerms = new List<valuesWhere>();
 
+            data = queryService.selectData(columns, "transactions", listTerms);
 
-            return data;
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+                var items = new transaction();
+
+                items.trn_id = Convert.ToInt32(filas["trn_ID"]);
+                items.userId = Convert.ToInt32(filas["trn_User_ID"]);
+                items.dateRegistered = Convert.ToString(filas["trn_DateRegistered"]);
+                items.comment = Convert.ToString(filas["trn_Comment"]);
+                items.type = Convert.ToInt32(filas["trn_Type"]);
+                items.amountCharged = Convert.ToInt32(filas["trn_AmountCharged"]);
+                items.cash = Convert.ToInt32(filas["trn_Cash"]);
+                items.credit = Convert.ToInt32(filas["trn_Credit"]);
+                items.check = Convert.ToInt32(filas["trn_Check"]);
+                items.checkNumber = Convert.ToInt32(filas["trn_CheckNumber"]);
+                items.change = Convert.ToInt32(filas["trn_Change"]);
+                items.patientFirstName = Convert.ToString(filas["trn_PatientFirstName"]);
+                items.copayment = Convert.ToBoolean(filas["trn_Copayment"]);
+                items.selfPay = Convert.ToBoolean(filas["trn_SelfPay"]);
+                items.deductible = Convert.ToBoolean(filas["trn_Deductible"]);
+                items.labs = Convert.ToBoolean(filas["trn_Labs"]);
+                items.other = Convert.ToBoolean(filas["trn_Other"]);
+                items.otherComments = Convert.ToString(filas["trn_OtherComments"]);
+                items.closed = Convert.ToBoolean(filas["trn_Closed"]);
+                items.registerId = Convert.ToString(filas["trn_RegisterID"]);
+                items.modifiedById = Convert.ToInt32(filas["trn_ModifiedBy_ID"]);
+                items.modificationDate = Convert.ToString(filas["trn_ModificationDate"]);
+
+                list.Add(items);
+
+            }
+
+            return list;
         }
 
         public void registerTransaction(transaction transactionArray)
@@ -25,7 +85,6 @@ namespace DoctorCashWpf
             sqlQueryService queryService = new sqlQueryService();
             var listService = new createListService();
             
-
             List<columnsValues> valuesArray = new List<columnsValues>();
             valuesArray.Add(listService.createListOfColumnsValues("trn_User_ID", transactionArray.userId));
             //valuesArray.Add(listService.createListOfColumnsValues("trn_DateRegistered", transactionArray.dateRegistered));

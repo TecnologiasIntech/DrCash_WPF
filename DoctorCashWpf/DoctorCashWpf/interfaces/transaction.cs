@@ -8,6 +8,7 @@ namespace DoctorCashWpf
 {
     class transaction
     {
+        public int trn_id;
         public int userId;
         public string dateRegistered;
         public string comment;

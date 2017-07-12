@@ -92,6 +92,49 @@ namespace DoctorCashWpf
 
         }
 
+        public DataTable selectAllData(string table, List<valuesWhere> valuesOfTerms)
+        {
+            string terms = "";
+
+            //En el caso de tener condiciones las guardamos para despues agregarla a la consulta
+            for (int i = 0; i < valuesOfTerms.Count(); i++)
+            {
+                if (i == 0)
+                {
+                    terms += " WHERE ";
+                }
+                if (valuesOfTerms[i].isTypeString)
+                {
+                    terms += valuesOfTerms[i].column + "= '" + valuesOfTerms[i].value + "' " + valuesOfTerms[i].operationBool + " ";
+                }
+                else
+                {
+                    terms += valuesOfTerms[i].column + "= " + valuesOfTerms[i].value + " " + valuesOfTerms[i].operationBool + " ";
+                }
+            }
+
+            //Creamos la consulta
+            string query = "SELECT * FROM " + table + terms;
+
+            //Abrimos una conexion
+            var conection = openConection();
+
+            //Creamos el adaptador para guardar los datos
+            SqlDataAdapter select = new SqlDataAdapter(query, conectionServer);
+
+            //Pasamos la informacion en un tabla 
+            DataSet data = new DataSet();
+            DataTable selectInformation = new DataTable();
+            select.Fill(data);
+
+            selectInformation = data.Tables[0];
+
+            //Cerramos la conexion
+            closeConection(conection);
+
+            return selectInformation;
+        }
+
         //SELECT column, column FROM table WHERE column = value;
         public DataTable selectData(List<String> columnsArray, string table,  List<valuesWhere> valuesOfTerms)
         {
@@ -101,7 +144,16 @@ namespace DoctorCashWpf
             //Añadimos todas las columnas que queremos consultar
             for (int i = 0; i < columnsArray.Count(); i++)
             {
-                columns += columnsArray[i] + " "; 
+                columns += columnsArray[i];
+
+                if (i < columnsArray.Count() - 1)
+                {
+                    columns += ", ";
+                }
+                else
+                {
+                    columns += "  ";
+                }
             }
 
             //En el caso de tener condiciones las guardamos para despues agregarla a la consulta
