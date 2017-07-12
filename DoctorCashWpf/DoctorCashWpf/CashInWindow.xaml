@@ -21,7 +21,7 @@
             </GroupBox.Header>
             <StackPanel Margin="3">
                 <TextBlock Text="Name" Margin=" 0 5 0 5"/>
-                <TextBox Padding="2"/>
+                <TextBox x:Name="patientFirstName" Padding="2"/>
             </StackPanel>
         </GroupBox>
 
@@ -39,38 +39,40 @@
                 
                 <!--Amount Charge-->
                 <TextBlock Text="Amount Charge" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                <xctk:DecimalUpDown x:Name="amountCharged" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
 
                 <!--Cash-->
                 <TextBlock Text="Cash" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                <xctk:DecimalUpDown x:Name="cash" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
 
                 <!--Check-->
                 <TextBlock Text="Check" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                <xctk:DecimalUpDown x:Name="check" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
 
                 <!--Credit-->
                 <TextBlock Text="Credit" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                <xctk:DecimalUpDown x:Name="credit" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
 
 
                 <!--Check #-->
                 <TextBlock Text="Check #" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown Margin="0 5 45 5" Value="0" Increment="1" />
+                <xctk:DecimalUpDown x:Name="checkNumber" Margin="0 5 45 5" Value="0" Increment="1" Minimum="0"/>
 
 
             </StackPanel>
 
-            <!-- Cash-->
+            <!-- Payment Type-->
             <StackPanel Grid.Column="1" Margin="12">
 
-                <CheckBox x:Name="CopaymentCheckBox"
+                <CheckBox x:Name="copayment"
                       Content="Copayment"/>
-                <CheckBox x:Name="SelfPayCheckBox"
+                <CheckBox x:Name="selfPay"
                       Content="SelfPay"/>
-                <CheckBox x:Name="DeductibleCheckBox"
+                <CheckBox x:Name="deductible"
                       Content="Deductible"/>
-                <CheckBox x:Name="OtherOptionCheckBox"
+                <CheckBox x:Name="labs"
+                      Content="Labs"/>
+                <CheckBox x:Name="other"
                           Content="Other"/>
                 <TextBox/>
 
@@ -110,7 +112,7 @@
                         <TextBlock Text="Comment"/>
                     </GroupBox.Header>
                     <Grid Margin="3">
-                        <TextBox Padding="2"/>
+                        <TextBox x:Name="comment" Padding="2"/>
                     </Grid>
                 </GroupBox>
                 

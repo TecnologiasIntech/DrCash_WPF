@@ -26,28 +26,30 @@ namespace DoctorCashWpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*var transactionService = new transactionService();
-          var transaction = new transaction();
-          transaction.userId = 4;
-          transaction.comment = "sdfsdf";
-          transaction.type = 1;
-          transaction.amountCharged = 100;
-          transaction.cash = 100;
-          transaction.credit = 10;
-          transaction.check = 100;
-          transaction.checkNumber = 2;
-          transaction.change = 10;
-          transaction.patientFirstName = "Carlos Alatorre";
-          transaction.copayment = true;
-          transaction.selfPay = false;
-          transaction.deductible = false;
-          transaction.labs = false;
-          transaction.other = false;
-          transaction.closed = false;
-          transaction.registerId = "Asd";
-          transaction.modifiedById = 4;
+            var transactionService = new transactionService();
+            var transaction = new transaction();
 
-          transactionService.registerTransaction(transaction);*/
+                          transaction.userId = 4;
+            transaction.comment = comment.Text;
+                          transaction.type = 1;
+
+            transaction.amountCharged = (float)amountCharged.Value;
+            transaction.cash = (float)cash.Value;
+            transaction.credit = (float)credit.Value;
+            transaction.check = (float)check.Value;
+            transaction.checkNumber = (int)checkNumber.Value;
+                          transaction.change = 10;
+            transaction.patientFirstName = patientFirstName.Text;
+            transaction.copayment = (bool)copayment.IsChecked;
+            transaction.selfPay = (bool)selfPay.IsChecked; ;
+            transaction.deductible = (bool)deductible.IsChecked; ;
+            transaction.labs = (bool)labs.IsChecked; ;
+            transaction.other = (bool)other.IsChecked; ;
+                          transaction.closed = false;
+                          transaction.registerId = "Asd";
+                          transaction.modifiedById = 4;
+
+            transactionService.registerTransaction(transaction);
         }
     }
 }
