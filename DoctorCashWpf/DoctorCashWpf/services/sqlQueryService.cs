@@ -14,6 +14,7 @@ namespace DoctorCashWpf
         private SqlConnection openConection()
         {
             SqlConnection conexion = new SqlConnection(conectionServer);
+            conexion.Open();
             return conexion;
         }
 
@@ -28,16 +29,27 @@ namespace DoctorCashWpf
             return command;
         }
 
-        public void insertData(string table, List<String> columnsArray, List<String> valuesArray)
+        public int searchValue(int valueInt, string valueString, bool valueBool, float valueFloat)
+        {
+            return 3;
+        }
+
+        public void insertData(string table, List<columnsValues> valuesArray)
         { 
             string columns = "";
             string values = "";
 
             //Obtenemos todos las columnas en las que queremos insertar datos
-            for (int i = 0; i < columnsArray.Count(); i++)
+            for (int i = 0; i < valuesArray.Count(); i++)
             {
-                columns += columnsArray[i] + ", ";
-                values += "@" + columnsArray[i] + ", ";
+                columns += valuesArray[i].column;
+                values += "@" + valuesArray[i].column;
+
+                if(i < valuesArray.Count()-1)
+                {
+                    columns += ", ";
+                    values += ", ";
+                }
             }
 
             //Creamos el query ya con las columnas y valores
@@ -52,7 +64,24 @@ namespace DoctorCashWpf
             //Añadimos todos los valores de las columnas
             for (int i = 0; i < valuesArray.Count(); i++)
             {
-                insert.Parameters.AddWithValue("@" + columnsArray[i], valuesArray[i]);
+
+                switch (valuesArray[i].typeValue)
+                {
+                  
+                    case (int)enums.INT:
+                        insert.Parameters.AddWithValue("@" + valuesArray[i].column, valuesArray[i].valueInt);
+                        break;
+                    case (int)enums.STRING:
+                        insert.Parameters.AddWithValue("@" + valuesArray[i].column, valuesArray[i].valueString);
+                        break;
+                    case (int)enums.BOOL:
+                        insert.Parameters.AddWithValue("@" + valuesArray[i].column, valuesArray[i].valueBool);
+                        break;
+                    case (int)enums.FLOAT:
+                        insert.Parameters.AddWithValue("@" + valuesArray[i].column, valuesArray[i].valueFloat);
+                        break;
+
+                }
             }
 
             //Insertamos los datos
@@ -237,15 +266,7 @@ namespace DoctorCashWpf
             closeConection(conection);
         }
 
-        public valuesWhere createListValuesWhere(bool isTypeString, string column, string value, string operationBool)
-        {
-            var items = new valuesWhere();
-            items.isTypeString = isTypeString;
-            items.column = column;
-            items.value = value;
-            items.operationBool = operationBool;
+        
 
-            return items;
-        }
     }
 }

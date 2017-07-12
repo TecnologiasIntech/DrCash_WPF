@@ -15,13 +15,14 @@ namespace DoctorCashWpf
             bool auth = false;
 
             sqlQueryService querys = new sqlQueryService();
+            var listService = new createListService();
 
             List<string> columnas = new List<string>();
             columnas.Add("usr_Username");
 
             var listValuesTerms = new List<valuesWhere>();
-            listValuesTerms.Add(querys.createListValuesWhere(true, "usr_Username", username, "AND"));
-            listValuesTerms.Add(querys.createListValuesWhere(true, "usr_Password", password, ""));
+            listValuesTerms.Add(listService.createListValuesWhere(true, "usr_Username", username, "AND"));
+            listValuesTerms.Add(listService.createListValuesWhere(true, "usr_Password", password, ""));
 
             DataTable dataTable = querys.selectData(columnas, "users", listValuesTerms);
 
