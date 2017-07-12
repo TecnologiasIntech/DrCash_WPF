@@ -4,9 +4,126 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DoctorCashWpf"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="CashInWindow" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="CashInWindow"  Height="600" Width="800">
+
+    <StackPanel>
+
+        <StackPanel Height="80" Background="Green">
+            <TextBlock Margin="30" Text="Doctor Cash" Foreground="White"/>
+        </StackPanel>
+
+        <!-- Patient Info -->
+        <GroupBox Margin="12">
+            <GroupBox.Header>
+                <TextBlock Text="Patient"/>
+            </GroupBox.Header>
+            <StackPanel Margin="3">
+                <TextBlock Text="Name" Margin=" 0 5 0 5"/>
+                <TextBox Padding="2"/>
+            </StackPanel>
+        </GroupBox>
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Cash-->
+            <StackPanel Grid.Column="0" Margin="12">
+
+                
+                <!--Amount Charge-->
+                <TextBlock Text="Amount Charge" Margin="0 5 0 5"/>
+                <xctk:DecimalUpDown FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+
+                <!--Cash-->
+                <TextBlock Text="Cash" Margin="0 5 0 5"/>
+                <xctk:DecimalUpDown Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+
+                <!--Check-->
+                <TextBlock Text="Check" Margin="0 5 0 5"/>
+                <xctk:DecimalUpDown Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+
+                <!--Credit-->
+                <TextBlock Text="Credit" Margin="0 5 0 5"/>
+                <xctk:DecimalUpDown Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+
+
+                <!--Check #-->
+                <TextBlock Text="Check #" Margin="0 5 0 5"/>
+                <xctk:DecimalUpDown Margin="0 5 45 5" Value="0" Increment="1" />
+
+
+            </StackPanel>
+
+            <!-- Cash-->
+            <StackPanel Grid.Column="1" Margin="12">
+
+                <CheckBox x:Name="CopaymentCheckBox"
+                      Content="Copayment"/>
+                <CheckBox x:Name="SelfPayCheckBox"
+                      Content="SelfPay"/>
+                <CheckBox x:Name="DeductibleCheckBox"
+                      Content="Deductible"/>
+                <CheckBox x:Name="OtherOptionCheckBox"
+                          Content="Other"/>
+                <TextBox/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Total" Grid.Column="0" Grid.Row="0"/>
+                    <TextBlock Text="$150" Grid.Column="1" Grid.Row="0"/>
+                    <TextBlock Text="Amount" Grid.Column="0" Grid.Row="1"/>
+                    <TextBlock Text="$200" Grid.Column="1" Grid.Row="1"/>
+                    <TextBlock Text="Change" Grid.Column="0" Grid.Row="2"/>
+                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="2"/>
+
+                </Grid>
+            </StackPanel>
+
+            <!-- Comment & Save Print-->
+            <Grid Grid.Column="2">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Comment Info -->
+                <GroupBox Margin="12" Grid.Row="0">
+                    <GroupBox.Header>
+                        <TextBlock Text="Comment"/>
+                    </GroupBox.Header>
+                    <Grid Margin="3">
+                        <TextBox Padding="2"/>
+                    </Grid>
+                </GroupBox>
+                
+                <Button Grid.Row="1" Margin="16 35" Content="Save Print" Background="Green"/>
+
+            </Grid>
+            
+            
+
+        </Grid>
+
+
+    </StackPanel>
+    
+
 </Window>
