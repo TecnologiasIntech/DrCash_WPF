@@ -72,6 +72,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="enums\enums.cs" />
+    <Compile Include="interfaces\columnsValues.cs" />
+    <Compile Include="interfaces\transaction.cs" />
+    <Compile Include="services\createListService.cs" />
     <Compile Include="services\transactionService.cs" />
     <Compile Include="services\userService.cs" />
     <Compile Include="constants\constants.cs" />
