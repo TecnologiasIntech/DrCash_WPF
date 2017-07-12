@@ -54,6 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="services\transactionService.cs" />
+    <Compile Include="services\userService.cs" />
+    <Compile Include="constants\constants.cs" />
+    <Compile Include="services\sqlQueryService.cs" />
+    <Compile Include="interfaces\valuesWhere.cs" />
     <Page Include="CashInWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
