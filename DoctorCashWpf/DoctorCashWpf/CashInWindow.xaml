@@ -114,7 +114,7 @@
                     </Grid>
                 </GroupBox>
                 
-                <Button Grid.Row="1" Margin="16 35" Content="Save Print" Background="Green"/>
+                <Button Grid.Row="1" Margin="16 35" Content="Save Print" Background="Green" Click="Button_Click"/>
 
             </Grid>
             
