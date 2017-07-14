@@ -6,11 +6,28 @@ using System.Threading.Tasks;
 
 namespace DoctorCashWpf
 {
-    enum enums
+    enum DATATYPE
     {
-        INT = 1,
-        STRING = 2,
-        BOOL = 3,
-        FLOAT = 4
+        INT,
+        STRING,
+        BOOL,
+        FLOAT,
+        DATETIME
+    }
+
+    enum OPERATOR
+    {
+        EQUALITY,
+        INEGUALITY,
+        GREATER_THAN,
+        GREATER_THAN_OR_EQUAL,
+        LESS_THAN,
+        LESS_THAN_OR_EQUAL
+    }
+
+    enum OPERATORBOOLEAN
+    {
+        LOGICAL_AND,
+        LOGICAL_OR
     }
 }

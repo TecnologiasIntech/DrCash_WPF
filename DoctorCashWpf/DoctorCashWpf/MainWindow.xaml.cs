@@ -30,9 +30,12 @@ namespace DoctorCashWpf
             // Opens a new Modal Window
             CashInWindow modalWindow = new CashInWindow();
              modalWindow.ShowDialog();
-          /*  var transactionService = new transactionService();
+            var transactionService = new transactionService();
             var list = new List<transaction>();
-            list = transactionService.getTransactions();*/
+
+            var userID = 4;
+
+            list = transactionService.getCurrentTransactions(userID);
           
         }
 

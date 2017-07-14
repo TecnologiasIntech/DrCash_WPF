@@ -19,21 +19,22 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="269*"/>
+            <RowDefinition Height="134*"/>
+            <RowDefinition Height="101*"/>
         </Grid.RowDefinitions>
-        
-        
+
+
         <!--Nav Bar-->
-        <StackPanel Background="Black" Grid.RowSpan="2">
-            
+        <StackPanel Background="Black" Grid.RowSpan="3">
+
         </StackPanel>
-        
+
         <!--Transaction Buttons-->
         <StackPanel Orientation="Horizontal"
                 Background="White"
                 Grid.Column="1"
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.ColumnSpan="2"
                 Margin="6">
 
@@ -75,17 +76,17 @@
             </Button>
 
         </StackPanel>
-        
+
         <!--Transactions DataGrid -->
         <DataGrid Grid.Column="1" 
                   Grid.Row="0"
-                  Margin="6"/>
-        
+                  Margin="6" Grid.RowSpan="2"/>
+
         <!--Transactions Reciept-->
         <StackPanel Grid.Column="2" 
                     Grid.Row="0" 
                     Background="White"
-                    Margin="6">
+                    Margin="6" Grid.RowSpan="2">
 
             <!--Initial Cash-->
             <GroupBox Margin="12" Grid.Row="0">
@@ -123,7 +124,7 @@
                     <TextBlock Text="$0" Grid.Column="1" Grid.Row="2"/>
                     <TextBlock Text="Total In" Grid.Column="0" Grid.Row="3"/>
                     <TextBlock Text="$150" Grid.Column="1" Grid.Row="3"/>
-                    
+
 
                 </Grid>
             </GroupBox>
@@ -168,9 +169,9 @@
             </GroupBox>
 
         </StackPanel>
-        
+
 
     </Grid>
-    
-    
+
+
 </Window>

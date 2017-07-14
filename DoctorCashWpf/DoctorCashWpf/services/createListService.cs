@@ -8,13 +8,15 @@ namespace DoctorCashWpf
 {
     class createListService
     {
-        public valuesWhere createListValuesWhere(bool isTypeString, string column, string value, string operationBool)
+        
+        public valuesWhere createListValuesWhere(bool isTypeString, string column, string value, string operationBool, int Operator)
         {
             var items = new valuesWhere();
             items.isTypeString = isTypeString;
             items.column = column;
             items.value = value;
             items.operationBool = operationBool;
+            items.Operator = Operator;
 
             return items;
         }
@@ -24,7 +26,7 @@ namespace DoctorCashWpf
             var items = new columnsValues();
             items.column = column;
             items.valueInt = value;
-            items.typeValue = (int)enums.INT;
+            items.typeValue = (int)DATATYPE.INT;
 
             return items;
         }
@@ -34,7 +36,7 @@ namespace DoctorCashWpf
             var items = new columnsValues();
             items.column = column;
             items.valueString = value;
-            items.typeValue = (int)enums.STRING;
+            items.typeValue = (int)DATATYPE.STRING;
 
             return items;
         }
@@ -44,7 +46,7 @@ namespace DoctorCashWpf
             var items = new columnsValues();
             items.column = column;
             items.valueFloat = value;
-            items.typeValue = (int)enums.FLOAT;
+            items.typeValue = (int)DATATYPE.FLOAT;
 
             return items;
         }
@@ -54,7 +56,7 @@ namespace DoctorCashWpf
             var items = new columnsValues();
             items.column = column;
             items.valueBool = value;
-            items.typeValue = (int)enums.BOOL;
+            items.typeValue = (int)DATATYPE.BOOL;
 
             return items;
         }

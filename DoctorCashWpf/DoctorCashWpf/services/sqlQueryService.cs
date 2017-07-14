@@ -29,9 +29,38 @@ namespace DoctorCashWpf
             return command;
         }
 
-        public int searchValue(int valueInt, string valueString, bool valueBool, float valueFloat)
+        public string getOperator(int Operator)
         {
-            return 3;
+            string operatorType = "";
+
+            switch (Operator)
+            {
+                case (int)OPERATOR.EQUALITY:
+                    operatorType =  "=";
+                    break;
+
+                case (int)OPERATOR.INEGUALITY:
+                    operatorType = "!=";
+                    break;
+
+                case (int)OPERATOR.LESS_THAN:
+                    operatorType = "<";
+                    break;
+
+                case (int)OPERATOR.LESS_THAN_OR_EQUAL:
+                    operatorType = "<=";
+                    break;
+
+                case (int)OPERATOR.GREATER_THAN:
+                    operatorType = ">";
+                    break;
+
+                case (int)OPERATOR.GREATER_THAN_OR_EQUAL:
+                    operatorType = ">=";
+                    break;
+            }
+
+            return operatorType;
         }
 
         public void insertData(string table, List<columnsValues> valuesArray)
@@ -68,16 +97,16 @@ namespace DoctorCashWpf
                 switch (valuesArray[i].typeValue)
                 {
                   
-                    case (int)enums.INT:
+                    case (int)DATATYPE.INT:
                         insert.Parameters.AddWithValue("@" + valuesArray[i].column, valuesArray[i].valueInt);
                         break;
-                    case (int)enums.STRING:
+                    case (int)DATATYPE.STRING:
                         insert.Parameters.AddWithValue("@" + valuesArray[i].column, valuesArray[i].valueString);
                         break;
-                    case (int)enums.BOOL:
+                    case (int)DATATYPE.BOOL:
                         insert.Parameters.AddWithValue("@" + valuesArray[i].column, valuesArray[i].valueBool);
                         break;
-                    case (int)enums.FLOAT:
+                    case (int)DATATYPE.FLOAT:
                         insert.Parameters.AddWithValue("@" + valuesArray[i].column, valuesArray[i].valueFloat);
                         break;
 
@@ -105,11 +134,11 @@ namespace DoctorCashWpf
                 }
                 if (valuesOfTerms[i].isTypeString)
                 {
-                    terms += valuesOfTerms[i].column + "= '" + valuesOfTerms[i].value + "' " + valuesOfTerms[i].operationBool + " ";
+                    terms += valuesOfTerms[i].column + " " + getOperator(valuesOfTerms[i].Operator) + " '" + valuesOfTerms[i].value + "' " + valuesOfTerms[i].operationBool + " ";
                 }
                 else
                 {
-                    terms += valuesOfTerms[i].column + "= " + valuesOfTerms[i].value + " " + valuesOfTerms[i].operationBool + " ";
+                    terms += valuesOfTerms[i].column + " " + getOperator(valuesOfTerms[i].Operator) + " " + valuesOfTerms[i].value + " " + valuesOfTerms[i].operationBool + " ";
                 }
             }
 
@@ -165,11 +194,11 @@ namespace DoctorCashWpf
                 }
                 if(valuesOfTerms[i].isTypeString)
                 {
-                    terms += valuesOfTerms[i].column + "= '" + valuesOfTerms[i].value + "' " + valuesOfTerms[i].operationBool + " ";
+                    terms += valuesOfTerms[i].column + " " + getOperator(valuesOfTerms[i].Operator) + " '" + valuesOfTerms[i].value + "' " + valuesOfTerms[i].operationBool + " ";
                 }
                 else
                 {
-                    terms += valuesOfTerms[i].column + "= " + valuesOfTerms[i].value + " " + valuesOfTerms[i].operationBool + " ";
+                    terms += valuesOfTerms[i].column + " " + getOperator(valuesOfTerms[i].Operator) + " " + valuesOfTerms[i].value + " " + valuesOfTerms[i].operationBool + " ";
                 }
             }
 
@@ -199,27 +228,27 @@ namespace DoctorCashWpf
         public int selectCountData(string column, string table, List<valuesWhere> valuesTermsArray)
         {
             int count = 0;
-            string condictions = "";
+            string terms = "";
 
             //En el caso de tener condiciones las guardamos para despues agregarla a la consulta
             for (int i = 0; i < valuesTermsArray.Count(); i++)
             {
                 if (i == 0)
                 {
-                    condictions += " WHERE ";
+                    terms += " WHERE ";
                 }
                 if (valuesTermsArray[i].isTypeString)
                 {
-                    condictions += valuesTermsArray[i].column + "= '" + valuesTermsArray[i].value + "' " + valuesTermsArray[i].operationBool + " ";
+                    terms += valuesTermsArray[i].column + " " + getOperator(valuesTermsArray[i].Operator) + " '" + valuesTermsArray[i].value + "' " + valuesTermsArray[i].operationBool + " ";
                 }
                 else
                 {
-                    condictions += valuesTermsArray[i].column + "= " + valuesTermsArray[i].value + " " + valuesTermsArray[i].operationBool + " ";
+                    terms += valuesTermsArray[i].column + " " + getOperator(valuesTermsArray[i].Operator) + " " + valuesTermsArray[i].value + " " + valuesTermsArray[i].operationBool + " ";
                 }
             }
 
             //Creamos la consulta
-            string query = "SELECT COUNT(" + column + ")" + "FROM " + table + condictions;
+            string query = "SELECT COUNT(" + column + ")" + "FROM " + table + terms;
 
             //Abrimos una conexion
             var conection = openConection();
@@ -254,11 +283,11 @@ namespace DoctorCashWpf
                 }
                 if (valuesTermsArray[i].isTypeString)
                 {
-                    condictions += valuesTermsArray[i].column + "= '" + valuesTermsArray[i].value + "' " + valuesTermsArray[i].operationBool + " ";
+                    condictions += valuesTermsArray[i].column + " " + getOperator(valuesTermsArray[i].Operator) + " '" + valuesTermsArray[i].value + "' " + valuesTermsArray[i].operationBool + " ";
                 }
                 else
                 {
-                    condictions += valuesTermsArray[i].column + "= " + valuesTermsArray[i].value + " " + valuesTermsArray[i].operationBool + " ";
+                    condictions += valuesTermsArray[i].column + " " + getOperator(valuesTermsArray[i].Operator) + " " + valuesTermsArray[i].value + " " + valuesTermsArray[i].operationBool + " ";
                 }
             }
 
@@ -297,11 +326,11 @@ namespace DoctorCashWpf
                 }
                 if (valuesTermsArray[i].isTypeString)
                 {
-                    terms += valuesTermsArray[i].column + "= '" + valuesTermsArray[i].value + "' " + valuesTermsArray[i].operationBool + " ";
+                    terms += valuesTermsArray[i].column + " " + getOperator(valuesTermsArray[i].Operator) + " '" + valuesTermsArray[i].value + "' " + valuesTermsArray[i].operationBool + " ";
                 }
                 else
                 {
-                    terms += valuesTermsArray[i].column + "= " + valuesTermsArray[i].value + " " + valuesTermsArray[i].operationBool + " ";
+                    terms += valuesTermsArray[i].column + " " + getOperator(valuesTermsArray[i].Operator) + " " + valuesTermsArray[i].value + " " + valuesTermsArray[i].operationBool + " ";
                 }
             }
 

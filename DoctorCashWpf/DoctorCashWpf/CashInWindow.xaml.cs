@@ -30,6 +30,7 @@ namespace DoctorCashWpf
             var transaction = new transaction();
 
                           transaction.userId = 4;
+            //transaction.dateRegistered = DateTime.Today.ToString("d");
             transaction.comment = comment.Text;
                           transaction.type = 1;
 
