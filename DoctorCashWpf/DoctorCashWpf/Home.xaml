@@ -1,0 +1,185 @@
+﻿<UserControl x:Class="DoctorCashWpf.Home"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+<UserControl.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+            <!-- throw in some extra colour for our floating action button -->
+            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</UserControl.Resources>
+<Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Transaction Buttons-->
+        <StackPanel Orientation="Horizontal"
+                Background="White"
+                Grid.Column="0"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="6">
+
+            <Button x:Name="CashInButton" 
+                
+                Background="Green"
+                Width="50"
+                Height="50"
+                Margin="10">
+                <Image Source="Images\Cash In 2_96px.png"
+                   Width="30"/>
+            </Button>
+            <Button x:Name="CashOutButton" 
+                
+                Background="Blue"
+                Width="50"
+                Height="50"
+                Margin="10">
+                <Image Source="Images\Cash Out_96px.png"
+                   Width="30"/>
+            </Button>
+            <Button x:Name="RefundButton" 
+                
+                Background="Orange"
+                Width="50"
+                Height="50"
+                Margin="10">
+                <Image Source="Images\Refund_96px.png"
+                   Width="30"/>
+            </Button>
+            <Button x:Name="CloseDateButton" 
+                
+                Background="Red"
+                Width="50"
+                Height="50"
+                Margin="10">
+                <Image Source="Images\Close Date_96px.png"
+                   Width="30"/>
+            </Button>
+
+            <Button Command="{Binding RunDialogCommand}"
+
+                        Width="128">
+
+                <!--RUN CODE-->
+
+            </Button>
+
+        </StackPanel>
+
+        <!--Transactions DataGrid-->
+
+        <Grid Grid.Column="0" Grid.Row="0" Margin="6">
+            <DataGrid ItemsSource="{Binding list}"/>
+        </Grid>
+
+
+
+        <!--Transactions Reciept-->
+
+        <StackPanel Grid.Column="1" 
+                    Grid.Row="0" 
+                    Background="White"
+                    Margin="6">
+
+            <!--Initial Cash-->
+            <GroupBox Margin="12" Grid.Row="0">
+                <GroupBox.Header>
+                    <TextBlock Text="Initial Cash"/>
+                </GroupBox.Header>
+                <StackPanel Margin="3">
+                    <TextBlock Text="$150"/>
+                </StackPanel>
+            </GroupBox>
+
+            <!--Transactions In-->
+            <GroupBox Margin="12" Grid.Row="0">
+                <GroupBox.Header>
+                    <TextBlock Text="Transactions In"/>
+                </GroupBox.Header>
+                <Grid Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"/>
+                    <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"/>
+                    <TextBlock Text="Credit Card" Grid.Column="0" Grid.Row="1"/>
+                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"/>
+                    <TextBlock Text="Checks" Grid.Column="0" Grid.Row="2"/>
+                    <TextBlock Text="$0" Grid.Column="1" Grid.Row="2"/>
+                    <TextBlock Text="Total In" Grid.Column="0" Grid.Row="3"/>
+                    <TextBlock Text="$150" Grid.Column="1" Grid.Row="3"/>
+
+
+                </Grid>
+            </GroupBox>
+
+            <!--Transactions Out-->
+            <GroupBox Margin="12" Grid.Row="0">
+                <GroupBox.Header>
+                    <TextBlock Text="Transactions In"/>
+                </GroupBox.Header>
+                <Grid Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"/>
+                    <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"/>
+                    <TextBlock Text="Refunds" Grid.Column="0" Grid.Row="1"/>
+                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"/>
+                    <TextBlock Text="Total Out" Grid.Column="0" Grid.Row="2"/>
+                    <TextBlock Text="$110" Grid.Column="1" Grid.Row="2"/>
+
+
+                </Grid>
+            </GroupBox>
+
+
+            <!--Balance-->
+            <GroupBox Margin="12" Grid.Row="0">
+                <GroupBox.Header>
+                    <TextBlock Text="Balance"/>
+                </GroupBox.Header>
+                <StackPanel Margin="3">
+                    <TextBlock Text="$150"/>
+                </StackPanel>
+            </GroupBox>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

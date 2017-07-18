@@ -6,6 +6,15 @@
         xmlns:local="clr-namespace:DoctorCashWpf"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
         Title="CashInWindow"  Height="600" Width="800">
 
     <StackPanel>
@@ -115,8 +124,9 @@
                         <TextBox x:Name="comment" Padding="2"/>
                     </Grid>
                 </GroupBox>
-                
-                <Button Grid.Row="1" Margin="16 35" Content="Save Print" Background="Green" Click="Button_Click"/>
+
+                <Button Grid.Row="1" Margin="16 35" Content="Save Print" Background="#27ae60" Click="Button_Click"/>
+
 
             </Grid>
             

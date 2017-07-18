@@ -34,7 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.0.823, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.3.0.823\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Abstractions, Version=2.0.2.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.Abstractions.2.0.2.26\lib\net45\System.Configuration.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,7 +82,49 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Domain\AnotherCommandImplementation.cs" />
+    <Compile Include="Domain\DemoItem.cs" />
+    <Compile Include="Domain\DialogsViewModel.cs" />
+    <Compile Include="Domain\DocumentationLink.cs" />
+    <Compile Include="Domain\DocumentationLinks.xaml.cs">
+      <DependentUpon>DocumentationLinks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\DocumentationLinkType.cs" />
+    <Compile Include="Domain\FutureDateValidationRule.cs" />
+    <Compile Include="Domain\IsCheckedValidationRule.cs" />
+    <Compile Include="Domain\ListsAndGridsViewModel.cs" />
+    <Compile Include="Domain\MainWindowViewModel.cs" />
+    <Compile Include="Domain\NotEmptyValidationRule.cs" />
+    <Compile Include="Domain\NotifyPropertyChangedExtension.cs" />
+    <Compile Include="Domain\Sample4Dialog.xaml.cs">
+      <DependentUpon>Sample4Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\SampleDialog.xaml.cs">
+      <DependentUpon>SampleDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\SampleDialogViewModel.cs" />
+    <Compile Include="Domain\SampleMessageDialog.xaml.cs">
+      <DependentUpon>SampleMessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\SampleProgressDialog.xaml.cs">
+      <DependentUpon>SampleProgressDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\SelectableViewModel.cs" />
+    <Compile Include="Domain\SimpleDataTemplateSelector.cs" />
+    <Compile Include="Domain\SimpleDateValidationRule.cs" />
+    <Compile Include="Domain\TextFieldsViewModel.cs" />
+    <Compile Include="Domain\TreesViewModel.cs" />
+    <Compile Include="PaletteSelector.xaml.cs">
+      <DependentUpon>PaletteSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PaletteSelectorViewModel.cs" />
+    <Compile Include="SampleMessageDialog.xaml.cs">
+      <DependentUpon>SampleMessageDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="enums\enums.cs" />
+    <Compile Include="Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
     <Compile Include="interfaces\columnsValues.cs" />
     <Compile Include="interfaces\transaction.cs" />
     <Compile Include="services\createListService.cs" />
@@ -82,6 +134,38 @@
     <Compile Include="services\sqlQueryService.cs" />
     <Compile Include="interfaces\valuesWhere.cs" />
     <Page Include="CashInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Domain\DocumentationLinks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Domain\Sample4Dialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Domain\SampleDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Domain\SampleMessageDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Domain\SampleProgressDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PaletteSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SampleMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +220,13 @@
     <Resource Include="Images\Cash Out_96px.png" />
     <Resource Include="Images\Close Date_96px.png" />
     <Resource Include="Images\Refund_96px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Chartridge046_small.jpg" />
+    <Resource Include="Resources\Contact.png" />
+    <Resource Include="Resources\favicon.ico" />
+    <Resource Include="Resources\ms-icon-310x310.png" />
+    <Resource Include="Resources\ProfilePic.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
