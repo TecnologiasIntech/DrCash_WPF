@@ -7,10 +7,9 @@ using System.Data;
 
 namespace DoctorCashWpf
 {
-    class transactionService : transaction
+    class transactionService
     {
-
-        public List<transaction> getTransactions()
+        public List<transaction> getCurrentTransactions(int currentUserID)
         {
             DataTable data = new DataTable();
             var list = new List<transaction>();
@@ -42,6 +41,21 @@ namespace DoctorCashWpf
             columns.Add("trn_ModificationDate");
             
             var listTerms = new List<valuesWhere>();
+            var listService = new createListService();
+            var formatService = new formatService();
+            
+            var currentDay = DateTime.Today;
+
+            var day = currentDay.Day.ToString();
+            var month = currentDay.Month.ToString();
+            var year = currentDay.Year.ToString();
+            
+            var dateInitial = formatService.createFormatDateTimeToQuery(year, month, day, "T00:00:00.000");
+            var dateEnd = formatService.createFormatDateTimeToQuery(year, month, day, "T23:59:59.999");
+
+            listTerms.Add(listService.createListValuesWhere(false, "trn_User_ID", currentUserID.ToString(), "AND", (int)OPERATOR.EQUALITY));
+            listTerms.Add(listService.createListValuesWhere(true, "trn_DateRegistered", dateInitial, "AND", (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            listTerms.Add(listService.createListValuesWhere(true, "trn_DateRegistered", dateEnd, "", (int)OPERATOR.LESS_THAN_OR_EQUAL));
 
             data = queryService.selectData(columns, "transactions", listTerms);
 

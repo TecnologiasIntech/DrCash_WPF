@@ -21,8 +21,8 @@ namespace DoctorCashWpf
             columnas.Add("usr_Username");
 
             var listValuesTerms = new List<valuesWhere>();
-            listValuesTerms.Add(listService.createListValuesWhere(true, "usr_Username", username, "AND"));
-            listValuesTerms.Add(listService.createListValuesWhere(true, "usr_Password", password, ""));
+            listValuesTerms.Add(listService.createListValuesWhere(true, "usr_Username", username, "AND", (int)OPERATOR.EQUALITY));
+            listValuesTerms.Add(listService.createListValuesWhere(true, "usr_Password", password, "", (int)OPERATOR.EQUALITY));
 
             DataTable dataTable = querys.selectData(columnas, "users", listValuesTerms);
 
