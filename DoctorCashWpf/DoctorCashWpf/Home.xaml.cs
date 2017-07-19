@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
+
 namespace DoctorCashWpf
 {
     /// <summary>
@@ -24,68 +24,37 @@ namespace DoctorCashWpf
 
         public Home()
         {
+            var transactionService = new transactionService();
+            var list = new List<transaction>();
+            list = transactionService.getCurrentTransactions(4);
+
             InitializeComponent();
         }
 
-        private void GitHubButton_OnClick(object sender, RoutedEventArgs e)
+        private void CashInButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(ConfigurationManager.AppSettings["GitHub"]);
+            // Opens a new Modal Window
+            CashInWindow modalWindow = new CashInWindow();
+            modalWindow.ShowDialog();
+            var transactionService = new transactionService();
+            var list = new List<transaction>();
+            list = transactionService.getCurrentTransactions(4);
+
         }
 
-        private void TwitterButton_OnClick(object sender, RoutedEventArgs e)
+        private void CashOutButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://twitter.com/James_Willock");
+
         }
 
-        private void ChatButton_OnClick(object sender, RoutedEventArgs e)
+        private void RefundButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://gitter.im/ButchersBoy/MaterialDesignInXamlToolkit");
+
         }
 
-        private void EmailButton_OnClick(object sender, RoutedEventArgs e)
+        private void CloseDateButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("mailto://james@dragablz.net");
+
         }
-
-        private void DonateButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            Process.Start("https://pledgie.com/campaigns/31029");
-        }
-
-
-        //public Home()
-        //{
-        //    var transactionService = new transactionService();
-        //    var list = new List<transaction>();
-        //    list = transactionService.getTransactions();
-
-        //    InitializeComponent();
-        //}
-
-        //private void CashInButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    // Opens a new Modal Window
-        //    CashInWindow modalWindow = new CashInWindow();
-        //    modalWindow.ShowDialog();
-        //    /*  var transactionService = new transactionService();
-        //      var list = new List<transaction>();
-        //      list = transactionService.getTransactions();*/
-
-        //}
-
-        //private void CashOutButton_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
-
-        //private void RefundButton_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
-
-        //private void CloseDateButton_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
     }
 }
