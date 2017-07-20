@@ -122,148 +122,148 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
             <StackPanel>
 
-            <!--Initial Cash-->
-            <GroupBox Margin="12" Grid.Row="0">
-                <GroupBox.Header>
-                    <TextBlock Text="Initial Cash"
+                <!--Initial Cash-->
+                <GroupBox Margin="12" Grid.Row="0">
+                    <GroupBox.Header>
+                        <TextBlock Text="Initial Cash"
                                FontSize="16px"
                                FontFamily="Roboto"
                                FontWeight="Bold"
                                Foreground="white"/>
-                </GroupBox.Header>
-                <StackPanel Margin="3">
-                    <TextBlock Text="$150"
+                    </GroupBox.Header>
+                    <StackPanel Margin="3">
+                        <TextBlock Text="$150"
                                FontFamily="Roboto"
                                Margin="0, 5"
                                FontSize="14"/>
-                </StackPanel>
-            </GroupBox>
+                    </StackPanel>
+                </GroupBox>
 
-            <!--Transactions In-->
-            <GroupBox Margin="12" Grid.Row="0">
-                <GroupBox.Header>
-                    <TextBlock Text="Transactions In"
+                <!--Transactions In-->
+                <GroupBox Margin="12" Grid.Row="0">
+                    <GroupBox.Header>
+                        <TextBlock Text="Transactions In"
                                FontFamily="Roboto"
                                FontSize="16px"
                                FontWeight="Bold"
                                Foreground="white"/>
-                </GroupBox.Header>
-                <Grid Margin="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    </GroupBox.Header>
+                    <Grid Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"
+                        <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"
                                FontFamily="Roboto"
                                Margin="0, 5"
                                FontSize="14"/>
-                    <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"
+                        <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"
                                FontFamily="Roboto"
                                FontSize="14"/>
-                    <TextBlock Text="Credit Card" Grid.Column="0" Grid.Row="1"
-                               FontFamily="Roboto"
-                               Margin="0, 5"
-                               FontSize="14"/>
-                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"
-                               FontFamily="Roboto"
-                               FontSize="14"/>
-                    <TextBlock Text="Checks" Grid.Column="0" Grid.Row="2"
+                        <TextBlock Text="Credit Card" Grid.Column="0" Grid.Row="1"
                                FontFamily="Roboto"
                                Margin="0, 5"
                                FontSize="14"/>
-                    <TextBlock Text="$0" Grid.Column="1" Grid.Row="2"
+                        <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"
                                FontFamily="Roboto"
                                FontSize="14"/>
-                    <TextBlock Text="Total In" Grid.Column="0" Grid.Row="3"
+                        <TextBlock Text="Checks" Grid.Column="0" Grid.Row="2"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
+                        <TextBlock Text="$0" Grid.Column="1" Grid.Row="2"
+                               FontFamily="Roboto"
+                               FontSize="14"/>
+                        <TextBlock Text="Total In" Grid.Column="0" Grid.Row="3"
                                FontFamily="Roboto"
                                FontWeight="Bold"
                                Margin="0, 5"
                                FontSize="14"/>
-                    <TextBlock Text="$150" Grid.Column="1" Grid.Row="3"
+                        <TextBlock Text="$150" Grid.Column="1" Grid.Row="3"
                                FontFamily="Roboto"
                                FontWeight="Bold"
                                FontSize="14"/>
 
 
-                </Grid>
-            </GroupBox>
+                    </Grid>
+                </GroupBox>
 
-            <!--Transactions Out-->
-            <GroupBox Margin="12" Grid.Row="0">
-                <GroupBox.Header>
-                    <TextBlock Text="Transactions In"
+                <!--Transactions Out-->
+                <GroupBox Margin="12" Grid.Row="0">
+                    <GroupBox.Header>
+                        <TextBlock Text="Transactions In"
                                FontFamily="Roboto"
                                FontSize="16px"
                                FontWeight="Bold"
                                Foreground="white"/>
-                </GroupBox.Header>
-                <Grid Margin="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    </GroupBox.Header>
+                    <Grid Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"
+                        <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"
                                FontFamily="Roboto"
                                Margin="0, 5"
                                FontSize="14"/>
-                    <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"
+                        <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"
                                FontFamily="Roboto"
                                FontSize="14"/>
-                    <TextBlock Text="Refunds" Grid.Column="0" Grid.Row="1"
-                               FontFamily="Roboto"
-                               Margin="0, 5"
-                               FontSize="14"/>
-                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"
-                               FontFamily="Roboto"
-                               FontSize="14"/>
-                    <TextBlock Text="Total Out" Grid.Column="0" Grid.Row="2"
+                        <TextBlock Text="Refunds" Grid.Column="0" Grid.Row="1"
                                FontFamily="Roboto"
                                Margin="0, 5"
                                FontSize="14"/>
-                    <TextBlock Text="$110" Grid.Column="1" Grid.Row="2"
+                        <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"
+                               FontFamily="Roboto"
+                               FontSize="14"/>
+                        <TextBlock Text="Total Out" Grid.Column="0" Grid.Row="2"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
+                        <TextBlock Text="$110" Grid.Column="1" Grid.Row="2"
                                FontFamily="Roboto"
                                FontSize="14"/>
 
 
-                </Grid>
-            </GroupBox>
+                    </Grid>
+                </GroupBox>
 
 
-            <!--Balance-->
-            <GroupBox Margin="12" Grid.Row="0">
-                <GroupBox.Header>
-                    <TextBlock Text="Balance"
+                <!--Balance-->
+                <GroupBox Margin="12" Grid.Row="0">
+                    <GroupBox.Header>
+                        <TextBlock Text="Balance"
                                FontFamily="Roboto"
                                FontSize="16px"
                                FontWeight="Bold"
                                Foreground="white"/>
-                </GroupBox.Header>
-                <StackPanel Margin="3">
-                    <TextBlock Text="$150"
+                    </GroupBox.Header>
+                    <StackPanel Margin="3">
+                        <TextBlock Text="$150"
                                FontFamily="Roboto"
                                Margin="0, 5"
                                FontSize="14"/>
-                </StackPanel>
-            </GroupBox>
+                    </StackPanel>
+                </GroupBox>
 
-        </StackPanel>
-        
-        <!--#endregion-->
+            </StackPanel>
 
+            <!--#endregion-->
+        </materialDesign:Card>
     </Grid>
 </UserControl>
