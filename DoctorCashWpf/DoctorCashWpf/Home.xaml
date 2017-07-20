@@ -104,7 +104,8 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     Margin="8"
                     Padding="12">
             <Grid>
-                <DataGrid Name="dataGridView1"/>
+                <DataGrid Name="dataGridView1"
+                          IsReadOnly="True"/>
             </Grid>
         </materialDesign:Card>
         <!--#endregion-->
@@ -135,6 +136,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         <TextBlock Text="$150"
                                FontFamily="Roboto"
                                Margin="0, 5"
+                                   x:Name="label_initialCash"
                                FontSize="14"/>
                     </StackPanel>
                 </GroupBox>
@@ -165,7 +167,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                FontFamily="Roboto"
                                Margin="0, 5"
                                FontSize="14"/>
-                        <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"
+                        <TextBlock x:Name="label_cashIn" Text="$100" Grid.Column="1" Grid.Row="0"
                                FontFamily="Roboto"
                                FontSize="14"/>
                         <TextBlock Text="Credit Card" Grid.Column="0" Grid.Row="1"
@@ -174,6 +176,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                FontSize="14"/>
                         <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"
                                FontFamily="Roboto"
+                                   x:Name="label_credit"
                                FontSize="14"/>
                         <TextBlock Text="Checks" Grid.Column="0" Grid.Row="2"
                                FontFamily="Roboto"
@@ -181,6 +184,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                FontSize="14"/>
                         <TextBlock Text="$0" Grid.Column="1" Grid.Row="2"
                                FontFamily="Roboto"
+                                   x:Name="label_checks"
                                FontSize="14"/>
                         <TextBlock Text="Total In" Grid.Column="0" Grid.Row="3"
                                FontFamily="Roboto"
@@ -190,6 +194,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         <TextBlock Text="$150" Grid.Column="1" Grid.Row="3"
                                FontFamily="Roboto"
                                FontWeight="Bold"
+                                   x:Name="label_totalIn"
                                FontSize="14"/>
 
 
@@ -199,7 +204,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 <!--Transactions Out-->
                 <GroupBox Margin="12" Grid.Row="0">
                     <GroupBox.Header>
-                        <TextBlock Text="Transactions In"
+                        <TextBlock Text="Transactions Out"
                                FontFamily="Roboto"
                                FontSize="16px"
                                FontWeight="Bold"
@@ -223,6 +228,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                FontSize="14"/>
                         <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"
                                FontFamily="Roboto"
+                                   x:Name="label_cashOut"
                                FontSize="14"/>
                         <TextBlock Text="Refunds" Grid.Column="0" Grid.Row="1"
                                FontFamily="Roboto"
@@ -230,13 +236,17 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                FontSize="14"/>
                         <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"
                                FontFamily="Roboto"
+                                   x:Name="label_refounds"
                                FontSize="14"/>
                         <TextBlock Text="Total Out" Grid.Column="0" Grid.Row="2"
                                FontFamily="Roboto"
+                                   FontWeight="Bold"
                                Margin="0, 5"
                                FontSize="14"/>
                         <TextBlock Text="$110" Grid.Column="1" Grid.Row="2"
                                FontFamily="Roboto"
+                                   FontWeight="Bold"
+                                   x:Name="label_totalOut"
                                FontSize="14"/>
 
 
@@ -257,6 +267,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         <TextBlock Text="$150"
                                FontFamily="Roboto"
                                Margin="0, 5"
+                                   x:Name="label_balance"
                                FontSize="14"/>
                     </StackPanel>
                 </GroupBox>

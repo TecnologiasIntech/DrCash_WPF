@@ -51,6 +51,8 @@ namespace DoctorCashWpf
                           transaction.modifiedById = 4;
 
             transactionService.registerTransaction(transaction);
+
+            this.Close();
         }
     }
 }
