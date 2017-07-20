@@ -22,6 +22,7 @@ namespace DoctorCashWpf
         public CashInWindow()
         {
             InitializeComponent();
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

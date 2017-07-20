@@ -9,18 +9,35 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
+        TextElement.FontSize="14"
+        TextElement.FontFamily="Roboto"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
         
-        Title="CashInWindow"  Height="600" Width="800">
+        Height="600" Width="800"
+        Title="CashInWindow"  >
 
-    <StackPanel>
+    <StackPanel >
 
-        <StackPanel Height="80" Background="Green">
-            <TextBlock Margin="30" Text="Doctor Cash" Foreground="White"/>
+        <StackPanel Height="62" Background="#27ae60">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:PackIcon Kind="Download" Foreground="White" Height="46" Width="90" Margin="1,6,0,0" Grid.ColumnSpan="2" />
+                <TextBlock Margin="86,16,536,44" Text="Cash IN" Foreground="White" FontSize="25px" FontWeight="Bold" Grid.ColumnSpan="2"/>
+            </Grid>
+
         </StackPanel>
 
         <!-- Patient Info -->
@@ -45,7 +62,7 @@
             <!-- Cash-->
             <StackPanel Grid.Column="0" Margin="12">
 
-                
+
                 <!--Amount Charge-->
                 <TextBlock Text="Amount Charge" Margin="0 5 0 5"/>
                 <xctk:DecimalUpDown x:Name="amountCharged" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
@@ -53,14 +70,14 @@
                 <!--Cash-->
                 <TextBlock Text="Cash" Margin="0 5 0 5"/>
                 <xctk:DecimalUpDown x:Name="cash" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                <TextBlock Text="Credit" Margin="0 5 0 5"/>
 
                 <!--Check-->
-                <TextBlock Text="Check" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown x:Name="check" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                <xctk:DecimalUpDown x:Name="credit" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
 
                 <!--Credit-->
-                <TextBlock Text="Credit" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown x:Name="credit" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                <TextBlock Text="Check" Margin="0 5 0 5"/>
+                <xctk:DecimalUpDown x:Name="check" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
 
 
                 <!--Check #-->
@@ -129,13 +146,12 @@
 
 
             </Grid>
-            
-            
+
+
 
         </Grid>
-
-
     </StackPanel>
-    
+
+
 
 </Window>

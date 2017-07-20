@@ -65,5 +65,10 @@ namespace DoctorCashWpf
 
             await DialogHost.Show(sampleMessageDialog, "RootDialog");
         }
+
+        private void closeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

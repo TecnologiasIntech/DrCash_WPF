@@ -81,10 +81,10 @@ namespace DoctorCashWpf
             chargeTransactionsList();
 
         }
-
+       
         private void CashOutButton_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
         private void RefundButton_Click(object sender, RoutedEventArgs e)
