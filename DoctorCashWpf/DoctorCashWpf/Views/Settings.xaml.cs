@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MaterialDesignDemo.Domain
+namespace DoctorCashWpf
 {
     /// <summary>
-    /// Interaction logic for DocumentationLinks.xaml
+    /// Interaction logic for Settings.xaml
     /// </summary>
-    public partial class DocumentationLinks : UserControl
+    public partial class Settings : UserControl
     {
-        public DocumentationLinks()
+        public Settings()
         {
             InitializeComponent();
         }
