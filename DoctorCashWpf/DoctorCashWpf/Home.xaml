@@ -4,7 +4,8 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" d:DesignWidth="1140.5" Height="617.988">
+             mc:Ignorable="d" 
+             d:DesignHeight="610.488" d:DesignWidth="1140.5">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,17 +17,21 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Margin="0,-132,0,0" HorizontalAlignment="Left" Width="1140">
+    <Grid>
 
+        <!--#region  Grid Definitions-->
+        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="848"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="600"/>
-            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        
+        <!--#endregion-->
 
         <!--#region Transaction Buttons-->
 
@@ -90,18 +95,32 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
 
         <!--#region Transactions Grid-->
-        <Grid Grid.Column="0" Grid.Row="0" Margin="6">
-            <DataGrid ItemsSource="{Binding list}"/>
-        </Grid>
+
+        <materialDesign:Card 
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    Grid.Column="0" 
+                    Grid.Row="0"
+                    Background="White"
+                    Margin="8"
+                    Padding="12">
+            <Grid>
+                <DataGrid Name="dataGridView1"/>
+            </Grid>
+        </materialDesign:Card>
         <!--#endregion-->
 
 
         <!--#region Transactions Reciept-->
 
-        <StackPanel Grid.Column="1" 
-                    Grid.Row="0" 
+        <materialDesign:Card 
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    Grid.Column="1" 
+                    Grid.Row="0"
                     Background="White"
-                    Margin="6">
+                    Margin="8"
+                    Padding="12">
+
+            <StackPanel>
 
             <!--Initial Cash-->
             <GroupBox Margin="12" Grid.Row="0">
@@ -243,7 +262,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             </GroupBox>
 
         </StackPanel>
-
+        
         <!--#endregion-->
 
     </Grid>
