@@ -28,7 +28,11 @@ namespace DoctorCashWpf
             var list = new List<transaction>();
             list = transactionService.getCurrentTransactions(4);
 
+
+
             InitializeComponent();
+
+            dataGridView1.ItemsSource = list;
         }
 
         private void CashInButton_Click(object sender, RoutedEventArgs e)
@@ -36,9 +40,11 @@ namespace DoctorCashWpf
             // Opens a new Modal Window
             CashInWindow modalWindow = new CashInWindow();
             modalWindow.ShowDialog();
+
             var transactionService = new transactionService();
             var list = new List<transaction>();
             list = transactionService.getCurrentTransactions(4);
+            dataGridView1.ItemsSource = list;
 
         }
 
@@ -56,5 +62,6 @@ namespace DoctorCashWpf
         {
 
         }
+
     }
 }

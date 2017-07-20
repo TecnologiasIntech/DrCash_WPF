@@ -19,6 +19,8 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     </UserControl.Resources>
     <Grid>
 
+        <!--#region  Grid Definitions-->
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="2*"/>
@@ -26,8 +28,10 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        
+        <!--#endregion-->
 
         <!--#region Transaction Buttons-->
 
@@ -88,18 +92,32 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
         
         <!--#region Transactions Grid-->
-        <Grid Grid.Column="0" Grid.Row="0" Margin="6">
-            <DataGrid ItemsSource="{Binding list}"/>
-        </Grid>
+
+        <materialDesign:Card 
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    Grid.Column="0" 
+                    Grid.Row="0"
+                    Background="White"
+                    Margin="8"
+                    Padding="12">
+            <Grid>
+                <DataGrid Name="dataGridView1"/>
+            </Grid>
+        </materialDesign:Card>
         <!--#endregion-->
 
 
         <!--#region Transactions Reciept-->
 
-        <StackPanel Grid.Column="1" 
-                    Grid.Row="0" 
+        <materialDesign:Card 
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    Grid.Column="1" 
+                    Grid.Row="0"
                     Background="White"
-                    Margin="6">
+                    Margin="8"
+                    Padding="12">
+
+            <StackPanel>
 
             <!--Initial Cash-->
             <GroupBox Margin="12" Grid.Row="0">
@@ -181,8 +199,10 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 </StackPanel>
             </GroupBox>
 
-        </StackPanel>
-        
+            </StackPanel>
+
+        </materialDesign:Card>
+
         <!--#endregion-->
 
     </Grid>
