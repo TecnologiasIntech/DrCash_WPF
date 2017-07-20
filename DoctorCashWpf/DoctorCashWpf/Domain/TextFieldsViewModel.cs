@@ -53,7 +53,7 @@ namespace MaterialDesignColors.WpfExample.Domain
 
         public IList<int> LongListToTestComboVirtualization { get; }
 
-        public DemoItem DemoItem => new DemoItem("Mr. Test", null, Enumerable.Empty<DocumentationLink>());
+        public DemoItem DemoItem => new DemoItem("Mr. Test", null);
 
         public event PropertyChangedEventHandler PropertyChanged;
 

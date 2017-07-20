@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DoctorCashWpf
 {
     /// <summary>
-    /// Interaction logic for PaletteSelector.xaml
+    /// Interaction logic for Help.xaml
     /// </summary>
-    public partial class PaletteSelector : UserControl
+    public partial class Help : UserControl
     {
-        public PaletteSelector()
+        public Help()
         {
             InitializeComponent();
         }
