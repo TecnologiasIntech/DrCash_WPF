@@ -4,8 +4,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             d:DesignHeight="610.488" d:DesignWidth="1140.5">
+             mc:Ignorable="d" d:DesignWidth="1140.5" Height="617.988">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,16 +16,16 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="0,-132,0,0" HorizontalAlignment="Left" Width="1140">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="848"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="600"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <!--#region Transaction Buttons-->
@@ -37,47 +36,50 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     Grid.Row="1"
                     Grid.ColumnSpan="2"
                     Background="White"
-                    Margin="8"
-                    Padding="12"
+                    Margin="4,4,4,0"
+                    Padding="12" Height="133"
                     >
-        
+
             <StackPanel Orientation="Horizontal">
 
                 <Button x:Name="CashInButton" 
                     Click="CashInButton_Click"
                     Background="#6aa84f"
                     Width="100"
+                        BorderThickness="0px"
                     Height="80"
-                    Margin="10">
-                    <Image Source="Images\Cash In 2_96px.png"
-                       Width="60"/>
+                    Margin="20, 10">
+                    <materialDesign:PackIcon Kind="Download" Height="70" Width="67"/>
+
                 </Button>
                 <Button x:Name="CashOutButton" 
                     Click="CashOutButton_Click"
                     Background="#597eaa"
                     Width="100"
                     Height="80"
-                    Margin="10">
-                    <Image Source="Images\Cash Out_96px.png"
-                       Width="60"/>
+                        BorderThickness="0px"
+                    Margin="20,10">
+                    <materialDesign:PackIcon Kind="Upload" Height="70" Width="67"  />
+
                 </Button>
                 <Button x:Name="RefundButton" 
                     Click="RefundButton_Click"
                     Background="#f1c232"
                     Width="100"
                     Height="80"
-                    Margin="10">
-                    <Image Source="Images\Refund_96px.png"
-                       Width="60"/>
+                        BorderThickness="0px"
+                    Margin="20,10">
+                    <materialDesign:PackIcon Kind="Inbox" Height="70" Width="67" />
+
                 </Button>
                 <Button x:Name="CloseDateButton" 
                     Click="CloseDateButton_Click"
                     Background="#cc0000"
                     Width="100"
                     Height="80"
-                    Margin="10">
-                    <Image Source="Images\Close Date_96px.png"
-                       Width="60"/>
+                        BorderThickness="0px"
+                    Margin="200,14">
+                    <materialDesign:PackIcon Kind="Close" Height="70" Width="67" />
                 </Button>
 
 
@@ -86,7 +88,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         </materialDesign:Card>
         <!--#endregion-->
 
-        
+
         <!--#region Transactions Grid-->
         <Grid Grid.Column="0" Grid.Row="0" Margin="6">
             <DataGrid ItemsSource="{Binding list}"/>
@@ -104,17 +106,28 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             <!--Initial Cash-->
             <GroupBox Margin="12" Grid.Row="0">
                 <GroupBox.Header>
-                    <TextBlock Text="Initial Cash"/>
+                    <TextBlock Text="Initial Cash"
+                               FontSize="16px"
+                               FontFamily="Roboto"
+                               FontWeight="Bold"
+                               Foreground="white"/>
                 </GroupBox.Header>
                 <StackPanel Margin="3">
-                    <TextBlock Text="$150"/>
+                    <TextBlock Text="$150"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
                 </StackPanel>
             </GroupBox>
 
             <!--Transactions In-->
             <GroupBox Margin="12" Grid.Row="0">
                 <GroupBox.Header>
-                    <TextBlock Text="Transactions In"/>
+                    <TextBlock Text="Transactions In"
+                               FontFamily="Roboto"
+                               FontSize="16px"
+                               FontWeight="Bold"
+                               Foreground="white"/>
                 </GroupBox.Header>
                 <Grid Margin="3">
                     <Grid.ColumnDefinitions>
@@ -129,14 +142,36 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"/>
-                    <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"/>
-                    <TextBlock Text="Credit Card" Grid.Column="0" Grid.Row="1"/>
-                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"/>
-                    <TextBlock Text="Checks" Grid.Column="0" Grid.Row="2"/>
-                    <TextBlock Text="$0" Grid.Column="1" Grid.Row="2"/>
-                    <TextBlock Text="Total In" Grid.Column="0" Grid.Row="3"/>
-                    <TextBlock Text="$150" Grid.Column="1" Grid.Row="3"/>
+                    <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
+                    <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"
+                               FontFamily="Roboto"
+                               FontSize="14"/>
+                    <TextBlock Text="Credit Card" Grid.Column="0" Grid.Row="1"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
+                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"
+                               FontFamily="Roboto"
+                               FontSize="14"/>
+                    <TextBlock Text="Checks" Grid.Column="0" Grid.Row="2"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
+                    <TextBlock Text="$0" Grid.Column="1" Grid.Row="2"
+                               FontFamily="Roboto"
+                               FontSize="14"/>
+                    <TextBlock Text="Total In" Grid.Column="0" Grid.Row="3"
+                               FontFamily="Roboto"
+                               FontWeight="Bold"
+                               Margin="0, 5"
+                               FontSize="14"/>
+                    <TextBlock Text="$150" Grid.Column="1" Grid.Row="3"
+                               FontFamily="Roboto"
+                               FontWeight="Bold"
+                               FontSize="14"/>
 
 
                 </Grid>
@@ -145,7 +180,11 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             <!--Transactions Out-->
             <GroupBox Margin="12" Grid.Row="0">
                 <GroupBox.Header>
-                    <TextBlock Text="Transactions In"/>
+                    <TextBlock Text="Transactions In"
+                               FontFamily="Roboto"
+                               FontSize="16px"
+                               FontWeight="Bold"
+                               Foreground="white"/>
                 </GroupBox.Header>
                 <Grid Margin="3">
                     <Grid.ColumnDefinitions>
@@ -159,12 +198,27 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"/>
-                    <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"/>
-                    <TextBlock Text="Refunds" Grid.Column="0" Grid.Row="1"/>
-                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"/>
-                    <TextBlock Text="Total Out" Grid.Column="0" Grid.Row="2"/>
-                    <TextBlock Text="$110" Grid.Column="1" Grid.Row="2"/>
+                    <TextBlock Text="Cash" Grid.Column="0" Grid.Row="0"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
+                    <TextBlock Text="$100" Grid.Column="1" Grid.Row="0"
+                               FontFamily="Roboto"
+                               FontSize="14"/>
+                    <TextBlock Text="Refunds" Grid.Column="0" Grid.Row="1"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
+                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="1"
+                               FontFamily="Roboto"
+                               FontSize="14"/>
+                    <TextBlock Text="Total Out" Grid.Column="0" Grid.Row="2"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
+                    <TextBlock Text="$110" Grid.Column="1" Grid.Row="2"
+                               FontFamily="Roboto"
+                               FontSize="14"/>
 
 
                 </Grid>
@@ -174,15 +228,22 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             <!--Balance-->
             <GroupBox Margin="12" Grid.Row="0">
                 <GroupBox.Header>
-                    <TextBlock Text="Balance"/>
+                    <TextBlock Text="Balance"
+                               FontFamily="Roboto"
+                               FontSize="16px"
+                               FontWeight="Bold"
+                               Foreground="white"/>
                 </GroupBox.Header>
                 <StackPanel Margin="3">
-                    <TextBlock Text="$150"/>
+                    <TextBlock Text="$150"
+                               FontFamily="Roboto"
+                               Margin="0, 5"
+                               FontSize="14"/>
                 </StackPanel>
             </GroupBox>
 
         </StackPanel>
-        
+
         <!--#endregion-->
 
     </Grid>
