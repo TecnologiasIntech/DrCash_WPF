@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 using System.Threading;
 using System.Windows.Controls.Primitives;
-using DoctorCashWpf.Domain;
+//using DoctorCashWpf.Domain;
 using MaterialDesignColors.WpfExample.Domain;
 
 namespace DoctorCashWpf
@@ -39,7 +39,7 @@ namespace DoctorCashWpf
             {
                 //note you can use the message queue from any thread, but just for the demo here we 
                 //need to get the message queue from the snackbar, so need to be on the dispatcher
-                MainSnackbar.MessageQueue.Enqueue("Welcome to Material Design In XAML Tookit");
+                MainSnackbar.MessageQueue.Enqueue("Welcome to Doctor Cash, devoloped by Tecnologias Intech");
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
