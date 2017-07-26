@@ -17,7 +17,7 @@ namespace DoctorCashWpf
     /// <summary>
     /// Interaction logic for CashInWindow.xaml
     /// </summary>
-    public partial class CashInWindow : Window
+    public partial class CashInWindow : UserControl
     {
         public CashInWindow()
         {
@@ -51,6 +51,7 @@ namespace DoctorCashWpf
                           transaction.modifiedById = 4;
 
             transactionService.registerTransaction(transaction);
+
         }
     }
 }

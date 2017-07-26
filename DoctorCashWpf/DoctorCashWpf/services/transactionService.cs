@@ -9,12 +9,15 @@ namespace DoctorCashWpf
 {
     class transactionService
     {
+
+        private dateService date = new dateService();
+        private sqlQueryService createQuery = new sqlQueryService();
+        private createListService createList = new createListService();
+
         public List<transaction> getCurrentTransactions(int currentUserID)
         {
             DataTable data = new DataTable();
             var list = new List<transaction>();
-
-            var queryService = new sqlQueryService();
 
             var columns = new List<string>();
             columns.Add("trn_ID");
@@ -41,23 +44,12 @@ namespace DoctorCashWpf
             columns.Add("trn_ModificationDate");
             
             var listTerms = new List<valuesWhere>();
-            var listService = new createListService();
-            var formatService = new formatService();
-            
-            var currentDay = DateTime.Today;
 
-            var day = currentDay.Day.ToString();
-            var month = currentDay.Month.ToString();
-            var year = currentDay.Year.ToString();
-            
-            var dateInitial = formatService.createFormatDateTimeToQuery(year, month, day, "T00:00:00.000");
-            var dateEnd = formatService.createFormatDateTimeToQuery(year, month, day, "T23:59:59.999");
+            listTerms.Add(createList.ofTypeValuesWhere(false, "trn_User_ID", currentUserID.ToString(), "AND", (int)OPERATOR.EQUALITY));
+            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", date.getInitialDate(), "AND", (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", date.getEndDate(), "", (int)OPERATOR.LESS_THAN_OR_EQUAL));
 
-            listTerms.Add(listService.createListValuesWhere(false, "trn_User_ID", currentUserID.ToString(), "AND", (int)OPERATOR.EQUALITY));
-            listTerms.Add(listService.createListValuesWhere(true, "trn_DateRegistered", dateInitial, "AND", (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            listTerms.Add(listService.createListValuesWhere(true, "trn_DateRegistered", dateEnd, "", (int)OPERATOR.LESS_THAN_OR_EQUAL));
-
-            data = queryService.selectData(columns, "transactions", listTerms);
+            data = createQuery.toSelect(columns, "transactions", listTerms);
 
             for (int i = 0; i < data.Rows.Count; i++)
             {
@@ -88,7 +80,6 @@ namespace DoctorCashWpf
                 items.modificationDate = Convert.ToString(filas["trn_ModificationDate"]);
 
                 list.Add(items);
-
             }
 
             return list;
@@ -96,33 +87,30 @@ namespace DoctorCashWpf
 
         public void registerTransaction(transaction transactionArray)
         {
-            sqlQueryService queryService = new sqlQueryService();
-            var listService = new createListService();
-            
             List<columnsValues> valuesArray = new List<columnsValues>();
-            valuesArray.Add(listService.createListOfColumnsValues("trn_User_ID", transactionArray.userId));
-            //valuesArray.Add(listService.createListOfColumnsValues("trn_DateRegistered", transactionArray.dateRegistered));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Comment", transactionArray.comment));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Type", transactionArray.type));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_AmountCharged", transactionArray.amountCharged));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Cash", transactionArray.cash));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Credit", transactionArray.credit));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Check", transactionArray.check));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Change", transactionArray.change));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_PatientFirstName", transactionArray.patientFirstName));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Copayment", transactionArray.copayment));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_SelfPay", transactionArray.selfPay));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Deductible", transactionArray.deductible));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Labs", transactionArray.labs));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Other", transactionArray.other));
-            //valuesArray.Add(listService.createListOfColumnsValues("trn_OtherComments", transactionArray.otherComments));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_Closed", transactionArray.closed));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_RegisterID", transactionArray.registerId));
-            valuesArray.Add(listService.createListOfColumnsValues("trn_ModifiedBy_ID", transactionArray.modifiedById));
-            //valuesArray.Add(listService.createListOfColumnsValues("trn_ModificationDate", transactionArray.modificationDate));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
+            //valuesArray.Add(createList.ofTypeColumnsValues("trn_DateRegistered", transactionArray.dateRegistered));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Type", transactionArray.type));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_AmountCharged", transactionArray.amountCharged));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Cash", transactionArray.cash));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Credit", transactionArray.credit));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Check", transactionArray.check));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Change", transactionArray.change));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_PatientFirstName", transactionArray.patientFirstName));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Copayment", transactionArray.copayment));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_SelfPay", transactionArray.selfPay));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Deductible", transactionArray.deductible));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Other", transactionArray.other));
+            //valuesArray.Add(createList.ofTypeColumnsValues("trn_OtherComments", transactionArray.otherComments));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_ModifiedBy_ID", transactionArray.modifiedById));
+            //valuesArray.Add(listService.ofTypeColumnsValues("trn_ModificationDate", transactionArray.modificationDate));
 
-            queryService.insertData("transactions", valuesArray);
+            createQuery.toInsert("transactions", valuesArray);
         }
 
     }

@@ -63,7 +63,7 @@ namespace DoctorCashWpf
             return operatorType;
         }
 
-        public void insertData(string table, List<columnsValues> valuesArray)
+        public void toInsert(string table, List<columnsValues> valuesArray)
         { 
             string columns = "";
             string values = "";
@@ -121,7 +121,7 @@ namespace DoctorCashWpf
 
         }
 
-        public DataTable selectAllData(string table, List<valuesWhere> valuesOfTerms)
+        public DataTable toSelectAll(string table, List<valuesWhere> valuesOfTerms)
         {
             string terms = "";
 
@@ -165,7 +165,7 @@ namespace DoctorCashWpf
         }
 
         //SELECT column, column FROM table WHERE column = value;
-        public DataTable selectData(List<String> columnsArray, string table,  List<valuesWhere> valuesOfTerms)
+        public DataTable toSelect(List<String> columnsArray, string table,  List<valuesWhere> valuesOfTerms)
         {
             string columns = "";
             string terms = "";
@@ -225,7 +225,7 @@ namespace DoctorCashWpf
         }
 
         //SELECT COUNT(column) FROM table WHERE column = value;
-        public int selectCountData(string column, string table, List<valuesWhere> valuesTermsArray)
+        public int toCount(string column, string table, List<valuesWhere> valuesTermsArray)
         {
             int count = 0;
             string terms = "";
@@ -263,15 +263,24 @@ namespace DoctorCashWpf
         }
 
         //UPDATE table SET column= value, column= value  WHERE column = value 
-        public void updateData(string table, List<String> columnsArray, List<String> valuesArray, List<valuesWhere> valuesTermsArray)
+        public void toUpdate(string table, List<columnsValues> columnsValuesArray, List<valuesWhere> valuesTermsArray)
         {
             string columns = "";
             string condictions = "";
 
             //Añadimos las columnas que queremos consultar
-            for (int i = 0; i < columnsArray.Count(); i++)
+            for (int i = 0; i < columnsValuesArray.Count(); i++)
             {
-                columns += "@" + columnsArray[i] + "= " + columnsArray[i] + ", ";
+                columns +=  columnsValuesArray[i].column + " = " + "@" + columnsValuesArray[i].column;
+
+                if (i < columnsValuesArray.Count() - 1)
+                {
+                    columns += ", ";
+                }
+                else
+                {
+                    columns += "  ";
+                }
             }
 
             //Guardamos las condiciones que tendrá la consulta
@@ -291,18 +300,32 @@ namespace DoctorCashWpf
                 }
             }
 
-
             var conection = openConection();
 
             //Creamos el query para actualizar
-            string query = "UPDATE " + table + "SET " + columns + " " + condictions;
+            string query = "UPDATE " + table + " SET " + columns + " " + condictions;
 
             var update = createCommand(query, conection);
 
             //Añadimos todos los valores de las columnas
-            for (int i = 0; i < valuesArray.Count(); i++)
+            for (int i = 0; i < columnsValuesArray.Count(); i++)
             {
-                update.Parameters.AddWithValue("@" + columnsArray[i], valuesArray[i]);
+                switch (columnsValuesArray[i].typeValue)
+                {
+
+                    case (int)DATATYPE.INT:
+                        update.Parameters.AddWithValue("@" + columnsValuesArray[i].column, columnsValuesArray[i].valueInt);
+                        break;
+                    case (int)DATATYPE.STRING:
+                        update.Parameters.AddWithValue("@" + columnsValuesArray[i].column, columnsValuesArray[i].valueString);
+                        break;
+                    case (int)DATATYPE.BOOL:
+                        update.Parameters.AddWithValue("@" + columnsValuesArray[i].column, columnsValuesArray[i].valueBool);
+                        break;
+                    case (int)DATATYPE.FLOAT:
+                        update.Parameters.AddWithValue("@" + columnsValuesArray[i].column, columnsValuesArray[i].valueFloat);
+                        break;
+                }
             }
 
             //Ejecutamos el comando
@@ -312,9 +335,8 @@ namespace DoctorCashWpf
         }
 
         //DELETE table WHERE column = value
-        public void deleteData(string table, List<valuesWhere> valuesTermsArray)
+        public void forDelete(string table, List<valuesWhere> valuesTermsArray)
         {
-
             string terms = "";
 
             //Añadimos las condiciones que tendrá nuestra consulta delete

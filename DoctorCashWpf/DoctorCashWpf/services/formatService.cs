@@ -9,7 +9,7 @@ namespace DoctorCashWpf
     class formatService
     {
 
-        public string createFormatDateTimeToQuery(string year, string month, string day, string hour)
+        public string toDateTimeForQuery(string year, string month, string day, string hour)
         {
             if(Convert.ToInt32(month) < 10)
             {
