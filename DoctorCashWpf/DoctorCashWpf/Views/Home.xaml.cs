@@ -94,13 +94,15 @@ namespace DoctorCashWpf
 
         }
 
-        private void CashInButton_Click(object sender, RoutedEventArgs e)
+        private async void CashInButton_Click(object sender, RoutedEventArgs e)
         {
 
-            
+            var cashInWindow = new CashInWindow();
+
+            await DialogHost.Show(cashInWindow, "RootDialog");
 
         }
-       
+
         private void CashOutButton_Click(object sender, RoutedEventArgs e)
         {
             userService user = new userService();
