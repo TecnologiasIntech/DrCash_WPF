@@ -17,12 +17,11 @@ namespace DoctorCashWpf
     /// <summary>
     /// Interaction logic for CashInWindow.xaml
     /// </summary>
-    public partial class CashInWindow : Window
+    public partial class CashInWindow : UserControl
     {
         public CashInWindow()
         {
             InitializeComponent();
-            Application.Current.MainWindow.WindowState = WindowState.Maximized;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -53,7 +52,6 @@ namespace DoctorCashWpf
 
             transactionService.registerTransaction(transaction);
 
-            this.Close();
         }
     }
 }

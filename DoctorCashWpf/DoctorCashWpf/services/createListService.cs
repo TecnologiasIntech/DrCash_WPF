@@ -9,7 +9,7 @@ namespace DoctorCashWpf
     class createListService
     {
         
-        public valuesWhere createListValuesWhere(bool isTypeString, string column, string value, string operationBool, int Operator)
+        public valuesWhere ofTypeValuesWhere(bool isTypeString, string column, string value, string operationBool, int Operator)
         {
             var items = new valuesWhere();
             items.isTypeString = isTypeString;
@@ -21,7 +21,7 @@ namespace DoctorCashWpf
             return items;
         }
 
-        public columnsValues createListOfColumnsValues(string column, int value)
+        public columnsValues ofTypeColumnsValues(string column, int value)
         {
             var items = new columnsValues();
             items.column = column;
@@ -31,7 +31,7 @@ namespace DoctorCashWpf
             return items;
         }
 
-        public columnsValues createListOfColumnsValues(string column, string value)
+        public columnsValues ofTypeColumnsValues(string column, string value)
         {
             var items = new columnsValues();
             items.column = column;
@@ -41,7 +41,7 @@ namespace DoctorCashWpf
             return items;
         }
 
-        public columnsValues createListOfColumnsValues(string column, float value)
+        public columnsValues ofTypeColumnsValues(string column, float value)
         {
             var items = new columnsValues();
             items.column = column;
@@ -51,7 +51,7 @@ namespace DoctorCashWpf
             return items;
         }
 
-        public columnsValues createListOfColumnsValues(string column, bool value)
+        public columnsValues ofTypeColumnsValues(string column, bool value)
         {
             var items = new columnsValues();
             items.column = column;
