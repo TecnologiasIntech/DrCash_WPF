@@ -143,9 +143,11 @@ namespace DoctorCashWpf
 
         }
 
-        private void CloseDateButton_Click(object sender, RoutedEventArgs e)
+        private async void CloseDateButton_Click(object sender, RoutedEventArgs e)
         {
+            var closeDate = new CloseDate();
 
+            await DialogHost.Show(closeDate, "RootDialog");
         }
 
     }
