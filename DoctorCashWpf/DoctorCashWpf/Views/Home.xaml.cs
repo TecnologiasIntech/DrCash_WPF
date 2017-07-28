@@ -18,6 +18,7 @@ using MaterialDesignColors.WpfExample.Domain;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using MaterialDesignDemo.Domain;
+using DoctorCashWpf.Views;
 
 namespace DoctorCashWpf
 {
@@ -103,31 +104,37 @@ namespace DoctorCashWpf
 
         }
 
-        private void CashOutButton_Click(object sender, RoutedEventArgs e)
+
+        private async void CashOutButton_Click(object sender, RoutedEventArgs e)
         {
+
+            var cashOut = new CashOut();
+
+            await DialogHost.Show(cashOut, "RootDialog");
+
             userService user = new userService();
 
             user userDetails = new user();
             /*//userDetails.usr_ID = 5;
-            userDetails.usr_Username = "psdzfgsapa";
-            userDetails.usr_FirstName = "pepsdfsdfse";
-            userDetails.usr_LastName = "pasdfsdfpa";
-            userDetails.usr_Password = "pepe123";
-            userDetails.usr_SecurityQuestion = "";
-            userDetails.usr_SecurityAnswer = "";
-            userDetails.usr_Email = "as@as.com"; // puede ser nullo
-            userDetails.usr_SecurityLevel = 1;
-            userDetails.usr_ActiveAccount = true;
-            userDetails.usr_PasswordReset = false;
-            userDetails.usr_ModifiedBy = 4; // puede ser nullo
-            userDetails.usr_CreatedBy = 4;
+            //userDetails.usr_Username = "psdzfgsapa";
+            //userDetails.usr_FirstName = "pepsdfsdfse";
+            //userDetails.usr_LastName = "pasdfsdfpa";
+            //userDetails.usr_Password = "pepe123";
+            //userDetails.usr_SecurityQuestion = "";
+            //userDetails.usr_SecurityAnswer = "";
+            //userDetails.usr_Email = "as@as.com"; // puede ser nullo
+            //userDetails.usr_SecurityLevel = 1;
+            //userDetails.usr_ActiveAccount = true;
+            //userDetails.usr_PasswordReset = false;
+            //userDetails.usr_ModifiedBy = 4; // puede ser nullo
+            //userDetails.usr_CreatedBy = 4;
 
-            user.setUser(userDetails);*/
+            //user.setUser(userDetails);*/
 
-            userDetails.usr_ID = 8;
+            //userDetails.usr_ID = 8;
 
-            user.deleteByID(8);
-            
+            //user.deleteByID(8);
+
 
         }
 
