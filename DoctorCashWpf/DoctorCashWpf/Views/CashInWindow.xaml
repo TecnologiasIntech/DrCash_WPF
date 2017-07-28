@@ -15,92 +15,136 @@
             TextOptions.TextFormattingMode="Ideal"
             TextOptions.TextRenderingMode="Auto"
             FontFamily="{DynamicResource MaterialDesignFont}">
-    <StackPanel >
+    <Grid>
 
-        <StackPanel Height="62" Background="#27ae60">
-            <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+
+        <!--#region Title Bar-->
+        <Grid Grid.Row="0" Background="#6aa84f ">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <!--Modal Icon-->
+            <materialDesign:PackIcon Kind="Download"  Grid.Column="0" Foreground="White" Height="40" Width="40" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+            <!--Title-->
+            <TextBlock Text="Cash Out" Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="28" FontWeight="Bold"/>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region  Body-->
+        <Grid Grid.Row="1">
+
+            <!--#region Body Sections  -->
+            <Grid Margin="15">
+
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <materialDesign:PackIcon Kind="Download" Foreground="White" Height="46" Width="90" Margin="1,6,0,0" Grid.ColumnSpan="2" />
-                <TextBlock Margin="86,16,536,44" Text="Cash IN" Foreground="White" FontSize="25px" FontWeight="Bold" Grid.ColumnSpan="2"/>
-            </Grid>
+                
 
-        </StackPanel>
+                <!--#region Patient Name Input-->
+                <StackPanel Grid.Row="0" Grid.Column="0"   Grid.ColumnSpan="3">
 
-        <!-- Patient Info -->
-        <GroupBox Margin="12">
-            <GroupBox.Header>
-                <TextBlock Text="Patient"/>
-            </GroupBox.Header>
-            <StackPanel Margin="3">
-                <TextBlock Text="Name" Margin=" 0 5 0 5"/>
-                <TextBox x:Name="patientFirstName" Padding="2"/>
-            </StackPanel>
-        </GroupBox>
+                    <TextBlock Text="Patient Name" Margin=" 10" FontFamily="Roboto"/>
+                    <TextBox x:Name="patientFirstName" BorderBrush="Gray" BorderThickness="1" Padding="2" materialDesign:HintAssist.Hint="Name"/>
 
-        <Grid>
+                </StackPanel>
+                
+                <!--#endregion-->
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="5*"/>
-            </Grid.ColumnDefinitions>
-
-            <!-- Cash-->
-            <StackPanel Grid.Column="0" Margin="12">
-
+                <!--#region  Charge Input-->
 
                 <!--Amount Charge-->
-                <TextBlock Text="Amount Charge" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown x:Name="amountCharged" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="Amount Charge" Margin="0 5 0 5"/>
+                    <xctk:DecimalUpDown x:Name="amountCharged" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                </StackPanel>
 
                 <!--Cash-->
-                <TextBlock Text="Cash" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown x:Name="cash" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
-                <TextBlock Text="Credit" Margin="0 5 0 5"/>
+                <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="Cash"/>
+                    <xctk:DecimalUpDown x:Name="cash" Margin="0 5 0 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                </StackPanel>
 
                 <!--Check-->
-                <xctk:DecimalUpDown x:Name="credit" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="Credit" Margin="0 5 0 5"/>
+                    <xctk:DecimalUpDown x:Name="credit" Margin="0 5 0 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+
+                </StackPanel>
 
                 <!--Credit-->
-                <TextBlock Text="Check" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown x:Name="check" Margin="0 5 45 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
-
+                <StackPanel Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="Check" Margin="0 5 0 5"/>
+                    <xctk:DecimalUpDown x:Name="check" Margin="0 5 0 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
+                </StackPanel>
 
                 <!--Check #-->
-                <TextBlock Text="Check #" Margin="0 5 0 5"/>
-                <xctk:DecimalUpDown x:Name="checkNumber" Margin="0 5 45 5" Value="0" Increment="1" Minimum="0"/>
+                <StackPanel Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="Check #" Margin="0 5 0 5"/>
+                    <xctk:DecimalUpDown x:Name="checkNumber" Margin="0 5 0 5" Value="0" Increment="1" Minimum="0"/>
+                </StackPanel>
 
+                <!--#endregion-->
 
-            </StackPanel>
+                <!--#region Clear all input-->
+                
+                <Button Grid.Row="6" Grid.Column="0" Margin="5 0 10 0" Background="Transparent" BorderBrush="Transparent"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                    <TextBlock Text="Clear all input" Foreground="#e06666" FontSize="18"/>
+                </Button>
+                
+                <!--#endregion-->
 
-            <!-- Payment Type-->
-            <StackPanel Grid.Column="1" Margin="12">
+                <!--#region CheckBoxes-->
 
-                <CheckBox x:Name="copayment"
-                      Content="Copayment"/>
-                <CheckBox x:Name="selfPay"
-                      Content="SelfPay"/>
-                <CheckBox x:Name="deductible"
-                      Content="Deductible"/>
-                <CheckBox x:Name="labs"
-                      Content="Labs"/>
-                <CheckBox x:Name="other"
-                          Content="Other"/>
-                <TextBox/>
+                <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="5 25 5 15">
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
+                    <CheckBox x:Name="copayment" Height="30">
+                        <TextBlock Text="Copayment" FontSize="16"/>
+                    </CheckBox>
+                    <CheckBox x:Name="selfPay" Height="30">
+                        <TextBlock Text="SelfPay" FontSize="16"/>
+                    </CheckBox>
+                    <CheckBox x:Name="deductible" Height="30">
+                        <TextBlock Text="Deductible" FontSize="16"/>
+                    </CheckBox>
+
+                    <CheckBox x:Name="labs" Height="30">
+                        <TextBlock Text="Labs" FontSize="16"/>
+                    </CheckBox>
+
+                    <CheckBox x:Name="other" Height="30">
+                        <TextBlock Text="Other" FontSize="16"/>
+                    </CheckBox>
+
+                    <TextBlock Height="30"/>
+
+                </StackPanel>
+                <!--#endregion-->
+             
+                <!--#region Payment Calculations -->
+
+                <Grid Grid.Column="1" Grid.Row="4" Grid.RowSpan="2">
 
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -108,43 +152,73 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Total" Grid.Column="0" Grid.Row="0"/>
-                    <TextBlock Text="$150" Grid.Column="1" Grid.Row="0"/>
-                    <TextBlock Text="Amount" Grid.Column="0" Grid.Row="1"/>
-                    <TextBlock Text="$200" Grid.Column="1" Grid.Row="1"/>
-                    <TextBlock Text="Change" Grid.Column="0" Grid.Row="2"/>
-                    <TextBlock Text="$50" Grid.Column="1" Grid.Row="2"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <!--Total-->
+                    <TextBlock Grid.Column="0" Grid.Row="0"
+                               Text="Total" FontSize="16"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0"
+                               Text="$150.00" FontSize="16"/>
+
+                    <!--Amount-->
+                    <TextBlock Grid.Column="0" Grid.Row="1"
+                               Text="Amount" FontSize="16" Foreground="#e06666"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1"
+                               Text="$200.00" FontSize="16" Foreground="#e06666"/>
+
+                    <!--Change-->
+                    <TextBlock Grid.Column="0" Grid.Row="2"
+                               Text="Change" FontSize="16"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2"
+                               Text="$150.00" FontSize="16"/>
+
 
                 </Grid>
-            </StackPanel>
+                <!--#endregion-->
 
-            <!-- Comment & Save Print-->
-            <Grid Grid.Column="2">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
 
-                <!-- Comment Info -->
-                <GroupBox Margin="12" Grid.Row="0">
-                    <GroupBox.Header>
-                        <TextBlock Text="Comment"/>
-                    </GroupBox.Header>
-                    <Grid Margin="3">
-                        <TextBox x:Name="comment" Padding="2"/>
-                    </Grid>
-                </GroupBox>
+                <!--#region Comment Area -->
+                <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Margin="0 20 0 20">
+                    <TextBlock Text="Comment:" FontSize="16" FontFamily="Roboto" Foreground="#666" />
+                    <TextBox x:Name="comment" Height="225" BorderBrush="#666" BorderThickness="2" Margin="0 10 0 0" materialDesign:HintAssist.Hint="Type a Comment ... "/>
+                </StackPanel>
+                <!--#endregion-->
 
-                <Button Grid.Row="1" Margin="16 35" Content="Save Print" Background="#27ae60" Click="Button_Click"/>
+                <!--#region Save Cancel Buttons-->
+                <Grid Grid.Column="2" Grid.Row="6" >
 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Grid.Column="0" Margin="10 0 5 0" Background="Transparent" BorderBrush="Transparent"
+                           Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
+                        <TextBlock Text="Cancel" Foreground="#666666 " FontSize="18"/>
+                    </Button>
+                    <Button Grid.Column="1" Margin="5 0 10 0" Background="Transparent" BorderBrush="Transparent"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                        <TextBlock Text="Save print" Foreground="#6aa84f " FontSize="18"/>
+                    </Button>
+                </Grid>
+                <!--#endregion-->
 
             </Grid>
+            <!--#endregion-->
+
 
 
 
         </Grid>
-    </StackPanel>
+        <!--#endregion-->
+
+    </Grid>
 
 
 

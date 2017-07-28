@@ -46,6 +46,8 @@
       <HintPath>..\packages\System.Configuration.Abstractions.2.0.2.26\lib\net45\System.Configuration.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -111,6 +113,9 @@
     <Compile Include="Domain\TreesViewModel.cs" />
     <Compile Include="interfaces\user.cs" />
     <Compile Include="services\dateService.cs" />
+    <Compile Include="Views\CashOut.xaml.cs">
+      <DependentUpon>CashOut.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
@@ -158,6 +163,10 @@
     <Page Include="Domain\SampleProgressDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CashOut.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Help.xaml">
       <SubType>Designer</SubType>
@@ -241,6 +250,9 @@
     <Resource Include="Resources\favicon.ico" />
     <Resource Include="Resources\ms-icon-310x310.png" />
     <Resource Include="Resources\ProfilePic.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
