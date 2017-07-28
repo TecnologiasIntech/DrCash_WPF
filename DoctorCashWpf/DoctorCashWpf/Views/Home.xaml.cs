@@ -102,6 +102,8 @@ namespace DoctorCashWpf
 
             await DialogHost.Show(cashInWindow, "RootDialog");
 
+            chargeTransactionsList();
+
         }
 
 
@@ -148,6 +150,8 @@ namespace DoctorCashWpf
             var closeDate = new CloseDate();
 
             await DialogHost.Show(closeDate, "RootDialog");
+
+            
         }
 
     }
