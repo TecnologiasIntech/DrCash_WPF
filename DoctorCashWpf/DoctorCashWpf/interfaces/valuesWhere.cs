@@ -11,7 +11,7 @@ namespace DoctorCashWpf
         public string column;
         public string value;
         public bool isTypeString;
-        public string operationBool;
+        public int operationBool;
         public int Operator;
     }
 }

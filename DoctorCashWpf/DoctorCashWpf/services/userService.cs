@@ -22,8 +22,8 @@ namespace DoctorCashWpf
             columnas.Add("usr_Username");
 
             var listValuesTerms = new List<valuesWhere>();
-            listValuesTerms.Add(createList.ofTypeValuesWhere(true, "usr_Username", username, "AND", (int)OPERATOR.EQUALITY));
-            listValuesTerms.Add(createList.ofTypeValuesWhere(true, "usr_Password", password, "", (int)OPERATOR.EQUALITY));
+            listValuesTerms.Add(createList.ofTypeValuesWhere(true, "usr_Username", username, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            listValuesTerms.Add(createList.ofTypeValuesWhere(true, "usr_Password", password, -1, (int)OPERATOR.EQUALITY));
 
             DataTable dataTable = createQuery.toSelect(columnas, "users", listValuesTerms);
 
@@ -75,7 +75,7 @@ namespace DoctorCashWpf
             list.Add(createList.ofTypeColumnsValues("usr_ModificationDate", date.getCurrentDate()));
 
             List<valuesWhere> listTerms = new List<valuesWhere>();
-            listTerms.Add(createList.ofTypeValuesWhere(false, "usr_ID", user.usr_ID.ToString(), "", (int)OPERATOR.EQUALITY));
+            listTerms.Add(createList.ofTypeValuesWhere(false, "usr_ID", user.usr_ID.ToString(), -1, (int)OPERATOR.EQUALITY));
 
             createQuery.toUpdate("users", list, listTerms);
         }
@@ -83,7 +83,7 @@ namespace DoctorCashWpf
         public void deleteByID(int userID)
         {
             List<valuesWhere> list = new List<valuesWhere>();
-            list.Add(createList.ofTypeValuesWhere(false, "usr_ID", userID.ToString(), "", (int)OPERATOR.EQUALITY));
+            list.Add(createList.ofTypeValuesWhere(false, "usr_ID", userID.ToString(), -1, (int)OPERATOR.EQUALITY));
 
             createQuery.forDelete("users", list);
         }

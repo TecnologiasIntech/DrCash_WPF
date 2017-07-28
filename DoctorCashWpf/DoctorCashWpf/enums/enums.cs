@@ -27,7 +27,7 @@ namespace DoctorCashWpf
 
     enum OPERATORBOOLEAN
     {
-        LOGICAL_AND,
-        LOGICAL_OR
+        AND,
+        OR
     }
 }

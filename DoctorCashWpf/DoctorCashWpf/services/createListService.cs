@@ -9,7 +9,7 @@ namespace DoctorCashWpf
     class createListService
     {
         
-        public valuesWhere ofTypeValuesWhere(bool isTypeString, string column, string value, string operationBool, int Operator)
+        public valuesWhere ofTypeValuesWhere(bool isTypeString, string column, string value, int operationBool, int Operator)
         {
             var items = new valuesWhere();
             items.isTypeString = isTypeString;

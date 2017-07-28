@@ -50,7 +50,8 @@ namespace DoctorCashWpf
                           transaction.registerId = "Asd";
                           transaction.modifiedById = 4;
 
-            transactionService.registerTransaction(transaction);
+            transactionService.setTransaction(transaction);
+
 
         }
     }

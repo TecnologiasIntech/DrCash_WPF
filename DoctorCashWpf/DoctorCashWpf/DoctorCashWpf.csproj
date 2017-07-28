@@ -109,6 +109,7 @@
     <Compile Include="Domain\SimpleDateValidationRule.cs" />
     <Compile Include="Domain\TextFieldsViewModel.cs" />
     <Compile Include="Domain\TreesViewModel.cs" />
+    <Compile Include="interfaces\closeDate.cs" />
     <Compile Include="interfaces\user.cs" />
     <Compile Include="services\dateService.cs" />
     <Compile Include="Views\Help.xaml.cs">

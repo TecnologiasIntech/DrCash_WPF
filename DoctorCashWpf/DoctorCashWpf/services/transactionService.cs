@@ -45,9 +45,9 @@ namespace DoctorCashWpf
             
             var listTerms = new List<valuesWhere>();
 
-            listTerms.Add(createList.ofTypeValuesWhere(false, "trn_User_ID", currentUserID.ToString(), "AND", (int)OPERATOR.EQUALITY));
-            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", date.getInitialDate(), "AND", (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", date.getEndDate(), "", (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            listTerms.Add(createList.ofTypeValuesWhere(false, "trn_User_ID", currentUserID.ToString(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", date.getInitialDate(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", date.getEndDate(), -1, (int)OPERATOR.LESS_THAN_OR_EQUAL));
 
             data = createQuery.toSelect(columns, "transactions", listTerms);
 
@@ -85,7 +85,16 @@ namespace DoctorCashWpf
             return list;
         }
 
-        public void registerTransaction(transaction transactionArray)
+        public void getTransactionsByRange(string dateInitial, string dateEnd)
+        {
+            var listTerms = new List<valuesWhere>();
+            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", dateInitial, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", dateEnd, -1, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+
+            createQuery.toSelectAll("transactions", listTerms);
+        }
+
+        public void setTransaction(transaction transactionArray)
         {
             List<columnsValues> valuesArray = new List<columnsValues>();
             valuesArray.Add(createList.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
@@ -111,6 +120,31 @@ namespace DoctorCashWpf
             //valuesArray.Add(listService.ofTypeColumnsValues("trn_ModificationDate", transactionArray.modificationDate));
 
             createQuery.toInsert("transactions", valuesArray);
+        }
+
+        public void closeDate(closeDate closeDate)
+        {
+            var list = new List<columnsValues>();
+            list.Add(createList.ofTypeColumnsValues("clt_100_bills", closeDate.clt_100_bills));
+            list.Add(createList.ofTypeColumnsValues("clt_50_bills", closeDate.clt_50_bills));
+            list.Add(createList.ofTypeColumnsValues("clt_20_bills", closeDate.clt_20_bills));
+            list.Add(createList.ofTypeColumnsValues("clt_10_bills", closeDate.clt_10_bills));
+            list.Add(createList.ofTypeColumnsValues("clt_5_bills", closeDate.clt_5_bills));
+            list.Add(createList.ofTypeColumnsValues("clt_1_bills", closeDate.clt_1_bills));
+            list.Add(createList.ofTypeColumnsValues("clt_checks_amount", closeDate.clt_checks_amount));
+            list.Add(createList.ofTypeColumnsValues("clt_credits_amount", closeDate.clt_credits_amount));
+            list.Add(createList.ofTypeColumnsValues("clt_total_charged", closeDate.clt_total_charged));
+            list.Add(createList.ofTypeColumnsValues("clt_total_cash", closeDate.clt_total_cash));
+            list.Add(createList.ofTypeColumnsValues("clt_total_check", closeDate.clt_total_check));
+            list.Add(createList.ofTypeColumnsValues("clt_total_credit", closeDate.clt_total_credit));
+            list.Add(createList.ofTypeColumnsValues("clt_initial_cash", closeDate.clt_initial_cash));
+            list.Add(createList.ofTypeColumnsValues("clt_balance", closeDate.clt_balance));
+            list.Add(createList.ofTypeColumnsValues("clt_transaction_count", closeDate.clt_transaction_count));
+            list.Add(createList.ofTypeColumnsValues("clt_reg_RegisterID", closeDate.clt_reg_RegisterID));
+            list.Add(createList.ofTypeColumnsValues("clt_Username", closeDate.clt_Username));
+            list.Add(createList.ofTypeColumnsValues("clt_Datetime", closeDate.clt_Datetime));
+
+            createQuery.toInsert("ClosedTransactions", list);
         }
 
     }
