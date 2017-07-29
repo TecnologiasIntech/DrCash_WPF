@@ -290,5 +290,16 @@ namespace DoctorCashWpf.Views
         {
             plusOrLess(textbox_bills1, label_1, (int)OPERATOR.EQUALITY, 1);
         }
+
+        private void Button_Click_13(object sender, RoutedEventArgs e)
+        {
+            var transaction = new transactionService();
+            var items = new transaction();
+            items.cash = Convert.ToInt32(label_totalCash.Text.Remove(0, 1));
+            items.comment = textbox_comment.Text;
+            items.type = (int)TRANSACTIONTYPE.OUT;
+
+            transaction.setTransaction(items);
+        }
     }
 }

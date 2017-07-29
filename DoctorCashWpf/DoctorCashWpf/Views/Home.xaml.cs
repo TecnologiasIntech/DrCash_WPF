@@ -34,7 +34,7 @@ namespace DoctorCashWpf
 
             Application.Current.MainWindow.WindowState = WindowState.Maximized;
 
-          //  chargeTransactionsList();
+            chargeTransactionsList();
 
         }
 
@@ -87,12 +87,41 @@ namespace DoctorCashWpf
         {
 
             //Transactions IN
-            label_cashIn.Text = "$" + transactionList.Distinct().Sum(obj => obj.cash).ToString();
+           /* label_cashIn.Text = "$" + transactionList.Distinct().Sum(obj => obj.cash).ToString();
             label_credit.Text = "$" + transactionList.Distinct().Sum(obj => obj.credit).ToString();
             label_checks.Text = "$" + transactionList.Distinct().Sum(obj => obj.check).ToString();
 
             label_totalIn.Text = "$" + (transactionList.Distinct().Sum(obj => obj.cash) + transactionList.Distinct().Sum(obj => obj.credit) + transactionList.Distinct().Sum(obj => obj.check)).ToString();
+            */
 
+            float cashIn = 0;
+            float credit = 0;
+            float checks = 0;
+            float cashOut = 0;
+
+            for (int i = 0; i < transactionList.Count(); i++)
+            {
+                if(transactionList[i].type == (int)TRANSACTIONTYPE.IN)
+                {
+                    cashIn += transactionList[i].cash;
+                    credit += transactionList[i].credit;
+                    checks += transactionList[i].check;
+                }
+                else if(transactionList[i].type == (int)TRANSACTIONTYPE.OUT)
+                {
+                    cashOut += transactionList[i].cash;
+                }
+            }
+
+            label_cashIn.Text = "$" + cashIn.ToString() + ".00";
+            label_credit.Text = "$" + credit.ToString() + ".00";
+            label_checks.Text = "$" + checks.ToString() + ".00";
+
+            label_totalIn.Text = "$" + (cashIn + credit + checks).ToString() + ".00";
+
+            label_cashOut.Text = "$" + cashOut.ToString() + ".00";
+
+            label_totalIn.Text = "$" + (cashOut).ToString() + ".00";
         }
 
         private async void CashInButton_Click(object sender, RoutedEventArgs e)
