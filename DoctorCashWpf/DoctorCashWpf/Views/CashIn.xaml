@@ -33,7 +33,7 @@
             <!--Modal Icon-->
             <materialDesign:PackIcon Kind="Download"  Grid.Column="0" Foreground="White" Height="40" Width="40" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
             <!--Title-->
-            <TextBlock Text="Cash Out" Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="28" FontWeight="Bold"/>
+            <TextBlock Text="Cash In" Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="28" FontWeight="Bold"/>
         </Grid>
         <!--#endregion-->
 
@@ -59,16 +59,16 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                
+
 
                 <!--#region Patient Name Input-->
                 <StackPanel Grid.Row="0" Grid.Column="0"   Grid.ColumnSpan="3">
 
                     <TextBlock Text="Patient Name" Margin=" 10" FontFamily="Roboto"/>
-                    <TextBox x:Name="patientFirstName" BorderBrush="Gray" BorderThickness="1" Padding="2" materialDesign:HintAssist.Hint="Name"/>
+                    <TextBox x:Name="txtbox_patientFirstName" BorderBrush="Gray" BorderThickness="1" Padding="2" materialDesign:HintAssist.Hint="Name"/>
 
                 </StackPanel>
-                
+
                 <!--#endregion-->
 
                 <!--#region  Charge Input-->
@@ -76,72 +76,67 @@
                 <!--Amount Charge-->
                 <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
                     <TextBlock Text="Amount Charge" Margin="0 5 0 5"/>
-                    <xctk:DecimalUpDown x:Name="amountCharged" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
                 </StackPanel>
 
                 <!--Cash-->
                 <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
                     <TextBlock Text="Cash"/>
-                    <xctk:DecimalUpDown x:Name="cash" Margin="0 5 0 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
                 </StackPanel>
 
                 <!--Check-->
                 <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center">
                     <TextBlock Text="Credit" Margin="0 5 0 5"/>
-                    <xctk:DecimalUpDown x:Name="credit" Margin="0 5 0 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
 
                 </StackPanel>
 
                 <!--Credit-->
                 <StackPanel Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center">
                     <TextBlock Text="Check" Margin="0 5 0 5"/>
-                    <xctk:DecimalUpDown x:Name="check" Margin="0 5 0 5" FormatString="C2" Value="0.0" Increment=".01"  Maximum="50000"  Minimum="0.01" />
                 </StackPanel>
 
                 <!--Check #-->
                 <StackPanel Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center">
                     <TextBlock Text="Check #" Margin="0 5 0 5"/>
-                    <xctk:DecimalUpDown x:Name="checkNumber" Margin="0 5 0 5" Value="0" Increment="1" Minimum="0"/>
                 </StackPanel>
 
                 <!--#endregion-->
 
                 <!--#region Clear all input-->
-                
+
                 <Button Grid.Row="6" Grid.Column="0" Margin="5 0 10 0" Background="Transparent" BorderBrush="Transparent"
-                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_2">
                     <TextBlock Text="Clear all input" Foreground="#e06666" FontSize="18"/>
                 </Button>
-                
+
                 <!--#endregion-->
 
                 <!--#region CheckBoxes-->
 
                 <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="5 25 5 15">
 
-                    <CheckBox x:Name="copayment" Height="30">
+                    <CheckBox x:Name="checkbox_copayment" Height="30">
                         <TextBlock Text="Copayment" FontSize="16"/>
                     </CheckBox>
-                    <CheckBox x:Name="selfPay" Height="30">
+                    <CheckBox x:Name="checkbox_selfPay" Height="30">
                         <TextBlock Text="SelfPay" FontSize="16"/>
                     </CheckBox>
-                    <CheckBox x:Name="deductible" Height="30">
+                    <CheckBox x:Name="checkbox_deductible" Height="30">
                         <TextBlock Text="Deductible" FontSize="16"/>
                     </CheckBox>
 
-                    <CheckBox x:Name="labs" Height="30">
+                    <CheckBox x:Name="checkbox_labs" Height="30">
                         <TextBlock Text="Labs" FontSize="16"/>
                     </CheckBox>
 
-                    <CheckBox x:Name="other" Height="30">
+                    <CheckBox x:Name="checkbox_other" Height="30">
                         <TextBlock Text="Other" FontSize="16"/>
                     </CheckBox>
 
-                    <TextBlock Height="30"/>
+                    <TextBlock x:Name="txtbox_other" Height="30"/>
 
                 </StackPanel>
                 <!--#endregion-->
-             
+
                 <!--#region Payment Calculations -->
 
                 <Grid Grid.Column="1" Grid.Row="4" Grid.RowSpan="2">
@@ -161,20 +156,20 @@
                     <!--Total-->
                     <TextBlock Grid.Column="0" Grid.Row="0"
                                Text="Total" FontSize="16"/>
-                    <TextBlock x:Name="total" Grid.Column="1" Grid.Row="0"
-                               Text="$150.00" FontSize="16"/>
+                    <TextBlock x:Name="label_total" Grid.Column="1" Grid.Row="0"
+                               Text="$0.00" FontSize="16"/>
 
                     <!--Amount-->
                     <TextBlock Grid.Column="0" Grid.Row="1"
                                Text="Amount" FontSize="16" Foreground="#e06666"/>
-                    <TextBlock x:Name="amount" Grid.Column="1" Grid.Row="1"
-                               Text="$200.00" FontSize="16" Foreground="#e06666"/>
+                    <TextBlock x:Name="label_amount" Grid.Column="1" Grid.Row="1"
+                               Text="$0.00" FontSize="16" Foreground="#e06666"/>
 
                     <!--Change-->
                     <TextBlock Grid.Column="0" Grid.Row="2"
                                Text="Change" FontSize="16"/>
-                    <TextBlock x:Name="change" Grid.Column="1" Grid.Row="2"
-                               Text="$150.00" FontSize="16"/>
+                    <TextBlock x:Name="label_change" Grid.Column="1" Grid.Row="2"
+                               Text="$0.00" FontSize="16"/>
 
 
                 </Grid>
@@ -185,7 +180,7 @@
                 <!--#region Comment Area -->
                 <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Margin="0 20 0 20">
                     <TextBlock Text="Comment:" FontSize="16" FontFamily="Roboto" Foreground="#666" />
-                    <TextBox x:Name="comment" Height="225" BorderBrush="#666" BorderThickness="2" Margin="0 10 0 0" materialDesign:HintAssist.Hint="Type a Comment ... "/>
+                    <TextBox x:Name="txtbox_comment" Height="225" BorderBrush="#666" BorderThickness="2" Margin="0 10 0 0" materialDesign:HintAssist.Hint="Type a Comment ... " VerticalContentAlignment="Top" Padding="5,2"/>
                 </StackPanel>
                 <!--#endregion-->
 
@@ -216,6 +211,11 @@
 
 
         </Grid>
+        <TextBox x:Name="txtbox_amountCharge" HorizontalAlignment="Left" Height="23" Margin="99,113,0,0" Grid.Row="1" TextWrapping="Wrap" Text="$0.00" VerticalAlignment="Top" Width="120" LostFocus="txtbox_amountCharge_LostFocus" KeyUp="txtbox_amountCharge_KeyUp" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="txtbox_cash" HorizontalAlignment="Left" Height="23" Margin="99,183,0,0" Grid.Row="1" TextWrapping="Wrap" Text="$0.00" VerticalAlignment="Top" Width="120" KeyUp="txtbox_cash_KeyUp" LostFocus="txtbox_cash_LostFocus" HorizontalContentAlignment="Center" Cursor=""/>
+        <TextBox x:Name="txtbox_credit" HorizontalAlignment="Left" Height="23" Margin="99,262,0,0" Grid.Row="1" TextWrapping="Wrap" Text="$0.00" VerticalAlignment="Top" Width="120" KeyUp="txtbox_credit_KeyUp" LostFocus="txtbox_credit_LostFocus" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="txtbox_check" HorizontalAlignment="Left" Height="23" Margin="99,333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="$0.00" VerticalAlignment="Top" Width="120" KeyUp="txtbox_check_KeyUp" LostFocus="txtbox_check_LostFocus" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="txtbox_numberChecks" HorizontalAlignment="Left" Height="23" Margin="99,400,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyUp="txtbox_numberChecks_KeyUp" LostFocus="txtbox_numberChecks_LostFocus" HorizontalContentAlignment="Center"/>
         <!--#endregion-->
 
     </Grid>
