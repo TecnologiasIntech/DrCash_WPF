@@ -34,7 +34,7 @@ namespace DoctorCashWpf
 
             Application.Current.MainWindow.WindowState = WindowState.Maximized;
 
-            chargeTransactionsList();
+          //  chargeTransactionsList();
 
         }
 
