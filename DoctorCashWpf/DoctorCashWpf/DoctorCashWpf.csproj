@@ -114,6 +114,9 @@
     <Compile Include="interfaces\closeDate.cs" />
     <Compile Include="interfaces\user.cs" />
     <Compile Include="services\dateService.cs" />
+    <Compile Include="Views\Authentication.xaml.cs">
+      <DependentUpon>Authentication.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CashOut.xaml.cs">
       <DependentUpon>CashOut.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
     <Compile Include="Views\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Authentication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CashIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
