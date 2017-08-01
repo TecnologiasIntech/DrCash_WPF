@@ -32,4 +32,10 @@ namespace DoctorCashWpf
         AND,
         OR
     }
+
+    enum TRANSACTIONTYPE
+    {
+        IN,
+        OUT
+    }
 }

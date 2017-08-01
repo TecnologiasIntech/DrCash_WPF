@@ -72,7 +72,7 @@ namespace DoctorCashWpf.Views
         private void getTotalCash()
         {
             double totalCash = 0;
-
+            
             if(textbox_bills100.Text != "")
             {
                 totalCash += Convert.ToDouble(label_100.Text.Remove(0, 1));
@@ -289,6 +289,49 @@ namespace DoctorCashWpf.Views
         private void textbox_bills1_LostFocus(object sender, RoutedEventArgs e)
         {
             plusOrLess(textbox_bills1, label_1, (int)OPERATOR.EQUALITY, 1);
+        }
+
+        private void Button_Click_13(object sender, RoutedEventArgs e)
+        {
+            var transaction = new transactionService();
+            var items = new transaction();
+            items.registerId = "Carlos Alatorre";
+            items.userId = 4;
+            items.cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
+            items.comment = textbox_comment.Text;
+            items.type = (int)TRANSACTIONTYPE.OUT;
+
+            transaction.setTransactionOut(items);
+        }
+
+        private void textbox_bills100_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textbox_bills100.SelectAll();
+        }
+
+        private void textbox_bills50_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textbox_bills50.SelectAll();
+        }
+
+        private void textbox_bills20_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textbox_bills20.SelectAll();
+        }
+
+        private void textbox_bills10_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textbox_bills10.SelectAll();
+        }
+
+        private void textbox_bills5_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textbox_bills5.SelectAll();
+        }
+
+        private void textbox_bills1_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textbox_bills1.SelectAll();
         }
     }
 }

@@ -49,6 +49,7 @@ namespace DoctorCashWpf
                           transaction.closed = false;
                           transaction.registerId = "Asd";
                           transaction.modifiedById = 4;
+            transaction.type = (int)TRANSACTIONTYPE.IN;
 
             transactionService.setTransaction(transaction);
 

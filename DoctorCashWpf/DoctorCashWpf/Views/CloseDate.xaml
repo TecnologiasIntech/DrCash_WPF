@@ -8,9 +8,7 @@
              xmlns:domain1="clr-namespace:MaterialDesignDemo.Domain"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             Height="600" Width="800"
-
-    d:DataContext="{d:DesignInstance domain:TextFieldsViewModel, d:IsDesignTimeCreatable=False}">
+             Height="600" Width="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -70,9 +68,9 @@
             <Grid Margin="30">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="291*" />
+                    <ColumnDefinition Width="134*"/>
+                    <ColumnDefinition Width="315*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -89,104 +87,110 @@
                 <!--#region  Bill Input-->
 
                 <!--Bills 100's -->
-                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000">
+                    <Button Background="#cc0000" Click="Button_Click">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
                     <!--Input-->
-                    <materialDesign:TimePicker VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
-                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" />
+                    <!--Input-->
+                    <TextBox x:Name="textbox_bills100" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
+                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f ">
+                    <Button Background="#6aa84f " Click="Button_Click_1">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
 
                 </StackPanel>
 
                 <!--Bills 50's-->
-                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000">
+                    <Button Background="#cc0000" Click="Button_Click_2">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
                     <!--Input-->
-                    <materialDesign:TimePicker VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
-                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" />
+                    <!--Input-->
+                    <TextBox x:Name="textbox_bills50" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
+                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                   materialDesign:HintAssist.Hint="50's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f ">
+                    <Button Background="#6aa84f " Click="Button_Click_3">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
 
                 <!--Bills 20's-->
-                <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000">
+                    <Button Background="#cc0000" Click="Button_Click_4">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
                     <!--Input-->
-                    <materialDesign:TimePicker VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
-                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" />
+                    <!--Input-->
+                    <TextBox x:Name="textbox_bills20" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
+                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                   materialDesign:HintAssist.Hint="20's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f ">
+                    <Button Background="#6aa84f " Click="Button_Click_5">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
 
                 <!--Bills 10's-->
-                <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000">
+                    <Button Background="#cc0000" Click="Button_Click_6">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
                     <!--Input-->
-                    <materialDesign:TimePicker VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
-                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" />
+                    <!--Input-->
+                    <TextBox x:Name="textbox_bills10" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
+                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                   materialDesign:HintAssist.Hint="10's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f ">
+                    <Button Background="#6aa84f " Click="Button_Click_7">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
 
                 <!--Bills 5's-->
-                <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000">
+                    <Button Background="#cc0000" Click="Button_Click_8">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
                     <!--Input-->
-                    <materialDesign:TimePicker VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
-                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" />
+                    <!--Input-->
+                    <TextBox x:Name="textbox_bills5" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
+                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                   materialDesign:HintAssist.Hint="5's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f ">
+                    <Button Background="#6aa84f " Click="Button_Click_9">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
 
                 <!--Bills 1's-->
-                <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000">
+                    <Button Background="#cc0000" Click="Button_Click_10">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
                     <!--Input-->
-                    <materialDesign:TimePicker VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
-                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" />
+                    <!--Input-->
+                    <TextBox x:Name="textbox_bills1" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
+                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                   materialDesign:HintAssist.Hint="1's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f ">
+                    <Button Background="#6aa84f " Click="Button_Click_11">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
@@ -198,20 +202,20 @@
 
                 <!--#region Total-->
 
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="Total" FontFamily="Roboto" HorizontalAlignment="Center"  FontSize="18" FontWeight="Bold" Foreground="#FF666666"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Total" FontFamily="Roboto" HorizontalAlignment="Center"  FontSize="18" FontWeight="Bold" Foreground="#FF666666" Margin="55,0,39,0" Width="40"/>
 
                 <TextBlock x:Name="Font" Grid.Column="1" Grid.Row="1"
-                           Text="$100" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666"/>
+                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock Grid.Column="1" Grid.Row="2"
-                           Text="$50" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666"/>
+                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock Grid.Column="1" Grid.Row="3"
-                           Text="$20" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666"/>
+                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock Grid.Column="1" Grid.Row="4"
-                           Text="$10" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666"/>
+                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock Grid.Column="1" Grid.Row="5"
-                           Text="$5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666"/>
+                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock Grid.Column="1" Grid.Row="6"
-                           Text="$1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666"/>
+                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
 
                 <!--#endregion-->
 
@@ -225,7 +229,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Total Cash: " Foreground="#FFF " FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock Grid.Column="1" Text="$630" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBlock Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="18,15,0,14"/>
 
                 </Grid>
 
@@ -246,15 +250,15 @@
 
                     <!-- Credit-->
                     <TextBlock Grid.Column="0"  Grid.Row="0" Text="Credit: " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock Grid.Column="1"  Grid.Row="0" Text="$500.00" Foreground="#FF666666 " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBlock Grid.Column="1"  Grid.Row="0" Text="$0.00" Foreground="#FF666666 " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
 
                     <!-- Check-->
                     <TextBlock Grid.Column="0"  Grid.Row="1" Text="Check:  " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock Grid.Column="1"  Grid.Row="1" Text="$50.00" Foreground="#FF666666 " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBlock Grid.Column="1"  Grid.Row="1" Text="$0.00" Foreground="#FF666666 " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
 
                     <!-- Check #-->
                     <TextBlock Grid.Column="0"  Grid.Row="2" Text="Check #  " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock Grid.Column="1"  Grid.Row="2" Text="45" Foreground="#FF666666 " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBlock Grid.Column="1"  Grid.Row="2" Text="0" Foreground="#FF666666 " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
 
                     <!-- Total Entered-->
                     <Grid Grid.Row="3" Grid.ColumnSpan="2" Background="#597eaa " Margin="0  0 0 2">
@@ -265,7 +269,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Total Entered " Foreground="#FFF " FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                        <TextBlock Grid.Column="1" Text="$630" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto"/>
+                        <TextBlock Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="22,14,0,14"/>
 
                     </Grid>
 
@@ -278,7 +282,7 @@
                 <!--#endregion-->
 
                 <!--#region Clear Cancel Print Buttons-->
-                <Grid Grid.Column="1" Grid.Row="7"  Grid.ColumnSpan="2" Margin="85,0,0,0.5">
+                <Grid Grid.Column="1" Grid.Row="7"  Grid.ColumnSpan="2" Margin="85,0,0,1">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
