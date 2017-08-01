@@ -38,7 +38,7 @@
         <!--#endregion-->
 
         <!--#region  Body-->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="White">
 
             <!--#region Body Sections  -->
             <Grid Margin="15">

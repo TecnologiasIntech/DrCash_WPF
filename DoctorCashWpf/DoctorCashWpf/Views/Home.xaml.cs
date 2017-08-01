@@ -121,7 +121,7 @@ namespace DoctorCashWpf
 
             label_cashOut.Text = "$" + cashOut.ToString() + ".00";
 
-            label_totalIn.Text = "$" + (cashOut).ToString() + ".00";
+            label_totalOut.Text = "$" + (cashOut).ToString() + ".00";
         }
 
         private async void CashInButton_Click(object sender, RoutedEventArgs e)
@@ -143,9 +143,11 @@ namespace DoctorCashWpf
 
             await DialogHost.Show(cashOut, "RootDialog");
 
-            userService user = new userService();
+            chargeTransactionsList();
 
-            user userDetails = new user();
+           // userService user = new userService();
+
+           // user userDetails = new user();
             /*//userDetails.usr_ID = 5;
             //userDetails.usr_Username = "psdzfgsapa";
             //userDetails.usr_FirstName = "pepsdfsdfse";

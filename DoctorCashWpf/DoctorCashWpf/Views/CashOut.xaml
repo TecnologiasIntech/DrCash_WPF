@@ -8,9 +8,7 @@
              xmlns:domain1="clr-namespace:MaterialDesignDemo.Domain"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             Height="500" Width="700"
-
-    d:DataContext="{d:DesignInstance domain:TextFieldsViewModel, d:IsDesignTimeCreatable=False}">
+             Height="500" Width="700">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -88,7 +86,7 @@
                 <!--#region  Bill Input-->
 
                 <!--Bills 100's -->
-                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="22,0,24,0" Width="206">
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="22,0,24,0" Width="196">
                     <!--Subtract-->
 
                     <!--Input-->
@@ -98,9 +96,9 @@
                     </Button>
 
                     <!--Input-->
-                    <TextBox x:Name="textbox_bills100" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
+                    <TextBox x:Name="textbox_bills100" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
+                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" GotFocus="textbox_bills100_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -120,7 +118,7 @@
 
                     <TextBox x:Name="textbox_bills50" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0,16,0,0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                   materialDesign:HintAssist.Hint="50's" HorizontalContentAlignment="Center" KeyUp="textbox_bills50_KeyUp" LostFocus="textbox_bills50_LostFocus" />
+                                   materialDesign:HintAssist.Hint="50's" HorizontalContentAlignment="Center" KeyUp="textbox_bills50_KeyUp" LostFocus="textbox_bills50_LostFocus" GotFocus="textbox_bills50_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_3">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -137,7 +135,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills20" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                   materialDesign:HintAssist.Hint="20's" HorizontalContentAlignment="Center" KeyUp="textbox_bills20_KeyUp" LostFocus="textbox_bills20_LostFocus" />
+                                   materialDesign:HintAssist.Hint="20's" HorizontalContentAlignment="Center" KeyUp="textbox_bills20_KeyUp" LostFocus="textbox_bills20_LostFocus" GotFocus="textbox_bills20_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_4">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -154,7 +152,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills10" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                   materialDesign:HintAssist.Hint="10's" HorizontalContentAlignment="Center" KeyUp="textbox_bills10_KeyUp" LostFocus="textbox_bills10_LostFocus" />
+                                   materialDesign:HintAssist.Hint="10's" HorizontalContentAlignment="Center" KeyUp="textbox_bills10_KeyUp" LostFocus="textbox_bills10_LostFocus" GotFocus="textbox_bills10_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_7">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -171,7 +169,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills5" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                   materialDesign:HintAssist.Hint="5's" HorizontalContentAlignment="Center" KeyUp="textbox_bills5_KeyUp" LostFocus="textbox_bills5_LostFocus" />
+                                   materialDesign:HintAssist.Hint="5's" HorizontalContentAlignment="Center" KeyUp="textbox_bills5_KeyUp" LostFocus="textbox_bills5_LostFocus" GotFocus="textbox_bills5_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_8">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -188,7 +186,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills1" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0 16 0 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                   materialDesign:HintAssist.Hint="1's" HorizontalContentAlignment="Center" KeyUp="textbox_bills1_KeyUp" LostFocus="textbox_bills1_LostFocus" />
+                                   materialDesign:HintAssist.Hint="1's" HorizontalContentAlignment="Center" KeyUp="textbox_bills1_KeyUp" LostFocus="textbox_bills1_LostFocus" GotFocus="textbox_bills1_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_11">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -255,7 +253,7 @@
                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
                         <TextBlock x:Name="btn_cancel" Text="Cancel" Foreground="#666666 " FontSize="18"/>
                     </Button>
-                    <Button Grid.Column="1" Margin="5 0 10 0" Background="Transparent" BorderBrush="Transparent"
+                    <Button Grid.Column="1" Margin="15,14,0,13" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                             Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_13">
                         <TextBlock x:Name="btn_save" Text="Save print" Foreground="#6aa84f " FontSize="18"/>
                     </Button>
