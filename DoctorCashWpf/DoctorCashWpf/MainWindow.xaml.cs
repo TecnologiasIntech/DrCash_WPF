@@ -18,6 +18,7 @@ using System.Threading;
 using System.Windows.Controls.Primitives;
 //using DoctorCashWpf.Domain;
 using MaterialDesignColors.WpfExample.Domain;
+using DoctorCashWpf.Views;
 
 namespace DoctorCashWpf
 {
@@ -70,5 +71,14 @@ namespace DoctorCashWpf
         {
             this.Close();
         }
+
+        private async void Capture_Initial_Cash(object sender, RoutedEventArgs e)
+        {
+            var initialCash = new InitialCash();
+
+            await DialogHost.Show(initialCash, "RootDialog");
+        }
+
+
     }
 }
