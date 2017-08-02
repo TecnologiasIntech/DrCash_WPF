@@ -161,6 +161,32 @@ namespace DoctorCashWpf.Views
             }
         }
 
+        private void verifyTxtBox(TextBox txtBox)
+        {
+            if (txtBox.Text[0] != '$')
+            {
+                if (Char.IsNumber(txtBox.Text[0]))
+                {
+
+                    txtBox.Text = "$" + txtBox.Text;
+                }
+                else
+                {
+                    txtBox.Text = "$0.00";
+                }
+            }
+            else
+            {
+                if (!Char.IsNumber(txtBox.Text.Remove(0, 1)[0]))
+                {
+                    txtBox.Text = "$0.00";
+                }
+            }
+
+            getCurrentTransactions();
+
+            isFloat(txtBox);
+        }
 
         private void clearInputs()
         {
@@ -244,33 +270,6 @@ namespace DoctorCashWpf.Views
         private void Button_Click_11(object sender, RoutedEventArgs e)
         {
             plusOrLess(textbox_bills1, label_bills1, (int)OPERATOR.SUM, 1);
-        }
-
-        private void verifyTxtBox(TextBox txtBox)
-        {
-            if(txtBox.Text[0] != '$')
-            {
-                if (Char.IsNumber(txtBox.Text[0]))
-                {
-                    
-                    txtBox.Text = "$" + txtBox.Text;
-                }
-                else
-                {
-                    txtBox.Text = "$0.00";
-                }
-            }
-            else
-            {
-                if (!Char.IsNumber(txtBox.Text.Remove(0, 1)[0]))
-                {
-                    txtBox.Text = "$0.00";
-                }
-            }
-
-            getCurrentTransactions();
-
-            isFloat(txtBox);
         }
 
         private void textbox_bills100_KeyUp(object sender, KeyEventArgs e)

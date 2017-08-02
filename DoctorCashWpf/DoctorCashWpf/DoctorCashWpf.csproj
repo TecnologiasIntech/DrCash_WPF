@@ -114,6 +114,7 @@
     <Compile Include="interfaces\closeDate.cs" />
     <Compile Include="interfaces\user.cs" />
     <Compile Include="services\dateService.cs" />
+    <Compile Include="services\MoneyComponentService.cs" />
     <Compile Include="Views\Authentication.xaml.cs">
       <DependentUpon>Authentication.xaml</DependentUpon>
     </Compile>
