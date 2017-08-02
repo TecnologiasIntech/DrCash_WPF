@@ -26,34 +26,35 @@ namespace DoctorCashWpf
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var transactionService = new transactionService();
-            var transaction = new transaction();
+            if (txtbox_patientFirstName.Text != "" && label_total.Text != "$0.00")
+            { 
+                var transactionService = new transactionService();
+                var transaction = new transaction();
 
-                          transaction.userId = 4;
-            //transaction.dateRegistered = DateTime.Today.ToString("d");
-            transaction.comment = txtbox_comment.Text;
-                          transaction.type = 1;
+                transaction.userId = 4;
+                //transaction.dateRegistered = DateTime.Today.ToString("d");
+                transaction.comment = txtbox_comment.Text;
+                transaction.type = 1;
 
-            transaction.amountCharged = (float)Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1));
-            transaction.cash = (float)Convert.ToDouble(txtbox_cash.Text.Remove(0, 1));
-            transaction.credit = (float)Convert.ToDouble(txtbox_credit.Text.Remove(0, 1));
-            transaction.check = (float)Convert.ToDouble(txtbox_check.Text.Remove(0, 1));
-            transaction.checkNumber = Convert.ToInt32(txtbox_numberChecks.Text);
-                          transaction.change = 10;
-            transaction.patientFirstName = txtbox_patientFirstName.Text;
-            transaction.copayment = (bool)checkbox_copayment.IsChecked;
-            transaction.selfPay = (bool)checkbox_selfPay.IsChecked; ;
-            transaction.deductible = (bool)checkbox_deductible.IsChecked; ;
-            transaction.labs = (bool)checkbox_labs.IsChecked; ;
-            transaction.other = (bool)checkbox_other.IsChecked; ;
-                          transaction.closed = false;
-                          transaction.registerId = "Asd";
-                          transaction.modifiedById = 4;
-            transaction.type = (int)TRANSACTIONTYPE.IN;
+                transaction.amountCharged = (float)Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1));
+                transaction.cash = (float)Convert.ToDouble(txtbox_cash.Text.Remove(0, 1));
+                transaction.credit = (float)Convert.ToDouble(txtbox_credit.Text.Remove(0, 1));
+                transaction.check = (float)Convert.ToDouble(txtbox_check.Text.Remove(0, 1));
+                transaction.checkNumber = Convert.ToInt32(txtbox_numberChecks.Text);
+                transaction.change = 10;
+                transaction.patientFirstName = txtbox_patientFirstName.Text;
+                transaction.copayment = (bool)checkbox_copayment.IsChecked;
+                transaction.selfPay = (bool)checkbox_selfPay.IsChecked; ;
+                transaction.deductible = (bool)checkbox_deductible.IsChecked; ;
+                transaction.labs = (bool)checkbox_labs.IsChecked; ;
+                transaction.other = (bool)checkbox_other.IsChecked; ;
+                transaction.closed = false;
+                transaction.registerId = "Asd";
+                transaction.modifiedById = 4;
+                transaction.type = (int)TRANSACTIONTYPE.IN;
 
-            transactionService.setTransaction(transaction);
-
-
+                transactionService.setTransaction(transaction);
+            }
         }
 
 
