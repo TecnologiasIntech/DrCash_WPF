@@ -173,5 +173,15 @@ namespace DoctorCashWpf
             checkbox_selfPay.IsChecked = false;
 
         }
+
+        private void checkbox_other_Checked(object sender, RoutedEventArgs e)
+        {
+            txtbox_other.IsEnabled = true;
+        }
+
+        private void checkbox_other_Unchecked(object sender, RoutedEventArgs e)
+        {
+            txtbox_other.IsEnabled = false;
+        }
     }
 }

@@ -128,11 +128,11 @@
                         <TextBlock Text="Labs" FontSize="16"/>
                     </CheckBox>
 
-                    <CheckBox x:Name="checkbox_other" Height="30">
+                    <CheckBox x:Name="checkbox_other" Height="30" Checked="checkbox_other_Checked" Unchecked="checkbox_other_Unchecked">
                         <TextBlock Text="Other" FontSize="16"/>
                     </CheckBox>
 
-                    <TextBlock x:Name="txtbox_other" Height="30"/>
+                    <TextBox x:Name="txtbox_other" Height="23" IsEnabled="False" BorderBrush="#89000000"/>
 
                 </StackPanel>
                 <!--#endregion-->
