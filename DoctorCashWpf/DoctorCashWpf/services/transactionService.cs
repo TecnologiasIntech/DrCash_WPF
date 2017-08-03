@@ -150,6 +150,26 @@ namespace DoctorCashWpf
             createQuery.toInsert("transactions", valuesArray);
         }
 
+        public void setTransactionInitialCash(transaction transactionArray)
+        {
+            List<columnsValues> valuesArray = new List<columnsValues>();
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_DateRegistered", date.getCurrentDate()));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Type", transactionArray.type));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Cash", transactionArray.cash));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Copayment", transactionArray.copayment));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_SelfPay", transactionArray.selfPay));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Deductible", transactionArray.deductible));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Other", transactionArray.other));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
+            valuesArray.Add(createList.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
+
+            createQuery.toInsert("transactions", valuesArray);
+        }
+
         public void closeDate(closeDate closeDate)
         {
             var list = new List<columnsValues>();

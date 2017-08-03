@@ -27,25 +27,63 @@ namespace DoctorCashWpf
             }
         }
 
-        public void convertComponentToMoneyComponent(TextBox txtBox)
+        public void convertComponentToMoneyFormat(TextBox txtBox)
         {
-            if (txtBox.Text[0] != '$')
+            if (txtBox.Text != "")
             {
-                if (Char.IsNumber(txtBox.Text[0]))
+                if (txtBox.Text[0] != '$')
                 {
-                    txtBox.Text = "$" + txtBox.Text;
+                    if (Char.IsNumber(txtBox.Text[0]))
+                    {
+                        txtBox.Text = "$" + txtBox.Text;
+                    }
+                    else
+                    {
+                        txtBox.Text = "$0.00";
+                    }
                 }
                 else
                 {
-                    txtBox.Text = "$0.00";
+                    if (!Char.IsNumber(txtBox.Text.Remove(0, 1)[0]))
+                    {
+                        txtBox.Text = "$0.00";
+                    }
                 }
             }
             else
             {
-                if (!Char.IsNumber(txtBox.Text.Remove(0, 1)[0]))
+                txtBox.Text = "$0.00";
+            }
+
+            AddFloatToComponent(txtBox);
+        }
+
+        public void convertComponentToMoneyFormat(TextBlock txtBox)
+        {
+            if (txtBox.Text != "")
+            {
+                if (txtBox.Text[0] != '$')
                 {
-                    txtBox.Text = "$0.00";
+                    if (Char.IsNumber(txtBox.Text[0]))
+                    {
+                        txtBox.Text = "$" + txtBox.Text;
+                    }
+                    else
+                    {
+                        txtBox.Text = "$0.00";
+                    }
                 }
+                else
+                {
+                    if (!Char.IsNumber(txtBox.Text.Remove(0, 1)[0]))
+                    {
+                        txtBox.Text = "$0.00";
+                    }
+                }
+            }
+            else
+            {
+                txtBox.Text = "$0.00";
             }
 
             AddFloatToComponent(txtBox);

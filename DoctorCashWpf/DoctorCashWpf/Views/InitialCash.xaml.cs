@@ -23,6 +23,73 @@ namespace DoctorCashWpf.Views
         public InitialCash()
         {
             InitializeComponent();
+
+            if (!checkInitialTransaction())
+            {
+                //No pedir la transaccion inicial o cerrar este dialogo
+            }
+        }
+
+        private transactionService transaction = new transactionService();
+        private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private dateService date = new dateService();
+
+        private bool checkInitialTransaction()
+        {
+            bool check = false;
+
+            var list = transaction.getCurrentTransactions(4); //Obtener ID de login
+            for (int i = 0; i < list.Count; i++)
+            {
+                if(list[i].type == (int)TRANSACTIONTYPE.INITIAL)
+                { 
+                    check = true;
+                    break;
+                }
+                else
+                {
+                    check = false;
+                } 
+              
+            }
+
+            return check;
+        }
+
+        private void setInitialCash()
+        {
+            if (txtbox_initialCash.Text != "$0.00")
+            {
+                var items = new transaction();
+
+                items.cash = (float)Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1));
+                items.type = (int)TRANSACTIONTYPE.INITIAL;
+                items.comment = "Initial Cash";
+                items.userId = 4; //Aqui se pondrá el id del usuario del cual se logee anteriormente en la ventana de login
+                items.registerId = "Carlos Alatorre";
+
+                transaction.setTransactionInitialCash(items);
+            }
+        }
+
+        private void setInitialCash_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash);
+                setInitialCash();
+            }
+        }
+
+        private void setInitialCash_click(object sender, RoutedEventArgs e)
+        {
+            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash);
+            setInitialCash();
+        }
+
+        private void txtbox_initialCash_LostFocus(object sender, RoutedEventArgs e)
+        {
+            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash);
         }
     }
 }

@@ -39,6 +39,7 @@ namespace DoctorCashWpf
         }
 
         public ICommand mostrar => new AnotherCommandImplementation(ExecuteRunDialog);
+        private MoneyComponentService moneyComponent = new MoneyComponentService();
 
         private async void ExecuteRunDialog(object o)
         {
@@ -85,10 +86,7 @@ namespace DoctorCashWpf
 
         private void getSumOfTransactions()
         {
-            float cashIn = 0;
-            float credit = 0;
-            float checks = 0;
-            float cashOut = 0;
+            float cashIn = 0, credit = 0, checks = 0, cashOut = 0, initialCash = 0;
 
             for (int i = 0; i < transactionList.Count(); i++)
             {
@@ -101,6 +99,9 @@ namespace DoctorCashWpf
                 else if(transactionList[i].type == (int)TRANSACTIONTYPE.OUT)
                 {
                     cashOut += transactionList[i].cash;
+                }else if(transactionList[i].type == (int)TRANSACTIONTYPE.INITIAL)
+                {
+                    initialCash = transactionList[i].cash;
                 }
             }
 
@@ -113,6 +114,10 @@ namespace DoctorCashWpf
             label_cashOut.Text = "$" + cashOut.ToString() + ".00";
 
             label_totalOut.Text = "$" + (cashOut).ToString() + ".00";
+
+            label_initialCash.Text = initialCash.ToString();
+            moneyComponent.convertComponentToMoneyFormat(label_initialCash);
+            
         }
 
         private async void CashInButton_Click(object sender, RoutedEventArgs e)
