@@ -14,25 +14,32 @@ namespace DoctorCashWpf
         private createListService createList = new createListService();
         private dateService date = new dateService();
 
-        public bool authentication(string username, string password)
+        public user authentication(string username, string password)
         {
-            bool auth = false;
+            var user = new user();
 
             List<string> columnas = new List<string>();
-            columnas.Add("usr_Username");
 
             var listValuesTerms = new List<valuesWhere>();
             listValuesTerms.Add(createList.ofTypeValuesWhere(true, "usr_Username", username, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
             listValuesTerms.Add(createList.ofTypeValuesWhere(true, "usr_Password", password, -1, (int)OPERATOR.EQUALITY));
 
-            DataTable dataTable = createQuery.toSelect(columnas, "users", listValuesTerms);
+            DataTable dataTable = createQuery.toSelectAll("users", listValuesTerms);
 
-            if (dataTable.Rows.Count == 0)
+
+            for (int i = 0; i < dataTable.Rows.Count; i++)
             {
-                auth = true;
+                DataRow filas = dataTable.Rows[i];
+
+                user.usr_ID = Convert.ToInt32(filas["usr_ID"]);
             }
-             
-            return auth;
+
+            if(dataTable.Rows.Count == 0)
+            {
+                user = null;
+            }
+
+            return user;
         }
 
         public void set(user user)
