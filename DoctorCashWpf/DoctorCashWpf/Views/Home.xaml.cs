@@ -39,6 +39,7 @@ namespace DoctorCashWpf
         }
 
         public ICommand mostrar => new AnotherCommandImplementation(ExecuteRunDialog);
+        private MoneyComponentService moneyComponent = new MoneyComponentService();
 
         private async void ExecuteRunDialog(object o)
         {
@@ -85,19 +86,7 @@ namespace DoctorCashWpf
 
         private void getSumOfTransactions()
         {
-
-            //Transactions IN
-           /* label_cashIn.Text = "$" + transactionList.Distinct().Sum(obj => obj.cash).ToString();
-            label_credit.Text = "$" + transactionList.Distinct().Sum(obj => obj.credit).ToString();
-            label_checks.Text = "$" + transactionList.Distinct().Sum(obj => obj.check).ToString();
-
-            label_totalIn.Text = "$" + (transactionList.Distinct().Sum(obj => obj.cash) + transactionList.Distinct().Sum(obj => obj.credit) + transactionList.Distinct().Sum(obj => obj.check)).ToString();
-            */
-
-            float cashIn = 0;
-            float credit = 0;
-            float checks = 0;
-            float cashOut = 0;
+            float cashIn = 0, credit = 0, checks = 0, cashOut = 0, initialCash = 0;
 
             for (int i = 0; i < transactionList.Count(); i++)
             {
@@ -110,6 +99,9 @@ namespace DoctorCashWpf
                 else if(transactionList[i].type == (int)TRANSACTIONTYPE.OUT)
                 {
                     cashOut += transactionList[i].cash;
+                }else if(transactionList[i].type == (int)TRANSACTIONTYPE.INITIAL)
+                {
+                    initialCash = transactionList[i].cash;
                 }
             }
 
@@ -122,6 +114,10 @@ namespace DoctorCashWpf
             label_cashOut.Text = "$" + cashOut.ToString() + ".00";
 
             label_totalOut.Text = "$" + (cashOut).ToString() + ".00";
+
+            label_initialCash.Text = initialCash.ToString();
+            moneyComponent.convertComponentToMoneyFormat(label_initialCash);
+            
         }
 
         private async void CashInButton_Click(object sender, RoutedEventArgs e)
@@ -144,31 +140,6 @@ namespace DoctorCashWpf
             await DialogHost.Show(cashOut, "RootDialog");
 
             chargeTransactionsList();
-
-           // userService user = new userService();
-
-           // user userDetails = new user();
-            /*//userDetails.usr_ID = 5;
-            //userDetails.usr_Username = "psdzfgsapa";
-            //userDetails.usr_FirstName = "pepsdfsdfse";
-            //userDetails.usr_LastName = "pasdfsdfpa";
-            //userDetails.usr_Password = "pepe123";
-            //userDetails.usr_SecurityQuestion = "";
-            //userDetails.usr_SecurityAnswer = "";
-            //userDetails.usr_Email = "as@as.com"; // puede ser nullo
-            //userDetails.usr_SecurityLevel = 1;
-            //userDetails.usr_ActiveAccount = true;
-            //userDetails.usr_PasswordReset = false;
-            //userDetails.usr_ModifiedBy = 4; // puede ser nullo
-            //userDetails.usr_CreatedBy = 4;
-
-            //user.setUser(userDetails);*/
-
-            //userDetails.usr_ID = 8;
-
-            //user.deleteByID(8);
-
-
         }
 
         private void RefundButton_Click(object sender, RoutedEventArgs e)

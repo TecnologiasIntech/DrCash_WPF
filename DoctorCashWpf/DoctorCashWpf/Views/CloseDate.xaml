@@ -97,7 +97,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills100" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
+                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" GotFocus="textbox_bills100_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_1">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -116,7 +116,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills50" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="50's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
+                                   materialDesign:HintAssist.Hint="50's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills50_KeyUp" LostFocus="textbox_bills50_LostFocus" GotFocus="textbox_bills50_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_3">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -134,7 +134,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills20" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="20's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
+                                   materialDesign:HintAssist.Hint="20's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills20_KeyUp" LostFocus="textbox_bills20_LostFocus" GotFocus="textbox_bills20_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_5">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -152,7 +152,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills10" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="10's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
+                                   materialDesign:HintAssist.Hint="10's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills10_KeyUp" LostFocus="textbox_bills10_LostFocus" GotFocus="textbox_bills10_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_7">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -170,7 +170,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills5" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="5's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
+                                   materialDesign:HintAssist.Hint="5's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills5_KeyUp" LostFocus="textbox_bills5_LostFocus" GotFocus="textbox_bills5_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_9">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -188,7 +188,7 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills1" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="1's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" />
+                                   materialDesign:HintAssist.Hint="1's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills1_KeyUp" LostFocus="textbox_bills1_LostFocus" GotFocus="textbox_bills1_GotFocus" />
                     <!--Addition-->
                     <Button Background="#6aa84f " Click="Button_Click_11">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
@@ -204,17 +204,17 @@
 
                 <TextBlock Grid.Column="1" Grid.Row="0" Text="Total" FontFamily="Roboto" HorizontalAlignment="Center"  FontSize="18" FontWeight="Bold" Foreground="#FF666666" Margin="55,0,39,0" Width="40"/>
 
-                <TextBlock x:Name="Font" Grid.Column="1" Grid.Row="1"
+                <TextBlock x:Name="label_bills100" Grid.Column="1" Grid.Row="1"
                            Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
-                <TextBlock Grid.Column="1" Grid.Row="2"
+                <TextBlock x:Name="label_bills50" Grid.Column="1" Grid.Row="2"
                            Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
-                <TextBlock Grid.Column="1" Grid.Row="3"
+                <TextBlock x:Name="label_bills20" Grid.Column="1" Grid.Row="3"
                            Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
-                <TextBlock Grid.Column="1" Grid.Row="4"
+                <TextBlock x:Name="label_bills10" Grid.Column="1" Grid.Row="4"
                            Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
-                <TextBlock Grid.Column="1" Grid.Row="5"
+                <TextBlock x:Name="label_bills5" Grid.Column="1" Grid.Row="5"
                            Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
-                <TextBlock Grid.Column="1" Grid.Row="6"
+                <TextBlock x:Name="label_bills1" Grid.Column="1" Grid.Row="6"
                            Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
 
                 <!--#endregion-->
@@ -229,11 +229,11 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Total Cash: " Foreground="#FFF " FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="18,15,0,14"/>
+                    <TextBlock x:Name="label_totalCash" Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="18,15,0,14"/>
 
                 </Grid>
 
-                <Grid Grid.Row="2" Grid.Column="2" Grid.RowSpan="4">
+                <Grid Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Margin="0,0,0,34">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -246,22 +246,29 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
                     <!-- Credit-->
                     <TextBlock Grid.Column="0"  Grid.Row="0" Text="Credit: " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock Grid.Column="1"  Grid.Row="0" Text="$0.00" Foreground="#FF666666 " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBox x:Name="textbox_credit" Text="$0.00" Grid.Column="1"  Grid.Row="0" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
+                                   materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_credit_KeyUp" LostFocus="textbox_credit_LostFocus" GotFocus="textbox_credit_GotFocus" />
+
 
                     <!-- Check-->
                     <TextBlock Grid.Column="0"  Grid.Row="1" Text="Check:  " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock Grid.Column="1"  Grid.Row="1" Text="$0.00" Foreground="#FF666666 " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBox x:Name="textbox_check" Text="$0.00" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
+                                   materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_check_KeyUp" LostFocus="textbox_check_LostFocus" GotFocus="textbox_check_GotFocus" />
+
 
                     <!-- Check #-->
-                    <TextBlock Grid.Column="0"  Grid.Row="2" Text="Check #  " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock Grid.Column="1"  Grid.Row="2" Text="0" Foreground="#FF666666 " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBlock Grid.Column="0"  Grid.Row="2" Text="Left in Register" Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBox x:Name="textbox_leftInRegister" Text="$0.00" Grid.Column="1"  Grid.Row="2" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
+                                   materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_leftRegister_KeyUp" LostFocus="textbox_leftRegister_LostFocus" GotFocus="textbox_leftInRegister_GotFocus" />
+
 
                     <!-- Total Entered-->
-                    <Grid Grid.Row="3" Grid.ColumnSpan="2" Background="#597eaa " Margin="0  0 0 2">
+                    <Grid Grid.Row="3" Grid.ColumnSpan="2" Background="#597eaa " Margin="0  0 0 5">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
@@ -269,13 +276,24 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Total Entered " Foreground="#FFF " FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                        <TextBlock Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="22,14,0,14"/>
+                        <TextBlock x:Name="label_totalEntered" Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="22,14,0,14"/>
+
+                    </Grid>
+                    <Grid Grid.Row="4" Grid.ColumnSpan="2" Background="#9b59b6 " Margin="0  5 0 2">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Total Registered " Foreground="#FFF " FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                        <TextBlock x:Name="label_totalRegistered" Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="22,14,0,14"/>
 
                     </Grid>
 
                     <!-- Short-->
-                    <TextBlock Grid.Column="0"  Grid.Row="4" Text="Short " Foreground="#e06666  " FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock Grid.Column="1"  Grid.Row="4" Text="$0.00" Foreground="#e06666 " FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBlock Grid.Column="0"  Grid.Row="5" Text="Short " Foreground="#e06666  " FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBlock x:Name="label_short" Grid.Column="1"  Grid.Row="5" Text="$0.00" Foreground="#e06666 " FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
 
 
                 </Grid>
@@ -291,7 +309,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Background="Transparent" BorderBrush="Transparent"
-                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_12">
                         <TextBlock Text="Clear" Foreground="#e06666  " FontSize="18"/>
                     </Button>
 

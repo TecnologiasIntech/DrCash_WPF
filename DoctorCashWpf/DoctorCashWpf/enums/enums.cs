@@ -36,6 +36,7 @@ namespace DoctorCashWpf
     enum TRANSACTIONTYPE
     {
         IN,
-        OUT
+        OUT,
+        INITIAL
     }
 }

@@ -12,18 +12,19 @@
 
         <TextBlock Text="Login" FontFamily="Roboto" FontSize="18" FontWeight="Bold"/>
 
-        <TextBox x:Name="username" VerticalAlignment="Top"  Width="200" HorizontalAlignment="Center" Margin="0 16 0 0"
+        <TextBox x:Name="txtbox_username" VerticalAlignment="Top"  Width="200" HorizontalAlignment="Center" Margin="0 16 0 0"
                                    Padding="3 0 0 0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="username" FontFamily="Roboto" FontSize="14"/>
-
-        <TextBox x:Name="password" VerticalAlignment="Top"  Width="200" HorizontalAlignment="Center" Margin="0 16 0 0"
-                                   Padding="3 0 0 0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="password" FontFamily="Roboto" FontSize="14"/>
-
-        <Button Background="#6aa84f" Margin="0 30" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                   materialDesign:HintAssist.Hint="username" FontFamily="Roboto" FontSize="14" KeyUp="authentification_KeyUp"/>
+        <PasswordBox x:Name="txtbox_password" VerticalAlignment="Top"  Width="200" HorizontalAlignment="Center" Margin="0 16 0 0"
+                                   Padding="3 0 0 0" 
+                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                   materialDesign:HintAssist.Hint="password" FontFamily="Roboto" FontSize="14" KeyUp="authentification_KeyUp"/>
+        
+        <Button Background="#6aa84f" Margin="0 30" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Click="Button_Click">
             <TextBlock>Login</TextBlock>
         </Button>
         
+
 
 
 

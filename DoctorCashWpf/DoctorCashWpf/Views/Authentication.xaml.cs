@@ -24,5 +24,34 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
         }
+
+        private userService user = new userService();
+
+        private void authentification()
+        {
+            var userData = user.authentication(txtbox_username.Text, txtbox_password.Password.ToString());
+
+            if (userData != null)
+            {
+                // Abrir Initial Cash
+            }
+            else
+            {
+                //Mensaje de error por datos incorrectos
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            authentification();
+        }
+
+        private void authentification_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                authentification();
+            }
+        }
     }
 }
