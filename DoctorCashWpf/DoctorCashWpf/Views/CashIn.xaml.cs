@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoctorCashWpf.Printer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,6 +57,11 @@ namespace DoctorCashWpf
                 transaction.type = (int)TRANSACTIONTYPE.IN;
 
                 transactionService.setTransaction(transaction);
+
+
+                // Imprime Recibo
+                Print print = new Print();
+                print.print();
             }
         }
 

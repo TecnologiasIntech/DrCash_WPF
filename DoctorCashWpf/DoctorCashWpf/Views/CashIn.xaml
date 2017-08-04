@@ -198,7 +198,7 @@
                         <TextBlock Text="Cancel" Foreground="#666666 " FontSize="18"/>
                     </Button>
                     <Button Grid.Column="1" Margin="5 0 10 0" Background="Transparent" BorderBrush="Transparent"
-                            Style="{DynamicResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Click="Button_Click_1">
+                            Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_1">
                         <TextBlock Text="Save print" Foreground="#6aa84f " FontSize="18"/>
                     </Button>
                 </Grid>

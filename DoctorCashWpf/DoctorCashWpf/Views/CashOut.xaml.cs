@@ -1,4 +1,5 @@
-﻿using MaterialDesignColors.WpfExample.Domain;
+﻿using DoctorCashWpf.Printer;
+using MaterialDesignColors.WpfExample.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -302,6 +303,10 @@ namespace DoctorCashWpf.Views
             items.type = (int)TRANSACTIONTYPE.OUT;
 
             transaction.setTransactionOut(items);
+
+            Print printer = new Print();
+            printer.print(); 
+
         }
 
         private void textbox_bills100_GotFocus(object sender, RoutedEventArgs e)
