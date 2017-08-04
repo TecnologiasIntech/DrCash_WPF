@@ -1,5 +1,4 @@
-﻿using DoctorCashWpf.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DoctorCashWpf
+namespace DoctorCashWpf.Views
 {
     /// <summary>
-    /// Interaction logic for Help.xaml
+    /// Interaction logic for UserProfile.xaml
     /// </summary>
-    public partial class Help : UserControl
+    public partial class UserProfile : UserControl
     {
-        public Help()
+        public UserProfile()
         {
             InitializeComponent();
-            
         }
     }
 }
