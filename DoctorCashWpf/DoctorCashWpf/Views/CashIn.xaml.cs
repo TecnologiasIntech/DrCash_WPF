@@ -26,6 +26,7 @@ namespace DoctorCashWpf
         }
 
         private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private BrushConverter brushConverter = new BrushConverter();
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -63,6 +64,26 @@ namespace DoctorCashWpf
                 Print print = new Print();
                 print.print();
             }
+            else
+            {
+                if(txtbox_patientFirstName.Text == "")
+                {
+                    txtbox_patientFirstName.Focus();
+
+                    txtbox_patientFirstName.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
+                    txtbox_patientFirstName.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
+                    txtbox_patientFirstName.FontWeight = FontWeights.Bold;
+                }
+                else
+                {
+                    txtbox_cash.Focus();
+
+                    txtbox_cash.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
+                    txtbox_cash.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
+                    txtbox_cash.FontWeight = FontWeights.Bold;
+                }
+            }
+
         }
 
         private void clearInputs()
