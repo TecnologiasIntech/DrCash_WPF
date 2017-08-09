@@ -20,7 +20,7 @@
                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                    materialDesign:HintAssist.Hint="password" FontFamily="Roboto" FontSize="14" KeyUp="authentification_KeyUp"/>
         
-        <Button Background="#6aa84f" Margin="0 30" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Click="Button_Click">
+        <Button Background="#6aa84f" Margin="0 30" Click="Button_Click">
             <TextBlock>Login</TextBlock>
         </Button>
         

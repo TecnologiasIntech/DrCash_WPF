@@ -76,7 +76,26 @@ namespace DoctorCashWpf
         {
             await DialogHost.Show(new Authentication(), "RootDialog");
 
-            await DialogHost.Show(new InitialCash(), "RootDialog");
+
+            var transaction = new transactionService();
+
+            var list = transaction.getCurrentTransactions(4);
+            bool initialCash = false;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if(list[i].type == (int)TRANSACTIONTYPE.INITIAL)
+                {
+                    initialCash = true;
+                    break;
+                }
+            }
+
+            if (!initialCash)
+            {
+                await DialogHost.Show(new InitialCash(), "RootDialog");
+            } 
+
         }
 
 

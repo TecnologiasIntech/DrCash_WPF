@@ -34,6 +34,7 @@ namespace DoctorCashWpf.Views
             if (userData != null)
             {
                 // Abrir Initial Cash
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
             else
             {

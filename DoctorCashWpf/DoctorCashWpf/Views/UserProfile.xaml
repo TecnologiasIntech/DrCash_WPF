@@ -99,22 +99,22 @@
                     <!-- First Name -->
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="1" FontSize="18" FontFamily="Roboto" Text="First Name:"/>
-                    <TextBlock Margin="20 0" Grid.Column="1" Grid.Row="1" FontSize="18" FontFamily="Roboto" Text="Carlos"/>
+                    <TextBlock x:Name="label_firstName" Margin="20 0" Grid.Column="1" Grid.Row="1" FontSize="18" FontFamily="Roboto" Text="Carlos"/>
 
                     <!-- LastName -->
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="2" FontSize="18" FontFamily="Roboto" Text="Last Name:"/>
-                    <TextBlock Margin="20 0" Grid.Column="1" Grid.Row="2" FontSize="18" FontFamily="Roboto" Text="Alatorre Parra"/>
+                    <TextBlock x:Name="label_lastName" Margin="20 0" Grid.Column="1" Grid.Row="2" FontSize="18" FontFamily="Roboto" Text="Alatorre Parra"/>
 
                     <!-- Email -->
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="3" FontSize="18" FontFamily="Roboto" Text="Email:"/>
-                    <TextBlock Margin="20 0" Grid.Column="1" Grid.Row="3" FontSize="18" FontFamily="Roboto" Text="ejemplo@hotmail.com"/>
+                    <TextBlock x:Name="label_email" Margin="20 0" Grid.Column="1" Grid.Row="3" FontSize="18" FontFamily="Roboto" Text="ejemplo@hotmail.com"/>
 
                     <!-- Security Question -->
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="Security Question"/>
-                    <TextBlock Margin="20 0" Grid.Column="1" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="............?"/>
+                    <TextBlock x:Name="label_securityQuestion" Margin="20 0" Grid.Column="1" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="............?"/>
 
 
                 </Grid>

@@ -63,6 +63,9 @@ namespace DoctorCashWpf
                 // Imprime Recibo
                 Print print = new Print();
                 print.print();
+
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+                
             }
             else
             {

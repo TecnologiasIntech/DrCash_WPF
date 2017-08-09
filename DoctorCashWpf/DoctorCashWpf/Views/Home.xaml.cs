@@ -61,7 +61,7 @@ namespace DoctorCashWpf
         private transactionService transactionService = new transactionService();
         private List<transaction> transactionList = new List<transaction>();
 
-        private void chargeTransactionsList()
+        public void chargeTransactionsList()
         {
 
             transactionList = transactionService.getCurrentTransactions(4);
