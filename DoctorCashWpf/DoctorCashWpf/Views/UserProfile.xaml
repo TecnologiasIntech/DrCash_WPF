@@ -58,7 +58,7 @@
                 </Grid>
 
 
-                <!-- Accept Button--><!--
+                 <!--Accept Button-->
                 <Grid Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 50 -35">
                     <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Height="70" Width="70" 
                             Background="#FFF" BorderThickness="0" BorderBrush="Transparent" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
@@ -68,7 +68,7 @@
                     </Button>
                 </Grid>
 
-                --><!-- Close Button--><!--
+                 <!--Close Button-->
 
                 <Grid Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 150 -35">
                     <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Height="70" Width="70" 
@@ -77,7 +77,7 @@
                          Height="60" Width="60" Background="#cc0000" BorderThickness="0" BorderBrush="Transparent">
                         <materialDesign:PackIcon Kind="Close" Height="35" Width="35" Foreground="#FFF"/>
                     </Button>
-                </Grid>-->
+                </Grid>
                 
 
 
@@ -100,10 +100,11 @@
                 
                 <!--#endregion-->
 
-                <!--#region User Information --><!--
+                <!--#region User Information--> 
                 <Grid Grid.Row="1" Width="500" Margin="0 50 0 30" Height="300">
 
-                    --><!--#region Grid Definitions--><!--
+                      
+                    <!--#region -->
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -118,40 +119,40 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    --><!--#endregion-->
+                    <!--#endregion-->
 
-                    <!-- Name --><!--
+                     <!--Name--> 
 
                     <TextBlock Grid.ColumnSpan="2" x:Name="label_userFullName" Text="Carlos Alatorre" FontSize="26" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Roboto" />
 
-                    --><!-- First Name --><!--
+                     <!--First Name--> 
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="1" FontSize="18" FontFamily="Roboto" Text="First Name:"/>
                     <TextBlock x:Name="label_firstName" Margin="20 0" Grid.Column="1" Grid.Row="1" FontSize="18" FontFamily="Roboto" Text="Carlos"/>
 
-                    --><!-- LastName --><!--
+                     <!--LastName--> 
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="2" FontSize="18" FontFamily="Roboto" Text="Last Name:"/>
                     <TextBlock x:Name="label_lastName" Margin="20 0" Grid.Column="1" Grid.Row="2" FontSize="18" FontFamily="Roboto" Text="Alatorre Parra"/>
 
-                    --><!-- Email --><!--
+                     <!--Email--> 
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="3" FontSize="18" FontFamily="Roboto" Text="Email:"/>
                     <TextBlock x:Name="label_email" Margin="20 0" Grid.Column="1" Grid.Row="3" FontSize="18" FontFamily="Roboto" Text="ejemplo@hotmail.com"/>
 
-                    --><!-- Security Question --><!--
+                     <!--Security Question--> 
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="Security Question"/>
                     <TextBlock x:Name="label_securityQuestion" Margin="20 0" Grid.Column="1" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="............?"/>
 
 
                 </Grid>
-                --><!--#endregion -->
+                <!--#endregion--> 
 
-                <!--#region User Information -->
+                <!--#region User Information Editable --><!--
                 <Grid Grid.Row="1" Width="700" Margin="0 50 0 30" Height="300">
 
-                    <!--#region Grid Definitions-->
+                    --><!--#region Grid Definitions--><!--
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
@@ -167,36 +168,36 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <!--#endregion-->
+                    --><!--#endregion-->
 
-                    <!-- Name -->
+                    <!-- Name --><!--
 
                     <TextBlock Grid.ColumnSpan="3" x:Name="userFullName" Text="Carlos Alatorre" FontSize="26" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Roboto" />
 
-                    <!-- First Name -->
+                    --><!-- First Name --><!--
 
                     <TextBlock Foreground="#666666" Margin="20 0" Grid.Column="0" Grid.Row="1" FontSize="18" FontFamily="Roboto" Text="First Name:"/>
                     <TextBox Foreground="#666666" Margin="20 0" Grid.Column="1" Grid.Row="1" FontSize="17" FontFamily="Roboto" Text="Carlos"/>
 
-                    <!-- LastName -->
+                    --><!-- LastName --><!--
 
                     <TextBlock Foreground="#666666" Margin="20 0" Grid.Column="0" Grid.Row="2" FontSize="18" FontFamily="Roboto" Text="Last Name:"/>
                     <TextBox Foreground="#666666" Margin="20 0" Grid.Column="1" Grid.Row="2" FontSize="17" FontFamily="Roboto" Text="Alatorre Parra"/>
 
-                    <!-- Email -->
+                    --><!-- Email --><!--
 
                     <TextBlock Foreground="#666666" Margin="20 0" Grid.Column="0" Grid.Row="3" FontSize="18" FontFamily="Roboto" Text="Email:"/>
                     <TextBox Foreground="#666666" Margin="20 0" Grid.Column="1" Grid.Row="3" FontSize="17" FontFamily="Roboto" Text="ejemplo@hotmail.com"/>
 
-                    <!-- Security Question -->
+                    --><!-- Security Question --><!--
 
                     <TextBlock Foreground="#666666" Margin="20 0" Grid.Column="0" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="Security Question"/>
                     <TextBox Foreground="#666666" Margin="20 0" Grid.Column="1" Grid.Row="4" FontSize="17" FontFamily="Roboto" Text="............?"/>
     
-                    <!-- New Password -->
+                    --><!-- New Password --><!--
                     <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="3">
                         
-                        <!-- New Password -->
+                        --><!-- New Password --><!--
                         <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="New Password"/>
                         <TextBox Text="******" Margin=" 20 10 0 20"/>
 
@@ -206,7 +207,7 @@
                     </StackPanel>
 
                 </Grid>
-                <!--#endregion -->
+                --><!--#endregion -->
             </Grid>
         </materialDesign:Card>
         <!--#endregion-->
