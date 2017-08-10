@@ -19,7 +19,7 @@
                    Margin="0 6 0 0"
                    FontSize="24" Grid.Row="0"/>
 
-        <TextBox x:Name="txtbox_initialCash" Height="30" Text="{Binding Path=Txt, StringFormat=C}" FontSize="20"  Grid.Row="1" Margin="0,15,0,10" HorizontalContentAlignment="Center" materialDesign:HintAssist.Hint="$0.00" KeyUp="setInitialCash_KeyUp" LostFocus="txtbox_initialCash_LostFocus" />
+        <TextBox x:Name="txtbox_initialCash" Height="30" Text="{Binding Path=Txt, StringFormat=C}" FontSize="20"  Grid.Row="1" Margin="0,15,0,10" HorizontalContentAlignment="Center" materialDesign:HintAssist.Hint="$0.00"  LostFocus="txtbox_initialCash_LostFocus" />
 
         <Button Grid.Row="2" 
                 IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"

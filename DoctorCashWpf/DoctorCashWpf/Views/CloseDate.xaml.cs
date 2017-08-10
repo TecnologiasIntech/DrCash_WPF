@@ -28,6 +28,7 @@ namespace DoctorCashWpf.Views
         }
 
         private transactionService transaction = new transactionService();
+        private MoneyComponentService moneyComponent = new MoneyComponentService();
 
         private void plusOrLess(TextBox txtbox, TextBlock label, int Operator, int typeBills)
         {
@@ -108,6 +109,8 @@ namespace DoctorCashWpf.Views
             label_totalCash.Text = "$" + totalCash.ToString() + ".00";
 
             label_totalEntered.Text = "$" + (Convert.ToDouble(label_totalCash.Text.Remove(0, 1)) + Convert.ToDouble(textbox_credit.Text.Remove(0, 1)) + Convert.ToDouble(textbox_check.Text.Remove(0, 1)) + Convert.ToDouble(textbox_leftInRegister.Text.Remove(0, 1))).ToString() + ".00";
+
+            label_short.Text = "$" + (Convert.ToDouble(label_totalEntered.Text.Remove(0, 1)) - Convert.ToDouble(label_totalRegistered.Text.Remove(0, 1))).ToString() + ".00";
         }
 
         private void getCurrentTransactions()
@@ -138,14 +141,14 @@ namespace DoctorCashWpf.Views
 
             label_totalRegistered.Text = "$" + totalRegistered.ToString();
 
-            label_short.Text = "$" + (totalRegistered - totalEntered).ToString();
+            label_short.Text = "$" + (totalEntered - totalRegistered).ToString();
 
-            isFloat(label_totalEntered);
-            isFloat(label_totalRegistered);
-            isFloat(label_short);
+            moneyComponent.AddFloatToComponent(label_totalEntered);
+            moneyComponent.AddFloatToComponent(label_totalRegistered);
+            moneyComponent.AddFloatToComponent(label_short);
         }
 
-        private void isFloat(TextBox txtbox)
+       /* private void isFloat(TextBox txtbox)
         {
             if (!txtbox.Text.Contains('.'))
             {
@@ -186,7 +189,7 @@ namespace DoctorCashWpf.Views
             getCurrentTransactions();
 
             isFloat(txtBox);
-        }
+        }*/
 
         private void clearInputs()
         {
@@ -359,40 +362,41 @@ namespace DoctorCashWpf.Views
         {
             if (e.Key == Key.Enter)
             {
-                verifyTxtBox(textbox_credit);
+                moneyComponent.convertComponentToMoneyFormat(textbox_credit, () => { getCurrentTransactions(); });
+               // verifyTxtBox(textbox_credit);
             }
         }
 
         private void textbox_credit_LostFocus(object sender, RoutedEventArgs e)
         {
-            verifyTxtBox(textbox_credit);
+            moneyComponent.convertComponentToMoneyFormat(textbox_credit, () => { getCurrentTransactions(); });
         }
 
         private void textbox_check_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                verifyTxtBox(textbox_check);
+                moneyComponent.convertComponentToMoneyFormat(textbox_check, () => { getCurrentTransactions(); });
             }
             
         }
 
         private void textbox_check_LostFocus(object sender, RoutedEventArgs e)
         {
-            verifyTxtBox(textbox_check);
+            moneyComponent.convertComponentToMoneyFormat(textbox_check, () => { getCurrentTransactions(); });
         }
 
         private void textbox_leftRegister_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                verifyTxtBox(textbox_leftInRegister);
+                moneyComponent.convertComponentToMoneyFormat(textbox_leftInRegister, () => { getCurrentTransactions(); });
             }
         }
 
         private void textbox_leftRegister_LostFocus(object sender, RoutedEventArgs e)
         {
-            verifyTxtBox(textbox_leftInRegister);
+            moneyComponent.convertComponentToMoneyFormat(textbox_leftInRegister, () => { getCurrentTransactions(); });
         }
 
         private void textbox_credit_GotFocus(object sender, RoutedEventArgs e)

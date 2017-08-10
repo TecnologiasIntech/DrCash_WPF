@@ -27,7 +27,7 @@ namespace DoctorCashWpf
             }
         }
 
-        public void convertComponentToMoneyFormat(TextBox txtBox)
+        public void convertComponentToMoneyFormat(TextBox txtBox, Action function)
         {
             if (txtBox.Text != "")
             {
@@ -54,6 +54,8 @@ namespace DoctorCashWpf
             {
                 txtBox.Text = "$0.00";
             }
+
+            function();
 
             AddFloatToComponent(txtBox);
         }

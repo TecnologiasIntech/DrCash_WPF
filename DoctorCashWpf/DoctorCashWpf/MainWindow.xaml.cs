@@ -71,14 +71,5 @@ namespace DoctorCashWpf
         {
             this.Close();
         }
-
-        private async void Capture_Initial_Cash(object sender, RoutedEventArgs e)
-        {
-            await DialogHost.Show(new Authentication(), "RootDialog");
-
-            await DialogHost.Show(new InitialCash(), "RootDialog");
-        }
-
-
     }
 }
