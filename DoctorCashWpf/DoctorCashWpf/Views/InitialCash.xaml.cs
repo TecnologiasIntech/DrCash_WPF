@@ -76,20 +76,20 @@ namespace DoctorCashWpf.Views
         {
             if(e.Key == Key.Enter)
             {
-                moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash);
+                moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
                 setInitialCash();
             }
         }
 
         private void setInitialCash_click(object sender, RoutedEventArgs e)
         {
-            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash);
+            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
             setInitialCash();
         }
 
         private void txtbox_initialCash_LostFocus(object sender, RoutedEventArgs e)
         {
-            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash);
+            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
         }
     }
 }

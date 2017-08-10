@@ -11,7 +11,7 @@
 
         
         <!--#region User Profile/ Manage Users -->
-        <Grid>
+        <Grid Loaded="loadeds">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -94,7 +94,7 @@
 
                     <!-- Name -->
 
-                    <TextBlock Grid.ColumnSpan="2" x:Name="userFullName" Text="Carlos Alatorre" FontSize="26" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Roboto" />
+                    <TextBlock Grid.ColumnSpan="2" x:Name="label_userFullName" Text="Carlos Alatorre" FontSize="26" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Roboto" />
 
                     <!-- First Name -->
 

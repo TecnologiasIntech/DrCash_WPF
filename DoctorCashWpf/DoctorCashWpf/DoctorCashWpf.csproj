@@ -117,6 +117,7 @@
     <Compile Include="Domain\TreesViewModel.cs" />
     <Compile Include="interfaces\closeDate.cs" />
     <Compile Include="interfaces\user.cs" />
+    <Compile Include="interfaces\userInformation.cs" />
     <Compile Include="Printer\Print.cs" />
     <Compile Include="Printer\RawPrinterHelper.cs" />
     <Compile Include="services\dateService.cs" />

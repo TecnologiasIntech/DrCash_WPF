@@ -33,9 +33,6 @@ namespace DoctorCashWpf
             InitializeComponent();
 
             Application.Current.MainWindow.WindowState = WindowState.Maximized;
-
-            chargeTransactionsList();
-
         }
 
         public ICommand mostrar => new AnotherCommandImplementation(ExecuteRunDialog);
@@ -154,6 +151,36 @@ namespace DoctorCashWpf
             await DialogHost.Show(closeDate, "RootDialog");
 
             
+        }
+
+        private async void Capture_Initial_Cash(object sender, RoutedEventArgs e)
+        {
+            if (userInformation.user == null)
+            {
+                await DialogHost.Show(new Authentication(), "RootDialog");
+            }
+
+            var transaction = new transactionService();
+
+            var list = transaction.getCurrentTransactions(userInformation.user.usr_ID);
+            bool initialCash = false;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].type == (int)TRANSACTIONTYPE.INITIAL)
+                {
+                    initialCash = true;
+                    break;
+                }
+            }
+
+            if (!initialCash)
+            {
+                await DialogHost.Show(new InitialCash(), "RootDialog");
+            }
+
+            chargeTransactionsList();
+
         }
 
     }

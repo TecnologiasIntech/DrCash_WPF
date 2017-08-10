@@ -23,6 +23,19 @@ namespace DoctorCashWpf.Views
         public UserProfile()
         {
             InitializeComponent();
+
+            
+        }
+        private void loadeds(object sender, RoutedEventArgs e)
+        {
+            if (userInformation.user != null)
+            {
+                label_email.Text = userInformation.user.usr_Email;
+                label_firstName.Text = userInformation.user.usr_FirstName;
+                label_lastName.Text = userInformation.user.usr_LastName;
+                label_securityQuestion.Text = userInformation.user.usr_SecurityQuestion;
+                label_userFullName.Text = userInformation.user.usr_Username;
+            }
         }
     }
 }
