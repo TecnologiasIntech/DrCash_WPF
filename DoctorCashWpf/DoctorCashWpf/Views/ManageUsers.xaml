@@ -75,7 +75,7 @@
 
                 <!--Active Acount-->
                 <TextBlock Text="Active Acount" Margin="30 15" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
-                <CheckBox Margin="40 10" Background="Black">
+                <CheckBox Margin="40 10">
                     <TextBlock Foreground="#666666" FontSize="15" FontFamily="Roboto" FontWeight="Bold">Active</TextBlock>
                 </CheckBox>
 
