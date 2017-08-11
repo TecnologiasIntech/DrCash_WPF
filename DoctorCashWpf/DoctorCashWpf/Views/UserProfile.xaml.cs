@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,14 @@ namespace DoctorCashWpf.Views
             InitializeVisualComponent();
 
         }
+
+        private async void Manage_User_Button_Click(object sender, RoutedEventArgs e)
+        {
+                var manageUsers = new ManageUsers();
+                await DialogHost.Show(manageUsers, "RootDialog");
+
+        }
+
         private void loadeds(object sender, RoutedEventArgs e)
         {
             if (userInformation.user != null)
@@ -112,5 +121,8 @@ namespace DoctorCashWpf.Views
         {
 
         }
+
+
+       
     }
 }

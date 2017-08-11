@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="DoctorCashWpf.Views.ManageUsers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DoctorCashWpf.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Height="600" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Title Bar-->
+        <Grid Grid.Row="0" Background="#6aa84f  ">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <!--Modal Icon-->
+            <materialDesign:PackIcon Kind="AccountMultiple"  Grid.Column="0" Foreground="White" Height="40" Width="40" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+            <!--Title-->
+            <TextBlock Text="Manage Users" Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="28" FontWeight="Bold"/>
+        </Grid>
+        <!--#endregion-->
+
+        <Grid Grid.Row="1" Margin="60">
+
+            <!--#region Column Definitions-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <!--#endregion-->
+
+            <!--#region Transactions Grid-->
+
+            <materialDesign:Card 
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                    Grid.Column="0" 
+                    Background="White"
+                    Margin="8"
+                    Padding="5">
+                <Grid>
+                    <DataGrid Name="dataGridView1"
+                          IsReadOnly="True"/>
+                </Grid>
+            </materialDesign:Card>
+            
+            <!--#endregion-->
+
+            <!--#region  Edit Controllers-->
+            <StackPanel Grid.Column="1" Margin="0 15 0 0" >
+                
+                <!--Security Level-->
+                <TextBlock Text="Security Level" Margin="30 15" Foreground="#666666" FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
+                <StackPanel Margin="40 10" Orientation="Horizontal">
+                    <RadioButton Width="80" VerticalContentAlignment="Center">
+                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" FontWeight="Bold">1</TextBlock>
+                    </RadioButton>
+                    <RadioButton Width="80" VerticalContentAlignment="Center">
+                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" FontWeight="Bold">2</TextBlock>
+                    </RadioButton>
+                </StackPanel>
+
+                <!--Password Reset-->
+                <TextBlock Text="Password Reset" Margin="30 15" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
+                <CheckBox Margin="40 10">
+                    <TextBlock Foreground="#666666" FontSize="15" FontFamily="Roboto" FontWeight="Bold">Reset</TextBlock>
+                </CheckBox>
+
+                <!--Active Acount-->
+                <TextBlock Text="Active Acount" Margin="30 15" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
+                <CheckBox Margin="40 10" Background="Black">
+                    <TextBlock Foreground="#666666" FontSize="15" FontFamily="Roboto" FontWeight="Bold">Active</TextBlock>
+                </CheckBox>
+
+                <!--Apply Changes-->
+                <Button x:Name="Apply_Changes"  Margin="30 20" Width="200" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent">
+                    <TextBlock Text="Apply Changes" Foreground="#6fa8dc  " FontSize="18"/>
+                </Button>
+                
+                <!--Close-->
+                <Button x:Name="btn_close"  Margin="30 15" Width="200" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Background="Transparent" BorderBrush="Transparent"
+                           Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" >
+                    <TextBlock Text="Close" Foreground="red " FontSize="18"/>
+                </Button>
+
+            </StackPanel>
+            <!--#endregion-->
+            
+
+        </Grid>
+
+
+
+    </Grid>
+</UserControl>
