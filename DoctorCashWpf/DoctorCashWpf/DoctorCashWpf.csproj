@@ -122,6 +122,7 @@
     <Compile Include="Printer\RawPrinterHelper.cs" />
     <Compile Include="services\dateService.cs" />
     <Compile Include="services\MoneyComponentService.cs" />
+    <Compile Include="services\reportService.cs" />
     <Compile Include="Views\Authentication.xaml.cs">
       <DependentUpon>Authentication.xaml</DependentUpon>
     </Compile>

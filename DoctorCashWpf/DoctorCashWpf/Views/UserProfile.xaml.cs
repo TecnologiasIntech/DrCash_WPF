@@ -25,7 +25,6 @@ namespace DoctorCashWpf.Views
             InitializeComponent();
 
             InitializeVisualComponent();
-
         }
 
         private userService user = new userService();
@@ -46,6 +45,11 @@ namespace DoctorCashWpf.Views
                 checkTextBlock(label_lastName);
                 checkTextBlock(label_securityQuestion);
                 checkTextBlock(label_userFullName);
+            }
+
+            if (userInformation.user.usr_SecurityLevel == (int)SECURIRYLEVEL.USER)
+            {
+                btn_manageUsers.Visibility = Visibility.Collapsed;
             }
         }
 

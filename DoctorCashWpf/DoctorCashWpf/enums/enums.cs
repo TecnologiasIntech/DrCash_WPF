@@ -39,4 +39,11 @@ namespace DoctorCashWpf
         OUT,
         INITIAL
     }
+
+    enum SECURIRYLEVEL
+    {
+        USER,
+        SUPERVISOR,
+        ADMINISTRATOR
+    }
 }

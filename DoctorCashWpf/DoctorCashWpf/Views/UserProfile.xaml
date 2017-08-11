@@ -23,7 +23,7 @@
             
             <!-- Manage Users -->
 
-            <Button Grid.Column="1" Width="200" Height="40" Background="#6aa84f" BorderThickness="0" FontSize="22" HorizontalAlignment="Right">
+            <Button x:Name="btn_manageUsers" Grid.Column="1" Width="200" Height="40" Background="#6aa84f" BorderThickness="0" FontSize="22" HorizontalAlignment="Right">
                     Manage Users     
             </Button>
 
