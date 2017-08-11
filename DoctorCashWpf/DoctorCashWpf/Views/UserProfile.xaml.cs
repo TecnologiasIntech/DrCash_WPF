@@ -24,7 +24,8 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
 
-            
+            InitializeVisualComponent();
+
         }
         private void loadeds(object sender, RoutedEventArgs e)
         {
@@ -36,6 +37,80 @@ namespace DoctorCashWpf.Views
                 label_securityQuestion.Text = userInformation.user.usr_SecurityQuestion;
                 label_userFullName.Text = userInformation.user.usr_Username;
             }
+        }
+
+        private void Edit_Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserEditInformationShow();
+        }
+
+        private void Accept_Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserInformationShow();
+        }
+
+        private void Cancel_Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserInformationShow();
+        }
+
+        private void UserInformationShow()
+        {
+            // Buttons
+            EditButton.Visibility = Visibility.Visible;
+            CancelButton.Visibility = AcceptButton.Visibility = Visibility.Collapsed;
+
+            // Grid
+            UserInformationEditGridHide();
+            UserInformationGridShow();
+        }
+
+        private void UserEditInformationShow()
+        {
+            // Buttons
+            EditButton.Visibility = Visibility.Collapsed;
+            CancelButton.Visibility = AcceptButton.Visibility = Visibility.Visible;
+
+            // Grid
+            UserInformationGridHide();
+            UserInformationEditGridShow();
+        }
+
+        private void InitializeVisualComponent()
+        {
+
+            CancelButton.Visibility = AcceptButton.Visibility = Visibility.Collapsed;
+            UserInformationEditGridHide();
+
+        }
+
+        private void UserInformationGridHide()
+        {
+            UserInformationCol1.Width = new GridLength(0);
+            UserInformationCol2.Width = new GridLength(0);
+        }
+
+        private void UserInformationGridShow() 
+        {
+            UserInformationCol1.Width = new GridLength(1, GridUnitType.Star);
+            UserInformationCol2.Width = new GridLength(1, GridUnitType.Star);
+        }
+
+        private void UserInformationEditGridHide()
+        {
+            UserEditInformationCol1.Width = new GridLength(0);
+            UserEditInformationCol2.Width = new GridLength(0);
+        }
+
+        private void UserInformationEditGridShow()
+        {
+            UserEditInformationCol1.Width = new GridLength(1, GridUnitType.Star);
+            UserEditInformationCol2.Width = new GridLength(1, GridUnitType.Star);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

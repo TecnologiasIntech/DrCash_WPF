@@ -48,10 +48,10 @@
                 <StackPanel Background="#2b78e4 " Height="200" />
 
                  <!--Edit Button-->
-                <Grid Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 50 -35">
+                <Grid x:Name="EditButton" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 50 -35">
                     <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Height="70" Width="70" 
                             Background="#FFF" BorderThickness="0" BorderBrush="Transparent" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
-                    <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" 
+                    <Button Click="Edit_Button_Click" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" 
                          Height="60" Width="60" Background="#e69138" BorderThickness="0" BorderBrush="Transparent">
                         <materialDesign:PackIcon Kind="Pencil" Height="35" Width="35" Foreground="#FFF"/>
                     </Button>
@@ -59,28 +59,25 @@
 
 
                  <!--Accept Button-->
-                <Grid Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 50 -35">
+                <Grid x:Name="AcceptButton" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 50 -35">
                     <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Height="70" Width="70" 
                             Background="#FFF" BorderThickness="0" BorderBrush="Transparent" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
-                    <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" 
+                    <Button Click="Accept_Button_Click" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" 
                          Height="60" Width="60" Background="#6aa84f" BorderThickness="0" BorderBrush="Transparent">
                         <materialDesign:PackIcon Kind="Check" Height="35" Width="35" Foreground="#FFF"/>
                     </Button>
                 </Grid>
 
                  <!--Close Button-->
-
-                <Grid Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 150 -35">
+                <Grid x:Name="CancelButton" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 150 -35">
                     <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Height="70" Width="70" 
                             Background="#FFF" BorderThickness="0" BorderBrush="Transparent" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
-                    <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" 
+                    <Button Click="Cancel_Button_Click" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" 
                          Height="60" Width="60" Background="#cc0000" BorderThickness="0" BorderBrush="Transparent">
                         <materialDesign:PackIcon Kind="Close" Height="35" Width="35" Foreground="#FFF"/>
                     </Button>
                 </Grid>
                 
-
-
                 <!-- User Icon-->
                 <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 -50">
                     <!-- White overlap Button Background-->
@@ -96,19 +93,17 @@
                     </Button>
                 </Grid>
 
-
                 
                 <!--#endregion-->
 
-                <!--#region User Information--> 
-                <Grid Grid.Row="1" Width="500" Margin="0 50 0 30" Height="300">
+                <!--#region User Information-->
+                <Grid x:Name="UserInformation" Grid.Row="1" Width="500" Margin="0 50 0 30" Height="350">
 
-                      
-                    <!--#region -->
+                    <!--#region Grid Definitions-->
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition x:Name="UserInformationCol1"/>
+                        <ColumnDefinition x:Name="UserInformationCol2"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
@@ -143,21 +138,19 @@
                      <!--Security Question--> 
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="Security Question"/>
-                    <TextBlock x:Name="label_securityQuestion" Margin="20 0" Grid.Column="1" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="............?"/>
-
+                    <TextBlock x:Name="label_securityQuestion" Margin="20 0" Grid.Column="1" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="????????????"/>
 
                 </Grid>
                 <!--#endregion--> 
 
-                <!--#region User Information Editable --><!--
-                <Grid Grid.Row="1" Width="700" Margin="0 50 0 30" Height="300">
+                <!--#region User Information Editable--> 
+                <Grid x:Name="UserEditInformation" Grid.Row="1" Width="650" Margin="0 50 0 30" Height="350">
 
-                    --><!--#region Grid Definitions--><!--
+                    <!--#region Grid Definitions-->
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="*" x:Name="UserEditInformationCol1"/>
+                        <ColumnDefinition Width="*" x:Name="UserEditInformationCol2"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
@@ -165,49 +158,54 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    --><!--#endregion-->
+                    <!--#endregion-->
 
-                    <!-- Name --><!--
+                     <!--Name--> 
 
                     <TextBlock Grid.ColumnSpan="3" x:Name="userFullName" Text="Carlos Alatorre" FontSize="26" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Roboto" />
 
-                    --><!-- First Name --><!--
-
-                    <TextBlock Foreground="#666666" Margin="20 0" Grid.Column="0" Grid.Row="1" FontSize="18" FontFamily="Roboto" Text="First Name:"/>
-                    <TextBox Foreground="#666666" Margin="20 0" Grid.Column="1" Grid.Row="1" FontSize="17" FontFamily="Roboto" Text="Carlos"/>
-
-                    --><!-- LastName --><!--
-
-                    <TextBlock Foreground="#666666" Margin="20 0" Grid.Column="0" Grid.Row="2" FontSize="18" FontFamily="Roboto" Text="Last Name:"/>
-                    <TextBox Foreground="#666666" Margin="20 0" Grid.Column="1" Grid.Row="2" FontSize="17" FontFamily="Roboto" Text="Alatorre Parra"/>
-
-                    --><!-- Email --><!--
-
-                    <TextBlock Foreground="#666666" Margin="20 0" Grid.Column="0" Grid.Row="3" FontSize="18" FontFamily="Roboto" Text="Email:"/>
-                    <TextBox Foreground="#666666" Margin="20 0" Grid.Column="1" Grid.Row="3" FontSize="17" FontFamily="Roboto" Text="ejemplo@hotmail.com"/>
-
-                    --><!-- Security Question --><!--
-
-                    <TextBlock Foreground="#666666" Margin="20 0" Grid.Column="0" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="Security Question"/>
-                    <TextBox Foreground="#666666" Margin="20 0" Grid.Column="1" Grid.Row="4" FontSize="17" FontFamily="Roboto" Text="............?"/>
-    
-                    --><!-- New Password --><!--
-                    <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="3">
-                        
-                        --><!-- New Password --><!--
-                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="New Password"/>
-                        <TextBox Text="******" Margin=" 20 10 0 20"/>
-
-                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="Confirm Password"/>
-                        <TextBox Text="******" Margin="20 10 0 0"/>
-
+                     <!--First Name-->
+                    <StackPanel Grid.Column="0" Grid.Row="1" Margin=" 15 0 25 0">
+                        <TextBlock Foreground="#666666" Grid.Column="0" Grid.Row="1" FontSize="16" FontFamily="Roboto" Text="First Name:"/>
+                        <TextBox Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="1" FontSize="15" FontFamily="Roboto" Text="Carlos"/>
+                    </StackPanel>
+                    
+                    <!--LastName-->
+                    <StackPanel Grid.Column="0" Grid.Row="2" Margin=" 15 0 25 0">
+                        <TextBlock Foreground="#666666" Grid.Column="0" Grid.Row="2" FontSize="16" FontFamily="Roboto" Text="Last Name:"/>
+                        <TextBox Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="2" FontSize="15" FontFamily="Roboto" Text="Alatorre Parra"/>
+                    </StackPanel>
+                    
+                    <!--Email-->
+                    <StackPanel Grid.Column="0" Grid.Row="3" Margin=" 15 0 25 0">
+                        <TextBlock Foreground="#666666" Grid.Column="0" Grid.Row="3" FontSize="16" FontFamily="Roboto" Text="Email:"/>
+                        <TextBox Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="3" FontSize="15" FontFamily="Roboto" Text="ejemplo@hotmail.com" TextChanged="TextBox_TextChanged"/>
+                    </StackPanel>
+                    
+                    <!--Security Question-->
+                    <StackPanel Grid.Column="1" Grid.Row="1" Margin=" 25 0 10 0">
+                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="Security Question"/>
+                        <TextBox Foreground="#666666" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto" Text="............?"/>
                     </StackPanel>
 
+                    <!--New Password-->
+                    <StackPanel Grid.Column="1" Grid.Row="2" Margin=" 25 0 10 0">
+                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="New Password"/>
+                        <TextBox Text="******" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto"/>
+                    </StackPanel>
+
+                    <!-- Confirm Password-->
+                    <StackPanel Grid.Column="1" Grid.Row="3" Margin=" 25 0 10 0">
+                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="Confirm Password"/>
+                        <TextBox Text="******" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto"/>
+                    </StackPanel>
+
+
+
                 </Grid>
-                --><!--#endregion -->
+                <!--#endregion--> 
             </Grid>
         </materialDesign:Card>
         <!--#endregion-->
