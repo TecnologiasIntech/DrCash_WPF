@@ -12,28 +12,28 @@
         
         <!--#region User Profile/ Manage Users -->
         <Grid Loaded="loadeds">
+            
+            <!--#region Grid Definition-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <!--#endregion-->
             
             <!-- User Profile -->
-            <TextBlock Grid.Column="0" Text="User Profile" FontFamily="Roboto" FontSize="28"
-                       Margin="20" FontWeight="Bold"/>
+            <TextBlock Grid.Column="0" Text="User Profile" FontFamily="Roboto" FontSize="28" Margin="20" FontWeight="Bold"/>
             
             <!-- Manage Users -->
 
-            <Button x:Name="btn_manageUsers" Grid.Column="1" Width="200" Height="40" Background="#6aa84f" BorderThickness="0" FontSize="22" HorizontalAlignment="Right">
+            <Button Click="Manage_User_Button_Click" x:Name="btn_manageUsers" Grid.Column="1" Width="200" Height="40" Background="#6aa84f" BorderThickness="0" FontSize="22" HorizontalAlignment="Right">
                     Manage Users     
             </Button>
-
 
         </Grid>
         
         <!--#endregion-->
-
         
-        <!--#region Card-->
+        <!--#region User Info Card-->
         <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth2">
             <Grid>
                 <Grid.RowDefinitions>
@@ -206,6 +206,7 @@
 
                 </Grid>
                 <!--#endregion--> 
+                
             </Grid>
         </materialDesign:Card>
         <!--#endregion-->
