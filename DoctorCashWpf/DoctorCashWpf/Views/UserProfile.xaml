@@ -168,37 +168,37 @@
                      <!--First Name-->
                     <StackPanel Grid.Column="0" Grid.Row="1" Margin=" 15 0 25 0">
                         <TextBlock Foreground="#666666" Grid.Column="0" Grid.Row="1" FontSize="16" FontFamily="Roboto" Text="First Name:"/>
-                        <TextBox Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="1" FontSize="15" FontFamily="Roboto" Text="Carlos"/>
+                        <TextBox x:Name="txtbox_firstname" Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="1" FontSize="15" FontFamily="Roboto" Text="Carlos"/>
                     </StackPanel>
                     
                     <!--LastName-->
                     <StackPanel Grid.Column="0" Grid.Row="2" Margin=" 15 0 25 0">
                         <TextBlock Foreground="#666666" Grid.Column="0" Grid.Row="2" FontSize="16" FontFamily="Roboto" Text="Last Name:"/>
-                        <TextBox Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="2" FontSize="15" FontFamily="Roboto" Text="Alatorre Parra"/>
+                        <TextBox x:Name="txtbox_lastname" Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="2" FontSize="15" FontFamily="Roboto" Text="Alatorre Parra"/>
                     </StackPanel>
                     
                     <!--Email-->
                     <StackPanel Grid.Column="0" Grid.Row="3" Margin=" 15 0 25 0">
                         <TextBlock Foreground="#666666" Grid.Column="0" Grid.Row="3" FontSize="16" FontFamily="Roboto" Text="Email:"/>
-                        <TextBox Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="3" FontSize="15" FontFamily="Roboto" Text="ejemplo@hotmail.com" TextChanged="TextBox_TextChanged"/>
+                        <TextBox x:Name="txtbox_email" Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="3" FontSize="15" FontFamily="Roboto" Text="ejemplo@hotmail.com" TextChanged="TextBox_TextChanged"/>
                     </StackPanel>
                     
                     <!--Security Question-->
                     <StackPanel Grid.Column="1" Grid.Row="1" Margin=" 25 0 10 0">
                         <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="Security Question"/>
-                        <TextBox Foreground="#666666" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto" Text="............?"/>
+                        <TextBox x:Name="txtbox_securityQuestion" Foreground="#666666" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto" Text="............?"/>
                     </StackPanel>
 
                     <!--New Password-->
                     <StackPanel Grid.Column="1" Grid.Row="2" Margin=" 25 0 10 0">
                         <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="New Password"/>
-                        <TextBox Text="******" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto"/>
+                        <PasswordBox x:Name="txtbox_newpassword" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto" materialDesign:HintAssist.Hint="* * * * *"/>
                     </StackPanel>
 
                     <!-- Confirm Password-->
                     <StackPanel Grid.Column="1" Grid.Row="3" Margin=" 25 0 10 0">
                         <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="Confirm Password"/>
-                        <TextBox Text="******" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto"/>
+                        <PasswordBox x:Name="txtbox_confirmpassword" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto" materialDesign:HintAssist.Hint="* * * * *"/>
                     </StackPanel>
 
 

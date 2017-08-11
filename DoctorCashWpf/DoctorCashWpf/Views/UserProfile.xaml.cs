@@ -29,6 +29,10 @@ namespace DoctorCashWpf.Views
 
         }
 
+        private userService user = new userService();
+        private dateService date = new dateService();
+
+
         private async void Manage_User_Button_Click(object sender, RoutedEventArgs e)
         {
                 var manageUsers = new ManageUsers();
@@ -45,17 +49,58 @@ namespace DoctorCashWpf.Views
                 label_lastName.Text = userInformation.user.usr_LastName;
                 label_securityQuestion.Text = userInformation.user.usr_SecurityQuestion;
                 label_userFullName.Text = userInformation.user.usr_Username;
+
+                checkTextBlock(label_email);
+                checkTextBlock(label_firstName);
+                checkTextBlock(label_lastName);
+                checkTextBlock(label_securityQuestion);
+                checkTextBlock(label_userFullName);
+            }
+        }
+
+        private void checkTextBlock(TextBlock label)
+        {
+            if(label.Text == "")
+            {
+                label.Text = "Unknown";
             }
         }
 
         private void Edit_Button_Click(object sender, RoutedEventArgs e)
         {
+            txtbox_email.Text = userInformation.user.usr_Email;
+            txtbox_firstname.Text = userInformation.user.usr_FirstName;
+            txtbox_lastname.Text = userInformation.user.usr_LastName;
+            txtbox_securityQuestion.Text = userInformation.user.usr_SecurityQuestion;
+
             UserEditInformationShow();
         }
 
         private void Accept_Button_Click(object sender, RoutedEventArgs e)
         {
+            var items = new user();
+            items.usr_Email = txtbox_email.Text;
+            items.usr_FirstName = txtbox_firstname.Text;
+            items.usr_LastName = txtbox_lastname.Text;
+            items.usr_SecurityQuestion = txtbox_securityQuestion.Text;
+            items.usr_ModifiedBy = userInformation.user.usr_ID;
+            items.usr_ModificationDate = date.getCurrentDate();
+
+            if (txtbox_newpassword.Password == txtbox_confirmpassword.Password && txtbox_newpassword.Password != "")
+            {
+                items.usr_Password = txtbox_confirmpassword.Password;
+            }
+            else
+            {
+                items.usr_Password = null;
+            }
+
+            user.updateBasicInformation(items);
+
             UserInformationShow();
+
+            txtbox_newpassword.Password = "";
+            txtbox_confirmpassword.Password = "";
         }
 
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
