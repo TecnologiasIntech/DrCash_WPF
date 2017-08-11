@@ -32,6 +32,16 @@ namespace DoctorCashWpf
                 DataRow filas = dataTable.Rows[i];
 
                 user.usr_ID = Convert.ToInt32(filas["usr_ID"]);
+                user.usr_Username = Convert.ToString(filas["usr_Username"]);
+                user.usr_FirstName = Convert.ToString(filas["usr_FirstName"]);
+                user.usr_LastName = Convert.ToString(filas["usr_LastName"]);
+                user.usr_Password = Convert.ToString(filas["usr_Password"]);
+                user.usr_SecurityQuestion = Convert.ToString(filas["usr_SecurityQuestion"]);
+                user.usr_SecurityAnswer = Convert.ToString(filas["usr_SecurityAnswer"]);
+                user.usr_Email = Convert.ToString(filas["usr_Email"]);
+                user.usr_SecurityLevel = Convert.ToInt32(filas["usr_SecurityLevel"]);
+                user.usr_ActiveAccount = Convert.ToBoolean(filas["usr_ActiveAccount"]);
+                user.usr_PasswordReset = Convert.ToBoolean(filas["usr_PasswordReset"]);
             }
 
             if(dataTable.Rows.Count == 0)

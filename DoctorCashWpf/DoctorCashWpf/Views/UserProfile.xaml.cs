@@ -35,6 +35,20 @@ namespace DoctorCashWpf.Views
                 label_lastName.Text = userInformation.user.usr_LastName;
                 label_securityQuestion.Text = userInformation.user.usr_SecurityQuestion;
                 label_userFullName.Text = userInformation.user.usr_Username;
+
+                checkTextBlock(label_email);
+                checkTextBlock(label_firstName);
+                checkTextBlock(label_lastName);
+                checkTextBlock(label_securityQuestion);
+                checkTextBlock(label_userFullName);
+            }
+        }
+
+        private void checkTextBlock(TextBlock label)
+        {
+            if(label.Text == "")
+            {
+                label.Text = "Unknown";
             }
         }
     }
