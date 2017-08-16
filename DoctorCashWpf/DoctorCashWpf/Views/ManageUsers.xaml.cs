@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace DoctorCashWpf.Views
 {
@@ -29,8 +30,9 @@ namespace DoctorCashWpf.Views
         }
 
         private userService user = new userService();
-        public int userID;
-        public DataTable usersData;
+        private BrushConverter brushConverter = new BrushConverter();
+        private int userID;
+        private DataTable usersData;
 
         private void Apply_Changes_Click(object sender, RoutedEventArgs e)
         {
@@ -47,6 +49,9 @@ namespace DoctorCashWpf.Views
             user.updateUser(items);
 
             getUsers();
+
+            label_applyChanges.Foreground = (Brush)brushConverter.ConvertFrom("#FFFFFF");
+            Apply_Changes.Background = (Brush)brushConverter.ConvertFrom("#27ae60");
         }
 
         private int getSecurityLevel()
@@ -94,6 +99,10 @@ namespace DoctorCashWpf.Views
             check_passwordReset.IsChecked = (bool)fila["usr_PasswordReset"];
             check_activeAcount.IsChecked = (bool)fila["usr_ActiveAccount"];
             setSecurityLevel((int)fila["usr_SecurityLevel"]);
+
+            label_applyChanges.Foreground = (Brush)brushConverter.ConvertFrom("#6fa8dc");
+            Apply_Changes.Background = (Brush)brushConverter.ConvertFrom("#00FFFFFF");
+
         }
 
         private void setSecurityLevel(int securityLevel)

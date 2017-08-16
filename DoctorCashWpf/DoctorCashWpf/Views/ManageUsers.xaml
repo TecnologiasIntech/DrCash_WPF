@@ -97,12 +97,12 @@
                 <!--Active Acount-->
                 <TextBlock Text="Active Acount" Margin="30 10" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
                 <CheckBox x:Name="check_activeAcount" Margin="40 0">
-                    <TextBlock Foreground="#666666" FontSize="15" FontFamily="Roboto" FontWeight="Bold">Active</TextBlock>
+                    <TextBlock x:Name="___Sin_nombre_" Foreground="#666666" FontSize="15" FontFamily="Roboto" FontWeight="Bold">Active</TextBlock>
                 </CheckBox>
 
                 <!--Apply Changes-->
-                <Button x:Name="Apply_Changes"  Margin="30 20" Width="200" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Click="Apply_Changes_Click">
-                    <TextBlock Text="Apply Changes" Foreground="#6fa8dc  " FontSize="18"/>
+                <Button x:Name="Apply_Changes"  Margin="30,20,0,20" Width="157" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Click="Apply_Changes_Click">
+                    <TextBlock x:Name="label_applyChanges" Text="Apply Changes" Foreground="#6fa8dc  " FontSize="18"/>
                 </Button>
 
                 <!--Close-->
