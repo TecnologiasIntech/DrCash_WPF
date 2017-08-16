@@ -28,7 +28,7 @@
         </Grid>
         <!--#endregion-->
 
-        <Grid Grid.Row="1" Margin="60">
+        <Grid Grid.Row="1" Margin="10">
 
             <!--#region Column Definitions-->
             <Grid.ColumnDefinitions>
@@ -46,53 +46,74 @@
                     Margin="8"
                     Padding="5">
                 <Grid>
-                    <DataGrid Name="dataGridView1"
-                          IsReadOnly="True"/>
+                    <DataGrid x:Name="grid_users"
+                          IsReadOnly="True" Width="423" ColumnWidth="423">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseUp" Handler="Row_DoubleClick"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                    </DataGrid>
                 </Grid>
             </materialDesign:Card>
-            
+
             <!--#endregion-->
 
             <!--#region  Edit Controllers-->
             <StackPanel Grid.Column="1" Margin="0 15 0 0" >
-                
+
+                <!--First Name-->
+                <TextBlock Text="First Name" Margin="30 10" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
+                <TextBox x:Name="txtbox_firstName" Margin="40 0"/>
+
+                <!--Last Name-->
+                <TextBlock Text="Last Name" Margin="30 10" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
+                <TextBox x:Name="txtbox_lastName" Margin="40 0"/>
+
+                <!--Email-->
+                <TextBlock Text="Email" Margin="30 10" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
+                <TextBox x:Name="txtbox_email" Margin="40 0"/>
+
                 <!--Security Level-->
-                <TextBlock Text="Security Level" Margin="30 15" Foreground="#666666" FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
-                <StackPanel Margin="40 10" Orientation="Horizontal">
-                    <RadioButton Width="80" VerticalContentAlignment="Center">
-                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" FontWeight="Bold">1</TextBlock>
+                <TextBlock Text="Security Level" Margin="30 10" Foreground="#666666" FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
+                <StackPanel Margin="40 0" Orientation="Horizontal">
+                    <RadioButton x:Name="radio_user" Width="80" VerticalContentAlignment="Center">
+                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" FontWeight="Bold">User</TextBlock>
                     </RadioButton>
-                    <RadioButton Width="80" VerticalContentAlignment="Center">
-                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" FontWeight="Bold">2</TextBlock>
+                    <RadioButton x:Name="radio_super" Width="80" VerticalContentAlignment="Center">
+                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" FontWeight="Bold">Sup</TextBlock>
+                    </RadioButton>
+                    <RadioButton x:Name="radio_admin" Width="80" VerticalContentAlignment="Center">
+                        <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" FontWeight="Bold">Admin</TextBlock>
                     </RadioButton>
                 </StackPanel>
 
                 <!--Password Reset-->
-                <TextBlock Text="Password Reset" Margin="30 15" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
-                <CheckBox Margin="40 10">
+                <TextBlock Text="Password Reset" Margin="30 10" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
+                <CheckBox x:Name="check_passwordReset" Margin="40 0">
                     <TextBlock Foreground="#666666" FontSize="15" FontFamily="Roboto" FontWeight="Bold">Reset</TextBlock>
                 </CheckBox>
 
                 <!--Active Acount-->
-                <TextBlock Text="Active Acount" Margin="30 15" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
-                <CheckBox Margin="40 10">
+                <TextBlock Text="Active Acount" Margin="30 10" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
+                <CheckBox x:Name="check_activeAcount" Margin="40 0">
                     <TextBlock Foreground="#666666" FontSize="15" FontFamily="Roboto" FontWeight="Bold">Active</TextBlock>
                 </CheckBox>
 
                 <!--Apply Changes-->
-                <Button x:Name="Apply_Changes"  Margin="30 20" Width="200" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent">
+                <Button x:Name="Apply_Changes"  Margin="30 20" Width="200" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Click="Apply_Changes_Click">
                     <TextBlock Text="Apply Changes" Foreground="#6fa8dc  " FontSize="18"/>
                 </Button>
-                
+
                 <!--Close-->
-                <Button x:Name="btn_close"  Margin="30 15" Width="200" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Background="Transparent" BorderBrush="Transparent"
+                <Button x:Name="btn_close"  Margin="0,5,30,5" Width="104" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Background="Transparent" BorderBrush="Transparent"
                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" >
-                    <TextBlock Text="Close" Foreground="red " FontSize="18"/>
+                    <TextBlock Text="Close" Foreground="red " FontSize="18" Width="66" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
                 </Button>
 
             </StackPanel>
             <!--#endregion-->
-            
+
 
         </Grid>
 

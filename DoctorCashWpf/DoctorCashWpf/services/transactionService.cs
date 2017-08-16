@@ -12,7 +12,7 @@ namespace DoctorCashWpf
 
         private dateService date = new dateService();
         private sqlQueryService createQuery = new sqlQueryService();
-        private createListService createList = new createListService();
+        private createItemsForListService createList = new createItemsForListService();
 
         public List<transaction> getCurrentTransactions(int currentUserID)
         {

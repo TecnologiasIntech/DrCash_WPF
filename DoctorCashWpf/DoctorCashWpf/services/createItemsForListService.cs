@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DoctorCashWpf
 {
-    class createListService
+    class createItemsForListService
     {
         
         public valuesWhere ofTypeValuesWhere(bool isTypeString, string column, string value, int operationBool, int Operator)

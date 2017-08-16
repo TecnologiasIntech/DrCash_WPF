@@ -61,7 +61,7 @@ namespace DoctorCashWpf
         public void chargeTransactionsList()
         {
 
-            transactionList = transactionService.getCurrentTransactions(4);
+            transactionList = transactionService.getCurrentTransactions(userInformation.user.usr_ID);
             
             dataGridView1.ItemsSource = null;
             
