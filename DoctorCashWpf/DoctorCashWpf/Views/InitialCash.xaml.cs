@@ -71,24 +71,35 @@ namespace DoctorCashWpf.Views
             }
         }
 
+        private void Desing()
+        {
+            txtbox_initialCash.Focus();
+            txtbox_initialCash.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
+            txtbox_initialCash.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
+            txtbox_initialCash.FontWeight = FontWeights.Bold;
+        }
+
         private void verificar()
         {
             if (txtbox_initialCash.Text == "")
             {                
                 labelCash.Content = "Insert initial Cash";
+                Desing();
             }
             else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == 0)
             {
                 labelCash.Content = "Insert initial Cash";
+                Desing();
             }
             else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) >= 120)
             {                
                 labelCash.Content = "Add less Cash";
+                Desing();
             }
             else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) < 0)
             {               
-
                 labelCash.Content = "Negative Values";
+                Desing();
             }
             else
             {
@@ -96,11 +107,7 @@ namespace DoctorCashWpf.Views
                 moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
                 setInitialCash();
             }
-
-            txtbox_initialCash.Focus();
-            txtbox_initialCash.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
-            txtbox_initialCash.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
-            txtbox_initialCash.FontWeight = FontWeights.Bold;
+            
         }
 
         private void setInitialCash_KeyUp(object sender, KeyEventArgs e)
