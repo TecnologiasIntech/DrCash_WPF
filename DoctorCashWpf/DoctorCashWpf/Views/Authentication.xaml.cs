@@ -45,8 +45,8 @@ namespace DoctorCashWpf.Views
             {
                 //Mensaje de error por datos incorrectos
                 //poner que no se encontro el usuario       
-                labelError.Content = "    Verify Data"+"\n"+
-                                     "User Not Found";
+                labelError.Content = "                    Verify Data"+"\n"+
+                                     "Username or Password is Incorrect";
             }
         }
 
@@ -55,19 +55,15 @@ namespace DoctorCashWpf.Views
             if (txtbox_username.Text == "")
             {
                 txtbox_username.Focus();
-
-                txtbox_username.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
-                txtbox_username.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
-                txtbox_username.FontWeight = FontWeights.Bold;
+               
+                txtbox_username.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
                 labelError.Content = "Complete the fields marked";
             }
             else if (txtbox_password.Password.ToString() == "")
             {
                 txtbox_password.Focus();
 
-                txtbox_password.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
-                txtbox_password.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
-                txtbox_password.FontWeight = FontWeights.Bold;
+                txtbox_password.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
                 labelError.Content = "Complete the fields marked";
             }
             else

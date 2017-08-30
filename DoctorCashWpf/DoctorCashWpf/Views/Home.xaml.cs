@@ -155,6 +155,12 @@ namespace DoctorCashWpf
 
         private async void Capture_Initial_Cash(object sender, RoutedEventArgs e)
         {
+            //para verificar las pantallas
+            //await DialogHost.Show(new UserNew(), "RootDialog");
+
+            ///asyrdutiuydtsyuifduytayuyta
+
+
             if (userInformation.user == null)
             {
                 await DialogHost.Show(new Authentication(), "RootDialog");

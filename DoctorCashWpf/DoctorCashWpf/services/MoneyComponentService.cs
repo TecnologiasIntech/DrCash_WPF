@@ -33,7 +33,7 @@ namespace DoctorCashWpf
             {
                 if (txtBox.Text[0] != '$')
                 {
-                    if (Char.IsNumber(txtBox.Text[0]))
+                    if (Char.IsNumber(txtBox.Text[0])||txtBox.Text[0]=='-')
                     {
                         txtBox.Text = "$" + txtBox.Text;
                     }
@@ -66,7 +66,7 @@ namespace DoctorCashWpf
             {
                 if (txtBox.Text[0] != '$')
                 {
-                    if (Char.IsNumber(txtBox.Text[0]))
+                    if (Char.IsNumber(txtBox.Text[0]) || txtBox.Text[0] == '-')
                     {
                         txtBox.Text = "$" + txtBox.Text;
                     }

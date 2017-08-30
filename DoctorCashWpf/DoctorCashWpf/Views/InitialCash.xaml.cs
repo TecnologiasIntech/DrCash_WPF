@@ -68,55 +68,59 @@ namespace DoctorCashWpf.Views
                 items.registerId = "Carlos Alatorre";
 
                 transaction.setTransactionInitialCash(items);
+
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
         }
 
         private void Desing()
         {
-            txtbox_initialCash.Focus();
-            txtbox_initialCash.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
-            txtbox_initialCash.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
-            txtbox_initialCash.FontWeight = FontWeights.Bold;
+            txtbox_initialCash.Clear();
+            txtbox_initialCash.Focus();            
+            txtbox_initialCash.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");            
         }
 
         private void verificar()
         {
-            if (txtbox_initialCash.Text == "")
-            {                
-                labelCash.Content = "Insert initial Cash";
-                Desing();
-            }
-            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == 0)
+            try
             {
-                labelCash.Content = "Insert initial Cash";
-                Desing();
+                if (txtbox_initialCash.Text == "")
+                {
+                    labelCash.Content = "Insert initial Cash";
+                    Desing();
+                }
+                else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == 0)
+                {
+                    labelCash.Content = "Insert initial Cash";
+                    Desing();
+                }
+                else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) >= 120)
+                {
+                    labelCash.Content = "Add less Cash";
+                    Desing();
+                }
+                else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) < 0)
+                {
+                    labelCash.Content = "Negative Values";
+                    Desing();
+                }
+                else
+                {
+                    labelCash.Content = "";
+                    moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                    setInitialCash();
+                }
             }
-            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) >= 120)
-            {                
-                labelCash.Content = "Add less Cash";
-                Desing();
-            }
-            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) < 0)
-            {               
-                labelCash.Content = "Negative Values";
-                Desing();
-            }
-            else
+            catch
             {
-                labelCash.Content = "";
-                moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-                setInitialCash();
-            }
-            
+                labelCash.Content = "Only Numbers";
+                Desing();
+            }                       
         }
 
         private void setInitialCash_KeyUp(object sender, KeyEventArgs e)
         {
             labelCash.Content = "";
-            if (e.Key == Key.Enter)
-            {
-                verificar();
-            }
         }
 
         private void setInitialCash_click(object sender, RoutedEventArgs e)
