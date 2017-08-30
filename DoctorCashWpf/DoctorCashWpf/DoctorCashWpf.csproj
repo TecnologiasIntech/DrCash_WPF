@@ -120,6 +120,9 @@
     <Compile Include="interfaces\userInformation.cs" />
     <Compile Include="Printer\Print.cs" />
     <Compile Include="Printer\RawPrinterHelper.cs" />
+    <Compile Include="Views\Refund.xaml.cs">
+      <DependentUpon>Refund.xaml</DependentUpon>
+    </Compile>
     <Compile Include="services\dateService.cs" />
     <Compile Include="services\MoneyComponentService.cs" />
     <Compile Include="services\reportService.cs" />
@@ -166,9 +169,16 @@
     <Compile Include="Views\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserNew.xaml.cs">
+      <DependentUpon>UserNew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserProfile.xaml.cs">
       <DependentUpon>UserProfile.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Refund.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Authentication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -245,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Statistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -23,7 +23,7 @@
         <Button Background="#6aa84f" Margin="0 30" Click="Button_Click">
             <TextBlock>Login</TextBlock>
         </Button>
-        <Label x:Name="labelError" Content="" Foreground="Red" HorizontalAlignment="Center"/>
+        <Label x:Name="labelError"  Content="" Foreground="Red" HorizontalAlignment="Center"/>
 
 
 

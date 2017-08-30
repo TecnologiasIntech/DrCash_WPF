@@ -29,7 +29,7 @@ namespace DoctorCashWpf.Views
                 //No pedir la transaccion inicial o cerrar este dialogo
             }
         }
-
+        private BrushConverter brushConverter = new BrushConverter();
         private transactionService transaction = new transactionService();
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private dateService date = new dateService();
@@ -49,17 +49,16 @@ namespace DoctorCashWpf.Views
                 else
                 {
                     check = false;
-                } 
-              
+                }               
             }
-
             return check;
         }
 
         private void setInitialCash()
         {
+            
             if (txtbox_initialCash.Text != "$0.00")
-            {
+            {                
                 var items = new transaction();
 
                 items.cash = (float)Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1));
@@ -72,19 +71,50 @@ namespace DoctorCashWpf.Views
             }
         }
 
-        private void setInitialCash_KeyUp(object sender, KeyEventArgs e)
+        private void verificar()
         {
-            if(e.Key == Key.Enter)
+            if (txtbox_initialCash.Text == "")
+            {                
+                labelCash.Content = "Insert initial Cash";
+            }
+            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == 0)
             {
+                labelCash.Content = "Insert initial Cash";
+            }
+            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) >= 120)
+            {                
+                labelCash.Content = "Add less Cash";
+            }
+            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) < 0)
+            {               
+
+                labelCash.Content = "Negative Values";
+            }
+            else
+            {
+                labelCash.Content = "";
                 moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
                 setInitialCash();
+            }
+
+            txtbox_initialCash.Focus();
+            txtbox_initialCash.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
+            txtbox_initialCash.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
+            txtbox_initialCash.FontWeight = FontWeights.Bold;
+        }
+
+        private void setInitialCash_KeyUp(object sender, KeyEventArgs e)
+        {
+            labelCash.Content = "";
+            if (e.Key == Key.Enter)
+            {
+                verificar();
             }
         }
 
         private void setInitialCash_click(object sender, RoutedEventArgs e)
         {
-            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-            setInitialCash();
+            verificar();                      
         }
 
         private void txtbox_initialCash_LostFocus(object sender, RoutedEventArgs e)

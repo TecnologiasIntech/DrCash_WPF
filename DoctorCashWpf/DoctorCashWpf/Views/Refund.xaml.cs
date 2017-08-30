@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DoctorCashWpf.Views
+namespace DoctorCashWpf
 {
     /// <summary>
-    /// Interaction logic for Authentication.xaml
+    /// Lógica de interacción para Refund.xaml
     /// </summary>
-    public partial class Authentication : UserControl
+    public partial class Refund : UserControl
     {
-        public Authentication()
+        public Refund()
         {
             InitializeComponent();
         }
@@ -32,21 +32,14 @@ namespace DoctorCashWpf.Views
         {
             var userData = user.authentication(txtbox_username.Text, txtbox_password.Password.ToString());
 
-            if (userData != null)
+            //En esta parte se verificara si es admin o supervisor
+            if (userData != null && (userData.usr_SecurityLevel==3||userData.usr_SecurityLevel==2))
             {
-                labelError.Content = "";
-                // Abrir Initial Cash
-                /* userInformation.userName = userData.usr_Username;
-                 userInformation.userID = userData.usr_ID;*/
-                userInformation.user = userData;
-                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+                //Si es administrador o supervisor hara lo demas en esta parte
             }
             else
-            {
-                //Mensaje de error por datos incorrectos
-                //poner que no se encontro el usuario       
-                labelError.Content = "    Verify Data"+"\n"+
-                                     "User Not Found";
+            {                      
+                labelError.Content = "Invalid User";
             }
         }
 
@@ -78,7 +71,7 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            verify();      
+            verify();
         }
 
         private void authentification_KeyUp(object sender, KeyEventArgs e)
@@ -89,5 +82,6 @@ namespace DoctorCashWpf.Views
                 verify();
             }
         }
+
     }
 }

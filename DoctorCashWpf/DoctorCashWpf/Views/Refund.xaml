@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="DoctorCashWpf.Refund"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:domain="clr-namespace:MaterialDesignColors.WpfExample.Domain"
+             xmlns:domain1="clr-namespace:MaterialDesignDemo.Domain"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel Margin="0">
+        <TextBlock Text="Authorization" FontFamily="Roboto" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center"></TextBlock>
+        <StackPanel Margin="15" Height="249">
+
+            <TextBlock Text="Supervisor or Administrator Account" FontFamily="Roboto" FontSize="11.5" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+            <TextBox x:Name="txtbox_username" VerticalAlignment="Top"  Width="200" HorizontalAlignment="Center" Margin="0 16 0 0"
+                                   Padding="3 0 0 0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                   materialDesign:HintAssist.Hint="username" FontFamily="Roboto" FontSize="14" KeyUp="authentification_KeyUp"/>
+            <PasswordBox x:Name="txtbox_password" VerticalAlignment="Top"  Width="200" HorizontalAlignment="Center" Margin="0 16 0 0"
+                                   Padding="3 0 0 0" 
+                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                   materialDesign:HintAssist.Hint="password" FontFamily="Roboto" FontSize="14" KeyUp="authentification_KeyUp"/>
+            <Button Background="Red" Margin="165,40,0,40" HorizontalAlignment="Left" Width="87">
+                <TextBlock><Run Text="Cancel"></Run></TextBlock>
+            </Button>
+            <Button Background="#6aa84f" Margin="23,-71,0,40" HorizontalAlignment="Left" Width="87" Click="Button_Click">
+                <TextBlock><Run Text="Approve"/></TextBlock>
+            </Button>
+            <Label x:Name="labelError" Margin="0,-19,0,30" Content="" Foreground="Red" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </StackPanel>
+
+
+</UserControl>
