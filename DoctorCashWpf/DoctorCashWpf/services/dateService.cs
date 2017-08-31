@@ -43,5 +43,15 @@ namespace DoctorCashWpf
             return format.toDateTimeForQuery(year, month, day, "T23:59:59.999");
         }
 
+        public string convertToFormatDate(string date)
+        {
+            string day = date.Substring(0, 2);
+            string month = date.Substring(3, 2);
+            string year = date.Substring(6, 4);
+            string hour = "T00:00:00.000";
+
+            return format.toDateTimeForQuery(year, month, day, hour);
+        }
+
     }
 }
