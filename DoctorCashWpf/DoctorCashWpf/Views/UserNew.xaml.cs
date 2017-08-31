@@ -26,6 +26,9 @@ namespace DoctorCashWpf.Views
         }
 
         private BrushConverter brushConverter = new BrushConverter();
+        private userService user = new userService();
+        private sqlQueryService createQuery = new sqlQueryService();
+        private createItemsForListService createItem = new createItemsForListService();
 
         private void txtbox_Confirm_Password_KeyUp(object sender, KeyEventArgs e)
         {
@@ -62,7 +65,19 @@ namespace DoctorCashWpf.Views
             }
             else
             {
-                //aqui se mandaran los datos a actualizar 
+                //aqui se mandaran los datos a actualizar
+                var Columns = new List<columnsValues>();
+                Columns.Add(createItem.ofTypeColumnsValues("usr_Password", txtbox_password.Password.ToString()));
+                Columns.Add(createItem.ofTypeColumnsValues("usr_SecurityQuestion", Combo_question.Text));
+                Columns.Add(createItem.ofTypeColumnsValues("usr_SecurityAnswer", txtbox_question.Text));
+                Columns.Add(createItem.ofTypeColumnsValues("usr_PasswordReset", true));                
+
+                var listValuesTerms = new List<valuesWhere>();
+                listValuesTerms.Add(createItem.ofTypeValuesWhere(true,"usr_FirstName",userInformation.user.usr_FirstName, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+                listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_ID", userInformation.user.usr_ID.ToString(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+                listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_LastName", userInformation.user.usr_LastName, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));                
+                
+                createQuery.toUpdate("users", Columns,listValuesTerms);
             }
         }
 

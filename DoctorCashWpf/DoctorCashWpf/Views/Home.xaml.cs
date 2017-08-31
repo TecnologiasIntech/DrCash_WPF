@@ -164,6 +164,11 @@ namespace DoctorCashWpf
             if (userInformation.user == null)
             {
                 await DialogHost.Show(new Authentication(), "RootDialog");
+
+                if (userInformation.user.usr_PasswordReset == false)
+                {
+                    await DialogHost.Show(new UserNew(), "RootDialog");
+                }
             }
 
             var transaction = new transactionService();

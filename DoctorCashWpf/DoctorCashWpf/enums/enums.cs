@@ -30,7 +30,8 @@ namespace DoctorCashWpf
     enum OPERATORBOOLEAN
     {
         AND,
-        OR
+        OR,
+        NINGUNO
     }
 
     enum TRANSACTIONTYPE
