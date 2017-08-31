@@ -165,7 +165,7 @@ namespace DoctorCashWpf
             {
                 await DialogHost.Show(new Authentication(), "RootDialog");
 
-                if (userInformation.user.usr_PasswordReset == false)
+                if (userInformation.user.usr_PasswordReset == true)
                 {
                     await DialogHost.Show(new UserNew(), "RootDialog");
                 }
