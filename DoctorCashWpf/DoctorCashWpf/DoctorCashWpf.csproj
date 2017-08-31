@@ -116,6 +116,7 @@
     <Compile Include="Domain\TextFieldsViewModel.cs" />
     <Compile Include="Domain\TreesViewModel.cs" />
     <Compile Include="interfaces\closeDate.cs" />
+    <Compile Include="interfaces\closeTransaction.cs" />
     <Compile Include="interfaces\user.cs" />
     <Compile Include="interfaces\userInformation.cs" />
     <Compile Include="Printer\Print.cs" />

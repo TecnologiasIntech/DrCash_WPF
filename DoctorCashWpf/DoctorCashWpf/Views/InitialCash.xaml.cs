@@ -94,7 +94,7 @@ namespace DoctorCashWpf.Views
                     labelCash.Content = "Insert initial Cash";
                     Desing();
                 }
-                else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) >= 120)
+                else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) > 120)
                 {
                     labelCash.Content = "Add less Cash";
                     Desing();
