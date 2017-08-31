@@ -8,40 +8,101 @@
       xmlns:domain1="clr-namespace:MaterialDesignDemo.Domain"
       mc:Ignorable="d" 
       d:DesignHeight="460" d:DesignWidth="410">
-    <StackPanel>
-        <TextBlock Text="Reset User" FontFamily="Roboto" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center"></TextBlock>
-        <StackPanel Margin="15" Height="420">
-            <TextBlock Text="Change PassWord" FontFamily="Roboto" FontSize="11.5" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
-            <PasswordBox x:Name="txtbox_password" VerticalAlignment="Top"  Width="360" HorizontalAlignment="Center" Margin="0 16 0 0"
-                                   Padding="3 0 0 0" 
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+
+        <!--#region Title Bar-->
+        <Grid Grid.Row="0" Background="#597eaa">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <!--Modal Icon-->
+            <materialDesign:PackIcon  Margin="15"  Kind="AccountConvert"  Grid.Column="0" Foreground="White" Height="40" Width="40" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+            <!--Title-->
+            <TextBlock Text="Reset User" Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="28" FontWeight="Bold"/>
+        </Grid>
+        <!--#endregion-->
+
+
+
+        <StackPanel Grid.Row="1">
+            <StackPanel Margin="30">
+                <!--Password Box-->
+                <PasswordBox x:Name="txtbox_password" VerticalAlignment="Top"  Width="360" HorizontalAlignment="Center" Margin="0 16 0 0"
                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                    materialDesign:HintAssist.Hint="Password" FontFamily="Roboto" FontSize="14" KeyUp="txtbox_password_KeyUp"/>
-            <Label Content="Dificult:" FontFamily="Roboto" FontSize="10" Margin="4" Height="20"></Label>
-            <ProgressBar Name="progressbar" Minimum="0" Maximum="9" Height="5" Width="175" Margin="22,-26,0,0"/>
-            <PasswordBox x:Name="txtbox_Confirm_Password" VerticalAlignment="Top"  Width="360" HorizontalAlignment="Center" Margin="0 15 0 0"
-                                   Padding="3 0 0 0" 
-                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                
+                <!--Password Dificulty Bar Box-->
+                <StackPanel Orientation="Horizontal" Width="360" Margin="0 16 0 0">
+                    <Label Content="Strength:" FontFamily="Roboto" Foreground="#666666" FontSize="14"/>
+                    <ProgressBar Name="progressbar" Margin="15 0" Minimum="0" Maximum="9" Height="15" Width="175" 
+                                 Background="Transparent" BorderBrush="#666666"/>
+                </StackPanel>
+
+                
+                
+                <!--Confirm Password Box-->
+                <PasswordBox x:Name="txtbox_Confirm_Password" VerticalAlignment="Top"  Width="360" HorizontalAlignment="Center" Margin="0 15 0 0"
+                                   Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                    materialDesign:HintAssist.Hint="Confirm Password" FontFamily="Roboto" FontSize="14" KeyUp="txtbox_Confirm_Password_KeyUp" />
-            <Label Name="Password_Diferent" Foreground="Red" Content="" FontFamily="Roboto" FontSize="10" Height="19" HorizontalAlignment="Center" Margin="5"></Label>
-            <ComboBox Margin="5" Name="Combo_question" materialDesign:HintAssist.Hint="Select Your Security Question">
-                <ComboBoxItem>What was your childhood nickname?</ComboBoxItem>
-                <ComboBoxItem>What school did you attend for sixth grade?</ComboBoxItem>
-                <ComboBoxItem>In what town was your firs job?</ComboBoxItem>
-                <ComboBoxItem>Where does your youngest brother birthday?</ComboBoxItem>
-                <ComboBoxItem>What is your maternal grandmother maiden name?</ComboBoxItem>
-                <ComboBoxItem>What street did you live on in third grade?</ComboBoxItem>
-                <ComboBoxItem></ComboBoxItem>
-            </ComboBox>
-            <TextBox x:Name="txtbox_question" VerticalAlignment="Top"  Width="360" HorizontalAlignment="Center" Margin="0 16 0 0"
-                                   Padding="3 0 0 0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                <Label Name="Password_Diferent" Foreground="Red" Content="" FontFamily="Roboto" FontSize="10" Height="19" HorizontalAlignment="Center" Margin="5"></Label>
+                
+                
+                <!--ComboBox-->
+                <ComboBox Margin="5" Name="Combo_question" Width="360" materialDesign:HintAssist.Hint="Select Your Security Question">
+                    <!--#region ComboBox Items-->
+                    <ComboBoxItem>What was your childhood nickname?</ComboBoxItem>
+                    <ComboBoxItem>What school did you attend for sixth grade?</ComboBoxItem>
+                    <ComboBoxItem>In what town was your firs job?</ComboBoxItem>
+                    <ComboBoxItem>Where does your youngest brother birthday?</ComboBoxItem>
+                    <ComboBoxItem>What is your maternal grandmother maiden name?</ComboBoxItem>
+                    <ComboBoxItem>What street did you live on in third grade?</ComboBoxItem>
+                    <!--#endregion-->
+                </ComboBox>
+                <TextBox x:Name="txtbox_question" VerticalAlignment="Top"  Width="360" HorizontalAlignment="Center" Margin="0 15 0 0"
+                                   Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                    materialDesign:HintAssist.Hint="Answer" FontFamily="Roboto" FontSize="14" KeyUp="txtbox_Confirm_Password_KeyUp"/>
-            <Button Background="Red" Margin="230,40,63,43">
-                <TextBlock><Run Text="Cancel"></Run></TextBlock>
-            </Button>
-            <Button Background="#6aa84f" Margin="43,-77,0,40" HorizontalAlignment="Left" Width="87" Click="Button_Click">
-                <TextBlock><Run Text="Approve"/></TextBlock>
-            </Button>
-            <Label x:Name="labelError" Margin="0,-25,0,30" Content="" Foreground="Red" HorizontalAlignment="Center"/>
+
+                <!--#region Save Cancel Buttons-->
+                <Grid Grid.Column="2" Grid.Row="6" Margin="0 30 0 0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Grid.Column="0" Margin="10 0 5 0" Background="Transparent" BorderBrush="Transparent"
+                           Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
+                        <TextBlock x:Name="btn_cancel" Foreground="#666666" FontSize="18">
+                            <Run Text="Cancel"/>
+                        </TextBlock>
+                    </Button>
+                    <Button Grid.Column="1" Margin="15,14,0,13" Background="Transparent" BorderBrush="Transparent"
+                            Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click">
+                        <TextBlock x:Name="btn_save" Foreground="#6aa84f " FontSize="18">
+                            <Run Text="Approve"/>
+                        </TextBlock>
+                    </Button>
+                </Grid>
+                <!--#endregion-->                
+                
+                <Label x:Name="labelError" Content="" Foreground="Red" HorizontalAlignment="Center"/>
+                
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+
+
+    </Grid>
+
+
+
 </UserControl>
