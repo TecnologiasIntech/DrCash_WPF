@@ -17,7 +17,7 @@
                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                    materialDesign:HintAssist.Hint="Password" FontFamily="Roboto" FontSize="14" KeyUp="txtbox_password_KeyUp"/>
             <Label Content="Dificult:" FontFamily="Roboto" FontSize="10" Margin="4" Height="20"></Label>
-            <ProgressBar Name="progressbar" Minimum="0" Maximum="9" Height="5" Width="175" Margin="22,-26,0,0"/>
+            <ProgressBar Name="progressbar" Minimum="0" Maximum="9" Height="5" Width="300" Margin="22,-26,-33,0"/>
             <PasswordBox x:Name="txtbox_Confirm_Password" VerticalAlignment="Top"  Width="360" HorizontalAlignment="Center" Margin="0 15 0 0"
                                    Padding="3 0 0 0" 
                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
@@ -35,10 +35,7 @@
             <TextBox x:Name="txtbox_question" VerticalAlignment="Top"  Width="360" HorizontalAlignment="Center" Margin="0 16 0 0"
                                    Padding="3 0 0 0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                    materialDesign:HintAssist.Hint="Answer" FontFamily="Roboto" FontSize="14" KeyUp="txtbox_Confirm_Password_KeyUp"/>
-            <Button Background="Red" Margin="230,40,63,43">
-                <TextBlock><Run Text="Cancel"></Run></TextBlock>
-            </Button>
-            <Button Background="#6aa84f" Margin="43,-77,0,40" HorizontalAlignment="Left" Width="87" Click="Button_Click">
+            <Button Background="#6aa84f" Margin="45" HorizontalAlignment="Center" Width="87" Click="Button_Click">
                 <TextBlock><Run Text="Approve"/></TextBlock>
             </Button>
             <Label x:Name="labelError" Margin="0,-25,0,30" Content="" Foreground="Red" HorizontalAlignment="Center"/>

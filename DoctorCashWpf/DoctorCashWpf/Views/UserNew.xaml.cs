@@ -78,6 +78,7 @@ namespace DoctorCashWpf.Views
                 listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_LastName", userInformation.user.usr_LastName, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));                
                 
                 createQuery.toUpdate("users", Columns,listValuesTerms);
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
         }
 
