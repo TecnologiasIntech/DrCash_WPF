@@ -1,6 +1,4 @@
-﻿using DoctorCashWpf.Views;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,24 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DoctorCashWpf
+namespace DoctorCashWpf.Views
 {
     /// <summary>
-    /// Interaction logic for Reports.xaml
+    /// Interaction logic for DailyTransactions.xaml
     /// </summary>
-    public partial class Reports : UserControl
+    public partial class DailyTransactions : UserControl
     {
-        public Reports()
+        public DailyTransactions()
         {
             InitializeComponent();
         }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var DailyTransacions = new DailyTransactions(); 
-
-            await DialogHost.Show(DailyTransacions, "RootDialog");
-        }
-
     }
 }

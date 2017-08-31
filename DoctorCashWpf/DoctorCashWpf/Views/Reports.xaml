@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:DoctorCashWpf"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <StackPanel>
         <TextBlock Text="Reports"/>
-    </Grid>
+        <Button Click="Button_Click">
+            Daily Transaction
+        </Button>
+    </StackPanel>
 </UserControl>
