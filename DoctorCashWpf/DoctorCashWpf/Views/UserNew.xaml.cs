@@ -70,7 +70,7 @@ namespace DoctorCashWpf.Views
                 Columns.Add(createItem.ofTypeColumnsValues("usr_Password", txtbox_password.Password.ToString()));
                 Columns.Add(createItem.ofTypeColumnsValues("usr_SecurityQuestion", Combo_question.Text));
                 Columns.Add(createItem.ofTypeColumnsValues("usr_SecurityAnswer", txtbox_question.Text));
-                Columns.Add(createItem.ofTypeColumnsValues("usr_PasswordReset", true));                
+                Columns.Add(createItem.ofTypeColumnsValues("usr_PasswordReset", false));                
 
                 var listValuesTerms = new List<valuesWhere>();
                 listValuesTerms.Add(createItem.ofTypeValuesWhere(true,"usr_FirstName",userInformation.user.usr_FirstName, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
