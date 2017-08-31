@@ -64,7 +64,7 @@ namespace DoctorCashWpf.Views
                 items.cash = (float)Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1));
                 items.type = (int)TRANSACTIONTYPE.INITIAL;
                 items.comment = "Initial Cash";
-                items.userId = userInformation.user.usr_ID; //Aqui se pondrá el id del usuario del cual se logee anteriormente en la ventana de login
+                items.userId = userInformation.user.usr_ID;
                 items.registerId = userInformation.user.usr_Username;
 
                 transaction.setTransactionInitialCash(items);
