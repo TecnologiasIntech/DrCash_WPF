@@ -27,10 +27,9 @@ namespace DoctorCashWpf
             }
         }
 
-        public List<moneyComponent> convertComponentToMoneyFormat(TextBox txtBox, Action function)
+        public moneyComponent convertComponentToMoneyFormat(TextBox txtBox, Action function)
         {
             var error = "";
-            var list = new List<moneyComponent>();
             var item = new moneyComponent();
 
             if (txtBox.Text != "")
@@ -70,15 +69,13 @@ namespace DoctorCashWpf
             AddFloatToComponent(txtBox);
             item.error = error;
             item.TextboxComponent = txtBox;
-            list.Add(item);
 
-            return list;
+            return item;
         }
 
-        public List<moneyComponent> convertComponentToMoneyFormat(TextBlock txtBox)
+        public moneyComponent convertComponentToMoneyFormat(TextBlock txtBox)
         {
             var error = "";
-            var list = new List<moneyComponent>();
             var item = new moneyComponent();
 
             if (txtBox.Text != "")
@@ -117,9 +114,8 @@ namespace DoctorCashWpf
             AddFloatToComponent(txtBox);
             item.error = error;
             item.labelComponent = txtBox;
-            list.Add(item);
 
-            return list;
+            return item;
         }
 
     }
