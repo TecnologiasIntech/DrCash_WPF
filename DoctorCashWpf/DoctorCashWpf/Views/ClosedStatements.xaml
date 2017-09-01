@@ -1,0 +1,334 @@
+﻿<UserControl x:Class="DoctorCashWpf.Views.ClosedStatements"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:domain="clr-namespace:MaterialDesignColors.WpfExample.Domain"
+             xmlns:domain1="clr-namespace:MaterialDesignDemo.Domain" 
+             xmlns:local="clr-namespace:DoctorCashWpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1500"
+             Height="600" Width="1200">
+
+
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- note you only need bring in these extra resource dictionaries when using non-default styles, so only bring them into your controls where the default style is not what you want -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type Viewbox}">
+                <Setter Property="Width" Value="18" />
+                <Setter Property="Height" Value="18" />
+                <Setter Property="Margin" Value="0 0 8 0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MaterialDesignSlider}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+
+        <!--#region Title Bar-->
+        <Grid Grid.Row="0" Background="#597eaa ">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <!--Modal Icon-->
+            <materialDesign:PackIcon Kind="BookMinus"  Grid.Column="0" Foreground="White" Height="40" Width="40" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+            <!--Title-->
+            <TextBlock Text="Closed Statements" Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="28" FontWeight="Bold"/>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region  Body-->
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--#region Search Closed Statements-->
+            <Grid Grid.Row="0" Margin="30">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                    <!--#region Query Table -->
+                    <Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Transaction #-->
+                            <StackPanel Grid.Column="0" Margin="15 0">
+                                <TextBox x:Name="txtbox_question"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                            materialDesign:HintAssist.Hint="Transaction Number" FontFamily="Roboto" FontSize="14" Width="173"/>
+                            </StackPanel>
+
+
+                            <!--Date From-->
+                            <StackPanel Grid.Column="1" Margin="15">
+                                <DatePicker Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            </StackPanel>
+                            <!--Date To-->
+                            <StackPanel Grid.Column="2" Margin="15">
+                                <DatePicker Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            </StackPanel>
+
+                            <!--Search Button-->
+                            <StackPanel Grid.Column="3" Margin="15">
+                                <Button VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
+                                    Style="{DynamicResource MaterialDesignFlatButton}">
+                                    <TextBlock Foreground="#666666" FontSize="18">
+                                    Clear
+                                    </TextBlock>
+                                </Button>
+                            </StackPanel>
+                            <!--Clear-->
+                            <StackPanel Grid.Column="4" Margin="15">
+                                <Button VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
+                                    Style="{DynamicResource MaterialDesignFlatButton}">
+                                    <TextBlock Foreground="#597eaa" FontSize="18">
+                                    Search
+                                    </TextBlock>
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </Grid>
+                    <!--#endregion-->
+
+                    <!--#region Transactions Grid-->
+                    <materialDesign:Card 
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                        Grid.Column="0" 
+                        Grid.Row="0"
+                        Background="White"
+                        Margin="0 8"
+                        Padding="12">
+                        <Grid>
+                            <DataGrid Name="dataGridViewClosedStatement"
+                                IsReadOnly="True"/>
+                        </Grid>
+                    </materialDesign:Card>
+                    <!--#endregion-->
+
+                </StackPanel>
+
+                <!--TODO-->
+                <!--#region Transactions Grid-->
+                <materialDesign:Card 
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                        Grid.Row="1"
+                        Background="White"
+                        Margin="0 8"
+                        Padding="12">
+                    <Grid>
+                        <DataGrid Name="dataGridViewStatment"
+                                IsReadOnly="True"/>
+                    </Grid>
+                </materialDesign:Card>
+                <!--#endregion-->
+
+                
+
+            </Grid>   
+            
+            <!--#endregion-->
+
+            <StackPanel Grid.Column="1"  Margin="25 25 25 0">
+                <!--#region Reciept-->
+                <Grid Height="400">
+
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+
+                    <!--#region Totals-->
+                    <!--Initial Cash-->
+
+                    <!--Totals-->
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Roboto" FontSize="16" FontWeight="Bold">Totals</TextBlock>
+
+                    <!--Initial Cash-->
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Initial Cash</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--Amount-->
+                    <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Amount</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--Cash-->
+                    <TextBlock Grid.Row="3" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Cash</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--Credit Card-->
+                    <TextBlock Grid.Row="4" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Credit Card</TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--Check-->
+                    <TextBlock Grid.Row="5" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Check</TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--#endregion-->
+
+                    <!--#region Report-->
+
+                    <!--Report-->
+                    <TextBlock Grid.Row="7" Grid.Column="0" FontFamily="Roboto" FontSize="16" FontWeight="Bold">Report</TextBlock>
+
+                    <!--100's-->
+                    <TextBlock Grid.Row="8" Grid.Column="0" FontFamily="Roboto" FontSize="16" >100's</TextBlock>
+                    <TextBlock Grid.Row="8" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+
+                    <!--50's-->
+                    <TextBlock Grid.Row="9" Grid.Column="0" FontFamily="Roboto" FontSize="16" >50's</TextBlock>
+                    <TextBlock Grid.Row="9" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--20's-->
+                    <TextBlock Grid.Row="10" Grid.Column="0" FontFamily="Roboto" FontSize="16" >20'a</TextBlock>
+                    <TextBlock Grid.Row="10" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+
+                    <!--10's-->
+                    <TextBlock Grid.Row="11" Grid.Column="0" FontFamily="Roboto" FontSize="16" >10's</TextBlock>
+                    <TextBlock Grid.Row="11" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--5's-->
+                    <TextBlock Grid.Row="12" Grid.Column="0" FontFamily="Roboto" FontSize="16" >5'</TextBlock>
+                    <TextBlock Grid.Row="12" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+
+                    <!--1's-->
+                    <TextBlock Grid.Row="13" Grid.Column="0" FontFamily="Roboto" FontSize="16" >1's</TextBlock>
+                    <TextBlock Grid.Row="13" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+
+                    <!--#endregion-->
+
+                    <!--#region Totals/ Balance-->
+
+                    <!--Cash-->
+                    <TextBlock Grid.Row="15" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Cash</TextBlock>
+                    <TextBlock Grid.Row="15" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--Credit Card-->
+                    <TextBlock Grid.Row="16" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Credit Card</TextBlock>
+                    <TextBlock Grid.Row="16" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--Check-->
+                    <TextBlock Grid.Row="17" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Check</TextBlock>
+                    <TextBlock Grid.Row="17" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+
+                    <!--Balance-->
+                    <TextBlock Grid.Row="19" Grid.Column="0" FontFamily="Roboto" FontSize="16" FontWeight="Bold">Balance</TextBlock>
+                    <TextBlock Grid.Row="19" Grid.Column="1" FontFamily="Roboto" FontSize="16" FontWeight="Bold">$0.00</TextBlock>
+
+                    <!--#endregion-->
+
+                </Grid>
+                <!--#endregion-->
+                
+                
+                <!--#region Print and Save Buttons-->
+                <Grid Margin="0 40">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                Style="{DynamicResource MaterialDesignFlatButton}">
+                        <TextBlock x:Name="btn_print" Text="Print" Foreground="#6aa84f " FontSize="18"/>
+
+                    </Button>
+                    <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
+                        <TextBlock x:Name="btn_close" Text="Close" Foreground="#e06666 " FontSize="18"/>
+                    
+                    </Button>
+                </Grid>
+                <!--#endregion-->
+                
+                
+
+            </StackPanel>
+            
+
+            
+        </Grid>
+
+        
+
+
+
+
+    </Grid>
+</UserControl>

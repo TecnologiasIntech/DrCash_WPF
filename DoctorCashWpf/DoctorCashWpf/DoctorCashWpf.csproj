@@ -121,6 +121,7 @@
     <Compile Include="Domain\TreesViewModel.cs" />
     <Compile Include="interfaces\closeDate.cs" />
     <Compile Include="interfaces\closeTransaction.cs" />
+    <Compile Include="interfaces\dailyTransactionsObj.cs" />
     <Compile Include="interfaces\moneyComponent.cs" />
     <Compile Include="interfaces\user.cs" />
     <Compile Include="interfaces\userInformation.cs" />
@@ -134,8 +135,14 @@
     <Compile Include="Reportings\Report1.xaml.cs">
       <DependentUpon>Report1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ClosedStatements.xaml.cs">
+      <DependentUpon>ClosedStatements.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DailyTransactions.xaml.cs">
       <DependentUpon>DailyTransactions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Log.xaml.cs">
+      <DependentUpon>Log.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Refund.xaml.cs">
       <DependentUpon>Refund.xaml</DependentUpon>
@@ -192,11 +199,22 @@
     <Compile Include="Views\UserProfile.xaml.cs">
       <DependentUpon>UserProfile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ViewReceipt.xaml.cs">
+      <DependentUpon>ViewReceipt.xaml</DependentUpon>
+    </Compile>
     <Page Include="Reportings\Report1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ClosedStatements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DailyTransactions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Log.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,6 +306,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ViewReceipt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

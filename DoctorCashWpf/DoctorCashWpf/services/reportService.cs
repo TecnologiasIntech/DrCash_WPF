@@ -12,8 +12,92 @@ namespace DoctorCashWpf
         private sqlQueryService createQuery = new sqlQueryService();
         private createItemsForListService createItem = new createItemsForListService();
         private dateService date = new dateService();
+        private List<string> getTransactionsColumns()
+        {
+            var columns = new List<string>();
+            columns.Add("trn_ID");
+            columns.Add("trn_User_ID");
+            columns.Add("trn_DateRegistered");
+            columns.Add("trn_PatientFirstName");
+            columns.Add("trn_Type");
+            columns.Add("trn_AmountCharged");
+            columns.Add("trn_Cash");
+            columns.Add("trn_Credit");
+            columns.Add("trn_Check");
+            columns.Add("trn_Change");
+            columns.Add("trn_CheckNumber");
+            columns.Add("trn_Closed");
+            columns.Add("trn_RegisterID");
 
-        public DataTable getCloseTransactionByRange(string fromDate, string toDate)
+            return columns;
+        }
+
+        public DataTable getCloseTransactions(string closeID, string fromDate, string toDate)
+        {
+            if(closeID != "" && fromDate == "" && toDate == "")
+            {
+                return getCloseTransactionByID(closeID);
+            }
+            else if (closeID == "" && fromDate != "" && toDate != "")
+            {
+                return getCloseTransactionByRange(fromDate, toDate);
+            }
+            else if (closeID != "" && fromDate != "" && toDate != "")
+            {
+                return getCloseTransactionByIdAndRange(closeID, fromDate, toDate);
+            }
+            else
+            {
+                return new DataTable();
+            }
+        }
+
+        public dailyTransactionsObj getDailyTransactions(string transactionID, string patientName, string fromDate, string toDate)
+        {
+            var data = new DataTable();
+            var dailyTrnObj = new dailyTransactionsObj();
+
+            if (transactionID == "" && patientName == "" && fromDate != "" && toDate != "")
+            {
+                data =  getDailyTransactionsByOnlyRange(fromDate, toDate);
+
+            }
+            else if (transactionID == "" && patientName != "" && fromDate == "" && toDate == "")
+            {
+                data = getDailyTransactionsByOnlyPatientname(patientName);
+
+            }
+            else if (transactionID != "" && patientName == "" && fromDate == "" && toDate == "")
+            {
+                data = getDailyTransactionsByOnlyTransactionID(transactionID);
+            }
+            else if (transactionID != "" && patientName != "" && fromDate != "" && toDate != "")
+            {
+                data = getDailyTransactionsByRangeAndPatientNameAndTransactionID(patientName, transactionID, fromDate, toDate);
+
+            }
+            else if (transactionID == "" && patientName != "" && fromDate != "" && toDate != "")
+            {
+                data = getDailyTransactionsByRangeAndPatientName(patientName, fromDate, toDate);
+
+            }
+            else if (transactionID != "" && patientName == "" && fromDate != "" && toDate != "")
+            {
+                data = getDailyTransactionsByRangeAndTransactionID(transactionID, fromDate, toDate);
+
+            }
+            else if (transactionID != "" && patientName != "" && fromDate == "" && toDate == "")
+            {
+                data = getDailyTransactionsByPatientNameAndTransactionID(patientName, transactionID);
+            }
+
+            dailyTrnObj.dataTable = data;
+            dailyTrnObj.list = setTransactionsInList(data);
+
+            return dailyTrnObj;
+        }
+
+        private DataTable getCloseTransactionByRange(string fromDate, string toDate)
         {
             var termsList = new List<valuesWhere>();
             termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
@@ -22,46 +106,22 @@ namespace DoctorCashWpf
             return createQuery.toSelectAll("ClosedTransactios", termsList);
         }
 
-        public DataTable getDailyTransactions(string transactionID, string patientName, string fromDate, string toDate)
+        private DataTable getCloseTransactionByID(string ID)
         {
-            if(transactionID == "" && patientName == "" && fromDate != "" && toDate != "")
-            {
-                return getDailyTransactionsByOnlyRange(fromDate, toDate);
+            var termsList = new List<valuesWhere>();
+            termsList.Add(createItem.ofTypeValuesWhere(false, "clt_closed_ID", ID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
 
-            }
-            else if (transactionID == "" && patientName != "" && fromDate == "" && toDate == "")
-            {
-                return getDailyTransactionsByOnlyPatientname(patientName);
+            return createQuery.toSelectAll("ClosedTransactios", termsList);
+        }
 
-            }
-            else if (transactionID != "" && patientName == "" && fromDate == "" && toDate == "")
-            {
-                return getDailyTransactionsByOnlyTransactionID(transactionID);
-            }
-            else if (transactionID != "" && patientName != "" && fromDate != "" && toDate != "")
-            {
-                return getDailyTransactionsByRangeAndPatientNameAndTransactionID(patientName, transactionID, fromDate, toDate);
+        private DataTable getCloseTransactionByIdAndRange(string ID, string fromDate, string toDate)
+        {
+            var termsList = new List<valuesWhere>();
+            termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(toDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            termsList.Add(createItem.ofTypeValuesWhere(false, "clt_closed_ID", ID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
 
-            }
-            else if (transactionID == "" && patientName != "" && fromDate != "" && toDate != "")
-            {
-                return getDailyTransactionsByRangeAndPatientName(patientName, fromDate, toDate);
-
-            }
-            else if (transactionID != "" && patientName == "" && fromDate != "" && toDate != "")
-            {
-                return getDailyTransactionsByRangeAndTransactionID(transactionID, fromDate, toDate);
-
-            }
-            else if (transactionID != "" && patientName != "" && fromDate == "" && toDate == "")
-            {
-                return getDailyTransactionsByPatientNameAndTransactionID(patientName, transactionID);
-
-            }
-            else
-            {
-                return new DataTable();
-            }
+            return createQuery.toSelectAll("ClosedTransactios", termsList);
         }
 
         private DataTable getDailyTransactionsByOnlyRange(string fromDate, string toDate)
@@ -143,24 +203,33 @@ namespace DoctorCashWpf
             return createQuery.toSelect(columns, "transactions", terms);
         }
 
-        private List<string> getTransactionsColumns()
+        private List<transaction> setTransactionsInList(DataTable data)
         {
-            var columns = new List<string>();
-            columns.Add("trn_ID");
-            columns.Add("trn_User_ID");
-            columns.Add("trn_DateRegistered");
-            columns.Add("trn_PatientFirstName");
-            columns.Add("trn_Type");
-            columns.Add("trn_AmountCharged");
-            columns.Add("trn_Cash");
-            columns.Add("trn_Credit");
-            columns.Add("trn_Check");
-            columns.Add("trn_Change");
-            columns.Add("trn_CheckNumber");
-            columns.Add("trn_Closed");
-            columns.Add("trn_RegisterID");
+            var list = new List<transaction>();
 
-            return columns;
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+                var items = new transaction();
+
+                items.trn_id = Convert.ToInt32(filas["trn_ID"]);
+                items.userId = Convert.ToInt32(filas["trn_User_ID"]);
+                items.dateRegistered = Convert.ToString(filas["trn_DateRegistered"]);
+                items.type = Convert.ToInt32(filas["trn_Type"]);
+                items.amountCharged = Convert.ToInt32(filas["trn_AmountCharged"]);
+                items.cash = Convert.ToInt32(filas["trn_Cash"]);
+                items.credit = Convert.ToInt32(filas["trn_Credit"]);
+                items.check = Convert.ToInt32(filas["trn_Check"]);
+                items.checkNumber = Convert.ToInt32(filas["trn_CheckNumber"]);
+                items.change = Convert.ToInt32(filas["trn_Change"]);
+                items.patientFirstName = Convert.ToString(filas["trn_PatientFirstName"]);
+                items.closed = Convert.ToBoolean(filas["trn_Closed"]);
+                items.registerId = Convert.ToString(filas["trn_RegisterID"]);
+
+                list.Add(items);
+            }
+
+            return list;
         }
 
     }

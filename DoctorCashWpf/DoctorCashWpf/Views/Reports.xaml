@@ -11,5 +11,18 @@
         <Button Click="Button_Click">
             Daily Transaction
         </Button>
+
+        <Button Click="Button_Click_1">
+            Closed Statements
+        </Button>
+
+
+        <Button Click="Button_Click_2">
+            Log
+        </Button>
+
+        <Button Click="Button_Click_3">
+            Recepit
+        </Button>
     </StackPanel>
 </UserControl>
