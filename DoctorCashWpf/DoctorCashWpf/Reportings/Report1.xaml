@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:DoctorCashWpf.Reportings"
         xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
         mc:Ignorable="d"
-        Title="Report1" Height="350" Width="525">
+        Title="Report1" Height="436.842" Width="1127.631">
     <Grid>
-        <WindowsFormsHost HorizontalAlignment="Left" Height="277" Margin="10,32,0,0" VerticalAlignment="Top" Width="497">
+        <WindowsFormsHost Height="406" VerticalAlignment="Top">
             <rv:ReportViewer x:Name="ReportViewerDemos"></rv:ReportViewer>
         </WindowsFormsHost>
 

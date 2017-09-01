@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,9 +30,15 @@ namespace DoctorCashWpf.Views
         private reportService getreport = new reportService();
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {           
+        {            
             this.dataGridViewDailyTransactions.ItemsSource = null;
             dataGridViewDailyTransactions.DataContext= getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text);            
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Reportings.Report1 miventana = new Reportings.Report1(getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text));            
+            miventana.ShowDialog();            
         }
     }
 }
