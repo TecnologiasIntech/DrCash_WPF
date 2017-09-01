@@ -52,7 +52,7 @@ namespace DoctorCashWpf
             }
         }
 
-        public dailyTransactionsObj getDailyTransactions(string transactionID, string patientName, string fromDate, string toDate)
+        public transactionsObj getDailyTransactions(string transactionID, string patientName, string fromDate, string toDate)
         {
             var data = new DataTable();
             var dailyTrnObj = new dailyTransactionsObj();
