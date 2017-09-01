@@ -13,11 +13,49 @@ namespace DoctorCashWpf
         private createItemsForListService createItem = new createItemsForListService();
         private dateService date = new dateService();
 
-        public DataTable getCloseTransactionByRange(string fromDate, string toDate)
+        public DataTable getCloseTransactions(string closeID, string fromDate, string toDate)
+        {
+            if(closeID != "" && fromDate == "" && toDate == "")
+            {
+                return getCloseTransactionByID(closeID);
+            }
+            else if (closeID == "" && fromDate != "" && toDate != "")
+            {
+                return getCloseTransactionByRange(fromDate, toDate);
+            }
+            else if (closeID != "" && fromDate != "" && toDate != "")
+            {
+                return getCloseTransactionByIdAndRange(closeID, fromDate, toDate);
+            }
+            else
+            {
+                return new DataTable();
+            }
+        }
+
+        private DataTable getCloseTransactionByRange(string fromDate, string toDate)
         {
             var termsList = new List<valuesWhere>();
             termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
             termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(toDate), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+
+            return createQuery.toSelectAll("ClosedTransactios", termsList);
+        }
+
+        private DataTable getCloseTransactionByID(string ID)
+        {
+            var termsList = new List<valuesWhere>();
+            termsList.Add(createItem.ofTypeValuesWhere(false, "clt_closed_ID", ID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            return createQuery.toSelectAll("ClosedTransactios", termsList);
+        }
+
+        private DataTable getCloseTransactionByIdAndRange(string ID, string fromDate, string toDate)
+        {
+            var termsList = new List<valuesWhere>();
+            termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(toDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            termsList.Add(createItem.ofTypeValuesWhere(false, "clt_closed_ID", ID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
 
             return createQuery.toSelectAll("ClosedTransactios", termsList);
         }
