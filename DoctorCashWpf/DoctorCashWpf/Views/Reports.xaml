@@ -15,5 +15,10 @@
         <Button Click="Button_Click_1">
             Closed Statements
         </Button>
+
+
+        <Button Click="Button_Click_2">
+            Log
+        </Button>
     </StackPanel>
 </UserControl>

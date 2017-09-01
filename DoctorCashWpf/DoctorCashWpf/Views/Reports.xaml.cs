@@ -39,5 +39,11 @@ namespace DoctorCashWpf
             var ClosedStatements = new ClosedStatements();
             await DialogHost.Show(ClosedStatements, "RootDialog");
         }
+
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var Log = new Log();
+            await DialogHost.Show(Log, "RootDialog");
+        }
     }
 }
