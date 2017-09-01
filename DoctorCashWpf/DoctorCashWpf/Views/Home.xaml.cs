@@ -158,7 +158,7 @@ namespace DoctorCashWpf
             //para verificar las pantallas
             //await DialogHost.Show(new Refund(), "RootDialog");
             //await DialogHost.Show(new UserNew(), "RootDialog");
-            //await DialogHost.Show(new DailyTransactions(), "RootDialog");
+            await DialogHost.Show(new DailyTransactions(), "RootDialog");
             ///asyrdutiuydtsyuifduytayuyta
 
 
