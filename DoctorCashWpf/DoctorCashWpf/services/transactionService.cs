@@ -12,7 +12,7 @@ namespace DoctorCashWpf
 
         private dateService date = new dateService();
         private sqlQueryService createQuery = new sqlQueryService();
-        private createItemsForListService createList = new createItemsForListService();
+        private createItemsForListService createItem = new createItemsForListService();
 
         public List<transaction> getCurrentTransactions(int currentUserID)
         {
@@ -45,9 +45,9 @@ namespace DoctorCashWpf
             
             var listTerms = new List<valuesWhere>();
 
-            listTerms.Add(createList.ofTypeValuesWhere(false, "trn_User_ID", currentUserID.ToString(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
-            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", date.getInitialDate(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", date.getEndDate(), -1, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            listTerms.Add(createItem.ofTypeValuesWhere(false, "trn_User_ID", currentUserID.ToString(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            listTerms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.getInitialDate(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            listTerms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.getEndDate(), -1, (int)OPERATOR.LESS_THAN_OR_EQUAL));
 
             data = createQuery.toSelect(columns, "transactions", listTerms);
 
@@ -88,8 +88,8 @@ namespace DoctorCashWpf
         public void getTransactionsByRange(string dateInitial, string dateEnd)
         {
             var listTerms = new List<valuesWhere>();
-            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", dateInitial, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            listTerms.Add(createList.ofTypeValuesWhere(true, "trn_DateRegistered", dateEnd, -1, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            listTerms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", dateInitial, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            listTerms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", dateEnd, -1, (int)OPERATOR.LESS_THAN_OR_EQUAL));
 
             createQuery.toSelectAll("transactions", listTerms);
         }
@@ -97,26 +97,26 @@ namespace DoctorCashWpf
         public void setTransaction(transaction transactionArray)
         {
             List<columnsValues> valuesArray = new List<columnsValues>();
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_DateRegistered", transactionArray.dateRegistered));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Type", transactionArray.type));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_AmountCharged", transactionArray.amountCharged));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Cash", transactionArray.cash));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Credit", transactionArray.credit));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Check", transactionArray.check));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Change", transactionArray.change));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_PatientFirstName", transactionArray.patientFirstName));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Copayment", transactionArray.copayment));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_SelfPay", transactionArray.selfPay));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Deductible", transactionArray.deductible));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Other", transactionArray.other));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Type", transactionArray.type));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_AmountCharged", transactionArray.amountCharged));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Cash", transactionArray.cash));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Credit", transactionArray.credit));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Check", transactionArray.check));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Change", transactionArray.change));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_PatientFirstName", transactionArray.patientFirstName));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Copayment", transactionArray.copayment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_SelfPay", transactionArray.selfPay));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Deductible", transactionArray.deductible));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Other", transactionArray.other));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_OtherComments", transactionArray.otherComments));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_ModifiedBy_ID", transactionArray.modifiedById));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_ModifiedBy_ID", transactionArray.modifiedById));
             //valuesArray.Add(listService.ofTypeColumnsValues("trn_ModificationDate", transactionArray.modificationDate));
 
             createQuery.toInsert("transactions", valuesArray);
@@ -125,25 +125,25 @@ namespace DoctorCashWpf
         public void setTransactionOut(transaction transactionArray)
         {
             List<columnsValues> valuesArray = new List<columnsValues>();
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_DateRegistered", transactionArray.dateRegistered));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Type", transactionArray.type));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Type", transactionArray.type));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_AmountCharged", transactionArray.amountCharged));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Cash", transactionArray.cash));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Cash", transactionArray.cash));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_Credit", transactionArray.credit));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_Check", transactionArray.check));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
            // valuesArray.Add(createList.ofTypeColumnsValues("trn_Change", transactionArray.change));
            // valuesArray.Add(createList.ofTypeColumnsValues("trn_PatientFirstName", transactionArray.patientFirstName));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Copayment", transactionArray.copayment));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_SelfPay", transactionArray.selfPay));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Deductible", transactionArray.deductible));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Other", transactionArray.other));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Copayment", transactionArray.copayment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_SelfPay", transactionArray.selfPay));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Deductible", transactionArray.deductible));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Other", transactionArray.other));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_OtherComments", transactionArray.otherComments));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_ModifiedBy_ID", transactionArray.modifiedById));
             //valuesArray.Add(listService.ofTypeColumnsValues("trn_ModificationDate", transactionArray.modificationDate));
 
@@ -153,19 +153,19 @@ namespace DoctorCashWpf
         public void setTransactionInitialCash(transaction transactionArray)
         {
             List<columnsValues> valuesArray = new List<columnsValues>();
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_DateRegistered", date.getCurrentDate()));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Type", transactionArray.type));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Cash", transactionArray.cash));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Copayment", transactionArray.copayment));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_SelfPay", transactionArray.selfPay));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Deductible", transactionArray.deductible));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Other", transactionArray.other));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
-            valuesArray.Add(createList.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_DateRegistered", date.getCurrentDate()));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Type", transactionArray.type));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Cash", transactionArray.cash));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Copayment", transactionArray.copayment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_SelfPay", transactionArray.selfPay));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Deductible", transactionArray.deductible));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Other", transactionArray.other));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
 
             createQuery.toInsert("transactions", valuesArray);
         }
@@ -173,26 +173,54 @@ namespace DoctorCashWpf
         public void closeDate(closeDate closeDate)
         {
             var list = new List<columnsValues>();
-            list.Add(createList.ofTypeColumnsValues("clt_100_bills", closeDate.clt_100_bills));
-            list.Add(createList.ofTypeColumnsValues("clt_50_bills", closeDate.clt_50_bills));
-            list.Add(createList.ofTypeColumnsValues("clt_20_bills", closeDate.clt_20_bills));
-            list.Add(createList.ofTypeColumnsValues("clt_10_bills", closeDate.clt_10_bills));
-            list.Add(createList.ofTypeColumnsValues("clt_5_bills", closeDate.clt_5_bills));
-            list.Add(createList.ofTypeColumnsValues("clt_1_bills", closeDate.clt_1_bills));
-            list.Add(createList.ofTypeColumnsValues("clt_checks_amount", closeDate.clt_checks_amount));
-            list.Add(createList.ofTypeColumnsValues("clt_credits_amount", closeDate.clt_credits_amount));
-            list.Add(createList.ofTypeColumnsValues("clt_total_charged", closeDate.clt_total_charged));
-            list.Add(createList.ofTypeColumnsValues("clt_total_cash", closeDate.clt_total_cash));
-            list.Add(createList.ofTypeColumnsValues("clt_total_check", closeDate.clt_total_check));
-            list.Add(createList.ofTypeColumnsValues("clt_total_credit", closeDate.clt_total_credit));
-            list.Add(createList.ofTypeColumnsValues("clt_initial_cash", closeDate.clt_initial_cash));
-            list.Add(createList.ofTypeColumnsValues("clt_balance", closeDate.clt_balance));
-            list.Add(createList.ofTypeColumnsValues("clt_transaction_count", closeDate.clt_transaction_count));
-            list.Add(createList.ofTypeColumnsValues("clt_reg_RegisterID", closeDate.clt_reg_RegisterID));
-            list.Add(createList.ofTypeColumnsValues("clt_Username", closeDate.clt_Username));
-            list.Add(createList.ofTypeColumnsValues("clt_Datetime", closeDate.clt_Datetime));
+            list.Add(createItem.ofTypeColumnsValues("clt_100_bills", closeDate.clt_100_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_50_bills", closeDate.clt_50_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_20_bills", closeDate.clt_20_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_10_bills", closeDate.clt_10_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_5_bills", closeDate.clt_5_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_1_bills", closeDate.clt_1_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_checks_amount", closeDate.clt_checks_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_credits_amount", closeDate.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_charged", closeDate.clt_total_charged));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_cash", closeDate.clt_total_cash));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_check", closeDate.clt_total_check));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_credit", closeDate.clt_total_credit));
+            list.Add(createItem.ofTypeColumnsValues("clt_initial_cash", closeDate.clt_initial_cash));
+            list.Add(createItem.ofTypeColumnsValues("clt_balance", closeDate.clt_balance));
+            list.Add(createItem.ofTypeColumnsValues("clt_transaction_count", closeDate.clt_transaction_count));
+            list.Add(createItem.ofTypeColumnsValues("clt_reg_RegisterID", closeDate.clt_reg_RegisterID));
+            list.Add(createItem.ofTypeColumnsValues("clt_Username", closeDate.clt_Username));
+            list.Add(createItem.ofTypeColumnsValues("clt_Datetime", closeDate.clt_Datetime));
 
             createQuery.toInsert("ClosedTransactions", list);
+        }
+
+        public List<transaction> getTransactionsByID(string userID)
+        {
+
+            var terms = new List<valuesWhere>();
+            var list = new List<transaction>();
+
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_User_ID", userID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            var data = createQuery.toSelectAll("transactions", terms);
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+                var items = new transaction();
+
+                items.trn_id = Convert.ToInt32(filas["trn_ID"]);
+                items.amountCharged = Convert.ToInt32(filas["trn_AmountCharged"]);
+                items.cash = Convert.ToInt32(filas["trn_Cash"]);
+                items.credit = Convert.ToInt32(filas["trn_Credit"]);
+                items.check = Convert.ToInt32(filas["trn_Check"]);
+                items.change = Convert.ToInt32(filas["trn_Change"]);
+
+                list.Add(items);
+            }
+
+            return list;
         }
 
     }

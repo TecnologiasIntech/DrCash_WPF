@@ -29,7 +29,7 @@ namespace DoctorCashWpf
             return command;
         }
 
-        public string getOperator(int Operator)
+        private string getOperator(int Operator)
         {
             string operatorType = "";
 
