@@ -24,5 +24,13 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
         }
+
+        private reportService getreport = new reportService();
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {           
+            this.dataGridViewDailyTransactions.ItemsSource = null;
+            dataGridViewDailyTransactions.DataContext= getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text);            
+        }
     }
 }

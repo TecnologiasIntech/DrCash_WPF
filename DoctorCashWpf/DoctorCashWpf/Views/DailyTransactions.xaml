@@ -108,11 +108,11 @@
 
                     <!--Date From-->
                     <StackPanel Grid.Column="3" Margin="15">
-                        <DatePicker materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
                     <!--Date To-->
                     <StackPanel Grid.Column="4" Margin="15">
-                        <DatePicker materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
 
                     <!--Search Button-->
@@ -127,7 +127,7 @@
                     <!--Clear-->
                     <StackPanel Grid.Column="6" Margin="15">
                         <Button VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
-                                Style="{DynamicResource MaterialDesignFlatButton}">
+                                Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click">
                             <TextBlock Foreground="#597eaa" FontSize="18">
                                 Search
                             </TextBlock>

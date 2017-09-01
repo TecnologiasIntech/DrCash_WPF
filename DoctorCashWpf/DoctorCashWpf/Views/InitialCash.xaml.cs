@@ -73,49 +73,35 @@ namespace DoctorCashWpf.Views
             }
         }
 
-        private void Desing()
+        private void designOfAlertInError()
         {
             txtbox_initialCash.Clear();
             txtbox_initialCash.Focus();            
             txtbox_initialCash.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");            
         }
 
-        private void verificar()
+        private void verifyCash()
         {
-            try
+            if (txtbox_initialCash.Text == "")
             {
-                if (txtbox_initialCash.Text == "")
-                {
-                    labelCash.Content = "Insert initial Cash";
-                    Desing();
-                }
-                else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == 0)
-                {
-                    labelCash.Content = "Insert initial Cash";
-                    Desing();
-                }
-                else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) > 120)
-                {
-                    labelCash.Content = "Add less Cash";
-                    Desing();
-                }
-                else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) < 0)
-                {
-                    labelCash.Content = "Negative Values";
-                    Desing();
-                }
-                else
-                {
-                    labelCash.Content = "";
-                    moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-                    setInitialCash();
-                }
+                labelCash.Content = "Insert initial Cash";
+                designOfAlertInError();
             }
-            catch
+            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == 0)
             {
-                labelCash.Content = "Only Numbers";
-                Desing();
-            }                       
+                labelCash.Content = "Insert initial Cash";
+                designOfAlertInError();
+            }
+            else
+            {
+                labelCash.Content = "";
+                moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                setInitialCash();
+
+                var response = moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                txtbox_initialCash = response.TextboxComponent;
+                labelCash.Content = response.error;
+            }
         }
 
         private void setInitialCash_KeyUp(object sender, KeyEventArgs e)
@@ -125,7 +111,7 @@ namespace DoctorCashWpf.Views
 
         private void setInitialCash_click(object sender, RoutedEventArgs e)
         {
-            verificar();                      
+            verifyCash();                      
         }
 
         private void txtbox_initialCash_LostFocus(object sender, RoutedEventArgs e)
