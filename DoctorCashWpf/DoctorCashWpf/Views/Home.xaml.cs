@@ -113,7 +113,7 @@ namespace DoctorCashWpf
             label_totalOut.Text = "$" + (cashOut).ToString() + ".00";
 
             label_initialCash.Text = initialCash.ToString();
-            moneyComponent.convertComponentToMoneyFormat(label_initialCash);
+            label_initialCash = moneyComponent.convertComponentToMoneyFormat(label_initialCash).labelComponent;
             
         }
 

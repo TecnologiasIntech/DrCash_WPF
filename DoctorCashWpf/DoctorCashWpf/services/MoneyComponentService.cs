@@ -40,7 +40,7 @@ namespace DoctorCashWpf
                     {
                         txtBox.Text = "$0.00";
                         error = "Only Numbers";
-                    }else if(txtBox.Text[0] != '-')
+                    }else if(txtBox.Text[0] == '-')
                     {
                         txtBox.Text = "$0.00";
                         error = "Negative Values";
@@ -87,7 +87,7 @@ namespace DoctorCashWpf
                         txtBox.Text = "$0.00";
                         error = "Only Numbers";
                     }
-                    else if (txtBox.Text[0] != '-')
+                    else if (txtBox.Text[0] == '-')
                     {
                         txtBox.Text = "$0.00";
                         error = "Negative Values";

@@ -16,7 +16,7 @@ namespace DoctorCashWpf
                 month = "0" + month;
             }
 
-            if (Convert.ToInt32(day) < 10 && month.Length == 1)
+            if (Convert.ToInt32(day) < 10 && day.Length == 1)
             {
                 day = "0" + day;
             }
