@@ -140,5 +140,29 @@ namespace DoctorCashWpf
             return data;
         }
 
+        public user getUserByID(string userID)
+        {
+            var columns = new List<string>();
+            var terms = new List<valuesWhere>();
+            var user = new user();
+
+            columns.Add("usr_FirstName");
+            columns.Add("usr_LastName");
+
+            terms.Add(createItem.ofTypeValuesWhere(false, "usr_ID", userID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            var data = createQuery.toSelect(columns, "users", terms);
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+
+                user.usr_FirstName = Convert.ToString(filas["usr_FirstName"]);
+                user.usr_LastName = Convert.ToString(filas["usr_LastName"]);
+            }
+
+            return user;
+        }
+
     }
 }
