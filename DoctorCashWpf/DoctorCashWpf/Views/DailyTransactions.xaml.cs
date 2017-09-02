@@ -31,13 +31,13 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {            
-            this.dataGridViewDailyTransactions.ItemsSource = null;
-            dataGridViewDailyTransactions.DataContext= getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text);            
+            dataGridViewDailyTransactions.ItemsSource = null;
+            dataGridViewDailyTransactions.ItemsSource= getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Reportings.Report1 miventana = new Reportings.Report1(getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text));            
+            Reportings.Report1 miventana = new Reportings.Report1(getreport.getDailyTransactions(txtbox_question.Text,Patient_Name.Text,fromdate.Text,todate.Text).dataTable);            
             miventana.ShowDialog();            
         }
     }
