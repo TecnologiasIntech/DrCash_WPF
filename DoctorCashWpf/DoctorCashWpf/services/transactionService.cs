@@ -154,7 +154,7 @@ namespace DoctorCashWpf
         {
             List<columnsValues> valuesArray = new List<columnsValues>();
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_DateRegistered", date.getCurrentDate()));
+            //valuesArray.Add(createItem.ofTypeColumnsValues("trn_DateRegistered", date.getCurrentDate()));
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Type", transactionArray.type));
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Cash", transactionArray.cash));

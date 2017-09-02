@@ -58,7 +58,7 @@ namespace DoctorCashWpf
                 transaction.credit = (float)Convert.ToDouble(txtbox_credit.Text.Remove(0, 1));
                 transaction.check = (float)Convert.ToDouble(txtbox_check.Text.Remove(0, 1));
                 transaction.checkNumber = Convert.ToInt32(txtbox_numberChecks.Text);
-                transaction.change = 10;
+                transaction.change = (float)Convert.ToDouble(label_change.Text.Remove(0,1));
                 transaction.patientFirstName = txtbox_patientFirstName.Text;
                 transaction.copayment = (bool)checkbox_copayment.IsChecked;
                 transaction.selfPay = (bool)checkbox_selfPay.IsChecked; ;
@@ -66,8 +66,8 @@ namespace DoctorCashWpf
                 transaction.labs = (bool)checkbox_labs.IsChecked; ;
                 transaction.other = (bool)checkbox_other.IsChecked; ;
                 transaction.closed = false;
-                transaction.registerId = "Asd";
-                transaction.modifiedById = 4;
+                transaction.registerId = userInformation.user.usr_Username;
+                transaction.modifiedById = userInformation.user.usr_ID;
                 transaction.type = (int)TRANSACTIONTYPE.IN;
 
                 transactionService.setTransaction(transaction);
