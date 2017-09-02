@@ -24,11 +24,31 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
 
+            setValuesInitials();
+
             getCurrentTransactions();
+
         }
 
         private transactionService transaction = new transactionService();
         private MoneyComponentService moneyComponent = new MoneyComponentService();
+
+        private void setValuesInitials()
+        {
+            moneyComponent.convertComponentToMoneyFormat(label_totalCash);
+            moneyComponent.convertComponentToMoneyFormat(label_bills1);
+            moneyComponent.convertComponentToMoneyFormat(label_bills5);
+            moneyComponent.convertComponentToMoneyFormat(label_bills20);
+            moneyComponent.convertComponentToMoneyFormat(label_bills50);
+            moneyComponent.convertComponentToMoneyFormat(label_bills100);
+            moneyComponent.convertComponentToMoneyFormat(label_bills10);
+            moneyComponent.convertComponentToMoneyFormat(label_totalEntered);
+            moneyComponent.convertComponentToMoneyFormat(label_totalRegistered);
+            moneyComponent.convertComponentToMoneyFormat(label_short);
+            moneyComponent.convertComponentToMoneyFormat(textbox_credit, () => { });
+            moneyComponent.convertComponentToMoneyFormat(textbox_leftInRegister, () => { });
+            moneyComponent.convertComponentToMoneyFormat(textbox_check, () => { });
+        }
 
         private void plusOrLess(TextBox txtbox, TextBlock label, int Operator, int typeBills)
         {
@@ -53,7 +73,8 @@ namespace DoctorCashWpf.Views
                         break;
                 }
 
-                label.Text = "$" + (Convert.ToInt32(txtbox.Text) * typeBills).ToString() + ".00";
+                label.Text = (Convert.ToInt32(txtbox.Text) * typeBills).ToString();
+                label = moneyComponent.convertComponentToMoneyFormat(label).labelComponent;
 
                 txtbox.Text = txtbox.Text;
 
@@ -67,7 +88,7 @@ namespace DoctorCashWpf.Views
             else
             {
                 txtbox.Text = "";
-                label.Text = "$0.00";
+                label.Text = moneyComponent.getFormatMoneyComponentInZero();
                 getTotalCash();
             }
         }
@@ -106,11 +127,14 @@ namespace DoctorCashWpf.Views
                 totalCash += Convert.ToDouble(label_bills1.Text.Remove(0, 1));
             }
 
-            label_totalCash.Text = "$" + totalCash.ToString() + ".00";
+            label_totalCash.Text = totalCash.ToString();
+            label_totalCash = moneyComponent.convertComponentToMoneyFormat(label_totalCash).labelComponent;
 
-            label_totalEntered.Text = "$" + (Convert.ToDouble(label_totalCash.Text.Remove(0, 1)) + Convert.ToDouble(textbox_credit.Text.Remove(0, 1)) + Convert.ToDouble(textbox_check.Text.Remove(0, 1)) + Convert.ToDouble(textbox_leftInRegister.Text.Remove(0, 1))).ToString() + ".00";
+            label_totalEntered.Text = (Convert.ToDouble(label_totalCash.Text.Remove(0, 1)) + Convert.ToDouble(textbox_credit.Text.Remove(0, 1)) + Convert.ToDouble(textbox_check.Text.Remove(0, 1)) + Convert.ToDouble(textbox_leftInRegister.Text.Remove(0, 1))).ToString();
+            label_totalEntered = moneyComponent.convertComponentToMoneyFormat(label_totalEntered).labelComponent;
 
-            label_short.Text = "$" + (Convert.ToDouble(label_totalEntered.Text.Remove(0, 1)) - Convert.ToDouble(label_totalRegistered.Text.Remove(0, 1))).ToString() + ".00";
+            label_short.Text = (Convert.ToDouble(label_totalEntered.Text.Remove(0, 1)) - Convert.ToDouble(label_totalRegistered.Text.Remove(0, 1))).ToString();
+            label_short = moneyComponent.convertComponentToMoneyFormat(label_short).labelComponent;
         }
 
         private void getCurrentTransactions()
@@ -200,12 +224,12 @@ namespace DoctorCashWpf.Views
             textbox_bills5.Text = "";
             textbox_bills1.Text = "";
 
-            label_totalCash.Text = "$0.00";
-            textbox_credit.Text = "$0.00";
-            textbox_check.Text = "$0.00";
-            label_totalEntered.Text = "$0.00";
-            textbox_leftInRegister.Text = "$0.00";
-            label_short.Text = "$0.00";
+            label_totalCash.Text = moneyComponent.getFormatMoneyComponentInZero();
+            textbox_credit.Text = moneyComponent.getFormatMoneyComponentInZero();
+            textbox_check.Text = moneyComponent.getFormatMoneyComponentInZero();
+            label_totalEntered.Text = moneyComponent.getFormatMoneyComponentInZero();
+            textbox_leftInRegister.Text = moneyComponent.getFormatMoneyComponentInZero();
+            label_short.Text = moneyComponent.getFormatMoneyComponentInZero();
 
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.EQUALITY, 0);
             plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.EQUALITY, 0);

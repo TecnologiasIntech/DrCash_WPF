@@ -65,7 +65,7 @@
                 <StackPanel Grid.Row="0" Grid.Column="0"   Grid.ColumnSpan="3">
 
                     <TextBlock Text="Patient Name" Margin=" 10" FontFamily="Roboto"/>
-                    <TextBox x:Name="txtbox_patientFirstName" BorderBrush="Gray" BorderThickness="1" Padding="2" materialDesign:HintAssist.Hint="Name" GotFocus="txtbox_patientFirstName_GotFocus_1"/>
+                    <TextBox x:Name="txtbox_patientFirstName" BorderBrush="Gray" BorderThickness="1" Padding="2" materialDesign:HintAssist.Hint="Name" GotFocus="txtbox_patientFirstName_GotFocus_1" TabIndex="0"/>
 
                 </StackPanel>
 
@@ -157,19 +157,19 @@
                     <TextBlock Grid.Column="0" Grid.Row="0"
                                Text="Total" FontSize="16"/>
                     <TextBlock x:Name="label_total" Grid.Column="1" Grid.Row="0"
-                               Text="$0.00" FontSize="16"/>
+                               Text="0" FontSize="16"/>
 
                     <!--Amount-->
                     <TextBlock Grid.Column="0" Grid.Row="1"
                                Text="Amount" FontSize="16" Foreground="#e06666"/>
                     <TextBlock x:Name="label_amount" Grid.Column="1" Grid.Row="1"
-                               Text="$0.00" FontSize="16" Foreground="#e06666"/>
+                               Text="0" FontSize="16" Foreground="#e06666"/>
 
                     <!--Change-->
                     <TextBlock Grid.Column="0" Grid.Row="2"
                                Text="Change" FontSize="16"/>
                     <TextBlock x:Name="label_change" Grid.Column="1" Grid.Row="2"
-                               Text="$0.00" FontSize="16"/>
+                               Text="0" FontSize="16"/>
 
 
                 </Grid>
@@ -180,7 +180,7 @@
                 <!--#region Comment Area -->
                 <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Margin="0 20 0 20">
                     <TextBlock Text="Comment:" FontSize="16" FontFamily="Roboto" Foreground="#666" />
-                    <TextBox x:Name="txtbox_comment" Height="225" BorderBrush="#666" BorderThickness="2" Margin="0 10 0 0" materialDesign:HintAssist.Hint="Type a Comment ... " VerticalContentAlignment="Top" Padding="5,2"/>
+                    <TextBox x:Name="txtbox_comment" Height="225" BorderBrush="#666" BorderThickness="2" Margin="0 10 0 0" materialDesign:HintAssist.Hint="Type a Comment ... " VerticalContentAlignment="Top" Padding="5,2" TabIndex="6"/>
                 </StackPanel>
                 <!--#endregion-->
 
@@ -211,11 +211,11 @@
 
 
         </Grid>
-        <TextBox x:Name="txtbox_amountCharge" HorizontalAlignment="Left" Height="23" Margin="99,113,0,0" Grid.Row="1" TextWrapping="Wrap" Text="$0.00" VerticalAlignment="Top" Width="120" LostFocus="txtbox_amountCharge_LostFocus" KeyUp="txtbox_amountCharge_KeyUp" HorizontalContentAlignment="Center" GotFocus="txtbox_amountCharge_GotFocus_1"/>
-        <TextBox x:Name="txtbox_cash" HorizontalAlignment="Left" Height="23" Margin="99,183,0,0" Grid.Row="1" TextWrapping="Wrap" Text="$0.00" VerticalAlignment="Top" Width="120" KeyUp="txtbox_cash_KeyUp" LostFocus="txtbox_cash_LostFocus" HorizontalContentAlignment="Center" Cursor="" GotFocus="txtbox_cash_GotFocus_1"/>
-        <TextBox x:Name="txtbox_credit" HorizontalAlignment="Left" Height="23" Margin="99,262,0,0" Grid.Row="1" TextWrapping="Wrap" Text="$0.00" VerticalAlignment="Top" Width="120" KeyUp="txtbox_credit_KeyUp" LostFocus="txtbox_credit_LostFocus" HorizontalContentAlignment="Center" GotFocus="txtbox_credit_GotFocus_1"/>
-        <TextBox x:Name="txtbox_check" HorizontalAlignment="Left" Height="23" Margin="99,333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="$0.00" VerticalAlignment="Top" Width="120" KeyUp="txtbox_check_KeyUp" LostFocus="txtbox_check_LostFocus" HorizontalContentAlignment="Center" GotFocus="txtbox_check_GotFocus_1"/>
-        <TextBox x:Name="txtbox_numberChecks" HorizontalAlignment="Left" Height="23" Margin="99,400,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyUp="txtbox_numberChecks_KeyUp" LostFocus="txtbox_numberChecks_LostFocus" HorizontalContentAlignment="Center" GotFocus="txtbox_numberChecks_GotFocus_1"/>
+        <TextBox x:Name="txtbox_amountCharge" HorizontalAlignment="Left" Height="23" Margin="99,113,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" LostFocus="txtbox_amountCharge_LostFocus" KeyUp="txtbox_amountCharge_KeyUp" HorizontalContentAlignment="Center" GotFocus="txtbox_amountCharge_GotFocus_1" TabIndex="1"/>
+        <TextBox x:Name="txtbox_cash" HorizontalAlignment="Left" Height="23" Margin="99,183,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyUp="txtbox_cash_KeyUp" LostFocus="txtbox_cash_LostFocus" HorizontalContentAlignment="Center" Cursor="" GotFocus="txtbox_cash_GotFocus_1" TabIndex="2"/>
+        <TextBox x:Name="txtbox_credit" HorizontalAlignment="Left" Height="23" Margin="99,262,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyUp="txtbox_credit_KeyUp" LostFocus="txtbox_credit_LostFocus" HorizontalContentAlignment="Center" GotFocus="txtbox_credit_GotFocus_1" TabIndex="3"/>
+        <TextBox x:Name="txtbox_check" HorizontalAlignment="Left" Height="23" Margin="99,333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyUp="txtbox_check_KeyUp" LostFocus="txtbox_check_LostFocus" HorizontalContentAlignment="Center" GotFocus="txtbox_check_GotFocus_1" TabIndex="4"/>
+        <TextBox x:Name="txtbox_numberChecks" HorizontalAlignment="Left" Height="23" Margin="99,400,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyUp="txtbox_numberChecks_KeyUp" LostFocus="txtbox_numberChecks_LostFocus" HorizontalContentAlignment="Center" GotFocus="txtbox_numberChecks_GotFocus_1" TabIndex="5"/>
         <!--#endregion-->
 
     </Grid>

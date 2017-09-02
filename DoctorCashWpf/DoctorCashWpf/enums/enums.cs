@@ -38,7 +38,17 @@ namespace DoctorCashWpf
     {
         IN,
         OUT,
-        INITIAL
+        INITIAL,
+        REFOUND
+    }
+
+    enum CASHINTYPE
+    {
+        COPAYMENT,
+        SELFPAY,
+        DEDUCTIBLE,
+        LABS,
+        OTHER
     }
 
     enum SECURIRYLEVEL

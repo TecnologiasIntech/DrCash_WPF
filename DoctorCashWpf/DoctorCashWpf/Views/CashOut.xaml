@@ -204,17 +204,17 @@
                 <!--#region Total-->
 
                 <TextBlock x:Name="label_100" Grid.Column="1" Grid.Row="0"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,18,10,17" Width="81"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,18,10,17" Width="81"/>
                 <TextBlock x:Name="label_50" Grid.Column="1" Grid.Row="1"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,17,10,18" Width="81"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,17,10,18" Width="81"/>
                 <TextBlock x:Name="label_20" Grid.Column="1" Grid.Row="2"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,18,10,17" Width="81"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,18,10,17" Width="81"/>
                 <TextBlock x:Name="label_10" Grid.Column="1" Grid.Row="3"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,17,10,18" Width="81"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,17,10,18" Width="81"/>
                 <TextBlock x:Name="label_5" Grid.Column="1" Grid.Row="4"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,18,10,17" Width="81"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,18,10,17" Width="81"/>
                 <TextBlock x:Name="label_1" Grid.Column="1" Grid.Row="5"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,18" Width="81"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="10,18" Width="81"/>
 
                 <!--#endregion-->
 
@@ -228,7 +228,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Total Cash: " Foreground="#FFF " FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock x:Name="label_totalCash" Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBlock x:Name="label_totalCash" Grid.Column="1" Text="0" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto"/>
 
                 </Grid>
                 <!--#endregion-->

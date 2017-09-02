@@ -23,14 +23,27 @@ namespace DoctorCashWpf
         public CashInWindow()
         {
             InitializeComponent();
+
+            setValesInitials();
         }
 
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private BrushConverter brushConverter = new BrushConverter();
 
+        private void setValesInitials()
+        {
+            moneyComponent.convertComponentToMoneyFormat(label_amount);
+            moneyComponent.convertComponentToMoneyFormat(label_change);
+            moneyComponent.convertComponentToMoneyFormat(label_total);
+            moneyComponent.convertComponentToMoneyFormat(txtbox_cash, () => { });
+            moneyComponent.convertComponentToMoneyFormat(txtbox_credit, () => { });
+            moneyComponent.convertComponentToMoneyFormat(txtbox_check, () => { });
+            moneyComponent.convertComponentToMoneyFormat(txtbox_amountCharge, () => { });
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (txtbox_patientFirstName.Text != "" && label_total.Text != "$0.00")
+            if (txtbox_patientFirstName.Text != "" && label_total.Text != moneyComponent.getFormatMoneyComponentInZero())
             { 
                 var transactionService = new transactionService();
                 var transaction = new transaction();
@@ -88,17 +101,17 @@ namespace DoctorCashWpf
 
         private void clearInputs()
         {
-            txtbox_amountCharge.Text = "$0.00";
-            txtbox_cash.Text = "$0.00";
-            txtbox_credit.Text = "$0.00";
-            txtbox_check.Text = "$0.00";
+            txtbox_amountCharge.Text = moneyComponent.getFormatMoneyComponentInZero();
+            txtbox_cash.Text = moneyComponent.getFormatMoneyComponentInZero();
+            txtbox_credit.Text = moneyComponent.getFormatMoneyComponentInZero();
+            txtbox_check.Text = moneyComponent.getFormatMoneyComponentInZero();
             txtbox_numberChecks.Text = "0";
             txtbox_patientFirstName.Text = "";
             txtbox_comment.Text = "";
 
-            label_amount.Text = "$0.00";
-            label_change.Text = "$0.00";
-            label_total.Text = "$0.00";
+            label_amount.Text = moneyComponent.getFormatMoneyComponentInZero();
+            label_change.Text = moneyComponent.getFormatMoneyComponentInZero();
+            label_total.Text = moneyComponent.getFormatMoneyComponentInZero();
 
             checkbox_copayment.IsChecked = false;
             checkbox_deductible.IsChecked = false;
