@@ -89,35 +89,35 @@
                     <StackPanel Grid.Column="0" Margin="15 0">
                         <TextBox x:Name="txtbox_question"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                       materialDesign:HintAssist.Hint="Transaction Number" FontFamily="Roboto" FontSize="14" Width="173"/>
+                                       materialDesign:HintAssist.Hint="Transaction Number" FontFamily="Roboto" FontSize="14" Width="173" KeyUp="txtbox_question_KeyUp"/>
                     </StackPanel>
 
                     <!--Comments-->
                     <StackPanel Grid.Column="1" Margin="15 0">
                         <TextBox x:Name="Comment" 
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                       materialDesign:HintAssist.Hint="Comment" FontFamily="Roboto" FontSize="14" Width="298"/>
+                                       materialDesign:HintAssist.Hint="Comment" FontFamily="Roboto" FontSize="14" Width="298" KeyUp="txtbox_question_KeyUp"/>
                     </StackPanel>
 
                     <!--Patient Name-->
                     <StackPanel Grid.Column="2" Margin="15 0">
                         <TextBox x:Name="Patient_Name"
                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                       materialDesign:HintAssist.Hint="Patient Name" FontFamily="Roboto" FontSize="14" Width="153"/>
+                                       materialDesign:HintAssist.Hint="Patient Name" FontFamily="Roboto" FontSize="14" Width="153" KeyUp="txtbox_question_KeyUp"/>
                     </StackPanel>
 
                     <!--Date From-->
                     <StackPanel Grid.Column="3" Margin="15">
-                        <DatePicker Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker KeyUp="txtbox_question_KeyUp" Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
                     <!--Date To-->
                     <StackPanel Grid.Column="4" Margin="15">
-                        <DatePicker Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker KeyUp="txtbox_question_KeyUp" Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
 
                     <!--Search Button-->
                     <StackPanel Grid.Column="5" Margin="15">
-                        <Button VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
+                        <Button Click="Button_Click_2" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
                                 Style="{DynamicResource MaterialDesignFlatButton}">
                             <TextBlock Foreground="#666666" FontSize="18">
                                 Clear
@@ -167,13 +167,13 @@
                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
                     <TextBlock x:Name="btn_close" Text="Close" Foreground="#e06666 " FontSize="18"/>
                 </Button>
-                <Button Grid.Column="1" Click="Button_Click_1" Margin="15,14,0,13" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                <Button Grid.Column="1" Click="Button_Click_1" Margin="15,14,0,13" Background="Transparent" BorderBrush="Transparent"
                             Style="{DynamicResource MaterialDesignFlatButton}">
                     <TextBlock x:Name="btn_print" Text="Print" Foreground="#6aa84f " FontSize="18"/>
                 </Button>
             </Grid>
             <!--#endregion-->
-
+            <Label Content="" Foreground="Red" Name="labelerror" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15,15,15,15"></Label>
 
         </StackPanel>
         

@@ -55,7 +55,7 @@ namespace DoctorCashWpf
         public transactionsObj getDailyTransactions(string transactionID, string patientName, string fromDate, string toDate)
         {
             var data = new DataTable();
-            var dailyTrnObj = new dailyTransactionsObj();
+            var dailyTrnObj = new transactionsObj();
 
             if (transactionID == "" && patientName == "" && fromDate != "" && toDate != "")
             {
