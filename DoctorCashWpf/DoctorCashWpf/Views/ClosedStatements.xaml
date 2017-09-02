@@ -97,7 +97,7 @@
 
                             <!--Transaction #-->
                             <StackPanel Grid.Column="0" Margin="15 0">
-                                <TextBox x:Name="txtbox_question"
+                                <TextBox x:Name="txtbox_ID"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                             materialDesign:HintAssist.Hint="Transaction Number" FontFamily="Roboto" FontSize="14" Width="173"/>
                             </StackPanel>
@@ -123,7 +123,7 @@
                             </StackPanel>
                             <!--Clear-->
                             <StackPanel Grid.Column="4" Margin="15">
-                                <Button VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
+                                <Button Click="Button_Click" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
                                     Style="{DynamicResource MaterialDesignFlatButton}">
                                     <TextBlock Foreground="#597eaa" FontSize="18">
                                     Search
@@ -146,7 +146,13 @@
                         Padding="12">
                         <Grid>
                             <DataGrid Name="dataGridViewClosedStatement"
-                                IsReadOnly="True"/>
+                                IsReadOnly="True">
+                                <DataGrid.ItemContainerStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseUp" Handler="Row_DoubleClick"></EventSetter>
+                                    </Style>
+                                </DataGrid.ItemContainerStyle>
+                            </DataGrid>
                         </Grid>
                     </materialDesign:Card>
                     <!--#endregion-->
@@ -315,6 +321,7 @@
                     
                     </Button>
                 </Grid>
+                
                 <!--#endregion-->
                 
                 

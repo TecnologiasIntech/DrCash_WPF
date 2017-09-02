@@ -62,10 +62,32 @@ namespace DoctorCashWpf.Views
         }
 
         private void dataGridViewClosedStatement_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
+        {            
+            /*
             //var dato = dataGridViewClosedStatement.SelectedItem;
             DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
             int dato = Convert.ToInt32(item.Row.ItemArray[0]);            
+            var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
+            for (int i = 0; i < list.Count(); i++)
+            {
+                if (list[i].trn_id == dato)
+                {
+                    amounChange.Text = list[i].amountCharged.ToString();
+                    cash.Text = list[i].cash.ToString();
+                    creditCard.Text = list[i].credit.ToString();
+                    check.Text = list[i].check.ToString();
+                    total.Text = list[i].cash.ToString();
+                    change.Text = list[i].change.ToString();
+                    break;
+                }
+            }*/
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //var dato = dataGridViewClosedStatement.SelectedItem;
+            DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
+            int dato = Convert.ToInt32(item.Row.ItemArray[0]);
             var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
             for (int i = 0; i < list.Count(); i++)
             {

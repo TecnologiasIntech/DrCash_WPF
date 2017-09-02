@@ -141,7 +141,13 @@
                         Padding="12">
                         <Grid>
                             <DataGrid MouseDoubleClick="dataGridViewClosedStatement_MouseDoubleClick" Name="dataGridViewClosedStatement"
-                                IsReadOnly="True"/>
+                                IsReadOnly="True">
+                                <DataGrid.ItemContainerStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseUp" Handler="Row_DoubleClick"></EventSetter>
+                                    </Style>
+                                </DataGrid.ItemContainerStyle>
+                            </DataGrid>
                         </Grid>
                     </materialDesign:Card>
                     <!--#endregion-->
