@@ -10,20 +10,20 @@ namespace DoctorCashWpf
 {
     class MoneyComponentService
     {
-
+        private string separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator;
         public void AddFloatToComponent(TextBox txtbox)
         {
-            if (!txtbox.Text.Contains('.'))
+            if (!txtbox.Text.Contains(separator))
             {
-                txtbox.Text = txtbox.Text + ".00";
+                txtbox.Text = txtbox.Text + separator + "00";
             }
         }
 
         public void AddFloatToComponent(TextBlock txtbock)
         {
-            if (!txtbock.Text.Contains('.'))
+            if (!txtbock.Text.Contains(separator))
             {
-                txtbock.Text = txtbock.Text + ".00";
+                txtbock.Text = txtbock.Text + separator + "00";
             }
         }
 
@@ -38,11 +38,11 @@ namespace DoctorCashWpf
                 {
                     if (!Char.IsNumber(txtBox.Text[0]))
                     {
-                        txtBox.Text = "$0.00";
+                        txtBox.Text = "$0" + separator + "00";
                         error = "Only Numbers";
                     }else if(txtBox.Text[0] == '-')
                     {
-                        txtBox.Text = "$0.00";
+                        txtBox.Text = "$0" + separator + "00";
                         error = "Negative Values";
                     }
                     else
@@ -54,14 +54,14 @@ namespace DoctorCashWpf
                 {
                     if (!Char.IsNumber(txtBox.Text.Remove(0, 1)[0]))
                     {
-                        txtBox.Text = "$0.00";
+                        txtBox.Text = "$0"+ separator + "00";
                         error = "Only Numbers";
                     }
                 }
             }
             else
             {
-                txtBox.Text = "$0.00";
+                txtBox.Text = "$0" + separator + "00";
             }
 
             function();
@@ -84,12 +84,12 @@ namespace DoctorCashWpf
                 {
                     if (!Char.IsNumber(txtBox.Text[0]))
                     {
-                        txtBox.Text = "$0.00";
+                        txtBox.Text = "$0" + separator + "00";
                         error = "Only Numbers";
                     }
                     else if (txtBox.Text[0] == '-')
                     {
-                        txtBox.Text = "$0.00";
+                        txtBox.Text = "$0"+ separator + "00";
                         error = "Negative Values";
                     }
                     else
@@ -101,14 +101,14 @@ namespace DoctorCashWpf
                 {
                     if (!Char.IsNumber(txtBox.Text.Remove(0, 1)[0]))
                     {
-                        txtBox.Text = "$0.00";
+                        txtBox.Text = "$0" + separator + "00";
                         error = "Only Numbers";
                     }
                 }
             }
             else
             {
-                txtBox.Text = "$0.00";
+                txtBox.Text = "$0" + separator + "00";
             }
 
             AddFloatToComponent(txtBox);
@@ -118,5 +118,9 @@ namespace DoctorCashWpf
             return item;
         }
 
+        public string getFormatMoneyComponentInZero()
+        {
+            return "$0" + separator + "00";
+        }
     }
 }

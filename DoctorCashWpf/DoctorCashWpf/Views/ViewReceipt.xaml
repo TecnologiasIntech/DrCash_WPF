@@ -111,7 +111,7 @@
 
                             <!--Search Button-->
                             <StackPanel Grid.Column="3" Margin="15">
-                                <Button VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
+                                <Button Click="Button_Click" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
                                     Style="{DynamicResource MaterialDesignFlatButton}">
                                     <TextBlock Foreground="#666666" FontSize="18">
                                     Clear
@@ -120,7 +120,7 @@
                             </StackPanel>
                             <!--Clear-->
                             <StackPanel Grid.Column="4" Margin="15">
-                                <Button VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
+                                <Button Click="Button_Click_1" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
                                     Style="{DynamicResource MaterialDesignFlatButton}">
                                     <TextBlock Foreground="#597eaa" FontSize="18">
                                     Search
@@ -140,8 +140,14 @@
                         Margin="0 8"
                         Padding="12">
                         <Grid>
-                            <DataGrid Name="dataGridViewClosedStatement"
-                                IsReadOnly="True"/>
+                            <DataGrid MouseDoubleClick="dataGridViewClosedStatement_MouseDoubleClick" Name="dataGridViewClosedStatement"
+                                IsReadOnly="True">
+                                <DataGrid.ItemContainerStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseUp" Handler="Row_DoubleClick"></EventSetter>
+                                    </Style>
+                                </DataGrid.ItemContainerStyle>
+                            </DataGrid>
                         </Grid>
                     </materialDesign:Card>
                     <!--#endregion-->
@@ -186,27 +192,27 @@
 
                     <!--Amount Charge-->
                     <TextBlock Grid.Row="1" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Amount Charge</TextBlock>
-                    <TextBlock Grid.Row="1" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="amounChange" Grid.Row="1" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Cash-->
                     <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Cash</TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="cash" Grid.Row="2" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Credit Card-->
                     <TextBlock Grid.Row="3" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Credit Card</TextBlock>
-                    <TextBlock Grid.Row="3" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="creditCard" Grid.Row="3" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Check-->
                     <TextBlock Grid.Row="4" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Check</TextBlock>
-                    <TextBlock Grid.Row="4" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="check" Grid.Row="4" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Total-->
                     <TextBlock Grid.Row="5" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Total</TextBlock>
-                    <TextBlock Grid.Row="5" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="total" Grid.Row="5" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Change-->
                     <TextBlock Grid.Row="6" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Change</TextBlock>
-                    <TextBlock Grid.Row="6" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="change" Grid.Row="6" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--#endregion-->
 

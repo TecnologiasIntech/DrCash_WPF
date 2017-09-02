@@ -60,8 +60,9 @@ namespace DoctorCashWpf.Views
             if (txtbox_initialCash.Text != "$0.00")
             {                
                 var items = new transaction();
-
-                items.cash = (float)Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1));
+                var cash = txtbox_initialCash.Text.Remove(0, 1);
+                cash = cash.Remove(cash.Length - 3, 3);
+                items.cash = (float)Convert.ToDouble(cash);
                 items.type = (int)TRANSACTIONTYPE.INITIAL;
                 items.comment = "Initial Cash";
                 items.userId = userInformation.user.usr_ID;

@@ -37,6 +37,7 @@ namespace DoctorCashWpf
 
         public ICommand mostrar => new AnotherCommandImplementation(ExecuteRunDialog);
         private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private userService user = new userService();
 
         private async void ExecuteRunDialog(object o)
         {
@@ -72,13 +73,65 @@ namespace DoctorCashWpf
 
             for (int i = 0; i < transactionList.Count(); i++)
             {
-                dt.Rows.Add(transactionList[i].comment, transactionList[i].userId, transactionList[i].dateRegistered);
+                var response = user.getUserByID((transactionList[i].userId).ToString());
+               
+                dt.Rows.Add(getTransactionComment(transactionList[i]), response.usr_FirstName + " " + response.usr_LastName, transactionList[i].dateRegistered);
             }
 
             dataGridView1.ItemsSource = dt.DefaultView;
 
             getSumOfTransactions();
 
+        }
+
+        private string getTransactionComment(transaction trn)
+        {
+            var comment = "";
+
+            switch (trn.type)
+            {
+                case (int)TRANSACTIONTYPE.INITIAL:
+                    comment = "Initial Cash In for total amount: $" + trn.cash + ".00";
+                    break;
+
+                case (int)TRANSACTIONTYPE.IN:
+
+                    if (trn.copayment)
+                    {
+                        comment = "Payment for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                    }
+                    else if (trn.selfPay)
+                    {
+                        comment = "SelPay for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                    }
+                    else if (trn.deductible)
+                    {
+                        comment = "Deductible for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                    }
+                    else if (trn.other)
+                    {
+                        comment = trn.otherComments + " for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                    }
+                    else if (trn.labs)
+                    {
+                        comment = "Labs for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                    }
+
+                    break;
+
+                case (int)TRANSACTIONTYPE.REFOUND:
+                    comment = "Refound for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                    break;
+            }
+
+            
+
+            return comment;
+        }
+
+        private float getTotalAmount(transaction trn)
+        {
+            return trn.cash + trn.credit + trn.check;
         }
 
         private void getSumOfTransactions()
@@ -102,19 +155,25 @@ namespace DoctorCashWpf
                 }
             }
 
-            label_cashIn.Text = "$" + cashIn.ToString() + ".00";
-            label_credit.Text = "$" + credit.ToString() + ".00";
-            label_checks.Text = "$" + checks.ToString() + ".00";
+            label_cashIn.Text = cashIn.ToString();
+            label_credit.Text = credit.ToString();
+            label_checks.Text = checks.ToString();
 
-            label_totalIn.Text = "$" + (cashIn + credit + checks).ToString() + ".00";
+            label_totalIn.Text = (cashIn + credit + checks).ToString();
 
-            label_cashOut.Text = "$" + cashOut.ToString() + ".00";
+            label_cashOut.Text = cashOut.ToString();
 
-            label_totalOut.Text = "$" + (cashOut).ToString() + ".00";
+            label_totalOut.Text = (cashOut).ToString();
 
             label_initialCash.Text = initialCash.ToString();
             label_initialCash = moneyComponent.convertComponentToMoneyFormat(label_initialCash).labelComponent;
-            
+
+            moneyComponent.convertComponentToMoneyFormat(label_cashIn);
+            moneyComponent.convertComponentToMoneyFormat(label_credit);
+            moneyComponent.convertComponentToMoneyFormat(label_checks);
+            moneyComponent.convertComponentToMoneyFormat(label_totalIn);
+            moneyComponent.convertComponentToMoneyFormat(label_cashOut);
+            moneyComponent.convertComponentToMoneyFormat(label_totalOut);
         }
 
         private async void CashInButton_Click(object sender, RoutedEventArgs e)
@@ -159,6 +218,8 @@ namespace DoctorCashWpf
             //await DialogHost.Show(new Refund(), "RootDialog");
             //await DialogHost.Show(new UserNew(), "RootDialog");
             //await DialogHost.Show(new DailyTransactions(), "RootDialog");
+            await DialogHost.Show(new ClosedStatements(), "RootDialog");
+            //await DialogHost.Show(new ViewReceipt(), "RootDialog");
             ///asyrdutiuydtsyuifduytayuyta
 
 

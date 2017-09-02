@@ -205,17 +205,17 @@
                 <TextBlock Grid.Column="1" Grid.Row="0" Text="Total" FontFamily="Roboto" HorizontalAlignment="Center"  FontSize="18" FontWeight="Bold" Foreground="#FF666666" Margin="55,0,39,0" Width="40"/>
 
                 <TextBlock x:Name="label_bills100" Grid.Column="1" Grid.Row="1"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock x:Name="label_bills50" Grid.Column="1" Grid.Row="2"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock x:Name="label_bills20" Grid.Column="1" Grid.Row="3"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock x:Name="label_bills10" Grid.Column="1" Grid.Row="4"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock x:Name="label_bills5" Grid.Column="1" Grid.Row="5"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
                 <TextBlock x:Name="label_bills1" Grid.Column="1" Grid.Row="6"
-                           Text="$0.00" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
 
                 <!--#endregion-->
 
@@ -229,7 +229,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="Total Cash: " Foreground="#FFF " FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock x:Name="label_totalCash" Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="18,15,0,14"/>
+                    <TextBlock x:Name="label_totalCash" Grid.Column="1" Text="0" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="18,15,0,14"/>
 
                 </Grid>
 
@@ -251,19 +251,19 @@
 
                     <!-- Credit-->
                     <TextBlock Grid.Column="0"  Grid.Row="0" Text="Credit: " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBox x:Name="textbox_credit" Text="$0.00" Grid.Column="1"  Grid.Row="0" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
+                    <TextBox x:Name="textbox_credit" Text="0" Grid.Column="1"  Grid.Row="0" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
                                    materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_credit_KeyUp" LostFocus="textbox_credit_LostFocus" GotFocus="textbox_credit_GotFocus" />
 
 
                     <!-- Check-->
                     <TextBlock Grid.Column="0"  Grid.Row="1" Text="Check:  " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBox x:Name="textbox_check" Text="$0.00" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
+                    <TextBox x:Name="textbox_check" Text="0" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
                                    materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_check_KeyUp" LostFocus="textbox_check_LostFocus" GotFocus="textbox_check_GotFocus" />
 
 
                     <!-- Check #-->
                     <TextBlock Grid.Column="0"  Grid.Row="2" Text="Left in Register" Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBox x:Name="textbox_leftInRegister" Text="$0.00" Grid.Column="1"  Grid.Row="2" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
+                    <TextBox x:Name="textbox_leftInRegister" Text="0" Grid.Column="1"  Grid.Row="2" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
                                    materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_leftRegister_KeyUp" LostFocus="textbox_leftRegister_LostFocus" GotFocus="textbox_leftInRegister_GotFocus" />
 
 
@@ -276,7 +276,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Total Entered " Foreground="#FFF " FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                        <TextBlock x:Name="label_totalEntered" Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="22,14,0,14"/>
+                        <TextBlock x:Name="label_totalEntered" Grid.Column="1" Text="0" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="22,14,0,14"/>
 
                     </Grid>
                     <Grid Grid.Row="4" Grid.ColumnSpan="2" Background="#9b59b6 " Margin="0  5 0 2">
@@ -287,13 +287,13 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Total Registered " Foreground="#FFF " FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                        <TextBlock x:Name="label_totalRegistered" Grid.Column="1" Text="$0.00" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="22,14,0,14"/>
+                        <TextBlock x:Name="label_totalRegistered" Grid.Column="1" Text="0" Foreground="#FFF" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" FontFamily="Roboto" Margin="22,14,0,14"/>
 
                     </Grid>
 
                     <!-- Short-->
                     <TextBlock Grid.Column="0"  Grid.Row="5" Text="Short " Foreground="#e06666  " FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
-                    <TextBlock x:Name="label_short" Grid.Column="1"  Grid.Row="5" Text="$0.00" Foreground="#e06666 " FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
+                    <TextBlock x:Name="label_short" Grid.Column="1"  Grid.Row="5" Text="0" Foreground="#e06666 " FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
 
 
                 </Grid>

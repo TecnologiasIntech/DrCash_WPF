@@ -32,30 +32,37 @@ namespace DoctorCashWpf
             return columns;
         }
 
-        public DataTable getCloseTransactions(string closeID, string fromDate, string toDate)
+        public transactionsObj getCloseTransactions(string closeID, string fromDate, string toDate)
         {
-            if(closeID != "" && fromDate == "" && toDate == "")
+            var data = new DataTable();
+            var dailyTrnObj = new transactionsObj();
+
+            if (closeID != "" && fromDate == "" && toDate == "")
             {
-                return getCloseTransactionByID(closeID);
+                data= getCloseTransactionByID(closeID);
             }
             else if (closeID == "" && fromDate != "" && toDate != "")
             {
-                return getCloseTransactionByRange(fromDate, toDate);
+                data= getCloseTransactionByRange(fromDate, toDate);
             }
             else if (closeID != "" && fromDate != "" && toDate != "")
             {
-                return getCloseTransactionByIdAndRange(closeID, fromDate, toDate);
+                data= getCloseTransactionByIdAndRange(closeID, fromDate, toDate);
             }
-            else
+            /*else
             {
                 return new DataTable();
-            }
+            }*/
+            dailyTrnObj.dataTable = data;
+            dailyTrnObj.list = setTransactionsInList(data);
+
+            return dailyTrnObj;
         }
 
-        public dailyTransactionsObj getDailyTransactions(string transactionID, string patientName, string fromDate, string toDate)
+        public transactionsObj getDailyTransactions(string transactionID, string patientName, string fromDate, string toDate)
         {
             var data = new DataTable();
-            var dailyTrnObj = new dailyTransactionsObj();
+            var dailyTrnObj = new transactionsObj();
 
             if (transactionID == "" && patientName == "" && fromDate != "" && toDate != "")
             {
@@ -103,7 +110,7 @@ namespace DoctorCashWpf
             termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
             termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(toDate), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
 
-            return createQuery.toSelectAll("ClosedTransactios", termsList);
+            return createQuery.toSelectAll("ClosedTransactions", termsList);
         }
 
         private DataTable getCloseTransactionByID(string ID)
@@ -111,7 +118,7 @@ namespace DoctorCashWpf
             var termsList = new List<valuesWhere>();
             termsList.Add(createItem.ofTypeValuesWhere(false, "clt_closed_ID", ID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
 
-            return createQuery.toSelectAll("ClosedTransactios", termsList);
+            return createQuery.toSelectAll("ClosedTransactions", termsList);
         }
 
         private DataTable getCloseTransactionByIdAndRange(string ID, string fromDate, string toDate)
@@ -121,7 +128,7 @@ namespace DoctorCashWpf
             termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(toDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
             termsList.Add(createItem.ofTypeValuesWhere(false, "clt_closed_ID", ID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
 
-            return createQuery.toSelectAll("ClosedTransactios", termsList);
+            return createQuery.toSelectAll("ClosedTransactions", termsList);
         }
 
         private DataTable getDailyTransactionsByOnlyRange(string fromDate, string toDate)

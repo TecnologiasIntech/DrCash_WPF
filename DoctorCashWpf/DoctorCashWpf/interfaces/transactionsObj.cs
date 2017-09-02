@@ -7,7 +7,7 @@ using System.Data;
 
 namespace DoctorCashWpf
 {
-    public class dailyTransactionsObj
+    public class transactionsObj
     {
         public DataTable dataTable;
         public List<transaction> list;

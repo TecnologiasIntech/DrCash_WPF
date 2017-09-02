@@ -26,6 +26,22 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
             DataContext = new TextFieldsViewModel();
+
+            setValuesInitials();
+        }
+
+        MoneyComponentService moneyComponent = new MoneyComponentService();
+
+        private void setValuesInitials()
+        {
+            moneyComponent.convertComponentToMoneyFormat(label_totalCash);
+            moneyComponent.convertComponentToMoneyFormat(label_1);
+            moneyComponent.convertComponentToMoneyFormat(label_10);
+            moneyComponent.convertComponentToMoneyFormat(label_20);
+            moneyComponent.convertComponentToMoneyFormat(label_50);
+            moneyComponent.convertComponentToMoneyFormat(label_100);
+            moneyComponent.convertComponentToMoneyFormat(label_5);
+
         }
 
         private void plusOrLess(TextBox txtbox, TextBlock label, int Operator, int typeBills)
@@ -51,7 +67,8 @@ namespace DoctorCashWpf.Views
                         break;
                 }
 
-                label.Text = "$" + (Convert.ToInt32(txtbox.Text) * typeBills).ToString() + ".00";
+                label.Text = (Convert.ToInt32(txtbox.Text) * typeBills).ToString();
+                label = moneyComponent.convertComponentToMoneyFormat(label).labelComponent;
 
                 txtbox.Text = txtbox.Text;
 
@@ -65,7 +82,7 @@ namespace DoctorCashWpf.Views
             else
             {
                 txtbox.Text = "";
-                label.Text = "$0.00";
+                label.Text = moneyComponent.getFormatMoneyComponentInZero();
                 getTotalCash();
             }
         }
@@ -104,7 +121,8 @@ namespace DoctorCashWpf.Views
                 totalCash += Convert.ToDouble(label_1.Text.Remove(0, 1));
             }
 
-            label_totalCash.Text = "$" + totalCash.ToString() + ".00";
+            label_totalCash.Text = totalCash.ToString();
+            label_totalCash = moneyComponent.convertComponentToMoneyFormat(label_totalCash).labelComponent;
         }
 
         private void clearInputs()
@@ -296,8 +314,8 @@ namespace DoctorCashWpf.Views
         {
             var transaction = new transactionService();
             var items = new transaction();
-            items.registerId = "Carlos Alatorre";
-            items.userId = 4;
+            items.registerId = userInformation.user.usr_Username;
+            items.userId = userInformation.user.usr_ID;
             items.cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
             items.comment = textbox_comment.Text;
             items.type = (int)TRANSACTIONTYPE.OUT;

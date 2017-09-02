@@ -22,20 +22,16 @@ namespace DoctorCashWpf.Reportings
     /// </summary>
     public partial class Report1 : Window
     {
-        public Report1()
+        public Report1(DataTable td)
         {
-            InitializeComponent();
-
-            /*
+            InitializeComponent();         
             ReportViewerDemos.Reset();            
-            DataTable dt = GetDataReport();
-            ReportDataSource ds = new ReportDataSource("DataSet1", dt);
+            ReportDataSource ds = new ReportDataSource("DataSet1", td);
             ReportViewerDemos.LocalReport.DataSources.Add(ds);
             ReportViewerDemos.LocalReport.ReportEmbeddedResource = "DoctorCashWpf.Reportings.Report1.rdlc";
             ReportViewerDemos.RefreshReport();
-            */
-        }
-
+            
+        }        
         private sqlQueryService createQuery = new sqlQueryService();
         private userService user = new userService();        
     }

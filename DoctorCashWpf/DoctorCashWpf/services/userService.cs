@@ -52,7 +52,7 @@ namespace DoctorCashWpf
             return user;
         }
 
-        public void set(user user)
+        public void createUser(user user)
         {
             List<columnsValues> list = new List<columnsValues>();
 
@@ -60,15 +60,14 @@ namespace DoctorCashWpf
             list.Add(createItem.ofTypeColumnsValues("usr_FirstName", user.usr_FirstName));
             list.Add(createItem.ofTypeColumnsValues("usr_LastName", user.usr_LastName));
             list.Add(createItem.ofTypeColumnsValues("usr_Password", user.usr_Password));
-            list.Add(createItem.ofTypeColumnsValues("usr_SecurityQuestion", user.usr_SecurityQuestion));
-            list.Add(createItem.ofTypeColumnsValues("usr_SecurityAnswer", user.usr_SecurityAnswer));
+            list.Add(createItem.ofTypeColumnsValues("usr_SecurityQuestion", ""));
+            list.Add(createItem.ofTypeColumnsValues("usr_SecurityAnswer", ""));
             list.Add(createItem.ofTypeColumnsValues("usr_Email", user.usr_Email));
             list.Add(createItem.ofTypeColumnsValues("usr_SecurityLevel", user.usr_SecurityLevel));
-            list.Add(createItem.ofTypeColumnsValues("usr_ActiveAccount", user.usr_ActiveAccount));
-            list.Add(createItem.ofTypeColumnsValues("usr_PasswordReset", user.usr_PasswordReset));
-            list.Add(createItem.ofTypeColumnsValues("usr_ModifiedBy", user.usr_ModifiedBy));
+            list.Add(createItem.ofTypeColumnsValues("usr_ActiveAccount", true));
+            list.Add(createItem.ofTypeColumnsValues("usr_PasswordReset", true));
             list.Add(createItem.ofTypeColumnsValues("usr_ModificationDate", date.getCurrentDate()));
-            list.Add(createItem.ofTypeColumnsValues("usr_CreatedBy", user.usr_CreatedBy));
+            list.Add(createItem.ofTypeColumnsValues("usr_CreatedBy", userInformation.user.usr_ID));
             list.Add(createItem.ofTypeColumnsValues("usr_CreationDate", date.getCurrentDate()));
 
             createQuery.toInsert("users", list);
@@ -139,6 +138,30 @@ namespace DoctorCashWpf
             var data = createQuery.toSelect(columnsList, "users", list);
 
             return data;
+        }
+
+        public user getUserByID(string userID)
+        {
+            var columns = new List<string>();
+            var terms = new List<valuesWhere>();
+            var user = new user();
+
+            columns.Add("usr_FirstName");
+            columns.Add("usr_LastName");
+
+            terms.Add(createItem.ofTypeValuesWhere(false, "usr_ID", userID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            var data = createQuery.toSelect(columns, "users", terms);
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+
+                user.usr_FirstName = Convert.ToString(filas["usr_FirstName"]);
+                user.usr_LastName = Convert.ToString(filas["usr_LastName"]);
+            }
+
+            return user;
         }
 
     }
