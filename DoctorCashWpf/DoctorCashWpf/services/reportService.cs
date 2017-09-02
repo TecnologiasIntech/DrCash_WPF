@@ -32,24 +32,31 @@ namespace DoctorCashWpf
             return columns;
         }
 
-        public DataTable getCloseTransactions(string closeID, string fromDate, string toDate)
+        public transactionsObj getCloseTransactions(string closeID, string fromDate, string toDate)
         {
-            if(closeID != "" && fromDate == "" && toDate == "")
+            var data = new DataTable();
+            var dailyTrnObj = new transactionsObj();
+
+            if (closeID != "" && fromDate == "" && toDate == "")
             {
-                return getCloseTransactionByID(closeID);
+                data= getCloseTransactionByID(closeID);
             }
             else if (closeID == "" && fromDate != "" && toDate != "")
             {
-                return getCloseTransactionByRange(fromDate, toDate);
+                data= getCloseTransactionByRange(fromDate, toDate);
             }
             else if (closeID != "" && fromDate != "" && toDate != "")
             {
-                return getCloseTransactionByIdAndRange(closeID, fromDate, toDate);
+                data= getCloseTransactionByIdAndRange(closeID, fromDate, toDate);
             }
-            else
+            /*else
             {
                 return new DataTable();
-            }
+            }*/
+            dailyTrnObj.dataTable = data;
+            dailyTrnObj.list = setTransactionsInList(data);
+
+            return dailyTrnObj;
         }
 
         public transactionsObj getDailyTransactions(string transactionID, string patientName, string fromDate, string toDate)
