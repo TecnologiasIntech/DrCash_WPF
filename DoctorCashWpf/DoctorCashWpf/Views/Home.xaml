@@ -266,11 +266,12 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                Foreground="white"/>
                     </GroupBox.Header>
                     <StackPanel Margin="3">
-                        <TextBlock Text="$150"
+                        <TextBlock Text="$0.00"
                                FontFamily="Roboto"
-                               Margin="0, 5"
+                               Margin="0,5,55,5"
                                    x:Name="label_balance"
-                               FontSize="14"/>
+                               FontSize="14"
+                                   HorizontalAlignment="Right"/>
                     </StackPanel>
                 </GroupBox>
 

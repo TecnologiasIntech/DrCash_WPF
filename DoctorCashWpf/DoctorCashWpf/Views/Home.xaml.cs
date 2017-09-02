@@ -38,6 +38,8 @@ namespace DoctorCashWpf
         public ICommand mostrar => new AnotherCommandImplementation(ExecuteRunDialog);
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private userService user = new userService();
+        private transactionService transactionService = new transactionService();
+        private List<transaction> transactionList = new List<transaction>();
 
         private async void ExecuteRunDialog(object o)
         {
@@ -55,9 +57,6 @@ namespace DoctorCashWpf
         {
             Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
-
-        private transactionService transactionService = new transactionService();
-        private List<transaction> transactionList = new List<transaction>();
 
         public void chargeTransactionsList()
         {
@@ -136,7 +135,7 @@ namespace DoctorCashWpf
 
         private void getSumOfTransactions()
         {
-            float cashIn = 0, credit = 0, checks = 0, cashOut = 0, initialCash = 0;
+            float cashIn = 0, credit = 0, checks = 0, cashOut = 0, initialCash = 0, refound = 0;
 
             for (int i = 0; i < transactionList.Count(); i++)
             {
@@ -152,16 +151,21 @@ namespace DoctorCashWpf
                 }else if(transactionList[i].type == (int)TRANSACTIONTYPE.INITIAL)
                 {
                     initialCash = transactionList[i].cash;
+                }else if(transactionList[i].type == (int)TRANSACTIONTYPE.REFOUND)
+                {
+                    refound += transactionList[i].amountCharged;
                 }
             }
 
             label_cashIn.Text = cashIn.ToString();
             label_credit.Text = credit.ToString();
             label_checks.Text = checks.ToString();
+            label_refounds.Text = refound.ToString();
+            label_balance.Text = (initialCash + cashIn + credit + checks - cashOut - refound).ToString();
 
             label_totalIn.Text = (cashIn + credit + checks).ToString();
 
-            label_cashOut.Text = cashOut.ToString();
+            label_cashOut.Text = (cashOut + refound).ToString();
 
             label_totalOut.Text = (cashOut).ToString();
 
@@ -174,6 +178,8 @@ namespace DoctorCashWpf
             moneyComponent.convertComponentToMoneyFormat(label_totalIn);
             moneyComponent.convertComponentToMoneyFormat(label_cashOut);
             moneyComponent.convertComponentToMoneyFormat(label_totalOut);
+            moneyComponent.convertComponentToMoneyFormat(label_refounds);
+            moneyComponent.convertComponentToMoneyFormat(label_balance);
         }
 
         private async void CashInButton_Click(object sender, RoutedEventArgs e)
@@ -186,7 +192,6 @@ namespace DoctorCashWpf
             chargeTransactionsList();
 
         }
-
 
         private async void CashOutButton_Click(object sender, RoutedEventArgs e)
         {
