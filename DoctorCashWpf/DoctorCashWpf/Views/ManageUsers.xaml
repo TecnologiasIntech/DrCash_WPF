@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="8*"/>
+            <RowDefinition Height=".8*"/>
         </Grid.RowDefinitions>
 
         <!--#region Title Bar-->
@@ -100,24 +101,40 @@
                     <TextBlock x:Name="___Sin_nombre_" Foreground="#666666" FontSize="15" FontFamily="Roboto" FontWeight="Bold">Active</TextBlock>
                 </CheckBox>
 
-                <!--Apply Changes-->
-                <Button x:Name="Apply_Changes"  Margin="30,20,0,20" Width="157" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Click="Apply_Changes_Click">
-                    <TextBlock x:Name="label_applyChanges" Text="Apply Changes" Foreground="#6fa8dc  " FontSize="18"/>
-                </Button>
 
-                <!--Close-->
-                <Button x:Name="btn_close"  Margin="0,5,30,5" Width="104" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Background="Transparent" BorderBrush="Transparent"
-                           Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" >
-                    <TextBlock Text="Close" Foreground="red " FontSize="18" Width="66" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
-                </Button>
 
             </StackPanel>
             <!--#endregion-->
 
 
+
+
         </Grid>
 
+        <Grid Grid.Row="2">
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Apply Changes-->
+            <Button x:Name="Apply_Changes"  Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Click="Apply_Changes_Click">
+                <TextBlock x:Name="label_applyChanges" Text="Apply Changes" Foreground="#6fa8dc  " FontSize="18"/>
+            </Button>
+
+            <!--Add User-->
+            <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="Add User" Foreground="green" FontSize="18"/>
+            </Button>
+
+            <!--Close-->
+            <Button x:Name="btn_close" Grid.Column="2" Background="Transparent" BorderBrush="Transparent"
+                           Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" >
+                <TextBlock Text="Close" Foreground="red " FontSize="18"/>
+            </Button>
+        </Grid>
 
     </Grid>
 </UserControl>
