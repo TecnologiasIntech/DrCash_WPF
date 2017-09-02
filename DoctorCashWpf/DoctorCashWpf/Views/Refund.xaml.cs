@@ -49,18 +49,14 @@ namespace DoctorCashWpf
             {
                 txtbox_username.Focus();
 
-                txtbox_username.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
-                txtbox_username.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
-                txtbox_username.FontWeight = FontWeights.Bold;
+                txtbox_username.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
                 labelError.Content = "Complete the fields marked";
             }
             else if (txtbox_password.Password.ToString() == "")
             {
                 txtbox_password.Focus();
 
-                txtbox_password.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
-                txtbox_password.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
-                txtbox_password.FontWeight = FontWeights.Bold;
+                txtbox_password.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
                 labelError.Content = "Complete the fields marked";
             }
             else
