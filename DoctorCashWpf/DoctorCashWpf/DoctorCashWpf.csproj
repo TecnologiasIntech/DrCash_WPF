@@ -144,8 +144,8 @@
     <Compile Include="Views\Log.xaml.cs">
       <DependentUpon>Log.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Refund.xaml.cs">
-      <DependentUpon>Refund.xaml</DependentUpon>
+    <Compile Include="Views\RefundAuth.xaml.cs">
+      <DependentUpon>RefundAuth.xaml</DependentUpon>
     </Compile>
     <Compile Include="services\dateService.cs" />
     <Compile Include="services\MoneyComponentService.cs" />
@@ -221,7 +221,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Refund.xaml">
+    <Page Include="Views\RefundAuth.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

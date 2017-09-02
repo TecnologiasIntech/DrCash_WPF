@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DoctorCashWpf
 {
     /// <summary>
-    /// Lógica de interacción para Refund.xaml
+    /// Lógica de interacción para RefundAuth.xaml
     /// </summary>
-    public partial class Refund : UserControl
+    public partial class RefundAuth : UserControl
     {
-        public Refund()
+        public RefundAuth()
         {
             InitializeComponent();
         }

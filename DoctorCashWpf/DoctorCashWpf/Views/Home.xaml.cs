@@ -198,8 +198,11 @@ namespace DoctorCashWpf
             chargeTransactionsList();
         }
 
-        private void RefundButton_Click(object sender, RoutedEventArgs e)
+        private async void RefundButton_Click(object sender, RoutedEventArgs e)
         {
+
+            var refundAuth = new RefundAuth();
+            await DialogHost.Show(refundAuth, "RootDialog");
 
         }
 
@@ -215,10 +218,10 @@ namespace DoctorCashWpf
         private async void Capture_Initial_Cash(object sender, RoutedEventArgs e)
         {
             //para verificar las pantallas
-            //await DialogHost.Show(new Refund(), "RootDialog");
+            //await DialogHost.Show(new RefundAuth(), "RootDialog");
             //await DialogHost.Show(new UserNew(), "RootDialog");
             //await DialogHost.Show(new DailyTransactions(), "RootDialog");
-            await DialogHost.Show(new ClosedStatements(), "RootDialog");
+            //await DialogHost.Show(new ClosedStatements(), "RootDialog");
             //await DialogHost.Show(new ViewReceipt(), "RootDialog");
             ///asyrdutiuydtsyuifduytayuyta
 
