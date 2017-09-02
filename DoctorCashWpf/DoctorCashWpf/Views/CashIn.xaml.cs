@@ -41,9 +41,42 @@ namespace DoctorCashWpf
             moneyComponent.convertComponentToMoneyFormat(txtbox_amountCharge, () => { });
         }
 
+        private bool verifyTransactionsType()
+        {
+            var ready = false;
+
+            if (checkbox_copayment.IsChecked != false)
+            {
+                ready = true;
+            }
+            if (checkbox_deductible.IsChecked != false)
+            {
+                ready = true;
+            }
+            if (checkbox_labs.IsChecked != false)
+            {
+                ready = true;
+            }
+            if (checkbox_other.IsChecked != false)
+            {
+                ready = true;
+            }
+            if (checkbox_selfPay.IsChecked != false)
+            {
+                ready = true;
+            }
+
+            if (!ready)
+            {
+                checkbox_copayment.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+            }
+
+            return ready;
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (txtbox_patientFirstName.Text != "" && label_total.Text != moneyComponent.getFormatMoneyComponentInZero())
+            if (txtbox_patientFirstName.Text != "" && label_total.Text != moneyComponent.getFormatMoneyComponentInZero() && verifyTransactionsType())
             { 
                 var transactionService = new transactionService();
                 var transaction = new transaction();
