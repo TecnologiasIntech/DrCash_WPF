@@ -187,7 +187,16 @@
                     <!--Security Question-->
                     <StackPanel Grid.Column="1" Grid.Row="1" Margin=" 25 0 10 0">
                         <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="Security Question"/>
-                        <TextBox x:Name="txtbox_securityQuestion" Foreground="#666666" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto" Text="............?"/>
+                        <ComboBox Margin="5" Name="Combo_question" Width="360" materialDesign:HintAssist.Hint="Select Your Security Question">
+                            <!--#region ComboBox Items-->
+                            <ComboBoxItem>What was your childhood nickname?</ComboBoxItem>
+                            <ComboBoxItem>What school did you attend for sixth grade?</ComboBoxItem>
+                            <ComboBoxItem>In what town was your firs job?</ComboBoxItem>
+                            <ComboBoxItem>Where does your youngest brother birthday?</ComboBoxItem>
+                            <ComboBoxItem>What is your maternal grandmother maiden name?</ComboBoxItem>
+                            <ComboBoxItem>What street did you live on in third grade?</ComboBoxItem>
+                            <!--#endregion-->
+                        </ComboBox>
                     </StackPanel>
 
                     <!--New Password-->

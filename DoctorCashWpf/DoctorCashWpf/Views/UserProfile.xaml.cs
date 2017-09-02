@@ -75,7 +75,7 @@ namespace DoctorCashWpf.Views
             txtbox_email.Text = userInformation.user.usr_Email;
             txtbox_firstname.Text = userInformation.user.usr_FirstName;
             txtbox_lastname.Text = userInformation.user.usr_LastName;
-            txtbox_securityQuestion.Text = userInformation.user.usr_SecurityQuestion;
+            Combo_question.Text = userInformation.user.usr_SecurityQuestion;
 
             UserEditInformationShow();
         }
@@ -86,7 +86,7 @@ namespace DoctorCashWpf.Views
             items.usr_Email = txtbox_email.Text;
             items.usr_FirstName = txtbox_firstname.Text;
             items.usr_LastName = txtbox_lastname.Text;
-            items.usr_SecurityQuestion = txtbox_securityQuestion.Text;
+            items.usr_SecurityQuestion = Combo_question.Text;
             items.usr_ModifiedBy = userInformation.user.usr_ID;
             items.usr_ModificationDate = date.getCurrentDate();
 
