@@ -170,6 +170,32 @@ namespace DoctorCashWpf
             createQuery.toInsert("transactions", valuesArray);
         }
 
+        public void setClosedTransaction(closeTransaction trn)
+        {
+            var list = new List<columnsValues>();
+
+            list.Add(createItem.ofTypeColumnsValues("clt_closed_ID", trn.clt_closed_ID));
+            list.Add(createItem.ofTypeColumnsValues("clt_100_bills", trn.clt_100_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_50_bills", trn.clt_50_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_20_bills", trn.clt_20_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_10_bills", trn.clt_10_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_5_bills", trn.clt_5_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_1_bills", trn.clt_1_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_checks_amount", trn.clt_checks_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_charged", trn.clt_total_charged));
+            list.Add(createItem.ofTypeColumnsValues("clt_credits_amount", trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_cash", trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_check", trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_credit", trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_initial_cash", trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_balance", trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_transaction_count", trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_reg_RegisterID", trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_Username", userInformation.user.usr_Username));
+
+            createQuery.toInsert("ClosedTransactions", list);
+        }
+
         public void closeDate(closeDate closeDate)
         {
             var list = new List<columnsValues>();
