@@ -226,7 +226,7 @@ namespace DoctorCashWpf
             //await DialogHost.Show(new RefundAuth(), "RootDialog");
             //await DialogHost.Show(new UserNew(), "RootDialog");
             //await DialogHost.Show(new DailyTransactions(), "RootDialog");
-            await DialogHost.Show(new ClosedStatements(), "RootDialog");
+            await DialogHost.Show(new UserCreate(), "RootDialog");
             //await DialogHost.Show(new ViewReceipt(), "RootDialog");
             ///asyrdutiuydtsyuifduytayuyta
             ///

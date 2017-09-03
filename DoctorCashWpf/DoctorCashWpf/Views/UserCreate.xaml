@@ -75,26 +75,27 @@
                 <StackPanel Grid.Column="0" Margin="30 0">
                     
                     <!--Username: -->
-                    <TextBox VerticalAlignment="Top"  Width="250" HorizontalAlignment="Center" Margin="0 15 0 0"
+                    <TextBox KeyUp="txtbox_username_KeyUp" Name="txtbox_username" VerticalAlignment="Top"  Width="250" HorizontalAlignment="Center" Margin="0 15 0 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                    materialDesign:HintAssist.Hint="Username:" FontFamily="Roboto" FontSize="14"/>
 
                     <!--Firstname: -->
-                    <TextBox VerticalAlignment="Top"  Width="250" HorizontalAlignment="Center" Margin="0 15 0 0"
+                    <TextBox KeyUp="txtbox_username_KeyUp" Name="txtbox_firtname" VerticalAlignment="Top"  Width="250" HorizontalAlignment="Center" Margin="0 15 0 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                    materialDesign:HintAssist.Hint="First Name:" FontFamily="Roboto" FontSize="14"/>
 
                     <!--Lastname: -->
-                    <TextBox VerticalAlignment="Top"  Width="250" HorizontalAlignment="Center" Margin="0 15 0 0"
+                    <TextBox KeyUp="txtbox_username_KeyUp" Name="txtbox_lastname" VerticalAlignment="Top"  Width="250" HorizontalAlignment="Center" Margin="0 15 0 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                    materialDesign:HintAssist.Hint="Last Name:" FontFamily="Roboto" FontSize="14"/>
+                    <Label Name="labeldata" Content="" HorizontalAlignment="Center" Margin="25" Foreground="Red"></Label>
 
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Margin="30 0">
                     
                     <!--Email: -->
-                    <TextBox VerticalAlignment="Top"  Width="250" HorizontalAlignment="Center" Margin="0 15 0 0"
+                    <TextBox KeyUp="TextBox_KeyUp" Name="txtbox_email" VerticalAlignment="Top"  Width="250" HorizontalAlignment="Center" Margin="0 15 0 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                    materialDesign:HintAssist.Hint="Email:" FontFamily="Roboto" FontSize="14"/>
 
@@ -103,10 +104,10 @@
                                FontSize="14">Security Level</TextBlock>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Width="250" HorizontalAlignment="Center" Margin="0 15 0 0">
-                        <RadioButton IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}" Margin="0 0 8 8" VerticalAlignment="Center">
+                        <RadioButton Name="radio_user" IsChecked="True" Style="{StaticResource MaterialDesignRadioButton}" Margin="0 0 8 8" VerticalAlignment="Center">
                             User
                         </RadioButton>
-                        <RadioButton Style="{StaticResource MaterialDesignRadioButton}" Margin="0 0 8 8" VerticalAlignment="Center">
+                        <RadioButton Name="radio_super" Style="{StaticResource MaterialDesignRadioButton}" Margin="0 0 8 8" VerticalAlignment="Center">
                             Supervisor
                         </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignRadioButton}" Margin="0 0 8 8" VerticalAlignment="Center">
@@ -115,7 +116,7 @@
 
                     </StackPanel>
 
-
+                    <Label Name="labelerror" Content="" HorizontalAlignment="Center" Margin="25" Foreground="Red"></Label>
                 </StackPanel>
                 
                 
@@ -134,7 +135,7 @@
                             <Run Text="Cancel"/>
                     </TextBlock>
                 </Button>
-                <Button Grid.Column="1" Margin="15,14,0,13" Background="Transparent" BorderBrush="Transparent"
+                <Button Grid.Column="1" Click="Button_Click" Margin="15,14,0,13" Background="Transparent" BorderBrush="Transparent"
                             Style="{DynamicResource MaterialDesignFlatButton}">
                     <TextBlock Foreground="#6aa84f " FontSize="18">
                             <Run Text="Approve"/>
