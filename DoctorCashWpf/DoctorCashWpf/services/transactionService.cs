@@ -115,7 +115,7 @@ namespace DoctorCashWpf
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Other", transactionArray.other));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_OtherComments", transactionArray.otherComments));
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", "1")); //Cambiar esto
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_ModifiedBy_ID", transactionArray.modifiedById));
             //valuesArray.Add(listService.ofTypeColumnsValues("trn_ModificationDate", transactionArray.modificationDate));
 
@@ -143,7 +143,7 @@ namespace DoctorCashWpf
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Other", transactionArray.other));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_OtherComments", transactionArray.otherComments));
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", "1")); //cambiar esto
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_ModifiedBy_ID", transactionArray.modifiedById));
             //valuesArray.Add(listService.ofTypeColumnsValues("trn_ModificationDate", transactionArray.modificationDate));
 
@@ -165,7 +165,7 @@ namespace DoctorCashWpf
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Other", transactionArray.other));
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", transactionArray.registerId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", "1")); //cambiar esto
 
             createQuery.toInsert("transactions", valuesArray);
         }
