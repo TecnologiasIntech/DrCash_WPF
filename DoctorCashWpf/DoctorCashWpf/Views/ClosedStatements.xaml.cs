@@ -33,13 +33,13 @@ namespace DoctorCashWpf.Views
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             //var dato = dataGridViewClosedStatement.SelectedItem;
-           /* DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
+           DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
             DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];
 
             int dato = Convert.ToInt32(item.Row.ItemArray[0]);
-            var ID = (int)fila["clt_Username"];
+            var registerID = fila["clt_reg_RegisterID"];
 
-            var list = transaction.getTransactionsByUserID(ID.ToString());
+            var list = transaction.getTransactionsByRegisterID(registerID.ToString(), fromdate.Text, todate.Text);
 
             DataTable dt = new DataTable();
             dt.Columns.Add("Transaction ID");
@@ -51,37 +51,35 @@ namespace DoctorCashWpf.Views
 
             for (int i = 0; i < list.Count(); i++)
             {
-                if (list[i].trn_id == dato)
-                {
-                    dt.Rows.Add(list[i].trn_id, list[i].change, list[i].cash, list[i].credit, list[i].check, list[i].change);                    
-                }
+                dt.Rows.Add(list[i].trn_id, list[i].amountCharged, list[i].cash, list[i].credit, list[i].check, list[i].change);
+
             }
-            dataGridViewClosedStatement.ItemsSource = dt.DefaultView;*/
+            dataGridViewStatment.ItemsSource = dt.DefaultView;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (txtbox_ID.Text == "" && fromdate.Text == "" && todate.Text == "")
-            {
 
+            var response = getreport.getCloseTransactions(txtbox_ID.Text, fromdate.Text, todate.Text);
+            var list = response.list;
+            transactionsData = response.dataTable;
+            dataGridViewClosedStatement.ItemsSource = null;
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Closed Statement ID");
+            dt.Columns.Add("Register");
+            dt.Columns.Add("Proceced By");
+            dt.Columns.Add("Date");
+
+            for (int i = 0; i < transactionsData.Rows.Count; i++)
+            {
+                DataRow filas = transactionsData.Rows[i];
+
+                dt.Rows.Add(filas["clt_closed_ID"], filas["clt_reg_RegisterID"], filas["clt_Username"], filas["clt_Datetime"]);
+                //dt.Rows.Add(list[i].clt_closed_ID, list[i].clt_reg_RegisterID, list[i].clt_Username, list[i].clt_Datetime);
             }
-            else
-            {
-                var list = getreport.getCloseTransactions(txtbox_ID.Text, fromdate.Text, todate.Text).list;
-                dataGridViewClosedStatement.ItemsSource = null;
+            dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
 
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Closed Statement ID");
-                dt.Columns.Add("Register");
-                dt.Columns.Add("Proceced By");
-                dt.Columns.Add("Date");
-
-                for (int i = 0; i < list.Count(); i++)
-                {
-                    dt.Rows.Add(list[i].clt_closed_ID, list[i].clt_reg_RegisterID, list[i].clt_Username, list[i].clt_Datetime);
-                }
-                dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
-            }            
         }
     }
 }

@@ -267,5 +267,34 @@ namespace DoctorCashWpf
 
             return list;
         }
+
+        public List<transaction> getTransactionsByRegisterID(string registerID, string fromDate, string toDate)
+        {
+            var terms = new List<valuesWhere>();
+            var list = new List<transaction>();
+
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_RegisterID", registerID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+
+            var data = createQuery.toSelectAll("transactions", terms);
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+                var items = new transaction();
+
+                items.trn_id = Convert.ToInt32(filas["trn_ID"]);
+                items.amountCharged = Convert.ToInt32(filas["trn_AmountCharged"]);
+                items.cash = Convert.ToInt32(filas["trn_Cash"]);
+                items.credit = Convert.ToInt32(filas["trn_Credit"]);
+                items.check = Convert.ToInt32(filas["trn_Check"]);
+                items.change = Convert.ToInt32(filas["trn_Change"]);
+
+                list.Add(items);
+            }
+
+            return list;
+        }
     }
 }
