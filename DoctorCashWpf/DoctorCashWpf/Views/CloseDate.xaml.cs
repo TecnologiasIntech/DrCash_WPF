@@ -472,5 +472,24 @@ namespace DoctorCashWpf.Views
         {
 
         }
+
+        private void Button_Click_13(object sender, RoutedEventArgs e)
+        {
+            var clDate = new closeDate();
+
+            clDate.clt_100_bills = (float)Convert.ToDouble(label_bills100.Text.Remove(0, 1));
+            clDate.clt_50_bills = (float)Convert.ToDouble(label_bills50.Text.Remove(0, 1));
+            clDate.clt_20_bills = (float)Convert.ToDouble(label_bills20.Text.Remove(0, 1));
+            clDate.clt_10_bills = (float)Convert.ToDouble(label_bills10.Text.Remove(0, 1));
+            clDate.clt_5_bills = (float)Convert.ToDouble(label_bills5.Text.Remove(0, 1));
+            clDate.clt_1_bills = (float)Convert.ToDouble(label_bills1.Text.Remove(0, 1));
+            clDate.clt_total_cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
+            clDate.clt_total_check = (float)Convert.ToDouble(textbox_check.Text.Remove(0, 1));
+            clDate.clt_total_credit = (float)Convert.ToDouble(textbox_credit.Text.Remove(0, 1));
+
+            transaction.setClosedTransaction(clDate);
+
+            MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+        }
     }
 }

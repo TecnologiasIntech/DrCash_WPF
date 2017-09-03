@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace DoctorCashWpf
 {
-    class closeDate
+    public class closeDate
     {
         public int clt_closed_ID;
-        public int clt_100_bills;
-        public int clt_50_bills;
-        public int clt_20_bills;
-        public int clt_10_bills;
-        public int clt_5_bills;
-        public int clt_1_bills;
-        public int clt_checks_amount;
-        public int clt_credits_amount;
-        public int clt_total_charged;
-        public int clt_total_cash;
-        public int clt_total_check;
-        public int clt_total_credit;
-        public int clt_initial_cash;
-        public int clt_balance;
+        public double clt_100_bills;
+        public double clt_50_bills;
+        public double clt_20_bills;
+        public double clt_10_bills;
+        public double clt_5_bills;
+        public double clt_1_bills;
+        public double clt_checks_amount;
+        public double clt_credits_amount;
+        public double clt_total_charged;
+        public double clt_total_cash;
+        public double clt_total_check;
+        public double clt_total_credit;
+        public double clt_initial_cash;
+        public double clt_balance;
         public int clt_transaction_count;
-        public int clt_reg_RegisterID;
+        public string clt_reg_RegisterID;
         public string clt_Username;
         public string clt_Datetime;
 

@@ -170,53 +170,46 @@ namespace DoctorCashWpf
             createQuery.toInsert("transactions", valuesArray);
         }
 
-        public void setClosedTransaction(closeTransaction trn)
+        public void setClosedTransaction(closeDate trn)
         {
             var list = new List<columnsValues>();
 
-            list.Add(createItem.ofTypeColumnsValues("clt_closed_ID", trn.clt_closed_ID));
-            list.Add(createItem.ofTypeColumnsValues("clt_100_bills", trn.clt_100_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_50_bills", trn.clt_50_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_20_bills", trn.clt_20_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_10_bills", trn.clt_10_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_5_bills", trn.clt_5_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_1_bills", trn.clt_1_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_checks_amount", trn.clt_checks_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_charged", trn.clt_total_charged));
-            list.Add(createItem.ofTypeColumnsValues("clt_credits_amount", trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_cash", trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_check", trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_credit", trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_initial_cash", trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_balance", trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_transaction_count", trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_reg_RegisterID", trn.clt_credits_amount));
+            var trns = getCurrentTransactions(userInformation.user.usr_ID);
+            var checkCount = 0;
+            var creditAmount = 0;
+            var totalCharged = 0.00;
+
+            for (int i = 0; i < trns.Count(); i++)
+            {
+                checkCount += trns[i].checkNumber;
+
+                if(trns[i].credit > 0)
+                {
+                    creditAmount++;
+                }
+
+                totalCharged += trns[i].cash + trns[i].credit + trns[i].check;
+            }
+
+            list.Add(createItem.ofTypeColumnsValues("clt_closed_ID", 1)); //Falta hacer un creador de ID
+            list.Add(createItem.ofTypeColumnsValues("clt_100_bills", (float)trn.clt_100_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_50_bills", (float)trn.clt_50_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_20_bills", (float)trn.clt_20_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_10_bills", (float)trn.clt_10_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_5_bills", (float)trn.clt_5_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_1_bills", (float)trn.clt_1_bills));
+            list.Add(createItem.ofTypeColumnsValues("clt_checks_amount", checkCount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_charged", (float)totalCharged));
+            list.Add(createItem.ofTypeColumnsValues("clt_credits_amount", creditAmount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_cash", (float)trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_check", (float)trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_credit", (float)trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_initial_cash", (float)trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_balance", (float)closeDateInformation.closeDate.clt_balance));
+            list.Add(createItem.ofTypeColumnsValues("clt_transaction_count", (float)closeDateInformation.closeDate.clt_transaction_count));
+            list.Add(createItem.ofTypeColumnsValues("clt_reg_RegisterID", 1)); // Falta guardar el ID de la caja registradora en la que se encuentra
             list.Add(createItem.ofTypeColumnsValues("clt_Username", userInformation.user.usr_Username));
-
-            createQuery.toInsert("ClosedTransactions", list);
-        }
-
-        public void closeDate(closeDate closeDate)
-        {
-            var list = new List<columnsValues>();
-            list.Add(createItem.ofTypeColumnsValues("clt_100_bills", closeDate.clt_100_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_50_bills", closeDate.clt_50_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_20_bills", closeDate.clt_20_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_10_bills", closeDate.clt_10_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_5_bills", closeDate.clt_5_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_1_bills", closeDate.clt_1_bills));
-            list.Add(createItem.ofTypeColumnsValues("clt_checks_amount", closeDate.clt_checks_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_credits_amount", closeDate.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_charged", closeDate.clt_total_charged));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_cash", closeDate.clt_total_cash));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_check", closeDate.clt_total_check));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_credit", closeDate.clt_total_credit));
-            list.Add(createItem.ofTypeColumnsValues("clt_initial_cash", closeDate.clt_initial_cash));
-            list.Add(createItem.ofTypeColumnsValues("clt_balance", closeDate.clt_balance));
-            list.Add(createItem.ofTypeColumnsValues("clt_transaction_count", closeDate.clt_transaction_count));
-            list.Add(createItem.ofTypeColumnsValues("clt_reg_RegisterID", closeDate.clt_reg_RegisterID));
-            list.Add(createItem.ofTypeColumnsValues("clt_Username", closeDate.clt_Username));
-            list.Add(createItem.ofTypeColumnsValues("clt_Datetime", closeDate.clt_Datetime));
+            list.Add(createItem.ofTypeColumnsValues("clt_Datetime", date.getCurrentDate()));
 
             createQuery.toInsert("ClosedTransactions", list);
         }

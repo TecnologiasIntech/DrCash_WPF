@@ -180,6 +180,9 @@ namespace DoctorCashWpf
             moneyComponent.convertComponentToMoneyFormat(label_totalOut);
             moneyComponent.convertComponentToMoneyFormat(label_refounds);
             moneyComponent.convertComponentToMoneyFormat(label_balance);
+
+            closeDateInformation.closeDate.clt_balance = (float)(initialCash + cashIn + credit + checks - cashOut - refound);
+            closeDateInformation.closeDate.clt_initial_cash = (float)(initialCash);
         }
 
         private async void CashInButton_Click(object sender, RoutedEventArgs e)

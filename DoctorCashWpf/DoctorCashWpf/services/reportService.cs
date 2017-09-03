@@ -32,10 +32,10 @@ namespace DoctorCashWpf
             return columns;
         }
 
-        public transactionsObj getCloseTransactions(string closeID, string fromDate, string toDate)
+        public closeDateObj getCloseTransactions(string closeID, string fromDate, string toDate)
         {
             var data = new DataTable();
-            var dailyTrnObj = new transactionsObj();
+            var dailyTrnObj = new closeDateObj();
 
             if (closeID != "" && fromDate == "" && toDate == "")
             {
@@ -54,7 +54,7 @@ namespace DoctorCashWpf
                 return new DataTable();
             }*/
             dailyTrnObj.dataTable = data;
-            dailyTrnObj.list = setTransactionsInList(data);
+            dailyTrnObj.list = setCloseDateInList(data);
 
             return dailyTrnObj;
         }
@@ -232,6 +232,41 @@ namespace DoctorCashWpf
                 items.patientFirstName = Convert.ToString(filas["trn_PatientFirstName"]);
                 items.closed = Convert.ToBoolean(filas["trn_Closed"]);
                 items.registerId = Convert.ToString(filas["trn_RegisterID"]);
+
+                list.Add(items);
+            }
+
+            return list;
+        }
+
+        private List<closeDate> setCloseDateInList(DataTable data)
+        {
+            var list = new List<closeDate>();
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+                var items = new closeDate();
+
+                items.clt_closed_ID = Convert.ToInt32(filas["clt_closed_ID"]);
+                items.clt_100_bills = Convert.ToDouble(filas["clt_100_bills"]);
+                items.clt_50_bills = Convert.ToDouble(filas["clt_50_bills"]);
+                items.clt_20_bills = Convert.ToDouble(filas["clt_20_bills"]);
+                items.clt_10_bills = Convert.ToDouble(filas["clt_10_bills"]);
+                items.clt_5_bills = Convert.ToDouble(filas["clt_5_bills"]);
+                items.clt_1_bills = Convert.ToDouble(filas["clt_1_bills"]);
+                items.clt_checks_amount = Convert.ToInt32(filas["clt_checks_amount"]);
+                items.clt_credits_amount = Convert.ToInt32(filas["clt_credits_amount"]);
+                items.clt_total_charged = Convert.ToDouble(filas["clt_total_charged"]);
+                items.clt_total_cash = Convert.ToDouble(filas["clt_total_cash"]);
+                items.clt_total_check = Convert.ToDouble(filas["clt_total_check"]);
+                items.clt_total_credit = Convert.ToDouble(filas["clt_total_credit"]);
+                items.clt_initial_cash = Convert.ToDouble(filas["clt_initial_cash"]);
+                items.clt_balance = Convert.ToDouble(filas["clt_balance"]);
+                items.clt_transaction_count = Convert.ToInt32(filas["clt_transaction_count"]);
+                items.clt_reg_RegisterID = Convert.ToString(filas["clt_reg_RegisterID"]);
+                items.clt_Username = Convert.ToString(filas["clt_Username"]);
+                items.clt_Datetime = Convert.ToString(filas["clt_Datetime"]);
 
                 list.Add(items);
             }

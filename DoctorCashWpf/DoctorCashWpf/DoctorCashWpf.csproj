@@ -120,11 +120,13 @@
     <Compile Include="Domain\TextFieldsViewModel.cs" />
     <Compile Include="Domain\TreesViewModel.cs" />
     <Compile Include="interfaces\closeDate.cs" />
+    <Compile Include="interfaces\closeDateObj.cs" />
     <Compile Include="interfaces\closeTransaction.cs" />
     <Compile Include="interfaces\transactionsObj.cs" />
     <Compile Include="interfaces\moneyComponent.cs" />
+    <Compile Include="statics\closeDate.cs" />
     <Compile Include="interfaces\user.cs" />
-    <Compile Include="interfaces\userInformation.cs" />
+    <Compile Include="statics\userInformation.cs" />
     <Compile Include="Printer\Print.cs" />
     <Compile Include="Printer\RawPrinterHelper.cs" />
     <Compile Include="Reportings\DataSet1.Designer.cs">
@@ -144,8 +146,8 @@
     <Compile Include="Views\Log.xaml.cs">
       <DependentUpon>Log.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RefundAuth.xaml.cs">
-      <DependentUpon>RefundAuth.xaml</DependentUpon>
+    <Compile Include="Views\Refund.xaml.cs">
+      <DependentUpon>Refund.xaml</DependentUpon>
     </Compile>
     <Compile Include="services\dateService.cs" />
     <Compile Include="services\MoneyComponentService.cs" />
@@ -221,7 +223,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RefundAuth.xaml">
+    <Page Include="Views\Refund.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -318,7 +318,7 @@
                         <TextBlock Text="Cancel" Foreground="#666666 " FontSize="18"/>
                     </Button>
                     <Button Grid.Column="2" Margin="5 0 10 0" Background="Transparent" BorderBrush="Transparent"
-                            Style="{DynamicResource MaterialDesignFlatButton}">
+                            Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_13">
                         <TextBlock Text="Print" Foreground="#6aa84f " FontSize="18"/>
                     </Button>
                 </Grid>
