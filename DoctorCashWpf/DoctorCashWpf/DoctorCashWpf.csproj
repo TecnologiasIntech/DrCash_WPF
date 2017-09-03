@@ -137,6 +137,9 @@
     <Compile Include="Reportings\Report1.xaml.cs">
       <DependentUpon>Report1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Themes\Refund.xaml.cs">
+      <DependentUpon>Refund.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ClosedStatements.xaml.cs">
       <DependentUpon>ClosedStatements.xaml</DependentUpon>
     </Compile>
@@ -198,6 +201,9 @@
     <Compile Include="Views\UpdateTransaction.xaml.cs">
       <DependentUpon>UpdateTransaction.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserCreate.xaml.cs">
+      <DependentUpon>UserCreate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserNew.xaml.cs">
       <DependentUpon>UserNew.xaml</DependentUpon>
     </Compile>
@@ -208,6 +214,10 @@
       <DependentUpon>ViewReceipt.xaml</DependentUpon>
     </Compile>
     <Page Include="Reportings\Report1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Refund.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,6 +320,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserCreate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -378,8 +392,6 @@
     <Resource Include="Resources\ms-icon-310x310.png" />
     <Resource Include="Resources\ProfilePic.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Themes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

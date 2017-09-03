@@ -123,5 +123,16 @@ namespace DoctorCashWpf.Views
             }
         }
 
+        private void txtbox_email_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!txtbox_email.Text.Contains("@")||!txtbox_email.Text.Contains(".com"))
+            {
+                labelerror.Content = "Does not match an email";
+            }
+            else
+            {
+                labelerror.Content = "";
+            }
+        }
     }
 }
