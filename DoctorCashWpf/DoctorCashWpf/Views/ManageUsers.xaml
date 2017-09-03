@@ -73,7 +73,7 @@
 
                 <!--Email-->
                 <TextBlock Text="Email" Margin="30 10" Foreground="#666666 " FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
-                <TextBox x:Name="txtbox_email" Margin="40 0"/>
+                <TextBox x:Name="txtbox_email" Margin="40 0" KeyUp="txtbox_email_KeyUp"/>
 
                 <!--Security Level-->
                 <TextBlock Text="Security Level" Margin="30 10" Foreground="#666666" FontFamily="Roboto" FontWeight="Bold" FontSize="18"/>
@@ -100,6 +100,7 @@
                 <CheckBox x:Name="check_activeAcount" Margin="40 0">
                     <TextBlock x:Name="___Sin_nombre_" Foreground="#666666" FontSize="15" FontFamily="Roboto" FontWeight="Bold">Active</TextBlock>
                 </CheckBox>
+                <Label Name="labelerror" Content="" HorizontalAlignment="Center" Margin="25" Foreground="Red"></Label>
 
 
 

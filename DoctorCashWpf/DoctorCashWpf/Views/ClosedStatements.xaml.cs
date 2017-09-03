@@ -49,6 +49,7 @@ namespace DoctorCashWpf.Views
                 if (list[i].trn_id == dato)
                 {
                     dt.Rows.Add(list[i].trn_id, list[i].change, list[i].cash, list[i].credit, list[i].check, list[i].change);
+                    
                 }
             }
             dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
