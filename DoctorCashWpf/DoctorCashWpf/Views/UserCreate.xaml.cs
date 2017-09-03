@@ -77,10 +77,46 @@ namespace DoctorCashWpf.Views
                 items.usr_LastName = txtbox_lastname.Text;
                 items.usr_Email = txtbox_email.Text;
                 items.usr_SecurityLevel = getSecurityLevel();
-                items.usr_Password = "NewUser";
+                items.usr_Password = PassWord(txtbox_firtname.Text, txtbox_lastname.Text);
 
                 user.createUser(items);
             }        
+        }
+        public string password;
+        private string PassWord(string firtsname, string lastname)
+        {
+            Random rnd = new Random();
+            password = "";
+            password += onlyFirstLastName(lastname);
+            password += "_"+firtsname;
+            password += rnd.Next(0, 100);            
+            password += rnd.Next(0, 100);
+
+            MessageBox.Show(password);
+            return password;
+        }
+        public string value;
+        private string onlyFirstLastName(string lastname)
+        {
+            
+            for (int i = 0; i < lastname.Length; i++)
+            {
+                if(!lastname.Contains(" "))
+                {
+                    value= lastname;
+                    break;
+                }
+                else if (lastname.Substring(0,i).Contains(" "))
+                {
+                    value= lastname.Substring(0, (i - 1));
+                    break;                    
+                }
+                else
+                {
+                    value=lastname.Substring(0, i);
+                }
+            }
+            return value;            
         }
 
         private int getSecurityLevel()

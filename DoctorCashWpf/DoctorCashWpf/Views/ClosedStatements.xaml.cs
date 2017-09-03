@@ -32,7 +32,7 @@ namespace DoctorCashWpf.Views
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //var dato = dataGridViewClosedStatement.SelectedItem;
+           //var dato = dataGridViewClosedStatement.SelectedItem;
            DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
             DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];
 
@@ -51,15 +51,17 @@ namespace DoctorCashWpf.Views
 
             for (int i = 0; i < list.Count(); i++)
             {
-                dt.Rows.Add(list[i].trn_id, list[i].amountCharged, list[i].cash, list[i].credit, list[i].check, list[i].change);
+                dt.Rows.Add(list[i].trn_id, list[i].amountCharged, list[i].cash, list[i].credit, list[i].check, list[i].change);                
 
             }
             dataGridViewStatment.ItemsSource = dt.DefaultView;
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+            double initial_cash=0,cash=0,credit=0,check=0,balance=0,cien=0, cincuenta=0, veinte=0, diez=0, cinco=0, uno=0;
             var response = getreport.getCloseTransactions(txtbox_ID.Text, fromdate.Text, todate.Text);
             var list = response.list;
             transactionsData = response.dataTable;
@@ -76,10 +78,41 @@ namespace DoctorCashWpf.Views
                 DataRow filas = transactionsData.Rows[i];
 
                 dt.Rows.Add(filas["clt_closed_ID"], filas["clt_reg_RegisterID"], filas["clt_Username"], filas["clt_Datetime"]);
-                //dt.Rows.Add(list[i].clt_closed_ID, list[i].clt_reg_RegisterID, list[i].clt_Username, list[i].clt_Datetime);
+
+                initial_cash += list[i].clt_initial_cash;
+
+                cash = list[i].clt_total_cash;
+                credit = list[i].clt_total_credit;
+                check = list[i].clt_total_check;
+                              
+                cien += list[i].clt_100_bills;
+                cincuenta += list[i].clt_50_bills;
+                veinte += list[i].clt_20_bills;
+                diez += list[i].clt_10_bills;
+                cinco += list[i].clt_5_bills;
+                uno += list[i].clt_1_bills;
+                balance += list[i].clt_balance;
+                
+
             }
+            txt_initialCash.Text = initial_cash.ToString();
+
+            txt_cash.Text = cash.ToString();
+            txt_credit.Text = credit.ToString();
+            txt_check.Text = check.ToString();
+
+            txt_ciens.Text = cien.ToString();
+            txt_cincuentas.Text = cincuenta.ToString();
+            txt_veintes.Text = veinte.ToString();
+            txt_diez.Text = diez.ToString();
+            txt_cincos.Text = cinco.ToString();
+            txt_unos.Text = uno.ToString();
+            txt_balance.Text = balance.ToString();
+
+
             dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
 
         }
+       
     }
 }

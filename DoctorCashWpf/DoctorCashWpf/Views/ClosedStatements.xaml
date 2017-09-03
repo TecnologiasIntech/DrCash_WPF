@@ -222,23 +222,23 @@
 
                     <!--Initial Cash-->
                     <TextBlock Grid.Row="1" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Initial Cash</TextBlock>
-                    <TextBlock Grid.Row="1" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_initialCash" Grid.Row="1" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Amount-->
                     <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Amount</TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_amount" Grid.Row="2" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Cash-->
                     <TextBlock Grid.Row="3" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Cash</TextBlock>
-                    <TextBlock Grid.Row="3" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_cash" Grid.Row="3" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Credit Card-->
                     <TextBlock Grid.Row="4" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Credit Card</TextBlock>
-                    <TextBlock Grid.Row="4" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_credit" Grid.Row="4" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Check-->
                     <TextBlock Grid.Row="5" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Check</TextBlock>
-                    <TextBlock Grid.Row="5" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_check" Grid.Row="5" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--#endregion-->
 
@@ -249,30 +249,30 @@
 
                     <!--100's-->
                     <TextBlock Grid.Row="8" Grid.Column="0" FontFamily="Roboto" FontSize="16" >100's</TextBlock>
-                    <TextBlock Grid.Row="8" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_ciens" Grid.Row="8" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
 
                     <!--50's-->
                     <TextBlock Grid.Row="9" Grid.Column="0" FontFamily="Roboto" FontSize="16" >50's</TextBlock>
-                    <TextBlock Grid.Row="9" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_cincuentas" Grid.Row="9" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--20's-->
                     <TextBlock Grid.Row="10" Grid.Column="0" FontFamily="Roboto" FontSize="16" >20'a</TextBlock>
-                    <TextBlock Grid.Row="10" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_veintes" Grid.Row="10" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
 
                     <!--10's-->
                     <TextBlock Grid.Row="11" Grid.Column="0" FontFamily="Roboto" FontSize="16" >10's</TextBlock>
-                    <TextBlock Grid.Row="11" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_diez" Grid.Row="11" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--5's-->
                     <TextBlock Grid.Row="12" Grid.Column="0" FontFamily="Roboto" FontSize="16" >5'</TextBlock>
-                    <TextBlock Grid.Row="12" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_cincos" Grid.Row="12" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
 
                     <!--1's-->
                     <TextBlock Grid.Row="13" Grid.Column="0" FontFamily="Roboto" FontSize="16" >1's</TextBlock>
-                    <TextBlock Grid.Row="13" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_unos" Grid.Row="13" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
 
                     <!--#endregion-->
@@ -293,7 +293,7 @@
 
                     <!--Balance-->
                     <TextBlock Grid.Row="19" Grid.Column="0" FontFamily="Roboto" FontSize="16" FontWeight="Bold">Balance</TextBlock>
-                    <TextBlock Grid.Row="19" Grid.Column="1" FontFamily="Roboto" FontSize="16" FontWeight="Bold">$0.00</TextBlock>
+                    <TextBlock Name="txt_balance" Grid.Row="19" Grid.Column="1" FontFamily="Roboto" FontSize="16" FontWeight="Bold">$0.00</TextBlock>
 
                     <!--#endregion-->
 
