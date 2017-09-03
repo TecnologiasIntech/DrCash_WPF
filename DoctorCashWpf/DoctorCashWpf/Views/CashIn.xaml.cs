@@ -81,10 +81,10 @@ namespace DoctorCashWpf
                 var transactionService = new transactionService();
                 var transaction = new transaction();
 
-                transaction.userId = 4;
+                transaction.userId = userInformation.user.usr_ID;
                 //transaction.dateRegistered = DateTime.Today.ToString("d");
                 transaction.comment = txtbox_comment.Text;
-                transaction.type = 1;
+                transaction.type = (int)TRANSACTIONTYPE.IN;
 
                 transaction.amountCharged = (float)Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1));
                 transaction.cash = (float)Convert.ToDouble(txtbox_cash.Text.Remove(0, 1));
