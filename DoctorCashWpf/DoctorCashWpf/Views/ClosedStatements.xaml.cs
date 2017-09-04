@@ -81,9 +81,9 @@ namespace DoctorCashWpf.Views
 
                 initial_cash += list[i].clt_initial_cash;
 
-                cash = list[i].clt_total_cash;
-                credit = list[i].clt_total_credit;
-                check = list[i].clt_total_check;
+                cash += list[i].clt_total_cash;
+                credit += list[i].clt_total_credit;
+                check += list[i].clt_total_check;
                               
                 cien += list[i].clt_100_bills;
                 cincuenta += list[i].clt_50_bills;
@@ -109,6 +109,9 @@ namespace DoctorCashWpf.Views
             txt_unos.Text = uno.ToString();
             txt_balance.Text = balance.ToString();
 
+            txt_cash2.Text = cash.ToString();
+            txt_credit2.Text = credit.ToString();
+            txt_check2.Text = check.ToString();
 
             dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
 

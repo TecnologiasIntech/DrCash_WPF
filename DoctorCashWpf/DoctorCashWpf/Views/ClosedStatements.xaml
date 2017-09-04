@@ -281,15 +281,15 @@
 
                     <!--Cash-->
                     <TextBlock Grid.Row="15" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Cash</TextBlock>
-                    <TextBlock Grid.Row="15" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_cash2" Grid.Row="15" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Credit Card-->
                     <TextBlock Grid.Row="16" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Credit Card</TextBlock>
-                    <TextBlock Grid.Row="16" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_credit2" Grid.Row="16" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Check-->
                     <TextBlock Grid.Row="17" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Check</TextBlock>
-                    <TextBlock Grid.Row="17" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Name="txt_check2" Grid.Row="17" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
 
                     <!--Balance-->
                     <TextBlock Grid.Row="19" Grid.Column="0" FontFamily="Roboto" FontSize="16" FontWeight="Bold">Balance</TextBlock>
