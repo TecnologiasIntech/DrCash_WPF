@@ -36,7 +36,7 @@ namespace DoctorCashWpf.Views
             //var dato = dataGridViewClosedStatement.SelectedItem;
             DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
             DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];
-
+            dataClear();
             int dato = Convert.ToInt32(item.Row.ItemArray[0]);
             var registerID = fila["clt_reg_RegisterID"];
 
@@ -59,6 +59,16 @@ namespace DoctorCashWpf.Views
                 check += list[i].check;
                 change += list[i].change;
             }
+            cash = cash - change;                       
+            txt_cash.Text = "$" + cash.ToString();
+            txt_credit.Text = "$" + credit.ToString();
+            txt_check.Text = "$" + check.ToString();
+            txt_amount.Text = "$" + charged.ToString();            
+
+            txt_cash2.Text = "$" + cash.ToString();
+            txt_credit2.Text = "$" + credit.ToString();
+            txt_check2.Text = "$" + check.ToString();
+
             dt.Rows.Add("Total´s",charged,cash,credit,check,change);
             dataGridViewStatment.ItemsSource = dt.DefaultView;
         }
@@ -71,6 +81,7 @@ namespace DoctorCashWpf.Views
             var response = getreport.getCloseTransactions(txtbox_ID.Text, fromdate.Text, todate.Text);
             var list = response.list;
             transactionsData = response.dataTable;
+            dataClear();
             dataGridViewClosedStatement.ItemsSource = null;
 
             DataTable dt = new DataTable();
@@ -128,6 +139,8 @@ namespace DoctorCashWpf.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             dataClear();
+            dataGridViewClosedStatement.ItemsSource = null;
+            dataGridViewStatment.ItemsSource = null;
         }
 
         private void dataClear()
@@ -152,8 +165,7 @@ namespace DoctorCashWpf.Views
             txt_cash2.Text = "$0.00";
             txt_credit2.Text = "$0.00";
             txt_check2.Text = "$0.00";
-            dataGridViewClosedStatement.ItemsSource = null;
-            dataGridViewStatment.ItemsSource = null;
+            
         }
     }
 }
