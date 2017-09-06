@@ -102,11 +102,11 @@
 
                             <!--Date From-->
                             <StackPanel Grid.Column="1" Margin="15">
-                                <DatePicker Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                <DatePicker x:Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             </StackPanel>
                             <!--Date To-->
                             <StackPanel Grid.Column="2" Margin="15">
-                                <DatePicker Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                <DatePicker x:Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             </StackPanel>
 
                             <!--Search Button-->
@@ -230,8 +230,8 @@
                 </Button>
                 
                 <!--Edit-->
-                <Button Margin="5" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                Style="{DynamicResource MaterialDesignFlatButton}">
+                <Button Margin="5" Background="Transparent" BorderBrush="Transparent"
+                                Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_2">
                     <TextBlock Text="Edit" Foreground="#597eaa " FontSize="18"/>
                 </Button>
 

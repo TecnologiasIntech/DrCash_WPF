@@ -24,11 +24,53 @@ namespace DoctorCashWpf
         {
             InitializeComponent();
 
+            if (cashInUpdate.isUpdate)
+            {
+                loadValuesToUpdate(cashInUpdate.transactionID);
+            }
+
             setValesInitials();
+
         }
 
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private BrushConverter brushConverter = new BrushConverter();
+        private transactionService transaction = new transactionService();
+
+        private void loadValuesToUpdate(int transactionID)
+        {
+            var trn = transaction.getObjTransactionByTransactionID(transactionID.ToString());
+
+            txtbox_patientFirstName.Text = trn.patientFirstName;
+            txtbox_amountCharge.Text = trn.amountCharged.ToString();
+            txtbox_cash.Text = trn.cash.ToString();
+            txtbox_credit.Text = trn.credit.ToString();
+            txtbox_check.Text = trn.check.ToString();
+            txtbox_numberChecks.Text = trn.checkNumber.ToString();
+            txtbox_comment.Text = trn.comment;
+
+            if (trn.copayment)
+            {
+                checkbox_copayment.IsChecked = true;
+            }
+            if (trn.selfPay)
+            {
+                checkbox_selfPay.IsChecked = true;
+            }
+            if(trn.deductible)
+            {
+                checkbox_deductible.IsChecked = true;
+            }
+            if (trn.labs)
+            {
+                checkbox_labs.IsChecked = true;
+            }
+            if (trn.other)
+            {
+                checkbox_other.IsChecked = true;
+                txtbox_other.Text = trn.otherComments;
+            }
+        }
 
         private void setValesInitials()
         {
@@ -117,17 +159,13 @@ namespace DoctorCashWpf
                 {
                     txtbox_patientFirstName.Focus();
 
-                    txtbox_patientFirstName.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
-                    txtbox_patientFirstName.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
-                    txtbox_patientFirstName.FontWeight = FontWeights.Bold;
+                    txtbox_patientFirstName.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
                 }
                 else
                 {
                     txtbox_cash.Focus();
 
-                    txtbox_cash.Background = (Brush)brushConverter.ConvertFrom("#f1c40f");
-                    txtbox_cash.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
-                    txtbox_cash.FontWeight = FontWeights.Bold;
+                    txtbox_cash.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
                 }
             }
         }
@@ -309,6 +347,28 @@ namespace DoctorCashWpf
         private void txtbox_patientFirstName_GotFocus_1(object sender, RoutedEventArgs e)
         {
             txtbox_patientFirstName.SelectAll();
+        }
+
+        private void btn_close_Click(object sender, RoutedEventArgs e)
+        {
+            var trn = new transaction();
+
+            trn.patientFirstName = txtbox_patientFirstName.Text;
+            trn.amountCharged = (float)Convert.ToDouble(txtbox_amountCharge.Text.Remove(0,1));
+            trn.cash = (float)Convert.ToDouble(txtbox_cash.Text.Remove(0, 1));
+            trn.credit = (float)Convert.ToDouble(txtbox_credit.Text.Remove(0, 1));
+            trn.check = (float)Convert.ToDouble(txtbox_check.Text.Remove(0, 1));
+            trn.checkNumber = Convert.ToInt32(txtbox_numberChecks.Text);
+            trn.copayment = (bool)checkbox_copayment.IsChecked;
+            trn.selfPay = (bool)checkbox_selfPay.IsChecked;
+            trn.deductible = (bool)checkbox_deductible.IsChecked;
+            trn.labs = (bool)checkbox_labs.IsChecked;
+            trn.other = (bool)checkbox_other.IsChecked;
+            trn.otherComments = txtbox_other.Text;
+            trn.comment = txtbox_comment.Text;
+            trn.change = (float)Convert.ToDouble(label_change.Text.Remove(0, 1));
+
+            transaction.updateTransaction(trn);
         }
     }
 }

@@ -268,6 +268,38 @@ namespace DoctorCashWpf
             return list;
         }
 
+        public transaction getObjTransactionByTransactionID(string transactionID)
+        {
+            var terms = new List<valuesWhere>();
+            var items = new transaction();
+
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", transactionID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            var data = createQuery.toSelectAll("transactions", terms);
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+
+                items.amountCharged = Convert.ToInt32(filas["trn_AmountCharged"]);
+                items.copayment = Convert.ToBoolean(filas["trn_Copayment"]);
+                items.selfPay = Convert.ToBoolean(filas["trn_SelfPay"]);
+                items.deductible = Convert.ToBoolean(filas["trn_Deductible"]);
+                items.labs = Convert.ToBoolean(filas["trn_Labs"]);
+                items.otherComments = Convert.ToString(filas["trn_OtherComments"]);
+                items.comment = Convert.ToString(filas["trn_Comment"]);
+                items.cash = (float)Convert.ToDouble(filas["trn_Cash"]);
+                items.credit = (float)Convert.ToDouble(filas["trn_Credit"]);
+                items.check = (float)Convert.ToDouble(filas["trn_Check"]);
+                items.checkNumber = Convert.ToInt32(filas["trn_CheckNumber"]);
+                items.change = (float)Convert.ToDouble(filas["trn_Change"]);
+                items.patientFirstName = Convert.ToString(filas["trn_PatientFirstName"]);
+
+            }
+
+            return items;
+        }
+
         public List<transaction> getTransactionsByRegisterID(string registerID, string fromDate, string toDate)
         {
             var terms = new List<valuesWhere>();
@@ -295,6 +327,33 @@ namespace DoctorCashWpf
             }
 
             return list;
+        }
+
+        public void updateTransaction(transaction trn)
+        {
+            var columns = new List<columnsValues>();
+            var terms = new List<valuesWhere>();
+
+            columns.Add(createItem.ofTypeColumnsValues("trn_PatientFirstName", trn.patientFirstName));
+            columns.Add(createItem.ofTypeColumnsValues("trn_AmountCharged", trn.amountCharged));
+            columns.Add(createItem.ofTypeColumnsValues("trn_Cash", trn.cash));
+            columns.Add(createItem.ofTypeColumnsValues("trn_Credit", trn.credit));
+            columns.Add(createItem.ofTypeColumnsValues("trn_Check", trn.check));
+            columns.Add(createItem.ofTypeColumnsValues("trn_CheckNumber", trn.checkNumber));
+            columns.Add(createItem.ofTypeColumnsValues("trn_Change", trn.change));
+            columns.Add(createItem.ofTypeColumnsValues("trn_Copayment", trn.copayment));
+            columns.Add(createItem.ofTypeColumnsValues("trn_SelfPay", trn.selfPay));
+            columns.Add(createItem.ofTypeColumnsValues("trn_Deductible", trn.deductible));
+            columns.Add(createItem.ofTypeColumnsValues("trn_Labs", trn.labs));
+            columns.Add(createItem.ofTypeColumnsValues("trn_Other", trn.other));
+            columns.Add(createItem.ofTypeColumnsValues("trn_OtherComments", trn.otherComments));
+            columns.Add(createItem.ofTypeColumnsValues("trn_ModifiedBy_ID", userInformation.user.usr_ID));
+            columns.Add(createItem.ofTypeColumnsValues("trn_Comment", trn.comment));
+            columns.Add(createItem.ofTypeColumnsValues("trn_ModificationDate", date.getCurrentDate()));
+
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", cashInUpdate.transactionID.ToString(), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            createQuery.toUpdate("transactions", columns, terms);
         }
     }
 }
