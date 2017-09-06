@@ -72,9 +72,7 @@
 
             <!--#region Query Table -->
             <Grid>
-
                 <Grid>
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1.5*"/>
                         <ColumnDefinition Width="2.5*"/>
@@ -133,12 +131,10 @@
                             </TextBlock>
                         </Button>
                     </StackPanel>
-
                 </Grid>
-
             </Grid>
             <!--#endregion-->
-            
+
             <!--#region Transactions Grid-->
             <materialDesign:Card 
                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
@@ -153,7 +149,6 @@
                 </Grid>
             </materialDesign:Card>
             <!--#endregion-->
-
             <!--#region Save Cancel Buttons-->
             <Grid Width="300" HorizontalAlignment="Right">
 
@@ -176,9 +171,6 @@
             <Label Content="" Foreground="Red" Name="labelerror" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15,15,15,15"></Label>
 
         </StackPanel>
-        
-        
-        
 
     </Grid>
 </UserControl>

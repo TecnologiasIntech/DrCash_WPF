@@ -32,8 +32,9 @@ namespace DoctorCashWpf.Views
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-           //var dato = dataGridViewClosedStatement.SelectedItem;
-           DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
+            double charged = 0, cash = 0, credit = 0, check = 0, change = 0;
+            //var dato = dataGridViewClosedStatement.SelectedItem;
+            DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
             DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];
 
             int dato = Convert.ToInt32(item.Row.ItemArray[0]);
@@ -51,9 +52,14 @@ namespace DoctorCashWpf.Views
 
             for (int i = 0; i < list.Count(); i++)
             {
-                dt.Rows.Add(list[i].trn_id, list[i].amountCharged, list[i].cash, list[i].credit, list[i].check, list[i].change);                
-
+                dt.Rows.Add(list[i].trn_id, list[i].amountCharged, list[i].cash, list[i].credit, list[i].check, list[i].change);
+                charged += list[i].amountCharged;
+                cash += list[i].cash;
+                credit += list[i].credit;
+                check += list[i].check;
+                change += list[i].change;
             }
+            dt.Rows.Add("Total´s",charged,cash,credit,check,change);
             dataGridViewStatment.ItemsSource = dt.DefaultView;
         }
 
@@ -61,7 +67,7 @@ namespace DoctorCashWpf.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            double initial_cash=0,cash=0,credit=0,check=0,balance=0,cien=0, cincuenta=0, veinte=0, diez=0, cinco=0, uno=0;
+            double initial_cash=0,amount=0,cash=0,credit=0,check=0,balance=0,cien=0, cincuenta=0, veinte=0, diez=0, cinco=0, uno=0;
             var response = getreport.getCloseTransactions(txtbox_ID.Text, fromdate.Text, todate.Text);
             var list = response.list;
             transactionsData = response.dataTable;
@@ -81,6 +87,8 @@ namespace DoctorCashWpf.Views
 
                 initial_cash += list[i].clt_initial_cash;
 
+                amount += list[i].clt_checks_amount + list[i].clt_credits_amount;
+
                 cash += list[i].clt_total_cash;
                 credit += list[i].clt_total_credit;
                 check += list[i].clt_total_check;
@@ -95,27 +103,57 @@ namespace DoctorCashWpf.Views
                 
 
             }
-            txt_initialCash.Text = initial_cash.ToString();
+            txt_initialCash.Text = "$" + initial_cash.ToString();
 
-            txt_cash.Text = cash.ToString();
-            txt_credit.Text = credit.ToString();
-            txt_check.Text = check.ToString();
+            txt_cash.Text = "$"+cash.ToString();
+            txt_credit.Text = "$" + credit.ToString();
+            txt_check.Text = "$" + check.ToString();
+            txt_amount.Text = "$" + amount.ToString();
+            txt_ciens.Text = "$" + cien.ToString();
+            txt_cincuentas.Text = "$" + cincuenta.ToString();
+            txt_veintes.Text = "$" + veinte.ToString();
+            txt_diez.Text = "$" + diez.ToString();
+            txt_cincos.Text = "$" + cinco.ToString();
+            txt_unos.Text = "$" + uno.ToString();
+            txt_balance.Text = "$" + balance.ToString();
 
-            txt_ciens.Text = cien.ToString();
-            txt_cincuentas.Text = cincuenta.ToString();
-            txt_veintes.Text = veinte.ToString();
-            txt_diez.Text = diez.ToString();
-            txt_cincos.Text = cinco.ToString();
-            txt_unos.Text = uno.ToString();
-            txt_balance.Text = balance.ToString();
-
-            txt_cash2.Text = cash.ToString();
-            txt_credit2.Text = credit.ToString();
-            txt_check2.Text = check.ToString();
+            txt_cash2.Text = "$" + cash.ToString();
+            txt_credit2.Text = "$" + credit.ToString();
+            txt_check2.Text = "$" + check.ToString();
 
             dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
 
         }
-       
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            dataClear();
+        }
+
+        private void dataClear()
+        {
+            txtbox_ID.Clear();
+            fromdate.Text = "";
+            todate.Text = "";
+            txt_initialCash.Text = "$0.00";
+
+            txt_cash.Text = "$0.00";
+            txt_credit.Text = "$0.00";
+            txt_check.Text = "$0.00";
+
+            txt_ciens.Text = "$0.00";
+            txt_cincuentas.Text = "$0.00";
+            txt_veintes.Text = "$0.00";
+            txt_diez.Text = "$0.00";
+            txt_cincos.Text = "$0.00";
+            txt_unos.Text = "$0.00";
+            txt_balance.Text = "$0.00";
+
+            txt_cash2.Text = "$0.00";
+            txt_credit2.Text = "$0.00";
+            txt_check2.Text = "$0.00";
+            dataGridViewClosedStatement.ItemsSource = null;
+            dataGridViewStatment.ItemsSource = null;
+        }
     }
 }
