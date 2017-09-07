@@ -9,6 +9,7 @@ namespace DoctorCashWpf
     class dateService
     {
         private formatService format = new formatService();
+        private string formatDate = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
 
         public string getCurrentDate()
         {
@@ -55,8 +56,18 @@ namespace DoctorCashWpf
 
         public string convertToFormatDateFinal(string date)
         {
-            string month = date.Substring(0, 2);
-            string day = date.Substring(3, 2);
+            string day = "", month = "";
+
+            if (formatDate == "dd/MM/yyyy")
+            {
+                day = date.Substring(0, 2);
+                month = date.Substring(3, 2);
+            }
+            else
+            {
+                month = date.Substring(0, 2);
+                day = date.Substring(3, 2);
+            }
             string year = date.Substring(6, 4);
             string hour = "T23:59:59.999";
 

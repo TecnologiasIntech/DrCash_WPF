@@ -11,6 +11,7 @@ namespace DoctorCashWpf
     class MoneyComponentService
     {
         private string separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator;
+        
         public void AddFloatToComponent(TextBox txtbox)
         {
             if (!txtbox.Text.Contains(separator))
@@ -128,6 +129,11 @@ namespace DoctorCashWpf
         {
             txt.Text = "$0" + separator + "00";
             return txt;
+        }
+
+        public string getFormatMoneyComponentInZero()
+        {
+            return "$0" + separator + "00";
         }
     }
 }

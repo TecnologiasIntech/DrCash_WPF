@@ -74,7 +74,8 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            verify();      
+            verify();
+            //Console.WriteLine(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
         }
 
         private void authentification_KeyUp(object sender, KeyEventArgs e)

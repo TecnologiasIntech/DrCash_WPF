@@ -21,9 +21,7 @@ namespace DoctorCashWpf
                 day = "0" + day;
             }
 
-            string format = year + "-" + month + "-" + day + hour;
-
-            return format;
+            return year + "-" + month + "-" + day + hour;
         }
 
     }

@@ -77,7 +77,12 @@ namespace DoctorCashWpf
             moneyComponent.convertComponentToMoneyFormat(label_amount);
             moneyComponent.convertComponentToMoneyFormat(label_change);
             moneyComponent.convertComponentToMoneyFormat(label_total);
+
+
             moneyComponent.convertComponentToMoneyFormat(txtbox_cash, () => { });
+
+
+
             moneyComponent.convertComponentToMoneyFormat(txtbox_credit, () => { });
             moneyComponent.convertComponentToMoneyFormat(txtbox_check, () => { });
             moneyComponent.convertComponentToMoneyFormat(txtbox_amountCharge, () => { });
