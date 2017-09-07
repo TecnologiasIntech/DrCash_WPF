@@ -24,8 +24,8 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
 
-            label_amountCharged.Text = moneyComponent.getFormatMoneyComponentInZero();
-            txtbox_amountRefund.Text = moneyComponent.getFormatMoneyComponentInZero();
+            label_amountCharged = moneyComponent.getMoneyComponentInZero(label_amountCharged);
+            txtbox_amountRefund = moneyComponent.getMoneyComponentInZero(txtbox_amountRefund);
         }
 
         private transactionService transaction = new transactionService();
@@ -127,8 +127,8 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            label_amountCharged.Text = moneyComponent.getFormatMoneyComponentInZero();
-            txtbox_amountRefund.Text = moneyComponent.getFormatMoneyComponentInZero();
+            label_amountCharged = moneyComponent.getMoneyComponentInZero(label_amountCharged);
+            txtbox_amountRefund = moneyComponent.getMoneyComponentInZero(txtbox_amountRefund);
 
             txtbox_transactionNumber.Text = "";
             txtbox_newLog.Text = "";

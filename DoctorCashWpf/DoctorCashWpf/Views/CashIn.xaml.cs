@@ -118,7 +118,7 @@ namespace DoctorCashWpf
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (txtbox_patientFirstName.Text != "" && label_total.Text != moneyComponent.getFormatMoneyComponentInZero() && verifyTransactionsType())
+            if (txtbox_patientFirstName.Text != "" && label_total.Text != txtbox_cash.Text && verifyTransactionsType())
             { 
                 var transactionService = new transactionService();
                 var transaction = new transaction();
@@ -172,17 +172,17 @@ namespace DoctorCashWpf
 
         private void clearInputs()
         {
-            txtbox_amountCharge.Text = moneyComponent.getFormatMoneyComponentInZero();
-            txtbox_cash.Text = moneyComponent.getFormatMoneyComponentInZero();
-            txtbox_credit.Text = moneyComponent.getFormatMoneyComponentInZero();
-            txtbox_check.Text = moneyComponent.getFormatMoneyComponentInZero();
+            txtbox_amountCharge = moneyComponent.getMoneyComponentInZero(txtbox_amountCharge);
+            txtbox_cash = moneyComponent.getMoneyComponentInZero(txtbox_cash);
+            txtbox_credit = moneyComponent.getMoneyComponentInZero(txtbox_credit);
+            txtbox_check = moneyComponent.getMoneyComponentInZero(txtbox_check);
             txtbox_numberChecks.Text = "0";
             txtbox_patientFirstName.Text = "";
             txtbox_comment.Text = "";
 
-            label_amount.Text = moneyComponent.getFormatMoneyComponentInZero();
-            label_change.Text = moneyComponent.getFormatMoneyComponentInZero();
-            label_total.Text = moneyComponent.getFormatMoneyComponentInZero();
+            label_amount = moneyComponent.getMoneyComponentInZero(label_amount);
+            label_change = moneyComponent.getMoneyComponentInZero(label_change);
+            label_total= moneyComponent.getMoneyComponentInZero(label_total);
 
             checkbox_copayment.IsChecked = false;
             checkbox_deductible.IsChecked = false;

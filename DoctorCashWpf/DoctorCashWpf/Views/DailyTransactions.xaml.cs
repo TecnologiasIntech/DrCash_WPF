@@ -80,6 +80,8 @@ namespace DoctorCashWpf.Views
             }
             else
             {
+                //vamos a crear el reporte desde codigo
+
                 Reportings.Report1 miventana = new Reportings.Report1(getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).dataTable);
                 miventana.ShowDialog();
             }
