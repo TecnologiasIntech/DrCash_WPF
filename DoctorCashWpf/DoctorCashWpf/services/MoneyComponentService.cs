@@ -118,9 +118,16 @@ namespace DoctorCashWpf
             return item;
         }
 
-        public string getFormatMoneyComponentInZero()
+        public TextBlock getMoneyComponentInZero(TextBlock txt)
         {
-            return "$0" + separator + "00";
+            txt.Text = "$0" + separator + "00";
+            return txt;
+        }
+
+        public TextBox getMoneyComponentInZero(TextBox txt)
+        {
+            txt.Text = "$0" + separator + "00";
+            return txt;
         }
     }
 }
