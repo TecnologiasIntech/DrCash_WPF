@@ -24,5 +24,18 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            dataGridViewLog.ItemsSource = null;
+            txtbox_question.Clear();
+            fromdate.Text = "";
+            todate.Text = "";
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

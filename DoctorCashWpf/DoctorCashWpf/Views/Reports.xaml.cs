@@ -50,6 +50,15 @@ namespace DoctorCashWpf
         {
             var ViewReceipt = new ViewReceipt();
             await DialogHost.Show(ViewReceipt, "RootDialog");
+
+            if (cashInUpdate.isUpdate)
+            {
+                await DialogHost.Show(new CashInWindow(), "RootDialog");
+
+                cashInUpdate.isUpdate = false;
+
+                Button_Click_3(null, null);
+            }
         }
 
         private async void Button_Click_4(object sender, RoutedEventArgs e)
