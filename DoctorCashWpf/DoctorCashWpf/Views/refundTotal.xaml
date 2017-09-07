@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="DoctorCashWpf.Views.refundTotal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DoctorCashWpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="300">
+    <StackPanel>
+
+        <TextBlock Text="Transaction Number"/>
+        <TextBox x:Name="txtbox_transactionNumber"/>
+
+        <TextBlock Text="Amount Charged" Margin="0 30 0 0"/>
+        <TextBlock Text="$0.00" x:Name="label_amountCharged"/>
+
+        <TextBlock Text="Log"/>
+        <TextBox x:Name="txtbox_log"/>
+
+        <TextBlock Text="Amount to Refund" Margin="0 30 0 0"/>
+        <TextBox Text="$0.00" x:Name="txtbox_amountRefund" KeyUp="txtbox_amountRefund_KeyUp" LostFocus="txtbox_amountRefund_LostFocus" GotFocus="txtbox_amountRefund_GotFocus"/>
+
+        <TextBlock Text="Log" Margin="0 30 0 0"/>
+        <TextBox x:Name="txtbox_newLog"/>
+
+        <Button Content="Search" Click="Button_Click"/>
+        <Button Content="Clear" Click="Button_Click_3"/>
+        <Button Content="close" Click="Button_Click_2"/>
+        <Button Content="print" Click="Button_Click_1"/>
+
+    </StackPanel>
+</UserControl>

@@ -139,7 +139,7 @@ namespace DoctorCashWpf.Views
 
         private void getCurrentTransactions()
         {
-            int currentUserID = 4;
+            int currentUserID = userInformation.user.usr_ID;
 
             var listCurrentTransactions = new List<transaction>();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -133,6 +134,13 @@ namespace DoctorCashWpf.Views
             {
                 labelerror.Content = "";
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            createUser.isCreateUser = true;
+
+            MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
         }
     }
 }

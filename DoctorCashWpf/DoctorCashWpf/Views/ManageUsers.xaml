@@ -126,7 +126,7 @@
             </Button>
 
             <!--Add User-->
-            <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent">
+            <Button Grid.Column="1"  Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
                 <TextBlock Text="Add User" Foreground="green" FontSize="18"/>
             </Button>
 

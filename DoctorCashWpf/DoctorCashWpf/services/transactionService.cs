@@ -170,6 +170,26 @@ namespace DoctorCashWpf
             createQuery.toInsert("transactions", valuesArray);
         }
 
+        public void setTransactionRefund(transaction trn)
+        {
+            List<columnsValues> valuesArray = new List<columnsValues>();
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_User_ID", trn.userId));
+            //valuesArray.Add(createItem.ofTypeColumnsValues("trn_DateRegistered", date.getCurrentDate()));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Comment", trn.comment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Type", trn.type));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_AmountCharged", trn.amountCharged));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_CheckNumber", 0)); //checar esto bien
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Copayment", trn.copayment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_SelfPay", trn.selfPay));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Deductible", trn.deductible));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Labs", trn.labs));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Other", trn.other));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Closed", trn.closed));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", "1")); //cambiar esto
+
+            createQuery.toInsert("transactions", valuesArray);
+        }
+
         public void setClosedTransaction(closeDate trn)
         {
             var list = new List<columnsValues>();
@@ -266,6 +286,35 @@ namespace DoctorCashWpf
             }
 
             return list;
+        }
+
+        public transaction getTransactionByTrnID(string transactionID)
+        {
+            var terms = new List<valuesWhere>();
+
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", transactionID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            var data = createQuery.toSelectAll("transactions", terms);
+            var items = new transaction();
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+
+                items.amountCharged = Convert.ToInt32(filas["trn_AmountCharged"]);
+                items.copayment = Convert.ToBoolean(filas["trn_Copayment"]);
+                items.selfPay = Convert.ToBoolean(filas["trn_SelfPay"]);
+                items.deductible = Convert.ToBoolean(filas["trn_Deductible"]);
+                items.labs = Convert.ToBoolean(filas["trn_Labs"]);
+                items.other = Convert.ToBoolean(filas["trn_Other"]);
+                items.otherComments = Convert.ToString(filas["trn_OtherComments"]);
+                items.cash = Convert.ToInt32(filas["trn_Cash"]);
+                items.credit = Convert.ToInt32(filas["trn_Credit"]);
+                items.check = Convert.ToInt32(filas["trn_Check"]);
+
+            }
+
+            return items;
         }
 
         public List<transaction> getTransactionsByRegisterID(string registerID, string fromDate, string toDate)

@@ -126,6 +126,9 @@
     <Compile Include="interfaces\moneyComponent.cs" />
     <Compile Include="statics\closeDate.cs" />
     <Compile Include="interfaces\user.cs" />
+    <Compile Include="statics\closeDT.cs" />
+    <Compile Include="statics\createRefund.cs" />
+    <Compile Include="statics\createUser.cs" />
     <Compile Include="statics\userInformation.cs" />
     <Compile Include="Printer\Print.cs" />
     <Compile Include="Printer\RawPrinterHelper.cs" />
@@ -172,6 +175,9 @@
     </Compile>
     <Compile Include="Views\ManageUsers.xaml.cs">
       <DependentUpon>ManageUsers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\refundTotal.xaml.cs">
+      <DependentUpon>refundTotal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Reports.xaml.cs">
       <DependentUpon>Reports.xaml</DependentUpon>
@@ -278,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ManageUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\refundTotal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

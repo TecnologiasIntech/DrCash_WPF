@@ -119,7 +119,11 @@ namespace DoctorCashWpf
                     break;
 
                 case (int)TRANSACTIONTYPE.REFOUND:
-                    comment = "Refound for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                    comment = "Refound for total amount: $" + trn.amountCharged + ".00";
+                    break;
+
+                case (int)TRANSACTIONTYPE.OUT:
+                    comment = "Cash out for total amount: $" + getTotalAmount(trn).ToString() + ".00";
                     break;
             }
 
@@ -172,6 +176,18 @@ namespace DoctorCashWpf
             label_initialCash.Text = initialCash.ToString();
             label_initialCash = moneyComponent.convertComponentToMoneyFormat(label_initialCash).labelComponent;
 
+            if(label_balance.Text[0] == '-')
+            {
+                label_balance.Text = label_balance.Text.Remove(0, 1);
+                moneyComponent.convertComponentToMoneyFormat(label_balance);
+                label_balance.Text = label_balance.Text.Remove(0, 1);
+                label_balance.Text = "- $" + label_balance.Text;
+            }
+            else
+            {
+                moneyComponent.convertComponentToMoneyFormat(label_balance);
+            }
+
             moneyComponent.convertComponentToMoneyFormat(label_cashIn);
             moneyComponent.convertComponentToMoneyFormat(label_credit);
             moneyComponent.convertComponentToMoneyFormat(label_checks);
@@ -179,7 +195,6 @@ namespace DoctorCashWpf
             moneyComponent.convertComponentToMoneyFormat(label_cashOut);
             moneyComponent.convertComponentToMoneyFormat(label_totalOut);
             moneyComponent.convertComponentToMoneyFormat(label_refounds);
-            moneyComponent.convertComponentToMoneyFormat(label_balance);
 
             closeDateInformation.closeDate.clt_balance = (float)(initialCash + cashIn + credit + checks - cashOut - refound);
             closeDateInformation.closeDate.clt_initial_cash = (float)(initialCash);
@@ -212,6 +227,14 @@ namespace DoctorCashWpf
             var refundAuth = new RefundAuth();
             await DialogHost.Show(refundAuth, "RootDialog");
 
+            if (createRefund.isRefund)
+            {
+                createRefund.isRefund = false;
+                await DialogHost.Show(new refundTotal(), "RootDialog");
+
+                chargeTransactionsList();
+            }
+
         }
 
         private async void CloseDateButton_Click(object sender, RoutedEventArgs e)
@@ -219,7 +242,6 @@ namespace DoctorCashWpf
             var closeDate = new CloseDate();
 
             await DialogHost.Show(closeDate, "RootDialog");
-
             
         }
 

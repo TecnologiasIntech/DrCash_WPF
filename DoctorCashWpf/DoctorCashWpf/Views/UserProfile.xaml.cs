@@ -34,8 +34,16 @@ namespace DoctorCashWpf.Views
 
         private async void Manage_User_Button_Click(object sender, RoutedEventArgs e)
         {
-                var manageUsers = new ManageUsers();
-                await DialogHost.Show(manageUsers, "RootDialog");
+            await DialogHost.Show(new ManageUsers(), "RootDialog");
+
+            if (createUser.isCreateUser)
+            {
+                await DialogHost.Show(new UserCreate(), "RootDialog");
+
+                createUser.isCreateUser = false;
+
+                Manage_User_Button_Click(null, null);
+            }
 
         }
 

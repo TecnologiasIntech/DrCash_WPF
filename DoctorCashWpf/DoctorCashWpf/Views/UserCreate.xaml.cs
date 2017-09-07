@@ -80,6 +80,8 @@ namespace DoctorCashWpf.Views
                 items.usr_Password = PassWord(txtbox_firtname.Text, txtbox_lastname.Text);
 
                 user.createUser(items);
+
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }        
         }
         public string password;
@@ -87,12 +89,12 @@ namespace DoctorCashWpf.Views
         {
             Random rnd = new Random();
             password = "";
-            password += onlyFirstLastName(lastname);
-            password += "_"+firtsname;
-            password += rnd.Next(0, 100);            
-            password += rnd.Next(0, 100);
+            /*password += onlyFirstLastName(lastname);*/
+            password += firtsname;
+            /*password += rnd.Next(0, 100);            
+            password += rnd.Next(0, 100);*/
 
-            MessageBox.Show(password);
+           // MessageBox.Show(password);
             return password;
         }
         public string value;

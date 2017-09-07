@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,14 +29,16 @@ namespace DoctorCashWpf
         private userService user = new userService();
         private BrushConverter brushConverter = new BrushConverter();
 
-        private void authentification()
+        private async void authentification()
         {
             var userData = user.authentication(txtbox_username.Text, txtbox_password.Password.ToString());
 
             //En esta parte se verificara si es admin o supervisor
-            if (userData != null && (userData.usr_SecurityLevel==3||userData.usr_SecurityLevel==2))
+            if (userData != null && (userData.usr_SecurityLevel >= (int)SECURIRYLEVEL.SUPERVISOR))
             {
                 //Si es administrador o supervisor hara lo demas en esta parte
+                createRefund.isRefund = true;
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
             else
             {                      

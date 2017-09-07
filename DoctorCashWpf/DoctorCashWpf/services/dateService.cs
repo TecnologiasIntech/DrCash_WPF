@@ -45,8 +45,8 @@ namespace DoctorCashWpf
 
         public string convertToFormatDate(string date)
         {
-            string day = date.Substring(0, 2);
-            string month = date.Substring(3, 2);
+            string month = date.Substring(0, 2);
+            string day = date.Substring(3, 2);
             string year = date.Substring(6, 4);
             string hour = "T00:00:00.000";
 
@@ -55,8 +55,8 @@ namespace DoctorCashWpf
 
         public string convertToFormatDateFinal(string date)
         {
-            string day = date.Substring(0, 2);
-            string month = date.Substring(3, 2);
+            string month = date.Substring(0, 2);
+            string day = date.Substring(3, 2);
             string year = date.Substring(6, 4);
             string hour = "T23:59:59.999";
 

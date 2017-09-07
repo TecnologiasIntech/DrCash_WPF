@@ -34,27 +34,31 @@ namespace DoctorCashWpf.Views
         {
            //var dato = dataGridViewClosedStatement.SelectedItem;
            DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
-            DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];
-
-            int dato = Convert.ToInt32(item.Row.ItemArray[0]);
-            var registerID = fila["clt_reg_RegisterID"];
-
-            var list = transaction.getTransactionsByRegisterID(registerID.ToString(), fromdate.Text, todate.Text);
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Transaction ID");
-            dt.Columns.Add("Charged");
-            dt.Columns.Add("Cash");
-            dt.Columns.Add("Credit");
-            dt.Columns.Add("Check");
-            dt.Columns.Add("Change");
-
-            for (int i = 0; i < list.Count(); i++)
+            if (dataGridViewClosedStatement.SelectedIndex != -1)
             {
-                dt.Rows.Add(list[i].trn_id, list[i].amountCharged, list[i].cash, list[i].credit, list[i].check, list[i].change);                
+                DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];
 
+                int dato = Convert.ToInt32(item.Row.ItemArray[0]);
+                var registerID = fila["clt_reg_RegisterID"];
+
+                var list = transaction.getTransactionsByRegisterID(registerID.ToString(), fromdate.Text, todate.Text);
+
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Transaction ID");
+                dt.Columns.Add("Charged");
+                dt.Columns.Add("Cash");
+                dt.Columns.Add("Credit");
+                dt.Columns.Add("Check");
+                dt.Columns.Add("Change");
+
+                for (int i = 0; i < list.Count(); i++)
+                {
+                    dt.Rows.Add(list[i].trn_id, list[i].amountCharged, list[i].cash, list[i].credit, list[i].check, list[i].change);
+
+                }
+                dataGridViewStatment.ItemsSource = dt.DefaultView;
             }
-            dataGridViewStatment.ItemsSource = dt.DefaultView;
+           
         }
 
 
