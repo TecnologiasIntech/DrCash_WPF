@@ -29,7 +29,7 @@ namespace DoctorCashWpf
         private userService user = new userService();
         private BrushConverter brushConverter = new BrushConverter();
 
-        private async void authentification()
+        private  void authentification()
         {
             var userData = user.authentication(txtbox_username.Text, txtbox_password.Password.ToString());
 

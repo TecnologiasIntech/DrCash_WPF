@@ -82,7 +82,7 @@ namespace DoctorCashWpf.Views
             else
             {
                 txtbox.Text = "";
-                label.Text = moneyComponent.getFormatMoneyComponentInZero();
+                label = moneyComponent.getMoneyComponentInZero(label);
                 getTotalCash();
             }
         }

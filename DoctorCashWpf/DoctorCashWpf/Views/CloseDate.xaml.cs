@@ -88,7 +88,7 @@ namespace DoctorCashWpf.Views
             else
             {
                 txtbox.Text = "";
-                label.Text = moneyComponent.getFormatMoneyComponentInZero();
+                label= moneyComponent.getMoneyComponentInZero(label);
                 getTotalCash();
             }
         }
@@ -224,12 +224,12 @@ namespace DoctorCashWpf.Views
             textbox_bills5.Text = "";
             textbox_bills1.Text = "";
 
-            label_totalCash.Text = moneyComponent.getFormatMoneyComponentInZero();
-            textbox_credit.Text = moneyComponent.getFormatMoneyComponentInZero();
-            textbox_check.Text = moneyComponent.getFormatMoneyComponentInZero();
-            label_totalEntered.Text = moneyComponent.getFormatMoneyComponentInZero();
-            textbox_leftInRegister.Text = moneyComponent.getFormatMoneyComponentInZero();
-            label_short.Text = moneyComponent.getFormatMoneyComponentInZero();
+            label_totalCash= moneyComponent.getMoneyComponentInZero(label_totalCash);
+            textbox_credit = moneyComponent.getMoneyComponentInZero(textbox_credit);
+            textbox_check= moneyComponent.getMoneyComponentInZero(textbox_check);
+            label_totalEntered = moneyComponent.getMoneyComponentInZero(label_totalEntered);
+            textbox_leftInRegister = moneyComponent.getMoneyComponentInZero(textbox_leftInRegister);
+            label_short= moneyComponent.getMoneyComponentInZero(label_short);
 
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.EQUALITY, 0);
             plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.EQUALITY, 0);
