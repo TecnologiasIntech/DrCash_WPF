@@ -234,6 +234,35 @@ namespace DoctorCashWpf
             createQuery.toInsert("ClosedTransactions", list);
         }
 
+        public transaction getTransactionByTrnID(string transactionID)
+        {
+            var terms = new List<valuesWhere>();
+
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", transactionID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            var data = createQuery.toSelectAll("transactions", terms);
+            var items = new transaction();
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+
+                items.amountCharged = Convert.ToInt32(filas["trn_AmountCharged"]);
+                items.copayment = Convert.ToBoolean(filas["trn_Copayment"]);
+                items.selfPay = Convert.ToBoolean(filas["trn_SelfPay"]);
+                items.deductible = Convert.ToBoolean(filas["trn_Deductible"]);
+                items.labs = Convert.ToBoolean(filas["trn_Labs"]);
+                items.other = Convert.ToBoolean(filas["trn_Other"]);
+                items.otherComments = Convert.ToString(filas["trn_OtherComments"]);
+                items.cash = Convert.ToInt32(filas["trn_Cash"]);
+                items.credit = Convert.ToInt32(filas["trn_Credit"]);
+                items.check = Convert.ToInt32(filas["trn_Check"]);
+
+            }
+
+            return items;
+        }
+
         public List<transaction> getTransactionsByUserID(string userID)
         {
             var terms = new List<valuesWhere>();

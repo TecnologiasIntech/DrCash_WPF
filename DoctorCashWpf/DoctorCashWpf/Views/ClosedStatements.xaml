@@ -115,7 +115,7 @@
                             <!--Search Button-->
                             <StackPanel Grid.Column="3" Margin="15">
                                 <Button Click="Button_Click_1" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
-                                    Style="{DynamicResource MaterialDesignFlatButton}">
+                                    Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Left" Width="110">
                                     <TextBlock Foreground="#666666" FontSize="18">
                                     Clear
                                     </TextBlock>

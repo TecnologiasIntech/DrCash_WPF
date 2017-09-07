@@ -117,6 +117,36 @@ namespace DoctorCashWpf.Views
             dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
 
         }
-       
+
+        private void dataClear()
+        {
+            txtbox_ID.Clear();
+            fromdate.Text = "";
+            todate.Text = "";
+            txt_initialCash.Text = "$0.00";
+
+            txt_cash.Text = "$0.00";
+            txt_credit.Text = "$0.00";
+            txt_check.Text = "$0.00";
+
+            txt_ciens.Text = "$0.00";
+            txt_cincuentas.Text = "$0.00";
+            txt_veintes.Text = "$0.00";
+            txt_diez.Text = "$0.00";
+            txt_cincos.Text = "$0.00";
+            txt_unos.Text = "$0.00";
+            txt_balance.Text = "$0.00";
+
+            txt_cash2.Text = "$0.00";
+            txt_credit2.Text = "$0.00";
+            txt_check2.Text = "$0.00";
+            dataGridViewClosedStatement.ItemsSource = null;
+            dataGridViewStatment.ItemsSource = null;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            dataClear();
+        }
     }
 }
