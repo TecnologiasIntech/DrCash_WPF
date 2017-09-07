@@ -46,8 +46,18 @@ namespace DoctorCashWpf
 
         public string convertToFormatDate(string date)
         {
-            string month = date.Substring(0, 2);
-            string day = date.Substring(3, 2);
+            string day = "", month = "";
+
+            if (formatDate == "dd/MM/yyyy")
+            {
+                day = date.Substring(0, 2);
+                month = date.Substring(3, 2);
+            }
+            else
+            {
+                month = date.Substring(0, 2);
+                day = date.Substring(3, 2);
+            }
             string year = date.Substring(6, 4);
             string hour = "T00:00:00.000";
 

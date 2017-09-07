@@ -36,7 +36,7 @@ namespace DoctorCashWpf.Views
             //var dato = dataGridViewClosedStatement.SelectedItem;
             DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
             DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];            
-            dataClear();
+            //dataClear();
             int dato = Convert.ToInt32(item.Row.ItemArray[0]);
             var registerID = fila["clt_reg_RegisterID"];
 
@@ -87,8 +87,8 @@ namespace DoctorCashWpf.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            if (todate.Text==""&&fromdate.Text==""&&txtbox_ID.Text=="")
-            {
+            if (todate.Text == "" && fromdate.Text == "" && txtbox_ID.Text == "") 
+            { 
                 labelerror.Content = "Complete the Date or ID fields";
             }
             else
@@ -97,7 +97,7 @@ namespace DoctorCashWpf.Views
                 var response = getreport.getCloseTransactions(txtbox_ID.Text, fromdate.Text, todate.Text);
                 var list = response.list;
                 transactionsData = response.dataTable;
-                dataClear();
+                //dataClear();
                 dataGridViewClosedStatement.ItemsSource = null;
 
                 DataTable dt = new DataTable();
