@@ -12,5 +12,6 @@ namespace DoctorCashWpf
         public string error;
         public TextBlock labelComponent;
         public TextBox TextboxComponent;
+        public string txtComponent;
     }
 }

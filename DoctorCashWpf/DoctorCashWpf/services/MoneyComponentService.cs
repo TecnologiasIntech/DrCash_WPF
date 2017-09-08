@@ -28,6 +28,14 @@ namespace DoctorCashWpf
             }
         }
 
+        public void AddFloatToComponent(string txtbock)
+        {
+            if (!txtbock.Contains(separator))
+            {
+                txtbock = txtbock + separator + "00";
+            }
+        }
+
         public moneyComponent convertComponentToMoneyFormat(TextBox txtBox, Action function)
         {
             var error = "";
@@ -115,6 +123,50 @@ namespace DoctorCashWpf
             AddFloatToComponent(txtBox);
             item.error = error;
             item.labelComponent = txtBox;
+
+            return item;
+        }
+        public moneyComponent convertComponentToMoneyFormat(string txt)
+        {
+            var error = "";
+            var item = new moneyComponent();
+
+            if (txt != "")
+            {
+                if (txt[0] != '$')
+                {
+                    if (!Char.IsNumber(txt[0]))
+                    {
+                        txt= "$0" + separator + "00";
+                        error = "Only Numbers";
+                    }
+                    else if (txt[0] == '-')
+                    {
+                        txt = "$0" + separator + "00";
+                        error = "Negative Values";
+                    }
+                    else
+                    {
+                        txt = "$" + txt;
+                    }
+                }
+                else
+                {
+                    if (!Char.IsNumber(txt.Remove(0, 1)[0]))
+                    {
+                        txt = "$0" + separator + "00";
+                        error = "Only Numbers";
+                    }
+                }
+            }
+            else
+            {
+                txt = "$0" + separator + "00";
+            }
+
+            AddFloatToComponent(txt);
+            item.error = error;
+            item.txtComponent = txt;
 
             return item;
         }

@@ -89,10 +89,10 @@ namespace DoctorCashWpf.Views
         {
             Random rnd = new Random();
             password = "";
-            /*password += onlyFirstLastName(lastname);*/
+            password += onlyFirstLastName(lastname);
             password += firtsname;
-            /*password += rnd.Next(0, 100);            
-            password += rnd.Next(0, 100);*/
+            password += rnd.Next(0, 100);            
+            password += rnd.Next(0, 100);
 
            // MessageBox.Show(password);
             return password;
