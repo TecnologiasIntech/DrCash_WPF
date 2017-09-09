@@ -116,7 +116,7 @@ namespace DoctorCashWpf.Views
             }
             else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) < Convert.ToDouble(dat1.Remove(0, 1)))
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure to enter "+moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { })+" in the box?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Are you sure to enter "+txtbox_initialCash.Text+" in the box?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     labelCash.Content = "";

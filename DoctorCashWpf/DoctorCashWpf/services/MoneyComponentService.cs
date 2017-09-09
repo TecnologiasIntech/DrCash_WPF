@@ -28,12 +28,13 @@ namespace DoctorCashWpf
             }
         }
 
-        public void AddFloatToComponent(string txtbock)
+        public string AddFloatToComponent(string txtbock)
         {
             if (!txtbock.Contains(separator))
             {
                 txtbock = txtbock + separator + "00";
             }
+            return txtbock;
         }
 
         public moneyComponent convertComponentToMoneyFormat(TextBox txtBox, Action function)
@@ -164,7 +165,7 @@ namespace DoctorCashWpf
                 txt = "$0" + separator + "00";
             }
 
-            AddFloatToComponent(txt);
+            txt=AddFloatToComponent(txt);
             item.error = error;
             item.txtComponent = txt;
 

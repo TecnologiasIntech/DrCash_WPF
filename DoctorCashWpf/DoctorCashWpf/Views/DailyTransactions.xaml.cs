@@ -64,7 +64,7 @@ namespace DoctorCashWpf.Views
 
                 for (int i = 0; i < list.Count(); i++)
                 {
-                    dt.Rows.Add(list[i].trn_id, list[i].userId, list[i].dateRegistered, list[i].patientFirstName, list[i].type, moneyService.convertComponentToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].cash.ToString()), moneyService.convertComponentToMoneyFormat(list[i].credit.ToString()), moneyService.convertComponentToMoneyFormat(list[i].check.ToString()), moneyService.convertComponentToMoneyFormat(list[i].change.ToString()), list[i].checkNumber, list[i].closed, list[i].registerId);
+                    dt.Rows.Add(list[i].trn_id, list[i].userId, list[i].dateRegistered, list[i].patientFirstName, list[i].type, list[i].amountCharged,list[i].cash,list[i].credit,list[i].check,list[i].change, list[i].checkNumber, list[i].closed, list[i].registerId);
                     charge += list[i].amountCharged;
                     cash += list[i].cash;
                     Credit += list[i].credit;
@@ -73,7 +73,7 @@ namespace DoctorCashWpf.Views
                 }
 
                 
-                dt.Rows.Add("Total´s","","","","",moneyService.convertComponentToMoneyFormat(charge.ToString()),moneyService.convertComponentToMoneyFormat(cash.ToString()),moneyService.convertComponentToMoneyFormat(Credit.ToString()),moneyService.convertComponentToMoneyFormat(Check.ToString()),moneyService.convertComponentToMoneyFormat(Change.ToString()),"","","");
+                dt.Rows.Add("Total´s","","","","",charge,cash,Credit,Check,Change,"","","");
                 
                 dataGridViewDailyTransactions.ItemsSource = dt.DefaultView;
 
