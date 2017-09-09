@@ -100,7 +100,7 @@ namespace DoctorCashWpf.Views
                 //PdfWriter write = PdfWriter.GetInstance(doc, new FileStream("", FileMode.CreateNew));
 
                 //datos de titulo
-                doc.AddTitle("Mi primer PDF");
+                doc.AddTitle("Archive PDF");
                 
                 doc.AddCreator("DrCash");
                 doc.Open();

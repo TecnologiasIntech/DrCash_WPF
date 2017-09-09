@@ -84,6 +84,11 @@ namespace DoctorCashWpf.Views
         }
 
 
+        private void Row_DoubleClick1(object sender,MouseButtonEventArgs e)
+        {
+
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -106,55 +111,63 @@ namespace DoctorCashWpf.Views
                 dt.Columns.Add("Proceced By");
                 dt.Columns.Add("Date");
 
-                for (int i = 0; i < transactionsData.Rows.Count; i++)
+                if (transactionsData.Rows.Count == 0)
                 {
-                    DataRow filas = transactionsData.Rows[i];
-
-                    dt.Rows.Add(filas["clt_closed_ID"], filas["clt_reg_RegisterID"], filas["clt_Username"], filas["clt_Datetime"]);
-
-                    initial_cash += list[i].clt_initial_cash;
-
-                    amount += list[i].clt_checks_amount + list[i].clt_credits_amount;
-
-                    cash += list[i].clt_total_cash;
-                    credit += list[i].clt_total_credit;
-                    check += list[i].clt_total_check;
-
-                    cien += list[i].clt_100_bills;
-                    cincuenta += list[i].clt_50_bills;
-                    veinte += list[i].clt_20_bills;
-                    diez += list[i].clt_10_bills;
-                    cinco += list[i].clt_5_bills;
-                    uno += list[i].clt_1_bills;
-                    balance += list[i].clt_balance;
-
-
+                    labelerror.Content = "No Data Found";
                 }
-                txt_initialCash.Text = "$" + initial_cash.ToString();
+                else
+                {
+                    for (int i = 0; i < transactionsData.Rows.Count; i++)
+                    {
+                        DataRow filas = transactionsData.Rows[i];
 
-                txt_cash.Text = "$" + cash.ToString();
-                txt_credit.Text = "$" + credit.ToString();
-                txt_check.Text = "$" + check.ToString();
-                txt_amount.Text = "$" + amount.ToString();
-                txt_ciens.Text = "$" + cien.ToString();
-                txt_cincuentas.Text = "$" + cincuenta.ToString();
-                txt_veintes.Text = "$" + veinte.ToString();
-                txt_diez.Text = "$" + diez.ToString();
-                txt_cincos.Text = "$" + cinco.ToString();
-                txt_unos.Text = "$" + uno.ToString();
-                txt_balance.Text = "$" + balance.ToString();
+                        dt.Rows.Add(filas["clt_closed_ID"], filas["clt_reg_RegisterID"], filas["clt_Username"], filas["clt_Datetime"]);
 
-                txt_cash2.Text = "$" + cash.ToString();
-                txt_credit2.Text = "$" + credit.ToString();
-                txt_check2.Text = "$" + check.ToString();
+                        initial_cash += list[i].clt_initial_cash;
 
-                dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
+                        amount += list[i].clt_checks_amount + list[i].clt_credits_amount;
+
+                        cash += list[i].clt_total_cash;
+                        credit += list[i].clt_total_credit;
+                        check += list[i].clt_total_check;
+
+                        cien += list[i].clt_100_bills;
+                        cincuenta += list[i].clt_50_bills;
+                        veinte += list[i].clt_20_bills;
+                        diez += list[i].clt_10_bills;
+                        cinco += list[i].clt_5_bills;
+                        uno += list[i].clt_1_bills;
+                        balance += list[i].clt_balance;
+
+
+                    }
+                    txt_initialCash.Text = moneyService.convertComponentToMoneyFormat(initial_cash.ToString()).txtComponent;
+
+                    txt_cash.Text = moneyService.convertComponentToMoneyFormat(cash.ToString()).txtComponent;
+                    txt_credit.Text = moneyService.convertComponentToMoneyFormat(credit.ToString()).txtComponent;
+                    txt_check.Text = moneyService.convertComponentToMoneyFormat(check.ToString()).txtComponent;
+                    txt_amount.Text = moneyService.convertComponentToMoneyFormat(amount.ToString()).txtComponent;
+                    txt_ciens.Text = moneyService.convertComponentToMoneyFormat(cien.ToString()).txtComponent;
+                    txt_cincuentas.Text = moneyService.convertComponentToMoneyFormat(cincuenta.ToString()).txtComponent;
+                    txt_veintes.Text = moneyService.convertComponentToMoneyFormat(veinte.ToString()).txtComponent;
+                    txt_diez.Text = moneyService.convertComponentToMoneyFormat(diez.ToString()).txtComponent;
+                    txt_cincos.Text = moneyService.convertComponentToMoneyFormat(cinco.ToString()).txtComponent;
+                    txt_unos.Text = moneyService.convertComponentToMoneyFormat(uno.ToString()).txtComponent;
+                    txt_balance.Text = moneyService.convertComponentToMoneyFormat(balance.ToString()).txtComponent;
+
+                    txt_cash2.Text = moneyService.convertComponentToMoneyFormat(cash.ToString()).txtComponent;
+                    txt_credit2.Text = moneyService.convertComponentToMoneyFormat(credit.ToString()).txtComponent;
+                    txt_check2.Text = moneyService.convertComponentToMoneyFormat(check.ToString()).txtComponent;
+
+                    dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
+                }                
             }
 
         }
 
         private void dataClear()
         {
+            labelerror.Content = "";
             txtbox_ID.Clear();
             fromdate.Text = "";
             todate.Text = "";
@@ -185,6 +198,11 @@ namespace DoctorCashWpf.Views
             dataClear();
             dataGridViewClosedStatement.ItemsSource = null;
             dataGridViewStatment.ItemsSource = null;
+        }
+
+        private void txtbox_ID_KeyUp(object sender, KeyEventArgs e)
+        {
+            labelerror.Content = "";            
         }
     }
 }

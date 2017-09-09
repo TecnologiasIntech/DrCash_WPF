@@ -83,6 +83,8 @@ namespace DoctorCashWpf.Views
 
         private void verifyCash()
         {
+            string dat1 = "120";            
+            dat1 = moneyComponent.convertComponentToMoneyFormat(dat1).txtComponent;
             if (txtbox_initialCash.Text == "")
             {
                 labelCash.Content = "Insert initial Cash";
@@ -93,16 +95,44 @@ namespace DoctorCashWpf.Views
                 labelCash.Content = "Insert initial Cash";
                 designOfAlertInError();
             }
-            else
+            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) >= Convert.ToDouble(dat1.Remove(0, 1)))
             {
-                labelCash.Content = "";
-                moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-                setInitialCash();
+                MessageBoxResult result = MessageBox.Show("Are you sure to enter more than $120 in the box?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    labelCash.Content = "";
+                    moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                    setInitialCash();
 
-                var response = moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-                txtbox_initialCash = response.TextboxComponent;
-                labelCash.Content = response.error;
+                    var response = moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                    txtbox_initialCash = response.TextboxComponent;
+                    labelCash.Content = response.error;
+                }
+                else
+                {
+                    txtbox_initialCash.Clear();
+                    txtbox_initialCash.Focus();
+                }
             }
+            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) < Convert.ToDouble(dat1.Remove(0, 1)))
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure to enter "+moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { })+" in the box?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    labelCash.Content = "";
+                    moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                    setInitialCash();
+                    var response = moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                    txtbox_initialCash = response.TextboxComponent;
+                    labelCash.Content = response.error;
+                }
+                else
+                {
+                    txtbox_initialCash.Clear();
+                    txtbox_initialCash.Focus();
+                }
+            }
+
         }
 
         private void setInitialCash_KeyUp(object sender, KeyEventArgs e)

@@ -124,7 +124,7 @@
 
                     <!--Print-->
                     <StackPanel Grid.Column="5" Margin="15">
-                        <Button VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
+                        <Button Click="Button_Click_2" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent"
                                 Style="{DynamicResource MaterialDesignFlatButton}">
                             <TextBlock Foreground="#6aa84f" FontSize="18">
                                 Print
@@ -160,6 +160,7 @@
                           IsReadOnly="True"/>
                 </Grid>
             </materialDesign:Card>
+            <Label Content="" Foreground="Red" Name="labelerror" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15,180,15,15"></Label>
             <!--#endregion-->
 
 

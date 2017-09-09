@@ -95,7 +95,7 @@
 
                             <!--Transaction #-->
                             <StackPanel Grid.Column="0" Margin="15 0">
-                                <TextBox x:Name="txtbox_ID"
+                                <TextBox KeyUp="txtbox_ID_KeyUp" x:Name="txtbox_ID"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                             materialDesign:HintAssist.Hint="Transaction Number" FontFamily="Roboto" FontSize="14" Width="173"/>
                             </StackPanel>
@@ -103,11 +103,11 @@
 
                             <!--Date From-->
                             <StackPanel Grid.Column="1" Margin="15">
-                                <DatePicker Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                <DatePicker KeyUp="txtbox_ID_KeyUp" Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             </StackPanel>
                             <!--Date To-->
                             <StackPanel Grid.Column="2" Margin="15">
-                                <DatePicker Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                <DatePicker KeyUp="txtbox_ID_KeyUp" Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             </StackPanel>
 
                             <!--Search Button-->
@@ -169,7 +169,13 @@
                         Padding="12">
                     <Grid>
                         <DataGrid Name="dataGridViewStatment"
-                                IsReadOnly="True"/>
+                                IsReadOnly="True">
+                            <DataGrid.ItemContainerStyle>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseUp" Handler="Row_DoubleClick1"></EventSetter>
+                                </Style>
+                            </DataGrid.ItemContainerStyle>
+                        </DataGrid>
                     </Grid>
                 </materialDesign:Card>
                 <!--#endregion-->

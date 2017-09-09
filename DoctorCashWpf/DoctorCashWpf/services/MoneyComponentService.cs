@@ -80,7 +80,7 @@ namespace DoctorCashWpf
             item.TextboxComponent = txtBox;
 
             return item;
-        }
+        }        
 
         public moneyComponent convertComponentToMoneyFormat(TextBlock txtBox)
         {
