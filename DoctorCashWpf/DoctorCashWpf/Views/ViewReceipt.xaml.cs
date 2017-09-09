@@ -47,6 +47,7 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             txtbox_question.Text = "";
             fromdate.Text = "";
             todate.Text = "";
@@ -55,26 +56,34 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             if (txtbox_question.Text == "" && fromdate.Text == "" && todate.Text == "")
             {
-
+                labelerror.Content = "Complete the Fields";
             }
             else
             {
                 var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
                 dataGridViewClosedStatement.ItemsSource = null;
 
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Transaction ID");
-                dt.Columns.Add("Patient Name");
-                dt.Columns.Add("Register");
-                dt.Columns.Add("Date");
-
-                for (int i = 0; i < list.Count(); i++)
+                if (list.Count() == 0)
                 {
-                    dt.Rows.Add(list[i].trn_id, list[i].patientFirstName, list[i].modifiedById, list[i].dateRegistered);
+                    labelerror.Content = "Data Not Found";
                 }
-                dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
+                else
+                {
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("Transaction ID");
+                    dt.Columns.Add("Patient Name");
+                    dt.Columns.Add("Register");
+                    dt.Columns.Add("Date");
+
+                    for (int i = 0; i < list.Count(); i++)
+                    {
+                        dt.Rows.Add(list[i].trn_id, list[i].patientFirstName, list[i].modifiedById, list[i].dateRegistered);
+                    }
+                    dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
+                }
             }            
         }
 
@@ -121,7 +130,7 @@ namespace DoctorCashWpf.Views
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             if (transactionID != -1)
             {
@@ -132,6 +141,8 @@ namespace DoctorCashWpf.Views
                 cashInUpdate.saveSearchToDate = todate.Text;
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+
+                await DialogHost.Show(new UpdateTransaction(), "RootDialog");
             }
         }
     }

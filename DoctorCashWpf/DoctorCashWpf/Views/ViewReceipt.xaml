@@ -154,6 +154,8 @@
 
                 </StackPanel>
 
+                <Label Name="labelerror" Content="" Foreground="Red" Margin="270" HorizontalAlignment="Center"></Label>
+
                 <!--TODO-->
 
 

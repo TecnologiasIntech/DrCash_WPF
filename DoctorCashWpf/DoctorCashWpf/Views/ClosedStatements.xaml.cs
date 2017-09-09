@@ -52,7 +52,7 @@ namespace DoctorCashWpf.Views
 
             for (int i = 0; i < list.Count(); i++)
             {
-                dt.Rows.Add(list[i].trn_id, list[i].amountCharged, list[i].cash, list[i].credit, list[i].check, list[i].change);
+                dt.Rows.Add(list[i].trn_id, moneyService.convertComponentToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].cash.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].credit.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].check.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].change.ToString()).txtComponent);
                 charged += list[i].amountCharged;
                 cash += list[i].cash;
                 credit += list[i].credit;
@@ -92,6 +92,7 @@ namespace DoctorCashWpf.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+            labelerror.Content = "";
             if (todate.Text == "" && fromdate.Text == "" && txtbox_ID.Text == "") 
             { 
                 labelerror.Content = "Complete the Date or ID fields";
@@ -103,20 +104,20 @@ namespace DoctorCashWpf.Views
                 var list = response.list;
                 transactionsData = response.dataTable;
                 //dataClear();
-                dataGridViewClosedStatement.ItemsSource = null;
-
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Closed Statement ID");
-                dt.Columns.Add("Register");
-                dt.Columns.Add("Proceced By");
-                dt.Columns.Add("Date");
-
+                dataGridViewClosedStatement.ItemsSource = null;                
+                
                 if (transactionsData.Rows.Count == 0)
                 {
-                    labelerror.Content = "No Data Found";
+                    labelerror.Content = "Data Not Found";
                 }
                 else
                 {
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("Closed Statement ID");
+                    dt.Columns.Add("Register");
+                    dt.Columns.Add("Proceced By");
+                    dt.Columns.Add("Date");
+
                     for (int i = 0; i < transactionsData.Rows.Count; i++)
                     {
                         DataRow filas = transactionsData.Rows[i];
