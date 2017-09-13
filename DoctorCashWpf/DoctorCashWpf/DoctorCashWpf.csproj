@@ -130,6 +130,7 @@
     <Compile Include="interfaces\closeDateObj.cs" />
     <Compile Include="interfaces\closeTransaction.cs" />
     <Compile Include="interfaces\log.cs" />
+    <Compile Include="interfaces\logObj.cs" />
     <Compile Include="interfaces\transactionsObj.cs" />
     <Compile Include="interfaces\moneyComponent.cs" />
     <Compile Include="services\logService.cs" />
