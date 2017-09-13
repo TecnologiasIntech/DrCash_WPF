@@ -15,8 +15,6 @@ namespace DoctorCashWpf.Printer
 
         public void print()
         {
-
-
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
             var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
@@ -65,13 +63,6 @@ namespace DoctorCashWpf.Printer
             {
 
             }
-
-
-
-
-
-
-
         }
 
         public byte[] CutPage()

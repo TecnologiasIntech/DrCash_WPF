@@ -253,7 +253,7 @@
                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
                         <TextBlock x:Name="btn_cancel" Text="Cancel" Foreground="#666666 " FontSize="18"/>
                     </Button>
-                    <Button Grid.Column="1" Margin="15,14,0,13" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                    <Button Grid.Column="1" Margin="15,14,0,13" Background="Transparent" BorderBrush="Transparent" 
                             Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_13">
                         <TextBlock x:Name="btn_save" Text="Save print" Foreground="#6aa84f " FontSize="18"/>
                     </Button>

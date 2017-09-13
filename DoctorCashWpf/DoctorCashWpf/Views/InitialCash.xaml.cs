@@ -23,7 +23,7 @@ namespace DoctorCashWpf.Views
         public InitialCash()
         {
             InitializeComponent();
-
+            hiddenAndCollapsed();
             if (!checkInitialTransaction())
             {
                 //No pedir la transaccion inicial o cerrar este dialogo
@@ -33,6 +33,20 @@ namespace DoctorCashWpf.Views
         private transactionService transaction = new transactionService();
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private dateService date = new dateService();
+
+        private void hiddenAndCollapsed()
+        {
+            BtnAgree.Visibility = Visibility.Hidden;
+            BtnAgree.Visibility = Visibility.Collapsed;
+            BtnDisagree.Visibility = Visibility.Hidden;
+            BtnDisagree.Visibility = Visibility.Collapsed;
+        }
+
+        private void visibility()
+        {
+            BtnAgree.Visibility = Visibility.Visible;            
+            BtnDisagree.Visibility = Visibility.Visible;           
+        }
 
         private bool checkInitialTransaction()
         {
@@ -75,9 +89,9 @@ namespace DoctorCashWpf.Views
         }
 
         private void designOfAlertInError()
-        {
+        {                        
             txtbox_initialCash.Clear();
-            txtbox_initialCash.Focus();            
+            txtbox_initialCash.Focus();
             txtbox_initialCash.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");            
         }
 
@@ -85,52 +99,28 @@ namespace DoctorCashWpf.Views
         {
             string dat1 = "120";            
             dat1 = moneyComponent.convertComponentToMoneyFormat(dat1).txtComponent;
-            if (txtbox_initialCash.Text == "")
-            {
-                labelCash.Content = "Insert initial Cash";
-                designOfAlertInError();
-            }
-            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == 0)
-            {
-                labelCash.Content = "Insert initial Cash";
-                designOfAlertInError();
-            }
-            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) >= Convert.ToDouble(dat1.Remove(0, 1)))
-            {
-                MessageBoxResult result = MessageBox.Show("Are you sure to enter more than $120 in the box?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    labelCash.Content = "";
-                    moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-                    setInitialCash();
 
-                    var response = moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-                    txtbox_initialCash = response.TextboxComponent;
-                    labelCash.Content = response.error;
-                }
-                else
-                {
-                    txtbox_initialCash.Clear();
-                    txtbox_initialCash.Focus();
-                }
+            if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == 0)
+            {
+                labelCash.Content = "Insert initial Cash";
+                designOfAlertInError();
+            }
+            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == Convert.ToDouble(dat1.Remove(0, 1)))
+            {
+                labelCash.Content = "";                
+                moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                setInitialCash();
+            }
+            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) > Convert.ToDouble(dat1.Remove(0, 1)))
+            {
+                labelCash.Content = "Are you sure to enter more "+"\n"+"     than $120 in the box?";                               
+                visibility();
+
             }
             else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) < Convert.ToDouble(dat1.Remove(0, 1)))
-            {
-                MessageBoxResult result = MessageBox.Show("Are you sure to enter "+txtbox_initialCash.Text+" in the box?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    labelCash.Content = "";
-                    moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-                    setInitialCash();
-                    var response = moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-                    txtbox_initialCash = response.TextboxComponent;
-                    labelCash.Content = response.error;
-                }
-                else
-                {
-                    txtbox_initialCash.Clear();
-                    txtbox_initialCash.Focus();
-                }
+            {              
+                labelCash.Content = "Are you sure to enter " +"\n  "+ txtbox_initialCash.Text + " in the box?";                
+                visibility();
             }
 
         }
@@ -148,6 +138,26 @@ namespace DoctorCashWpf.Views
         private void txtbox_initialCash_LostFocus(object sender, RoutedEventArgs e)
         {
             moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+        }
+
+        private void BtnAgree_Click(object sender, RoutedEventArgs e)
+        {
+            /*labelCash.Content = "";
+                var response = moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                txtbox_initialCash = response.TextboxComponent;
+                labelCash.Content = response.error;*/
+            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+            setInitialCash();
+            labelCash.Content = "";
+            hiddenAndCollapsed();
+        }
+
+        private void BtnDisagree_Click(object sender, RoutedEventArgs e)
+        {
+            txtbox_initialCash.Focus();
+            txtbox_initialCash.Clear();
+            labelCash.Content = "";
+            hiddenAndCollapsed();
         }
     }
 }

@@ -7,27 +7,32 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             Height="220" Width="250">
+             Height="240" Width="250">
 
-    <Grid Margin="18,1" >
+    <Grid Margin="18,1" RenderTransformOrigin="0.469,0.496" >
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="69*" />
+            <RowDefinition Height="54*" />
+            <RowDefinition Height="115*" />
         </Grid.RowDefinitions>
         <TextBlock Text="Initial Cash"
                    Margin="0 6 0 0"
                    FontSize="24" Grid.Row="0"/>
 
-        <TextBox x:Name="txtbox_initialCash" KeyUp="setInitialCash_KeyUp" Height="30" Text="{Binding Path=Txt, StringFormat=C}" FontSize="20"  Grid.Row="1" Margin="0,15,0,10" HorizontalContentAlignment="Center" materialDesign:HintAssist.Hint="$0.00"  LostFocus="txtbox_initialCash_LostFocus" />
-
+        <TextBox x:Name="txtbox_initialCash" KeyUp="setInitialCash_KeyUp" Text="{Binding Path=Txt, StringFormat=C}" FontSize="20"  Grid.Row="1" Margin="0,14,0,0" HorizontalContentAlignment="Center" materialDesign:HintAssist.Hint="$0.00"  LostFocus="txtbox_initialCash_LostFocus" Height="30" VerticalAlignment="Top" />
+        <Label Grid.Row="2" x:Name="labelCash" Margin="0,0,0,67" Content="" FontSize="11" Foreground="Red" HorizontalAlignment="Center"/>
+        <Button  Name="BtnAgree" Click="BtnAgree_Click" Grid.Row="2" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}" FontSize="11" HorizontalAlignment="Left" Margin="12,45,0,46" Height="Auto" Width="81">
+            Agree
+        </Button>
+        <Button Name="BtnDisagree" Click="BtnDisagree_Click" Grid.Row="2" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}" FontSize="11" HorizontalAlignment="Right" Margin="0,45,19,46" Height="Auto" Width="81">
+            Disagree
+        </Button>
         <Button Grid.Row="2" 
                 IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
                 HorizontalAlignment="Right"
-                Margin="17 20 16 -9"
-                Click="setInitialCash_click" >
+                Margin="0,0,16,15"
+                Click="setInitialCash_click" Height="0,25" Width="95" VerticalAlignment="Bottom" >
             ACCEPT
         </Button>
-        <Label x:Name="labelCash" Content="" HorizontalAlignment="Center" Margin="0,-9,0,0" Grid.Row="2" VerticalAlignment="Top" Height="30" Foreground="Red"/>
     </Grid>
 </UserControl>

@@ -31,6 +31,7 @@ namespace DoctorCashWpf.Views
         }
 
         MoneyComponentService moneyComponent = new MoneyComponentService();
+        private BrushConverter brushConverter = new BrushConverter();
 
         private void setValuesInitials()
         {
@@ -310,20 +311,65 @@ namespace DoctorCashWpf.Views
             plusOrLess(textbox_bills1, label_1, (int)OPERATOR.EQUALITY, 1);
         }
 
+        private void applydesign(TextBox value)
+        {            
+            value.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+        }
+
         private void Button_Click_13(object sender, RoutedEventArgs e)
         {
-            var transaction = new transactionService();
-            var items = new transaction();
-            items.registerId = userInformation.user.usr_Username;
-            items.userId = userInformation.user.usr_ID;
-            items.cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
-            items.comment = textbox_comment.Text;
-            items.type = (int)TRANSACTIONTYPE.OUT;
+            if (textbox_bills1.Text==""||textbox_bills10.Text==""||textbox_bills100.Text==""||textbox_bills20.Text==""||textbox_bills5.Text==""||textbox_bills50.Text==""||textbox_comment.Text=="")
+            {
+                #region Check
 
-            transaction.setTransactionOut(items);
+                if (textbox_bills100.Text == "")
+                {
+                    applydesign(textbox_bills100);
+                }
+                else if (textbox_bills50.Text == "")
+                {
+                    applydesign(textbox_bills50);
+                }
+                else if (textbox_bills20.Text == "")
+                {
+                    applydesign(textbox_bills20);
+                }                
+                else if (textbox_bills10.Text == "")
+                {
+                    applydesign(textbox_bills10);
+                }                                
+                else if (textbox_bills5.Text == "")
+                {
+                    applydesign(textbox_bills5);
+                }
+                else if (textbox_bills1.Text == "")
+                {
+                    applydesign(textbox_bills1);
+                }
+                else if (textbox_comment.Text == "")
+                {
+                    applydesign(textbox_comment);
+                }
 
-            Print printer = new Print();
-            printer.print(); 
+                #endregion
+            }
+            else
+            {
+                var transaction = new transactionService();
+                var items = new transaction();
+                items.registerId = userInformation.user.usr_Username;
+                items.userId = userInformation.user.usr_ID;
+                items.cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
+                items.comment = textbox_comment.Text;
+                items.type = (int)TRANSACTIONTYPE.OUT;
+
+                transaction.setTransactionOut(items);
+
+                Print printer = new Print();
+                printer.print();
+
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+            } 
 
         }
 

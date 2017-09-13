@@ -246,7 +246,8 @@ namespace DoctorCashWpf
         }
 
         private async void Capture_Initial_Cash(object sender, RoutedEventArgs e)
-        {            
+        {
+            //await DialogHost.Show(new CloseDate(), "RootDialog");
             if (userInformation.user == null)
             {
                 await DialogHost.Show(new Authentication(), "RootDialog");

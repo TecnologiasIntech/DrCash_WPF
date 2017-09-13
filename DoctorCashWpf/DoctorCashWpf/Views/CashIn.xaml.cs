@@ -88,10 +88,9 @@ namespace DoctorCashWpf
             moneyComponent.convertComponentToMoneyFormat(txtbox_amountCharge, () => { });
         }
 
+        public bool ready = false;
         private bool verifyTransactionsType()
-        {
-            var ready = false;
-
+        {            
             if (checkbox_copayment.IsChecked != false)
             {
                 ready = true;
@@ -112,71 +111,100 @@ namespace DoctorCashWpf
             {
                 ready = true;
             }
-
-            if (!ready)
-            {
-                checkbox_copayment.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
-            }
-
             return ready;
+        }
+
+        private void ApplyDesignForError(TextBox value)
+        {
+            value.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+            value.Focus();
+            labelerror.Content = "Complete Field";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (txtbox_patientFirstName.Text != "" && label_total.Text != txtbox_cash.Text && verifyTransactionsType())
-            { 
-                var transactionService = new transactionService();
-                var transaction = new transaction();
-
-                transaction.userId = userInformation.user.usr_ID;
-                //transaction.dateRegistered = DateTime.Today.ToString("d");
-                transaction.comment = txtbox_comment.Text;
-                transaction.type = (int)TRANSACTIONTYPE.IN;
-
-                transaction.amountCharged = (float)Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1));
-                transaction.cash = (float)Convert.ToDouble(txtbox_cash.Text.Remove(0, 1));
-                transaction.credit = (float)Convert.ToDouble(txtbox_credit.Text.Remove(0, 1));
-                transaction.check = (float)Convert.ToDouble(txtbox_check.Text.Remove(0, 1));
-                transaction.checkNumber = Convert.ToInt32(txtbox_numberChecks.Text);
-                transaction.change = (float)Convert.ToDouble(label_change.Text.Remove(0,1));
-                transaction.patientFirstName = txtbox_patientFirstName.Text;
-                transaction.copayment = (bool)checkbox_copayment.IsChecked;
-                transaction.selfPay = (bool)checkbox_selfPay.IsChecked; ;
-                transaction.deductible = (bool)checkbox_deductible.IsChecked; ;
-                transaction.labs = (bool)checkbox_labs.IsChecked; ;
-                transaction.other = (bool)checkbox_other.IsChecked; ;
-                transaction.closed = false;
-                transaction.registerId = userInformation.user.usr_Username;
-                transaction.modifiedById = userInformation.user.usr_ID;
-                transaction.type = (int)TRANSACTIONTYPE.IN;
-
-                transactionService.setTransaction(transaction);
-
-                // Imprime Recibo
-                Print print = new Print();
-                print.print();
-
-                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+            labelerror.Content = "";
+            if (txtbox_patientFirstName.Text == "")
+            {
+                ApplyDesignForError(txtbox_patientFirstName);
+            }
+            else if (txtbox_amountCharge.Text == "$0,00")
+            {
+                ApplyDesignForError(txtbox_amountCharge);
+            }
+            else if (txtbox_cash.Text == "$0,00")
+            {
+                ApplyDesignForError(txtbox_cash);
+            }
+            else if (txtbox_credit.Text == "$0,00")
+            {
+                ApplyDesignForError(txtbox_credit);
+            }
+            else if (txtbox_check.Text == "$0,00")
+            {
+                ApplyDesignForError(txtbox_check);
+            }
+            else if (txtbox_numberChecks.Text == "0")
+            {
+                ApplyDesignForError(txtbox_numberChecks);
+            }
+            else if (txtbox_comment.Text == "")
+            {
+                ApplyDesignForError(txtbox_comment);
             }
             else
             {
-                if(txtbox_patientFirstName.Text == "")
+                verifyTransactionsType();
+                if (ready == false)
                 {
-                    txtbox_patientFirstName.Focus();
-
-                    txtbox_patientFirstName.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+                    checkbox_copayment.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+                    checkbox_deductible.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+                    checkbox_labs.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+                    checkbox_other.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+                    checkbox_selfPay.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+                    labelerror.Content = "Select a transaction type";
                 }
                 else
                 {
-                    txtbox_cash.Focus();
+                    var transactionService = new transactionService();
+                    var transaction = new transaction();
 
-                    txtbox_cash.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+                    transaction.userId = userInformation.user.usr_ID;
+                    //transaction.dateRegistered = DateTime.Today.ToString("d");
+                    transaction.comment = txtbox_comment.Text;
+                    transaction.type = (int)TRANSACTIONTYPE.IN;
+
+                    transaction.amountCharged = (float)Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1));
+                    transaction.cash = (float)Convert.ToDouble(txtbox_cash.Text.Remove(0, 1));
+                    transaction.credit = (float)Convert.ToDouble(txtbox_credit.Text.Remove(0, 1));
+                    transaction.check = (float)Convert.ToDouble(txtbox_check.Text.Remove(0, 1));
+                    transaction.checkNumber = Convert.ToInt32(txtbox_numberChecks.Text);
+                    transaction.change = (float)Convert.ToDouble(label_change.Text.Remove(0, 1));
+                    transaction.patientFirstName = txtbox_patientFirstName.Text;
+                    transaction.copayment = (bool)checkbox_copayment.IsChecked;
+                    transaction.selfPay = (bool)checkbox_selfPay.IsChecked; ;
+                    transaction.deductible = (bool)checkbox_deductible.IsChecked; ;
+                    transaction.labs = (bool)checkbox_labs.IsChecked; ;
+                    transaction.other = (bool)checkbox_other.IsChecked; ;
+                    transaction.closed = false;
+                    transaction.registerId = userInformation.user.usr_Username;
+                    transaction.modifiedById = userInformation.user.usr_ID;
+                    transaction.type = (int)TRANSACTIONTYPE.IN;
+
+                    transactionService.setTransaction(transaction);
+
+                    // Imprime Recibo
+                    Print print = new Print();
+                    print.print();
+
+                    MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                 }
             }
         }
 
         private void clearInputs()
         {
+            labelerror.Content = "";
             txtbox_amountCharge = moneyComponent.getMoneyComponentInZero(txtbox_amountCharge);
             txtbox_cash = moneyComponent.getMoneyComponentInZero(txtbox_cash);
             txtbox_credit = moneyComponent.getMoneyComponentInZero(txtbox_credit);
@@ -198,6 +226,7 @@ namespace DoctorCashWpf
 
         private void getTotal_amount_change()
         {
+            labelerror.Content = "";
             double total = 0;
             if(txtbox_cash.Text != "")
             {
@@ -224,6 +253,7 @@ namespace DoctorCashWpf
 
         private void txtbox_amountCharge_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             moneyComponent.convertComponentToMoneyFormat(txtbox_amountCharge, ()=> { });
 
             label_amount.Text = txtbox_amountCharge.Text;
@@ -234,6 +264,7 @@ namespace DoctorCashWpf
 
         private void txtbox_amountCharge_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 moneyComponent.convertComponentToMoneyFormat(txtbox_amountCharge, () => { });
@@ -247,6 +278,7 @@ namespace DoctorCashWpf
 
         private void txtbox_cash_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 moneyComponent.convertComponentToMoneyFormat(txtbox_cash, () => { });
@@ -256,12 +288,14 @@ namespace DoctorCashWpf
 
         private void txtbox_cash_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             moneyComponent.convertComponentToMoneyFormat(txtbox_cash, () => { });
             getTotal_amount_change();
         }
 
         private void txtbox_credit_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 moneyComponent.convertComponentToMoneyFormat(txtbox_credit, () => { });
@@ -271,12 +305,14 @@ namespace DoctorCashWpf
 
         private void txtbox_credit_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             moneyComponent.convertComponentToMoneyFormat(txtbox_credit, () => { });
             getTotal_amount_change();
         }
 
         private void txtbox_check_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 moneyComponent.convertComponentToMoneyFormat(txtbox_check, () => { });
@@ -286,13 +322,15 @@ namespace DoctorCashWpf
 
         private void txtbox_check_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             moneyComponent.convertComponentToMoneyFormat(txtbox_check, () => { });
             getTotal_amount_change();
         }
 
         private void txtbox_numberChecks_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            labelerror.Content = "";
+            if (e.Key == Key.Enter)
             {
                 if (!Char.IsNumber(txtbox_numberChecks.Text[0]))
                 {
@@ -303,6 +341,7 @@ namespace DoctorCashWpf
 
         private void txtbox_numberChecks_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             if (!Char.IsNumber(txtbox_numberChecks.Text[0]))
             {
                 txtbox_numberChecks.Text = 0.ToString();
@@ -326,31 +365,37 @@ namespace DoctorCashWpf
 
         private void txtbox_amountCharge_GotFocus_1(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             txtbox_amountCharge.SelectAll();
         }
 
         private void txtbox_cash_GotFocus_1(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             txtbox_cash.SelectAll();
         }
 
         private void txtbox_credit_GotFocus_1(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             txtbox_credit.SelectAll();
         }
 
         private void txtbox_check_GotFocus_1(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             txtbox_check.SelectAll();
         }
 
         private void txtbox_numberChecks_GotFocus_1(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             txtbox_numberChecks.SelectAll();
         }
 
         private void txtbox_patientFirstName_GotFocus_1(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             txtbox_patientFirstName.SelectAll();
         }
 
@@ -374,6 +419,11 @@ namespace DoctorCashWpf
             trn.change = (float)Convert.ToDouble(label_change.Text.Remove(0, 1));
 
             transaction.updateTransaction(trn);
+        }
+
+        private void txtbox_comment_KeyUp(object sender, KeyEventArgs e)
+        {
+            labelerror.Content = "";
         }
     }
 }

@@ -322,6 +322,7 @@
                         <TextBlock Text="Print" Foreground="#6aa84f " FontSize="18"/>
                     </Button>
                 </Grid>
+                <Label Name="labelerror" Content="" FontSize="11" HorizontalAlignment="Center" Margin="5,15,0,0" Foreground="Red" Grid.Row="7"></Label>
                 <!--#endregion-->
 
             </Grid>

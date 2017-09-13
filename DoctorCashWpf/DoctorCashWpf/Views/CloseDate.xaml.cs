@@ -32,6 +32,7 @@ namespace DoctorCashWpf.Views
 
         private transactionService transaction = new transactionService();
         private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private BrushConverter brushConverter = new BrushConverter();
 
         private void setValuesInitials()
         {
@@ -217,6 +218,7 @@ namespace DoctorCashWpf.Views
 
         private void clearInputs()
         {
+            labelerror.Content = "";
             textbox_bills100.Text = "";
             textbox_bills50.Text = "";
             textbox_bills20.Text = "";
@@ -241,66 +243,79 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.REMOVE, 100);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.SUM, 100);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.REMOVE, 50);
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.SUM, 50);
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills20, label_bills20, (int)OPERATOR.REMOVE, 20);
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills20, label_bills20, (int)OPERATOR.SUM, 20);
         }
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills10, label_bills10, (int)OPERATOR.REMOVE, 10);
         }
 
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills10, label_bills10, (int)OPERATOR.SUM, 10);
         }
 
         private void Button_Click_8(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills5, label_bills5, (int)OPERATOR.REMOVE, 5);
         }
 
         private void Button_Click_9(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills5, label_bills5, (int)OPERATOR.SUM, 5);
         }
 
         private void Button_Click_10(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills1, label_bills1, (int)OPERATOR.REMOVE, 1);
         }
 
         private void Button_Click_11(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills1, label_bills1, (int)OPERATOR.SUM, 1);
         }
 
         private void textbox_bills100_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.EQUALITY, 100);
@@ -309,6 +324,7 @@ namespace DoctorCashWpf.Views
 
         private void textbox_bills100_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.EQUALITY, 100);
         }
 
@@ -319,6 +335,7 @@ namespace DoctorCashWpf.Views
 
         private void textbox_bills50_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.EQUALITY, 50);
@@ -327,11 +344,13 @@ namespace DoctorCashWpf.Views
 
         private void textbox_bills50_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.EQUALITY, 50);
         }
 
         private void textbox_bills20_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 plusOrLess(textbox_bills20, label_bills20, (int)OPERATOR.EQUALITY, 20);
@@ -340,11 +359,13 @@ namespace DoctorCashWpf.Views
 
         private void textbox_bills20_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills20, label_bills20, (int)OPERATOR.EQUALITY, 20);
         }
 
         private void textbox_bills10_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 plusOrLess(textbox_bills10, label_bills10, (int)OPERATOR.EQUALITY, 10);
@@ -353,11 +374,13 @@ namespace DoctorCashWpf.Views
 
         private void textbox_bills10_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills10, label_bills10, (int)OPERATOR.EQUALITY, 10);
         }
 
         private void textbox_bills5_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 plusOrLess(textbox_bills5, label_bills5, (int)OPERATOR.EQUALITY, 5);
@@ -366,11 +389,13 @@ namespace DoctorCashWpf.Views
 
         private void textbox_bills5_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills5, label_bills5, (int)OPERATOR.EQUALITY, 5);
         }
 
         private void textbox_bills1_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 plusOrLess(textbox_bills1, label_bills1, (int)OPERATOR.EQUALITY, 1);
@@ -379,11 +404,13 @@ namespace DoctorCashWpf.Views
 
         private void textbox_bills1_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             plusOrLess(textbox_bills1, label_bills1, (int)OPERATOR.EQUALITY, 1);
         }
 
         private void textbox_credit_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 moneyComponent.convertComponentToMoneyFormat(textbox_credit, () => { getCurrentTransactions(); });
@@ -393,11 +420,13 @@ namespace DoctorCashWpf.Views
 
         private void textbox_credit_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             moneyComponent.convertComponentToMoneyFormat(textbox_credit, () => { getCurrentTransactions(); });
         }
 
         private void textbox_check_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 moneyComponent.convertComponentToMoneyFormat(textbox_check, () => { getCurrentTransactions(); });
@@ -407,11 +436,13 @@ namespace DoctorCashWpf.Views
 
         private void textbox_check_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             moneyComponent.convertComponentToMoneyFormat(textbox_check, () => { getCurrentTransactions(); });
         }
 
         private void textbox_leftRegister_KeyUp(object sender, KeyEventArgs e)
         {
+            labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
                 moneyComponent.convertComponentToMoneyFormat(textbox_leftInRegister, () => { getCurrentTransactions(); });
@@ -420,51 +451,61 @@ namespace DoctorCashWpf.Views
 
         private void textbox_leftRegister_LostFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             moneyComponent.convertComponentToMoneyFormat(textbox_leftInRegister, () => { getCurrentTransactions(); });
         }
 
         private void textbox_credit_GotFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             textbox_credit.SelectAll();
         }
 
         private void textbox_check_GotFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             textbox_check.SelectAll();
         }
 
         private void textbox_leftInRegister_GotFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             textbox_leftInRegister.SelectAll();
         }
 
         private void textbox_bills100_GotFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             textbox_bills100.SelectAll();
         }
 
         private void textbox_bills50_GotFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             textbox_bills50.SelectAll();
         }
 
         private void textbox_bills20_GotFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             textbox_bills20.SelectAll();
         }
 
         private void textbox_bills10_GotFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             textbox_bills10.SelectAll();
         }
 
         private void textbox_bills5_GotFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             textbox_bills5.SelectAll();
         }
 
         private void textbox_bills1_GotFocus(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             textbox_bills1.SelectAll();
         }
 
@@ -473,23 +514,77 @@ namespace DoctorCashWpf.Views
 
         }
 
+        private void applydesign(TextBox value)
+        {            
+            value.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+            value.Focus();
+            labelerror.Content = "Complete Field";
+        }
+
         private void Button_Click_13(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
             var clDate = new closeDate();
 
-            clDate.clt_100_bills = (float)Convert.ToDouble(label_bills100.Text.Remove(0, 1));
-            clDate.clt_50_bills = (float)Convert.ToDouble(label_bills50.Text.Remove(0, 1));
-            clDate.clt_20_bills = (float)Convert.ToDouble(label_bills20.Text.Remove(0, 1));
-            clDate.clt_10_bills = (float)Convert.ToDouble(label_bills10.Text.Remove(0, 1));
-            clDate.clt_5_bills = (float)Convert.ToDouble(label_bills5.Text.Remove(0, 1));
-            clDate.clt_1_bills = (float)Convert.ToDouble(label_bills1.Text.Remove(0, 1));
-            clDate.clt_total_cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
-            clDate.clt_total_check = (float)Convert.ToDouble(textbox_check.Text.Remove(0, 1));
-            clDate.clt_total_credit = (float)Convert.ToDouble(textbox_credit.Text.Remove(0, 1));
+            if (textbox_bills1.Text == "" || textbox_bills10.Text == "" || textbox_bills100.Text == "" || textbox_bills20.Text == "" || textbox_bills5.Text == "" || textbox_bills50.Text == ""||textbox_credit.Text== "$0,00" || textbox_check.Text== "$0,00" || textbox_leftInRegister.Text=="$0,00")
+            {
+                #region Check                               
+                if (textbox_bills100.Text == "")
+                {
+                    applydesign(textbox_bills100);
+                }
+                               
+                else if (textbox_bills50.Text == "")
+                {
+                    applydesign(textbox_bills50);
+                }
+                else if (textbox_bills20.Text == "")
+                {
+                    applydesign(textbox_bills20);
+                }
+                else if (textbox_bills10.Text == "")
+                {
+                    applydesign(textbox_bills10);
+                }
+                else if (textbox_bills5.Text == "")
+                {
+                    applydesign(textbox_bills5);
+                }
+                else if (textbox_bills1.Text == "")
+                {
+                    applydesign(textbox_bills1);
+                }
+                else if (textbox_credit.Text == "$0,00")
+                {
+                    applydesign(textbox_credit);
+                }
+                else if (textbox_check.Text == "$0,00")
+                {
+                    applydesign(textbox_check);
+                }
+                else if (textbox_leftInRegister.Text == "$0,00")
+                {
+                    applydesign(textbox_leftInRegister);
+                }
+                #endregion
+            }
+            else
+            {
+                labelerror.Content = "";
+                clDate.clt_100_bills = (float)Convert.ToDouble(label_bills100.Text.Remove(0, 1));
+                clDate.clt_50_bills = (float)Convert.ToDouble(label_bills50.Text.Remove(0, 1));
+                clDate.clt_20_bills = (float)Convert.ToDouble(label_bills20.Text.Remove(0, 1));
+                clDate.clt_10_bills = (float)Convert.ToDouble(label_bills10.Text.Remove(0, 1));
+                clDate.clt_5_bills = (float)Convert.ToDouble(label_bills5.Text.Remove(0, 1));
+                clDate.clt_1_bills = (float)Convert.ToDouble(label_bills1.Text.Remove(0, 1));
+                clDate.clt_total_cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
+                clDate.clt_total_check = (float)Convert.ToDouble(textbox_check.Text.Remove(0, 1));
+                clDate.clt_total_credit = (float)Convert.ToDouble(textbox_credit.Text.Remove(0, 1));
 
-            transaction.setClosedTransaction(clDate);
+                transaction.setClosedTransaction(clDate);
 
-            MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+            }            
         }
     }
 }
