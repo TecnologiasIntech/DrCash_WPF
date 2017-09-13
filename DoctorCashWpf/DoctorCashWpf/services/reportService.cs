@@ -12,6 +12,7 @@ namespace DoctorCashWpf
         private sqlQueryService createQuery = new sqlQueryService();
         private createItemsForListService createItem = new createItemsForListService();
         private dateService date = new dateService();
+
         private List<string> getTransactionsColumns()
         {
             var columns = new List<string>();
