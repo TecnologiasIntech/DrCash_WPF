@@ -57,7 +57,7 @@ namespace DoctorCashWpf
                     }
                     else
                     {
-                        txtBox.Text = "$" + txtBox.Text;
+                        txtBox.Text = "$" + txtBox.Text + separator + "00";
                     }
                 }
                 else
@@ -104,7 +104,7 @@ namespace DoctorCashWpf
                     }
                     else
                     {
-                        txtBox.Text = "$" + txtBox.Text;
+                        txtBox.Text = "$" + txtBox.Text + separator + "00";
                     }
                 }
                 else
@@ -148,7 +148,7 @@ namespace DoctorCashWpf
                     }
                     else
                     {
-                        txt = "$" + txt;
+                        txt = "$" + txt + separator + "00";
                     }
                 }
                 else
