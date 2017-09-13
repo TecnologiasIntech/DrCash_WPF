@@ -129,8 +129,10 @@
     <Compile Include="interfaces\closeDate.cs" />
     <Compile Include="interfaces\closeDateObj.cs" />
     <Compile Include="interfaces\closeTransaction.cs" />
+    <Compile Include="interfaces\log.cs" />
     <Compile Include="interfaces\transactionsObj.cs" />
     <Compile Include="interfaces\moneyComponent.cs" />
+    <Compile Include="services\logService.cs" />
     <Compile Include="statics\cashInUpdate.cs" />
     <Compile Include="statics\closeDate.cs" />
     <Compile Include="interfaces\user.cs" />
