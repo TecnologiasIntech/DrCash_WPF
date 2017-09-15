@@ -32,7 +32,7 @@ namespace DoctorCashWpf.Views
 
         MoneyComponentService moneyComponent = new MoneyComponentService();
         private BrushConverter brushConverter = new BrushConverter();
-
+        private logService serviceslog = new logService();
         private void setValuesInitials()
         {
             moneyComponent.convertComponentToMoneyFormat(label_totalCash);
@@ -365,6 +365,12 @@ namespace DoctorCashWpf.Views
 
                 transaction.setTransactionOut(items);
 
+                var item = new log();
+                item.log_Username = userInformation.user.usr_Username;
+                item.log_DateTime = DateTime.Now.ToString();
+                item.log_Actions = "Cash Out Created by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash="+label_totalCash;
+                serviceslog.CreateLog(item);
+
                 Print printer = new Print();
                 printer.print();
 
@@ -401,6 +407,15 @@ namespace DoctorCashWpf.Views
         private void textbox_bills1_GotFocus(object sender, RoutedEventArgs e)
         {
             textbox_bills1.SelectAll();
+        }
+
+        private void Button_Click_14(object sender, RoutedEventArgs e)
+        {
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = DateTime.Now.ToString();
+            items.log_Actions = "Cash Out Cancel by UserName="+userInformation.user.usr_Username+", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash Captured="+label_totalCash;
+            serviceslog.CreateLog(items);
         }
     }
 }

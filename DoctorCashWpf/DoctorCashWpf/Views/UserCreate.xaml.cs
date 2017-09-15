@@ -26,6 +26,7 @@ namespace DoctorCashWpf.Views
         }
         userService user = new userService();
         private BrushConverter brushConverter = new BrushConverter();
+        private logService serviceslog = new logService();
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
@@ -71,13 +72,21 @@ namespace DoctorCashWpf.Views
             }            
             else
             {
+
+                var item = new log();
+                item.log_Username = txtbox_username.Text;
+                item.log_DateTime = DateTime.Now.ToString();
+                item.log_Actions = "New User Created= ("+txtbox_firtname.Text+" "+txtbox_lastname.Text+") by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                serviceslog.CreateLog(item);
+
+
                 var items = new user();
                 items.usr_Username = txtbox_username.Text;
                 items.usr_FirstName = txtbox_firtname.Text;
                 items.usr_LastName = txtbox_lastname.Text;
                 items.usr_Email = txtbox_email.Text;
                 items.usr_SecurityLevel = getSecurityLevel();
-                items.usr_Password = PassWord(txtbox_firtname.Text, txtbox_lastname.Text);
+                items.usr_Password = "";
 
                 user.createUser(items);
 
@@ -140,6 +149,15 @@ namespace DoctorCashWpf.Views
         private void txtbox_username_KeyUp(object sender, KeyEventArgs e)
         {
             labeldata.Content = "";
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var item = new log();
+            item.log_Username = txtbox_username.Text;
+            item.log_DateTime = DateTime.Now.ToString();
+            item.log_Actions = "User Creation Canceled by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+            serviceslog.CreateLog(item);
         }
     }
 }

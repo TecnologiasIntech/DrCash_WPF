@@ -30,6 +30,7 @@ namespace DoctorCashWpf.Views
 
         private userService user = new userService();
         private dateService date = new dateService();
+        private logService serviceslog = new logService();
 
 
         private async void Manage_User_Button_Click(object sender, RoutedEventArgs e)
@@ -106,6 +107,12 @@ namespace DoctorCashWpf.Views
             {
                 items.usr_Password = null;
             }
+
+            var item = new log();
+            item.log_Username = userInformation.user.usr_Username;
+            item.log_DateTime = DateTime.Now.ToString();
+            item.log_Actions = "The (" + txtbox_firstname.Text + " " + txtbox_lastname.Text + ") Information Was Modified by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+            serviceslog.CreateLog(item);
 
             user.updateBasicInformation(items);
 

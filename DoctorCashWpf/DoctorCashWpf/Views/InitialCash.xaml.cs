@@ -33,6 +33,7 @@ namespace DoctorCashWpf.Views
         private transactionService transaction = new transactionService();
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private dateService date = new dateService();
+        logService serviceslog = new logService();
 
         private void hiddenAndCollapsed()
         {
@@ -83,6 +84,12 @@ namespace DoctorCashWpf.Views
                 items.registerId = userInformation.user.usr_Username;
 
                 transaction.setTransactionInitialCash(items);
+
+                var item = new log();
+                item.log_Username = userInformation.user.usr_Username;
+                item.log_DateTime = DateTime.Now.ToString();
+                item.log_Actions = "Set Initial Cash by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " For=" + txtbox_initialCash.Text;
+                serviceslog.CreateLog(item);
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }

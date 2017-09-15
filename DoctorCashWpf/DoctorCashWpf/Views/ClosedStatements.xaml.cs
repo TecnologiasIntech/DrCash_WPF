@@ -28,6 +28,8 @@ namespace DoctorCashWpf.Views
         MoneyComponentService moneyService = new MoneyComponentService();
         reportService getreport = new reportService();
         transactionService transaction = new transactionService();
+        logService serviceslog = new logService();
+
         private DataTable transactionsData;
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -99,6 +101,12 @@ namespace DoctorCashWpf.Views
             }
             else
             {
+                var items = new log();
+                items.log_Username = userInformation.user.usr_Username;
+                items.log_DateTime = DateTime.Now.ToString();
+                items.log_Actions = "Search Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Closed Statement, Search Data: Transaction Number=" + txtbox_ID.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                serviceslog.CreateLog(items);
+
                 double initial_cash = 0, amount = 0, cash = 0, credit = 0, check = 0, balance = 0, cien = 0, cincuenta = 0, veinte = 0, diez = 0, cinco = 0, uno = 0;
                 var response = getreport.getCloseTransactions(txtbox_ID.Text, fromdate.Text, todate.Text);
                 var list = response.list;
@@ -160,7 +168,7 @@ namespace DoctorCashWpf.Views
                     txt_credit2.Text = moneyService.convertComponentToMoneyFormat(credit.ToString()).txtComponent;
                     txt_check2.Text = moneyService.convertComponentToMoneyFormat(check.ToString()).txtComponent;
 
-                    dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
+                    dataGridViewClosedStatement.ItemsSource = dt.DefaultView;                    
                 }                
             }
 

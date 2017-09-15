@@ -32,8 +32,17 @@ namespace DoctorCashWpf.Views
 
         private userService user = new userService();
         private BrushConverter brushConverter = new BrushConverter();
+        private logService serviceslog = new logService();
         private int userID;
         private DataTable usersData;
+
+        int uID;
+        string firstName;
+        string lastName;
+        string email;
+        bool passwordReset;
+        bool activeAcount;
+        string security,security1;
 
         private void Apply_Changes_Click(object sender, RoutedEventArgs e)
         {
@@ -53,6 +62,13 @@ namespace DoctorCashWpf.Views
 
             label_applyChanges.Foreground = (Brush)brushConverter.ConvertFrom("#FFFFFF");
             Apply_Changes.Background = (Brush)brushConverter.ConvertFrom("#27ae60");
+
+            var item = new log();
+            item.log_Username = userInformation.user.usr_Username;
+            item.log_DateTime = DateTime.Now.ToString();
+            item.log_Actions = "User Update Before:("+ uID+", "+firstName+", "+lastName+", "+passwordReset.ToString()+", "+activeAcount.ToString()+", "+security1+", "+email+"), Now:("+items.usr_ID+", "+items.usr_FirstName+", "+items.usr_LastName+", "+items.usr_Password+", "+items.usr_ActiveAccount+", "+items.usr_SecurityLevel+") by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in ManageUser";
+            serviceslog.CreateLog(item);
+
         }
 
         private int getSecurityLevel()
@@ -89,10 +105,25 @@ namespace DoctorCashWpf.Views
             grid_users.ItemsSource = dt.DefaultView;
         }
 
-        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        private void saveTemporalDataUser()
         {
             DataRow fila = usersData.Rows[grid_users.SelectedIndex];
 
+            uID = (int)fila["usr_ID"];
+            firstName = fila["usr_FirstName"].ToString();
+            lastName = fila["usr_LastName"].ToString();
+            email = (string)fila["usr_Email"];
+            passwordReset = (bool)fila["usr_PasswordReset"];
+            activeAcount = (bool)fila["usr_ActiveAccount"];
+            setSecurityLevel((int)fila["usr_SecurityLevel"]);
+            security1 = security;
+
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataRow fila = usersData.Rows[grid_users.SelectedIndex];
+            saveTemporalDataUser();
             userID = (int)fila["usr_ID"];
             txtbox_firstName.Text = fila["usr_FirstName"].ToString();
             txtbox_lastName.Text = fila["usr_LastName"].ToString();
@@ -112,14 +143,17 @@ namespace DoctorCashWpf.Views
             {
                 case (int)SECURIRYLEVEL.USER:
                     radio_user.IsChecked = true;
+                    security = "User";
                     break;
 
                 case (int)SECURIRYLEVEL.SUPERVISOR:
                     radio_super.IsChecked = true;
+                    security = "Supervisor";
                     break;
 
                 case (int)SECURIRYLEVEL.ADMINISTRATOR:
                     radio_admin.IsChecked = true;
+                    security = "Administrator";
                     break;
             }
         }

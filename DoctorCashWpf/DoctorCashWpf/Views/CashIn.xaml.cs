@@ -36,6 +36,7 @@ namespace DoctorCashWpf
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private BrushConverter brushConverter = new BrushConverter();
         private transactionService transaction = new transactionService();
+        private logService serviceslog = new logService();
 
         private void loadValuesToUpdate(int transactionID)
         {
@@ -192,6 +193,13 @@ namespace DoctorCashWpf
                     transaction.type = (int)TRANSACTIONTYPE.IN;
 
                     transactionService.setTransaction(transaction);
+
+
+                    var items = new log();
+                    items.log_Username = userInformation.user.usr_Username;
+                    items.log_DateTime = DateTime.Now.ToString();
+                    items.log_Actions = "Cash In Created by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total=" + label_total + ", Amount=" + label_amount + ", Change=" + label_change;                    
+                    serviceslog.CreateLog(items);
 
                     // Imprime Recibo
                     Print print = new Print();
@@ -419,6 +427,13 @@ namespace DoctorCashWpf
             trn.change = (float)Convert.ToDouble(label_change.Text.Remove(0, 1));
 
             transaction.updateTransaction(trn);
+
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = DateTime.Now.ToString();
+            items.log_Actions = "Cash In Cancel by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data Captured: Total=" + label_total + ", Amount=" + label_amount + ", Change=" + label_change;
+            serviceslog.CreateLog(items);
+
         }
 
         private void txtbox_comment_KeyUp(object sender, KeyEventArgs e)

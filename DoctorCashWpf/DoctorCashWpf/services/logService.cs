@@ -13,58 +13,120 @@ namespace DoctorCashWpf
         private createItemsForListService createItem = new createItemsForListService();
         private dateService date = new dateService();
 
-        public void setLog(log log)
+        private List<string> getLogColumns()
         {
-            var list = new List<columnsValues>();
+            var columns = new List<string>();            
+            columns.Add("log_ID");
+            columns.Add("log_Username");
+            columns.Add("log_DateTime");
+            columns.Add("log_Actions");
 
-            list.Add(createItem.ofTypeColumnsValues("log_Username", log.log_Username));
-            list.Add(createItem.ofTypeColumnsValues("log_DateTime", date.getCurrentDate()));
-            list.Add(createItem.ofTypeColumnsValues("log_Actions", log.log_Actions));
-
-            createQuery.toInsert("Log", list);
+            return columns;
         }
 
         public logObj getLogs(string proccessedBy, string fromDate, string toDate)
-        {
-            var terms = new List<valuesWhere>();
+        {            
             var obj = new logObj();
+            var data = new DataTable();            
 
-            if(proccessedBy != "" && fromDate != "" && toDate != "")
+            if (proccessedBy != "" && fromDate != "" && toDate != "")
             {
-                terms.Add(createItem.ofTypeValuesWhere(true, "log_Username", proccessedBy, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+                data = getproccessedByByIdAndRange(proccessedBy, fromDate, toDate);
             }
 
-            if (proccessedBy != "" && fromDate == "" && toDate == "")
+            else if (proccessedBy != "" && fromDate == "" && toDate == "")
             {
-                terms.Add(createItem.ofTypeValuesWhere(true, "log_Username", proccessedBy, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+                data = getproccessedByById(proccessedBy);
             }
 
-            if (fromDate != "" && toDate != "")
+            else if (proccessedBy==""&&fromDate != "" && toDate != "")
             {
-                terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", fromDate, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-                terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", toDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+                data = getLogOnlyByRange(fromDate, toDate);
             }
 
-            if (fromDate != "" && toDate == "")
+            else if (proccessedBy == "" && fromDate != "" && toDate == "")
             {
-                terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", fromDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+                data = getLogOnlyByfromDate(fromDate);
+            }
+            else if (proccessedBy == "" && fromDate == "" && toDate != "")
+            {
+                data = getLogOnlyBytoDate(toDate);
             }
 
-            obj.Datatable = createQuery.toSelectAll("Log", terms);
+            obj.Datatable = data;
+            obj.list = setLogDateInList(data);
 
-            for (int i = 0; i < obj.Datatable.Rows.Count; i++)
+            return obj;
+        }
+
+        private List<log> setLogDateInList(DataTable data)
+        {
+            var list = new List<log>();
+
+            for (int i = 0; i < data.Rows.Count; i++)
             {
-                DataRow filas = obj.Datatable.Rows[i];
+                DataRow filas = data.Rows[i];
                 var items = new log();
-
+                items.log_ID = Convert.ToInt32(filas["log_ID"]);
                 items.log_Username = Convert.ToString(filas["log_Username"]);
                 items.log_DateTime = Convert.ToString(filas["log_DateTime"]);
                 items.log_Actions = Convert.ToString(filas["log_Actions"]);
 
-                obj.list.Add(items);
+                list.Add(items);
             }
 
-            return obj;
+            return list;
+        }
+
+        private DataTable getproccessedByByIdAndRange(string proccessedBy, string fromDate, string toDate)
+        {            
+            var terms = new List<valuesWhere>();
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_Username", proccessedBy, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", fromDate, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", toDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+
+            return createQuery.toSelectAll("Log", terms);
+        }
+
+        private DataTable getproccessedByById(string proccessedBy)
+        {
+            var terms = new List<valuesWhere>();
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_Username", proccessedBy, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));            
+
+            return createQuery.toSelectAll("Log", terms);
+        }
+
+        private DataTable getLogOnlyByRange(string fromDate,string toDate)
+        {
+            var terms = new List<valuesWhere>();
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", fromDate, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", toDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            return createQuery.toSelectAll("Log", terms);
+        }
+
+        private DataTable getLogOnlyByfromDate(string fromDate)
+        {
+            var terms = new List<valuesWhere>();
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", fromDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.GREATER_THAN_OR_EQUAL));            
+            return createQuery.toSelectAll("Log", terms);
+        }
+
+        private DataTable getLogOnlyBytoDate( string toDate)
+        {
+            var terms = new List<valuesWhere>();            
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", toDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            return createQuery.toSelectAll("Log", terms);
+        }
+
+        public void CreateLog(log log)
+        {
+            List<columnsValues> list = new List<columnsValues>();
+            
+            list.Add(createItem.ofTypeColumnsValues("log_Username", log.log_Username));
+            list.Add(createItem.ofTypeColumnsValues("log_DateTime", log.log_DateTime));
+            list.Add(createItem.ofTypeColumnsValues("log_Actions", log.log_Actions));
+
+            createQuery.toInsert("Log", list);            
         }
     }
 }

@@ -33,6 +33,7 @@ namespace DoctorCashWpf.Views
         private transactionService transaction = new transactionService();
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private BrushConverter brushConverter = new BrushConverter();
+        private logService serviceslog = new logService();
 
         private void setValuesInitials()
         {
@@ -583,8 +584,23 @@ namespace DoctorCashWpf.Views
 
                 transaction.setClosedTransaction(clDate);
 
+                var item = new log();
+                item.log_Username = userInformation.user.usr_Username;
+                item.log_DateTime = DateTime.Now.ToString();
+                item.log_Actions = "Close Date Created by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash="+label_totalCash;
+                serviceslog.CreateLog(item);
+
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }            
+        }
+
+        private void Button_Click_14(object sender, RoutedEventArgs e)
+        {
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = DateTime.Now.ToString();
+            items.log_Actions = "Close Date Cancel by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName;
+            serviceslog.CreateLog(items);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace DoctorCashWpf
 
         private userService user = new userService();
         private BrushConverter brushConverter = new BrushConverter();
+        private logService serviceslog = new logService();
 
         private  void authentification()
         {
@@ -37,12 +38,26 @@ namespace DoctorCashWpf
             if (userData != null && (userData.usr_SecurityLevel >= (int)SECURIRYLEVEL.SUPERVISOR))
             {
                 //Si es administrador o supervisor hara lo demas en esta parte
+
+                var items = new log();
+                items.log_Username = userData.usr_Username;
+                items.log_DateTime = DateTime.Now.ToString();
+                items.log_Actions = "Refund Authorized by:" + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
+                serviceslog.CreateLog(items);
+
                 createRefund.isRefund = true;
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
             else
             {                      
                 labelError.Content = "Invalid User";
+
+                var items = new log();
+                items.log_Username = userData.usr_Username;
+                items.log_DateTime = DateTime.Now.ToString();
+                items.log_Actions = "Intent To Refund Not Authorized, Data to Access: UserName= " + txtbox_username.Text + ", PassWord= " + txtbox_password.Password.ToString();
+                serviceslog.CreateLog(items);
+
             }
         }
 

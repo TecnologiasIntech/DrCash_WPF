@@ -27,6 +27,7 @@ namespace DoctorCashWpf.Views
 
         private userService user = new userService();
         private BrushConverter brushConverter = new BrushConverter();
+        private logService serviceslog = new logService();        
 
         private void authentification()
         {
@@ -38,6 +39,13 @@ namespace DoctorCashWpf.Views
                 // Abrir Initial Cash
                 /* userInformation.userName = userData.usr_Username;
                  userInformation.userID = userData.usr_ID;*/
+                var items = new log();
+                items.log_Username = txtbox_username.Text;
+                items.log_DateTime = DateTime.Now.ToString();
+                items.log_Actions = "Login of:" + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
+                serviceslog.CreateLog(items);
+                  
+                                                                                 
                 userInformation.user = userData;
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }

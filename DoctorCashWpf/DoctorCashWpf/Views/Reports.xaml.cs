@@ -60,11 +60,5 @@ namespace DoctorCashWpf
                 Button_Click_3(null, null);
             }
         }
-
-        private async void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            var updateTransaction = new UpdateTransaction();
-            await DialogHost.Show(updateTransaction, "RootDialog");
-        }
     }
 }

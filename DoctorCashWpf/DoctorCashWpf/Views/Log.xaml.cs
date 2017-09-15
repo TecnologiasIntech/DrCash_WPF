@@ -32,6 +32,7 @@ namespace DoctorCashWpf.Views
         }
         private reportService getreport = new reportService();
         MoneyComponentService moneyService = new MoneyComponentService();
+        logService serviceslog = new logService();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -39,11 +40,47 @@ namespace DoctorCashWpf.Views
             txtbox_question.Clear();
             fromdate.Text = "";
             todate.Text = "";
+            labelerror.Content = "";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            labelerror.Content = "";
+            dataGridViewLog.ItemsSource = null;
+            if (todate.Text == "" && fromdate.Text == "" && txtbox_question.Text == "")
+            {
+                labelerror.Content = "Complete the Date or ID fields";
+            }
+            else
+            {
+                var items = new log();
+                items.log_Username = userInformation.user.usr_Username;
+                items.log_DateTime = DateTime.Now.ToString();
+                items.log_Actions = "Search Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                serviceslog.CreateLog(items);
 
+                var list = serviceslog.getLogs(txtbox_question.Text, fromdate.Text, todate.Text).list;
+
+                if (list.Count() == 0)
+                {
+                    labelerror.Content = "Data not Found";
+                }
+                else
+                {
+                    DataTable table = new DataTable();
+                    table.Columns.Add("Date");
+                    table.Columns.Add("Processed by");
+                    table.Columns.Add("Action");
+
+                    for (int i = 0; i < list.Count(); i++)
+                    {
+                        table.Rows.Add(list[i].log_DateTime, list[i].log_Username, list[i].log_Actions);
+                    }
+
+                    dataGridViewLog.ItemsSource = table.DefaultView;
+                    
+                }
+            }           
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -54,8 +91,9 @@ namespace DoctorCashWpf.Views
                 labelerror.Content = "complete a field or dates";
             }
             else
-            {
-                var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
+            {               
+
+                var list = serviceslog.getLogs(txtbox_question.Text, fromdate.Text, todate.Text).list;
 
                 if (list.Count() == 0)
                 {
@@ -63,6 +101,12 @@ namespace DoctorCashWpf.Views
                 }
                 else
                 {
+                    var items = new log();
+                    items.log_Username = userInformation.user.usr_Username;
+                    items.log_DateTime = DateTime.Now.ToString();
+                    items.log_Actions = "Print Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed by=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                    serviceslog.CreateLog(items);
+
                     #region Create PDF
 
                     Random rnd = new Random();
@@ -72,7 +116,7 @@ namespace DoctorCashWpf.Views
                     Document doc = new Document(PageSize.LETTER);
 
                     PdfWriter writer = PdfWriter.GetInstance(doc,
-                                new FileStream(@"C:/DrCash_WPF/DoctorCashWpf/Archive" + nomber + ".pdf", FileMode.CreateNew));
+                                new FileStream(@"C:/DrCash_WPF/DoctorCashWpf/ArchiveLog" + nomber + ".pdf", FileMode.CreateNew));
                     //PdfWriter write = PdfWriter.GetInstance(doc, new FileStream("", FileMode.CreateNew));
 
                     //datos de titulo
@@ -126,18 +170,18 @@ namespace DoctorCashWpf.Views
                     {
                         if (i == (list.Count() - 1))
                         {
-                            clprocessedby = new PdfPCell(new Phrase(list[i].trn_id.ToString(), _standardFont)); clprocessedby.BorderWidth = 0; clprocessedby.BorderWidthBottom = 0.75f;
-                            cldate = new PdfPCell(new Phrase(list[i].dateRegistered.ToString(), _standardFont)); cldate.BorderWidth = 0; cldate.BorderWidthBottom = 0.75f;
-                            claction = new PdfPCell(new Phrase(list[i].patientFirstName.ToString(), _standardFont)); claction.BorderWidth = 0; claction.BorderWidthBottom = 0.75f;
+                            clprocessedby = new PdfPCell(new Phrase(list[i].log_Username.ToString(), _standardFont)); clprocessedby.BorderWidth = 0; clprocessedby.BorderWidthBottom = 0.75f;
+                            cldate = new PdfPCell(new Phrase(list[i].log_DateTime.ToString(), _standardFont)); cldate.BorderWidth = 0; cldate.BorderWidthBottom = 0.75f;
+                            claction = new PdfPCell(new Phrase(list[i].log_Actions.ToString(), _standardFont)); claction.BorderWidth = 0; claction.BorderWidthBottom = 0.75f;
                             tblPrueba.AddCell(clprocessedby);
                             tblPrueba.AddCell(cldate);
                             tblPrueba.AddCell(claction);
                         }
                         else
                         {
-                            clprocessedby = new PdfPCell(new Phrase(list[i].trn_id.ToString(), _standardFont)); clprocessedby.BorderWidth = 0;
-                            cldate = new PdfPCell(new Phrase(list[i].dateRegistered.ToString(), _standardFont)); cldate.BorderWidth = 0;
-                            claction = new PdfPCell(new Phrase(list[i].patientFirstName.ToString(), _standardFont)); claction.BorderWidth = 0;
+                            clprocessedby = new PdfPCell(new Phrase(list[i].log_Username.ToString(), _standardFont)); clprocessedby.BorderWidth = 0;
+                            cldate = new PdfPCell(new Phrase(list[i].log_DateTime.ToString(), _standardFont)); cldate.BorderWidth = 0;
+                            claction = new PdfPCell(new Phrase(list[i].log_Actions.ToString(), _standardFont)); claction.BorderWidth = 0;
                             tblPrueba.AddCell(clprocessedby);
                             tblPrueba.AddCell(cldate);
                             tblPrueba.AddCell(claction);
@@ -148,7 +192,7 @@ namespace DoctorCashWpf.Views
                     doc.Close();
                     writer.Close();
 
-                    Process.Start(@"C:/DrCash_WPF/DoctorCashWpf/Archive" + nomber + ".pdf");
+                    Process.Start(@"C:/DrCash_WPF/DoctorCashWpf/ArchiveLog" + nomber + ".pdf");
 
                     #endregion
                 }

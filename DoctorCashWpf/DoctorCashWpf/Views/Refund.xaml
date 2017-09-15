@@ -51,7 +51,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Close-->
-                <Button Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                <Button Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" >
                     <TextBlock Foreground="#e06666">Close</TextBlock>
                 </Button>
 

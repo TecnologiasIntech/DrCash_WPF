@@ -22,7 +22,6 @@
 
         <TextBlock Text="Log" Margin="0 30 0 0"/>
         <TextBox x:Name="txtbox_newLog"/>
-
         <Button Content="Search" Click="Button_Click"/>
         <Button Content="Clear" Click="Button_Click_3"/>
         <Button Content="close" Click="Button_Click_2"/>

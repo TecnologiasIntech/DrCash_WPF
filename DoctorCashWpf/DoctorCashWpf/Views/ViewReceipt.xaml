@@ -238,7 +238,7 @@
                 </Button>
 
                 <!--Print-->
-                <Button Margin="5" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                <Button Margin="5" Background="Transparent" BorderBrush="Transparent" Click="Button_Click_3"
                             Style="{DynamicResource MaterialDesignFlatButton}">
                     <TextBlock x:Name="btn_print" Text="Print" Foreground="#6aa84f " FontSize="18"/>
                 </Button>

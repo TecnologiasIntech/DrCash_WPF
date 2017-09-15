@@ -29,6 +29,7 @@ namespace DoctorCashWpf.Views
         private userService user = new userService();
         private sqlQueryService createQuery = new sqlQueryService();
         private createItemsForListService createItem = new createItemsForListService();
+        private logService serviceslog = new logService();
 
         private void txtbox_Confirm_Password_KeyUp(object sender, KeyEventArgs e)
         {
@@ -65,6 +66,12 @@ namespace DoctorCashWpf.Views
             }
             else
             {
+                var items = new log();
+                items.log_Username = userInformation.user.usr_Username;
+                items.log_DateTime = DateTime.Now.ToString();
+                items.log_Actions = "Reset User:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                serviceslog.CreateLog(items);
+
                 //aqui se mandaran los datos a actualizar
                 var Columns = new List<columnsValues>();
                 Columns.Add(createItem.ofTypeColumnsValues("usr_Password", txtbox_password.Password.ToString()));

@@ -170,7 +170,7 @@
                 </Button>
             </Grid>
             <!--#endregion-->
-            <Label Content="" Foreground="Red" Name="labelerror" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15,15,15,15"></Label>
+            <Label Content="" Foreground="Red" Name="labelerror" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,15,15"></Label>
 
         </StackPanel>
 

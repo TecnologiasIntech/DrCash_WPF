@@ -24,9 +24,5 @@
         <Button Click="Button_Click_3">
             Recepit
         </Button>
-
-        <Button Click="Button_Click_4">
-            Update Transaction
-        </Button>
     </StackPanel>
 </UserControl>

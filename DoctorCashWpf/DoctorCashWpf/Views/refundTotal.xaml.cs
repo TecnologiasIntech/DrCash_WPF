@@ -31,6 +31,7 @@ namespace DoctorCashWpf.Views
         private transactionService transaction = new transactionService();
         private transaction transactionInfo = new transaction();
         private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private logService serviceslog = new logService();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -42,6 +43,12 @@ namespace DoctorCashWpf.Views
                 txtbox_log.Text = getTransactionComment(transactionInfo);
 
                 moneyComponent.convertComponentToMoneyFormat(label_amountCharged);
+
+                var items = new log();
+                items.log_Username = userInformation.user.usr_Username;
+                items.log_DateTime = DateTime.Now.ToString();
+                items.log_Actions = "Search Information in RefundTotal with Transaction Number: "+txtbox_transactionNumber.Text+" by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                serviceslog.CreateLog(items);
             }
         }
 
@@ -97,6 +104,12 @@ namespace DoctorCashWpf.Views
                 trn.userId = userInformation.user.usr_ID;
 
                 transaction.setTransactionRefund(trn);
+
+                var items = new log();
+                items.log_Username = userInformation.user.usr_Username;
+                items.log_DateTime = DateTime.Now.ToString();
+                items.log_Actions = "Print Information in RefundTotal with Transaction Number: " + txtbox_transactionNumber.Text + " by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                serviceslog.CreateLog(items);
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }

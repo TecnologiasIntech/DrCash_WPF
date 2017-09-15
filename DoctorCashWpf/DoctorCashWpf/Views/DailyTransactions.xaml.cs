@@ -34,6 +34,7 @@ namespace DoctorCashWpf.Views
 
         private reportService getreport = new reportService();
         MoneyComponentService moneyService = new MoneyComponentService();
+        logService serviceslog = new logService();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -44,6 +45,12 @@ namespace DoctorCashWpf.Views
             }
             else
             {
+                var items = new log();
+                items.log_Username = userInformation.user.usr_Username;
+                items.log_DateTime = DateTime.Now.ToString();
+                items.log_Actions = "Search Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                serviceslog.CreateLog(items);
+
                 double charge = 0, cash = 0, Credit = 0, Check = 0, Change = 0;
                 var list = getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
                 dataGridViewDailyTransactions.ItemsSource = null;
@@ -83,6 +90,7 @@ namespace DoctorCashWpf.Views
                     dt.Rows.Add("Total´s", "", "", "", "", moneyService.convertComponentToMoneyFormat(charge.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(cash.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(Credit.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(Check.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(Change.ToString()).txtComponent, "", "", "");
 
                     dataGridViewDailyTransactions.ItemsSource = dt.DefaultView;
+                    
                 }
 
             }            
@@ -96,7 +104,8 @@ namespace DoctorCashWpf.Views
                 labelerror.Content = "complete a field or dates";
             }
             else
-            {
+            {                
+
                 var list = getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
 
                 if (list.Count() == 0)
@@ -105,6 +114,12 @@ namespace DoctorCashWpf.Views
                 }
                 else
                 {
+                    var items = new log();
+                    items.log_Username = userInformation.user.usr_Username;
+                    items.log_DateTime = DateTime.Now.ToString();
+                    items.log_Actions = "Print Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                    serviceslog.CreateLog(items);
+
                     #region Create PDF
                     Random rnd = new Random();
                     string nomber = rnd.Next().ToString();
@@ -114,7 +129,7 @@ namespace DoctorCashWpf.Views
                     Document doc = new Document(PageSize.LETTER);
 
                     PdfWriter writer = PdfWriter.GetInstance(doc,
-                                new FileStream(@"C:/DrCash_WPF/DoctorCashWpf/Archive" + nomber + ".pdf", FileMode.CreateNew));
+                                new FileStream(@"C:/DrCash_WPF/DoctorCashWpf/DailyTransaction" + nomber + ".pdf", FileMode.CreateNew));
                     //PdfWriter write = PdfWriter.GetInstance(doc, new FileStream("", FileMode.CreateNew));
 
                     //datos de titulo
@@ -217,8 +232,7 @@ namespace DoctorCashWpf.Views
                     for (int i = 0; i < list.Count(); i++)
                     {
                         if (i == (list.Count() - 1))
-                        {
-                            ;
+                        {                            
                             cltransaction = new PdfPCell(new Phrase(list[i].trn_id.ToString(), _standardFont)); cltransaction.BorderWidth = 0; cltransaction.BorderWidthBottom = 0.75f;
                             cluser = new PdfPCell(new Phrase(list[i].userId.ToString(), _standardFont)); cluser.BorderWidth = 0; cluser.BorderWidthBottom = 0.75f;
                             cldate = new PdfPCell(new Phrase(list[i].dateRegistered.ToString(), _standardFont)); cldate.BorderWidth = 0; cldate.BorderWidthBottom = 0.75f;
@@ -325,8 +339,9 @@ namespace DoctorCashWpf.Views
                     doc.Close();
                     writer.Close();
 
-                    Process.Start(@"C:/DrCash_WPF/DoctorCashWpf/Archive" + nomber + ".pdf");
-                    #endregion
+                    Process.Start(@"C:/DrCash_WPF/DoctorCashWpf/DailyTransaction" + nomber + ".pdf");
+                    #endregion                    
+
                 }
                 //////////////////////////////////////
                 /*

@@ -129,7 +129,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Create user-->
-                <Button Grid.Column="0" Margin="10 0 5 0" Background="Transparent" BorderBrush="Transparent"
+                <Button Click="Button_Click_1" Grid.Column="0" Margin="10 0 5 0" Background="Transparent" BorderBrush="Transparent"
                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
                     <TextBlock Foreground="#666666" FontSize="18">
                             <Run Text="Cancel"/>
