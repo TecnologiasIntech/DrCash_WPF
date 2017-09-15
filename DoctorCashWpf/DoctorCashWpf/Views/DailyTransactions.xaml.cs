@@ -48,7 +48,7 @@ namespace DoctorCashWpf.Views
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
                 items.log_DateTime = DateTime.Now.ToString();
-                items.log_Actions = "Search Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 
                 double charge = 0, cash = 0, Credit = 0, Check = 0, Change = 0;
@@ -117,7 +117,7 @@ namespace DoctorCashWpf.Views
                     var items = new log();
                     items.log_Username = userInformation.user.usr_Username;
                     items.log_DateTime = DateTime.Now.ToString();
-                    items.log_Actions = "Print Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                    items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                     serviceslog.CreateLog(items);
 
                     #region Create PDF

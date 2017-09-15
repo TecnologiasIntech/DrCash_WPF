@@ -104,7 +104,7 @@ namespace DoctorCashWpf.Views
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
                 items.log_DateTime = DateTime.Now.ToString();
-                items.log_Actions = "Search Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Closed Statement, Search Data: Transaction Number=" + txtbox_ID.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Closed Statement, Search Data: Transaction Number= " + txtbox_ID.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 
                 double initial_cash = 0, amount = 0, cash = 0, credit = 0, check = 0, balance = 0, cien = 0, cincuenta = 0, veinte = 0, diez = 0, cinco = 0, uno = 0;

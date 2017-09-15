@@ -88,7 +88,7 @@ namespace DoctorCashWpf.Views
                 var item = new log();
                 item.log_Username = userInformation.user.usr_Username;
                 item.log_DateTime = DateTime.Now.ToString();
-                item.log_Actions = "Set Initial Cash by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " For=" + txtbox_initialCash.Text;
+                item.log_Actions = "Set Initial Cash by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " For= " + txtbox_initialCash.Text;
                 serviceslog.CreateLog(item);
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);

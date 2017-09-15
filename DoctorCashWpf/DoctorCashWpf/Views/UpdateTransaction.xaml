@@ -46,7 +46,7 @@
                 <!--#region Patient Name Input-->
                 <StackPanel>
                     <TextBlock Text="Patient Info" Margin=" 10" FontFamily="Roboto"/>
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Patient Name" FontFamily="Roboto" FontSize="18" />
+                    <TextBox Name="patienName" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Patient Name" FontFamily="Roboto" FontSize="18" />
                 </StackPanel>
                 <!--#endregion-->
                 
@@ -65,19 +65,19 @@
                         <!--Amount-->
                         <StackPanel Margin="0 0 0 10" Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Amount Charge" FontSize="22" FontWeight="Medium"/>
-                            <TextBox Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="50 0 0 0" FontSize="22" FontWeight="Medium"/>
+                            <TextBox Name="txtamountcharge" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="50 0 0 0" FontSize="22" FontWeight="Medium"/>
                         </StackPanel>
                           
                         <!--Total-->
                         <StackPanel Margin="0 10" Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Total" FontSize="22" FontWeight="Bold" Foreground="#e06666"/>
-                            <TextBlock Text="$0.00" Margin="50 0 0 0" FontSize="22" FontWeight="Bold" Foreground="#e06666"/>
+                            <TextBlock Name="txttotal" Text="$0.00" Margin="50 0 0 0" FontSize="22" FontWeight="Bold" Foreground="#e06666"/>
                         </StackPanel>
                         
                         <!--Change-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Change" FontWeight="Bold" FontSize="22"/>
-                            <TextBlock Text="$0.00" Margin="50 0 0 0" FontWeight="Bold" FontSize="22"/>
+                            <TextBlock Name="txtchange" Text="$0.00" Margin="50 0 0 0" FontWeight="Bold" FontSize="22"/>
                         </StackPanel>
 
 
@@ -88,25 +88,25 @@
                         <!--Cash-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Cash" FontSize="22" FontWeight="Medium"/>
-                            <TextBox Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="22" FontWeight="Medium"/>
+                            <TextBox Name="txtcash" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="22" FontWeight="Medium"/>
                         </StackPanel>
 
                         <!--Credit-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Credit" FontSize="22" FontWeight="Medium"/>
-                            <TextBox Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="22" FontWeight="Medium"/>
+                            <TextBox Name="txtcredid" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="22" FontWeight="Medium"/>
                         </StackPanel>
 
                         <!--Check-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Check" FontSize="22" FontWeight="Medium"/>
-                            <TextBox Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="22" FontWeight="Medium"/>
+                            <TextBox Name="txtcheck" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="22" FontWeight="Medium"/>
                         </StackPanel>
 
                         <!--Check #-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Check #" FontSize="22" FontWeight="Medium"/>
-                            <TextBox Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="22" FontWeight="Medium"/>
+                            <TextBox Name="txtchecknumber" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="22" FontWeight="Medium"/>
                         </StackPanel>
 
                     </StackPanel>
@@ -119,21 +119,21 @@
 
                 <StackPanel Orientation="Horizontal" Margin="5 25 5 15">
 
-                    <CheckBox Height="30" Margin="30 15">
+                    <CheckBox Name="chequedcopayment" Height="30" Margin="30 15">
                         <TextBlock Text="Copayment" FontSize="16"/>
                     </CheckBox>
-                    <CheckBox Height="30" Margin="30 15">
+                    <CheckBox Name="chequedselfpay" Height="30" Margin="30 15">
                         <TextBlock Text="SelfPay" FontSize="16"/>
                     </CheckBox>
-                    <CheckBox Height="30" Margin="30 15">
+                    <CheckBox Name="chequeddeductible" Height="30" Margin="30 15">
                         <TextBlock Text="Deductible" FontSize="16"/>
                     </CheckBox>
 
-                    <CheckBox Height="30" Margin="30 15">
+                    <CheckBox Name="chequedlaps" Height="30" Margin="30 15">
                         <TextBlock Text="Labs" FontSize="16"/>
                     </CheckBox>
 
-                    <CheckBox Height="30" Margin="30 15">
+                    <CheckBox Name="chequedother" Height="30" Margin="30 15">
                         <TextBlock Text="Other" FontSize="16"/>
                     </CheckBox>
 
@@ -161,7 +161,7 @@
                     </Grid.ColumnDefinitions>
                     
                     <!--Clear all input-->
-                    <Button Grid.Column="0" Margin="5 0 10 0" Background="Transparent" BorderBrush="Transparent"
+                    <Button Click="Button_Click_1" Grid.Column="0" Margin="5 0 10 0" Background="Transparent" BorderBrush="Transparent"
                                 Style="{DynamicResource MaterialDesignFlatButton}">
                         <TextBlock Text="Clear all input" Foreground="#e06666" FontSize="18"/>
                     </Button>
@@ -173,7 +173,7 @@
                     </Button>
                 
                     <!--Save-->
-                    <Button Grid.Column="2" Background="Transparent" BorderBrush="Transparent"
+                    <Button Click="Button_Click" Grid.Column="2" Background="Transparent" BorderBrush="Transparent"
                             Style="{DynamicResource MaterialDesignFlatButton}">
                         <TextBlock Text="Save print" Foreground="#6aa84f " FontSize="18"/>
                     </Button>

@@ -47,7 +47,7 @@ namespace DoctorCashWpf.Views
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
                 items.log_DateTime = DateTime.Now.ToString();
-                items.log_Actions = "Search Information in RefundTotal with Transaction Number: "+txtbox_transactionNumber.Text+" by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                items.log_Actions = "Search Information in RefundTotal with Transaction Number: "+txtbox_transactionNumber.Text+" by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
             }
         }
@@ -108,7 +108,7 @@ namespace DoctorCashWpf.Views
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
                 items.log_DateTime = DateTime.Now.ToString();
-                items.log_Actions = "Print Information in RefundTotal with Transaction Number: " + txtbox_transactionNumber.Text + " by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                items.log_Actions = "Print Information in RefundTotal with Transaction Number: " + txtbox_transactionNumber.Text + " by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);

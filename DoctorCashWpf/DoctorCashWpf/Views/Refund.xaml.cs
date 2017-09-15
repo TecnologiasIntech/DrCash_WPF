@@ -42,7 +42,7 @@ namespace DoctorCashWpf
                 var items = new log();
                 items.log_Username = userData.usr_Username;
                 items.log_DateTime = DateTime.Now.ToString();
-                items.log_Actions = "Refund Authorized by:" + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
+                items.log_Actions = "Refund Authorized by: " + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
 
                 createRefund.isRefund = true;

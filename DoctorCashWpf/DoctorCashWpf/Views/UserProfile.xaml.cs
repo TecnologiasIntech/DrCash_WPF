@@ -25,7 +25,7 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
 
-            InitializeVisualComponent();
+            InitializeVisualComponent();            
         }
 
         private userService user = new userService();
@@ -81,6 +81,7 @@ namespace DoctorCashWpf.Views
 
         private void Edit_Button_Click(object sender, RoutedEventArgs e)
         {
+            userFullName.Text = userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName;
             txtbox_email.Text = userInformation.user.usr_Email;
             txtbox_firstname.Text = userInformation.user.usr_FirstName;
             txtbox_lastname.Text = userInformation.user.usr_LastName;
@@ -92,6 +93,7 @@ namespace DoctorCashWpf.Views
         private void Accept_Button_Click(object sender, RoutedEventArgs e)
         {
             var items = new user();
+            
             items.usr_Email = txtbox_email.Text;
             items.usr_FirstName = txtbox_firstname.Text;
             items.usr_LastName = txtbox_lastname.Text;
@@ -111,7 +113,7 @@ namespace DoctorCashWpf.Views
             var item = new log();
             item.log_Username = userInformation.user.usr_Username;
             item.log_DateTime = DateTime.Now.ToString();
-            item.log_Actions = "The (" + txtbox_firstname.Text + " " + txtbox_lastname.Text + ") Information Was Modified by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+            item.log_Actions = "The ( " + txtbox_firstname.Text + " " + txtbox_lastname.Text + " ) Information Was Modified by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
             serviceslog.CreateLog(item);
 
             user.updateBasicInformation(items);

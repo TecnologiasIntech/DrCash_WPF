@@ -66,7 +66,7 @@ namespace DoctorCashWpf.Views
             var item = new log();
             item.log_Username = userInformation.user.usr_Username;
             item.log_DateTime = DateTime.Now.ToString();
-            item.log_Actions = "User Update Before:("+ uID+", "+firstName+", "+lastName+", "+passwordReset.ToString()+", "+activeAcount.ToString()+", "+security1+", "+email+"), Now:("+items.usr_ID+", "+items.usr_FirstName+", "+items.usr_LastName+", "+items.usr_Password+", "+items.usr_ActiveAccount+", "+items.usr_SecurityLevel+") by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in ManageUser";
+            item.log_Actions = "User Update Before: ( "+ uID+", "+firstName+", "+lastName+", "+passwordReset.ToString()+", "+activeAcount.ToString()+", "+security1+", "+email+" ), Now: ( "+items.usr_ID+", "+items.usr_FirstName+", "+items.usr_LastName+", "+items.usr_Password+", "+items.usr_ActiveAccount+", "+items.usr_SecurityLevel+" ) by UserName= " + userInformation.user.usr_Username + ", Full Name= " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in ManageUser";
             serviceslog.CreateLog(item);
 
         }

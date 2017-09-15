@@ -56,7 +56,7 @@ namespace DoctorCashWpf.Views
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
                 items.log_DateTime = DateTime.Now.ToString();
-                items.log_Actions = "Search Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed by= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 
                 var list = serviceslog.getLogs(txtbox_question.Text, fromdate.Text, todate.Text).list;
@@ -104,7 +104,7 @@ namespace DoctorCashWpf.Views
                     var items = new log();
                     items.log_Username = userInformation.user.usr_Username;
                     items.log_DateTime = DateTime.Now.ToString();
-                    items.log_Actions = "Print Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed by=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                    items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed by= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                     serviceslog.CreateLog(items);
 
                     #region Create PDF
@@ -143,7 +143,7 @@ namespace DoctorCashWpf.Views
 
 
                     //creamos una tabla para los datos
-                    PdfPTable tblPrueba = new PdfPTable(13);
+                    PdfPTable tblPrueba = new PdfPTable(3);
                     tblPrueba.WidthPercentage = 100;
 
                     // Configuramos el título de las columnas de la tabla

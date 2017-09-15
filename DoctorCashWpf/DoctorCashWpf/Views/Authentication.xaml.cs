@@ -42,7 +42,7 @@ namespace DoctorCashWpf.Views
                 var items = new log();
                 items.log_Username = txtbox_username.Text;
                 items.log_DateTime = DateTime.Now.ToString();
-                items.log_Actions = "Login of:" + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
+                items.log_Actions = "Login of: " + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
                   
                                                                                  

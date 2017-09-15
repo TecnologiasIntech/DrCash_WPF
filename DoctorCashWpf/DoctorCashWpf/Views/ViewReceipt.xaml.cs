@@ -72,7 +72,7 @@ namespace DoctorCashWpf.Views
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
                 items.log_DateTime = DateTime.Now.ToString();
-                items.log_Actions = "Search Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Transactions, Search Data: Transaction Number=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 
                 var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
@@ -143,7 +143,7 @@ namespace DoctorCashWpf.Views
             }
         }
 
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             if (transactionID != -1)
             {
@@ -153,12 +153,10 @@ namespace DoctorCashWpf.Views
                 cashInUpdate.saveSearchFromDate = fromdate.Text;
                 cashInUpdate.saveSearchToDate = todate.Text;
 
-                await DialogHost.Show(new UpdateTransaction(), "RootDialog");
+                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);                
 
-                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
-
-                
             }
+            
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -173,7 +171,7 @@ namespace DoctorCashWpf.Views
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
                 items.log_DateTime = DateTime.Now.ToString();
-                items.log_Actions = "Print Information by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number=" + txtbox_question.Text + ", Dates: From=" + fromdate.Text + ", To=" + todate.Text;
+                items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 
                 var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
@@ -220,7 +218,7 @@ namespace DoctorCashWpf.Views
 
 
                     //creamos una tabla para los datos
-                    PdfPTable tblPrueba = new PdfPTable(13);
+                    PdfPTable tblPrueba = new PdfPTable(4);
                     tblPrueba.WidthPercentage = 100;
 
                     // Configuramos el título de las columnas de la tabla

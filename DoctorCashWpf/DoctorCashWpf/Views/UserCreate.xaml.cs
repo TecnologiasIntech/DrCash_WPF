@@ -76,7 +76,7 @@ namespace DoctorCashWpf.Views
                 var item = new log();
                 item.log_Username = txtbox_username.Text;
                 item.log_DateTime = DateTime.Now.ToString();
-                item.log_Actions = "New User Created= ("+txtbox_firtname.Text+" "+txtbox_lastname.Text+") by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                item.log_Actions = "New User Created= ( "+txtbox_firtname.Text+" "+txtbox_lastname.Text+" ) by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
                 serviceslog.CreateLog(item);
 
 
@@ -156,7 +156,7 @@ namespace DoctorCashWpf.Views
             var item = new log();
             item.log_Username = txtbox_username.Text;
             item.log_DateTime = DateTime.Now.ToString();
-            item.log_Actions = "User Creation Canceled by:" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+            item.log_Actions = "User Creation Canceled by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
             serviceslog.CreateLog(item);
         }
     }

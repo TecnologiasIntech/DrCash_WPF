@@ -368,7 +368,7 @@ namespace DoctorCashWpf.Views
                 var item = new log();
                 item.log_Username = userInformation.user.usr_Username;
                 item.log_DateTime = DateTime.Now.ToString();
-                item.log_Actions = "Cash Out Created by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash="+label_totalCash;
+                item.log_Actions = "Cash Out Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash= "+moneyComponent.convertComponentToMoneyFormat(label_totalCash).txtComponent;
                 serviceslog.CreateLog(item);
 
                 Print printer = new Print();
@@ -414,7 +414,7 @@ namespace DoctorCashWpf.Views
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
             items.log_DateTime = DateTime.Now.ToString();
-            items.log_Actions = "Cash Out Cancel by UserName="+userInformation.user.usr_Username+", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash Captured="+label_totalCash;
+            items.log_Actions = "Cash Out Cancel by UserName= "+userInformation.user.usr_Username+", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash Captured= "+moneyComponent.convertComponentToMoneyFormat(label_totalCash).txtComponent;
             serviceslog.CreateLog(items);
         }
     }

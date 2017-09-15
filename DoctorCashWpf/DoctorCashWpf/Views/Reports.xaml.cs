@@ -53,7 +53,7 @@ namespace DoctorCashWpf
 
             if (cashInUpdate.isUpdate)
             {
-                await DialogHost.Show(new CashInWindow(), "RootDialog");
+                await DialogHost.Show(new UpdateTransaction(), "RootDialog");
 
                 cashInUpdate.isUpdate = false;
 
