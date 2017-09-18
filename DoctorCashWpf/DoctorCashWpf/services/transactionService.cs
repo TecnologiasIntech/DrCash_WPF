@@ -378,6 +378,43 @@ namespace DoctorCashWpf
             return list;
         }
 
+
+        public List<transaction> getAllTransactionsByRegisterID(string registerID, string fromDate, string toDate)
+        {
+            var terms = new List<valuesWhere>();
+            var list = new List<transaction>();
+
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_ID", registerID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+
+            var data = createQuery.toSelectAll("transactions", terms);
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+                var items = new transaction();
+
+                items.trn_id = Convert.ToInt32(filas["trn_ID"]);                
+                items.amountCharged = Convert.ToInt32(filas["trn_AmountCharged"]);
+                items.cash = Convert.ToInt32(filas["trn_Cash"]);
+                items.credit = Convert.ToInt32(filas["trn_Credit"]);
+                items.check = Convert.ToInt32(filas["trn_Check"]);
+                items.change = Convert.ToInt32(filas["trn_Change"]);
+                items.patientFirstName = filas["trn_PatientFirstName"].ToString();
+                items.selfPay = (bool)filas["trn_SelfPay"];
+                items.copayment = (bool)filas["trn_Copayment"];
+                items.comment = filas["trn_Comment"].ToString();
+                items.deductible = (bool)filas["trn_Deductible"];
+                items.labs = (bool)filas["trn_Labs"];
+                items.other = (bool)filas["trn_Other"];
+                items.checkNumber = Convert.ToInt32(filas["trn_CheckNumber"]);
+                list.Add(items);
+            }
+
+            return list;
+        }
+
         public void updateTransaction(transaction trn)
         {
             var columns = new List<columnsValues>();

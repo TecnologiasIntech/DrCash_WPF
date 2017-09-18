@@ -25,15 +25,14 @@ namespace DoctorCashWpf.Views
             InitializeComponent();
             LoadInformation();
         }
-
-        private reportService getreport = new reportService();
+        
         private logService serviceslog = new logService();
         private transactionService servicestransaction = new transactionService();
 
 
         private void LoadInformation()
         {            
-            var list = getreport.getDailyTransactions(cashInUpdate.transactionID.ToString(), "", cashInUpdate.saveSearchFromDate, cashInUpdate.saveSearchToDate).list;
+            var list = servicestransaction.getAllTransactionsByRegisterID(cashInUpdate.transactionID.ToString(), cashInUpdate.saveSearchFromDate, cashInUpdate.saveSearchToDate);
 
             for (int i = 0; i < list.Count(); i++)
             {
@@ -86,6 +85,8 @@ namespace DoctorCashWpf.Views
             items.log_DateTime = DateTime.Now.ToString();
             items.log_Actions = "Transaction Updated by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName +" Transaction ID Modified: " + cashInUpdate.transactionID;
             serviceslog.CreateLog(items);
+
+            MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
 
         }
 
