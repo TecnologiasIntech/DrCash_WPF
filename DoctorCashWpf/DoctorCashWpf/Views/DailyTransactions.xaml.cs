@@ -53,7 +53,7 @@ namespace DoctorCashWpf.Views
 
                 double charge = 0, cash = 0, Credit = 0, Check = 0, Change = 0;
                 var list = getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
-                dataGridViewDailyTransactions.ItemsSource = null;
+                dataGridViewDailyTransactions.ItemsSource = null;                              
 
                 if (list.Count() == 0)
                 {
@@ -90,7 +90,9 @@ namespace DoctorCashWpf.Views
                     dt.Rows.Add("Total´s", "", "", "", "", moneyService.convertComponentToMoneyFormat(charge.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(cash.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(Credit.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(Check.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(Change.ToString()).txtComponent, "", "", "");
 
                     dataGridViewDailyTransactions.ItemsSource = dt.DefaultView;
-                    
+
+                    dataGridViewDailyTransactions.MaxHeight = 185;
+
                 }
 
             }            
@@ -354,7 +356,7 @@ namespace DoctorCashWpf.Views
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            dataGridViewDailyTransactions.ItemsSource = null;
+            dataGridViewDailyTransactions.ItemsSource = null;                      
             txtbox_question.Clear();
             Patient_Name.Clear();
             fromdate.Text = "";

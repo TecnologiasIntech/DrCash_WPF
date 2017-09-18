@@ -8,8 +8,8 @@
              xmlns:domain1="clr-namespace:MaterialDesignDemo.Domain"
              xmlns:local="clr-namespace:DoctorCashWpf.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="1480"
-             Width="Auto">
+             d:DesignHeight="500" d:DesignWidth="1280"
+             Width="1280" Height="500">
 
 
 
@@ -48,6 +48,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
 
@@ -137,21 +138,29 @@
 
             <!--#region Transactions Grid-->
             <materialDesign:Card 
-                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                    Grid.Column="0" 
-                    Grid.Row="0"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth1"                    
+                    Grid.Row="1"
                     Background="White"
                     Margin="0 8"
                     Padding="12">
                 <Grid>
                     <DataGrid Name="dataGridViewDailyTransactions"
-                          IsReadOnly="True" />
+                          IsReadOnly="True"/>
 
 
                 </Grid>
             </materialDesign:Card>
+            
+            
             <!--#endregion-->
             <!--#region Save Cancel Buttons-->
+            
+            <!--#endregion-->
+            <Label Content="" Foreground="Red" Name="labelerror" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,220,15,15"></Label>
+
+        </StackPanel>
+
+        <Grid Grid.Row="2">
             <Grid Width="300" HorizontalAlignment="Right">
 
                 <Grid.ColumnDefinitions>
@@ -169,10 +178,7 @@
                     <TextBlock x:Name="btn_print" Text="Print" Foreground="#6aa84f " FontSize="18"/>
                 </Button>
             </Grid>
-            <!--#endregion-->
-            <Label Content="" Foreground="Red" Name="labelerror" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,15,15"></Label>
-
-        </StackPanel>
+        </Grid>
 
     </Grid>
 </UserControl>

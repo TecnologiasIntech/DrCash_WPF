@@ -36,7 +36,7 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            dataGridViewLog.ItemsSource = null;
+            dataGridViewLog.ItemsSource = null;            
             txtbox_question.Clear();
             fromdate.Text = "";
             todate.Text = "";
@@ -57,7 +57,7 @@ namespace DoctorCashWpf.Views
                 items.log_Username = userInformation.user.usr_Username;
                 items.log_DateTime = DateTime.Now.ToString();
                 items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed by= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
-                serviceslog.CreateLog(items);
+                serviceslog.CreateLog(items);                
 
                 var list = serviceslog.getLogs(txtbox_question.Text, fromdate.Text, todate.Text).list;
 
@@ -78,7 +78,7 @@ namespace DoctorCashWpf.Views
                     }
 
                     dataGridViewLog.ItemsSource = table.DefaultView;
-                    
+                    dataGridViewLog.MaxHeight = 300;
                 }
             }           
         }

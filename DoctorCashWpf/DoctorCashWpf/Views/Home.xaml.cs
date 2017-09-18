@@ -78,6 +78,7 @@ namespace DoctorCashWpf
             }
 
             dataGridView1.ItemsSource = dt.DefaultView;
+            dataGridView1.MaxHeight = 470;
 
             getSumOfTransactions();
 
@@ -247,7 +248,7 @@ namespace DoctorCashWpf
 
         private async void Capture_Initial_Cash(object sender, RoutedEventArgs e)
         {
-            //await DialogHost.Show(new Log(), "RootDialog");
+            //await DialogHost.Show(new ClosedStatements(), "RootDialog");
             if (userInformation.user == null)
             {
                 await DialogHost.Show(new Authentication(), "RootDialog");

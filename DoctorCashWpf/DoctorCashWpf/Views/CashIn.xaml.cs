@@ -431,7 +431,8 @@ namespace DoctorCashWpf
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
             items.log_DateTime = DateTime.Now.ToString();
-            items.log_Actions = "Cash In Cancel by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data Captured: Total= " + moneyComponent.convertComponentToMoneyFormat(label_total).txtComponent + ", Amount= " + moneyComponent.convertComponentToMoneyFormat(label_amount).txtComponent + ", Change= " + moneyComponent.convertComponentToMoneyFormat(label_change).txtComponent;
+            items.log_Actions = "Cash In Cancel by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data Captured: Total= " + label_total.Text + ", Amount= " + label_amount.Text + ", Change= " + label_change.Text;
+            MessageBox.Show(items.log_Actions);
             serviceslog.CreateLog(items);
 
         }

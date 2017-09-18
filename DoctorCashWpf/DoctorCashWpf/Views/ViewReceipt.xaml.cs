@@ -57,7 +57,7 @@ namespace DoctorCashWpf.Views
             txtbox_question.Text = "";
             fromdate.Text = "";
             todate.Text = "";
-            dataGridViewClosedStatement.ItemsSource = null;
+            dataGridViewClosedStatement.ItemsSource = null;            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -77,6 +77,7 @@ namespace DoctorCashWpf.Views
 
                 var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
                 dataGridViewClosedStatement.ItemsSource = null;
+                
 
                 if (list.Count() == 0)
                 {
@@ -96,6 +97,7 @@ namespace DoctorCashWpf.Views
                         dt.Rows.Add(list[i].trn_id, list[i].patientFirstName, list[i].modifiedById, list[i].dateRegistered);
                     }
                     dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
+                    dataGridViewClosedStatement.MaxHeight = 315;
                 }
             }            
         }
@@ -174,8 +176,7 @@ namespace DoctorCashWpf.Views
                 items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 
-                var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
-                dataGridViewClosedStatement.ItemsSource = null;
+                var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;                
 
                 if (list.Count() == 0)
                 {

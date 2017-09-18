@@ -7,12 +7,8 @@
              xmlns:domain="clr-namespace:MaterialDesignColors.WpfExample.Domain"
              xmlns:domain1="clr-namespace:MaterialDesignDemo.Domain" 
              xmlns:local="clr-namespace:DoctorCashWpf.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1500"
-             Height="600" Width="1200">
-
-
-
+             mc:Ignorable="d" d:DesignWidth="300"
+             Height="512" Width="1200">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -70,15 +66,15 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <!--#region Search Closed Statements-->
-            <Grid Grid.Row="0" Margin="30">
+            <Grid Grid.Row="0" Margin="30,30,30,27">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <StackPanel>
                     <!--#region Query Table -->
                     <Grid>
@@ -153,8 +149,8 @@
                             </DataGrid>
                         </Grid>
                     </materialDesign:Card>
-                    
-                    
+
+
                     <!--#endregion-->
 
                 </StackPanel>
@@ -164,6 +160,7 @@
                 <materialDesign:Card 
                         materialDesign:ShadowAssist.ShadowDepth="Depth1"
                         Grid.Row="1"
+                        Grid.Column="1"
                         Background="White"
                         Margin="0 8"
                         Padding="12">
@@ -179,16 +176,16 @@
                     </Grid>
                 </materialDesign:Card>
                 <!--#endregion-->
-                
+
 
 
             </Grid>
             <Label Name="labelerror" Margin="0,410,0,80" Content="" HorizontalAlignment="Center" Foreground="Red"></Label>
             <!--#endregion-->
 
-            <StackPanel Grid.Column="1"  Margin="25 25 25 0">
+            <StackPanel Grid.Column="1"  Margin="25,15,25,10">
                 <!--#region Reciept-->
-                <Grid Height="400">
+                <Grid Height="350">
 
 
                     <Grid.ColumnDefinitions>
@@ -224,61 +221,61 @@
                     <!--Initial Cash-->
 
                     <!--Totals-->
-                    <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Roboto" FontSize="16" FontWeight="Bold">Totals</TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Roboto" FontSize="15" FontWeight="Bold">Totals</TextBlock>
 
                     <!--Initial Cash-->
-                    <TextBlock Grid.Row="1" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Initial Cash</TextBlock>
-                    <TextBlock Name="txt_initialCash" Grid.Row="1" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontFamily="Roboto" FontSize="14" >Initial Cash</TextBlock>
+                    <TextBlock Name="txt_initialCash" Grid.Row="1" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--Amount-->
-                    <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Amount</TextBlock>
-                    <TextBlock Name="txt_amount" Grid.Row="2" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="Roboto" FontSize="14" >Amount</TextBlock>
+                    <TextBlock Name="txt_amount" Grid.Row="2" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--Cash-->
-                    <TextBlock Grid.Row="3" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Cash</TextBlock>
-                    <TextBlock Name="txt_cash" Grid.Row="3" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" FontFamily="Roboto" FontSize="14" >Cash</TextBlock>
+                    <TextBlock Name="txt_cash" Grid.Row="3" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--Credit Card-->
-                    <TextBlock Grid.Row="4" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Credit Card</TextBlock>
-                    <TextBlock Name="txt_credit" Grid.Row="4" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="0" FontFamily="Roboto" FontSize="14" >Credit Card</TextBlock>
+                    <TextBlock Name="txt_credit" Grid.Row="4" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--Check-->
-                    <TextBlock Grid.Row="5" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Check</TextBlock>
-                    <TextBlock Name="txt_check" Grid.Row="5" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="0" FontFamily="Roboto" FontSize="14" >Check</TextBlock>
+                    <TextBlock Name="txt_check" Grid.Row="5" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--#endregion-->
 
                     <!--#region Report-->
 
                     <!--Report-->
-                    <TextBlock Grid.Row="7" Grid.Column="0" FontFamily="Roboto" FontSize="16" FontWeight="Bold">Report</TextBlock>
+                    <TextBlock Grid.Row="7" Grid.Column="0" FontFamily="Roboto" FontSize="15" FontWeight="Bold">Report</TextBlock>
 
                     <!--100's-->
-                    <TextBlock Grid.Row="8" Grid.Column="0" FontFamily="Roboto" FontSize="16" >100's</TextBlock>
-                    <TextBlock Name="txt_ciens" Grid.Row="8" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="8" Grid.Column="0" FontFamily="Roboto" FontSize="14" >100's</TextBlock>
+                    <TextBlock Name="txt_ciens" Grid.Row="8" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
 
                     <!--50's-->
-                    <TextBlock Grid.Row="9" Grid.Column="0" FontFamily="Roboto" FontSize="16" >50's</TextBlock>
-                    <TextBlock Name="txt_cincuentas" Grid.Row="9" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="9" Grid.Column="0" FontFamily="Roboto" FontSize="14" >50's</TextBlock>
+                    <TextBlock Name="txt_cincuentas" Grid.Row="9" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--20's-->
-                    <TextBlock Grid.Row="10" Grid.Column="0" FontFamily="Roboto" FontSize="16" >20'a</TextBlock>
-                    <TextBlock Name="txt_veintes" Grid.Row="10" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="10" Grid.Column="0" FontFamily="Roboto" FontSize="14" >20'a</TextBlock>
+                    <TextBlock Name="txt_veintes" Grid.Row="10" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
 
                     <!--10's-->
-                    <TextBlock Grid.Row="11" Grid.Column="0" FontFamily="Roboto" FontSize="16" >10's</TextBlock>
-                    <TextBlock Name="txt_diez" Grid.Row="11" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="11" Grid.Column="0" FontFamily="Roboto" FontSize="14" >10's</TextBlock>
+                    <TextBlock Name="txt_diez" Grid.Row="11" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--5's-->
-                    <TextBlock Grid.Row="12" Grid.Column="0" FontFamily="Roboto" FontSize="16" >5'</TextBlock>
-                    <TextBlock Name="txt_cincos" Grid.Row="12" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="12" Grid.Column="0" FontFamily="Roboto" FontSize="14" >5'</TextBlock>
+                    <TextBlock Name="txt_cincos" Grid.Row="12" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
 
                     <!--1's-->
-                    <TextBlock Grid.Row="13" Grid.Column="0" FontFamily="Roboto" FontSize="16" >1's</TextBlock>
-                    <TextBlock Name="txt_unos" Grid.Row="13" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="13" Grid.Column="0" FontFamily="Roboto" FontSize="14" >1's</TextBlock>
+                    <TextBlock Name="txt_unos" Grid.Row="13" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
 
                     <!--#endregion-->
@@ -286,20 +283,20 @@
                     <!--#region Totals/ Balance-->
 
                     <!--Cash-->
-                    <TextBlock Grid.Row="15" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Cash</TextBlock>
-                    <TextBlock Name="txt_cash2" Grid.Row="15" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="15" Grid.Column="0" FontFamily="Roboto" FontSize="14" >Cash</TextBlock>
+                    <TextBlock Name="txt_cash2" Grid.Row="15" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--Credit Card-->
-                    <TextBlock Grid.Row="16" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Credit Card</TextBlock>
-                    <TextBlock Name="txt_credit2" Grid.Row="16" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="16" Grid.Column="0" FontFamily="Roboto" FontSize="14" >Credit Card</TextBlock>
+                    <TextBlock Name="txt_credit2" Grid.Row="16" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--Check-->
-                    <TextBlock Grid.Row="17" Grid.Column="0" FontFamily="Roboto" FontSize="16" >Check</TextBlock>
-                    <TextBlock Name="txt_check2" Grid.Row="17" Grid.Column="1" FontFamily="Roboto" FontSize="16">$0.00</TextBlock>
+                    <TextBlock Grid.Row="17" Grid.Column="0" FontFamily="Roboto" FontSize="14" >Check</TextBlock>
+                    <TextBlock Name="txt_check2" Grid.Row="17" Grid.Column="1" FontFamily="Roboto" FontSize="14">$0.00</TextBlock>
 
                     <!--Balance-->
-                    <TextBlock Grid.Row="19" Grid.Column="0" FontFamily="Roboto" FontSize="16" FontWeight="Bold">Balance</TextBlock>
-                    <TextBlock Name="txt_balance" Grid.Row="19" Grid.Column="1" FontFamily="Roboto" FontSize="16" FontWeight="Bold">$0.00</TextBlock>
+                    <TextBlock Grid.Row="19" Grid.Column="0" FontFamily="Roboto" FontSize="15" FontWeight="Bold">Balance</TextBlock>
+                    <TextBlock Name="txt_balance" Grid.Row="19" Grid.Column="1" FontFamily="Roboto" FontSize="15" FontWeight="Bold">$0.00</TextBlock>
 
                     <!--#endregion-->
 
@@ -316,7 +313,7 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <Button Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                    <Button Click="Button_Click_2" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                                 Style="{DynamicResource MaterialDesignFlatButton}">
                         <TextBlock x:Name="btn_print" Text="Print" Foreground="#6aa84f " FontSize="18"/>
 

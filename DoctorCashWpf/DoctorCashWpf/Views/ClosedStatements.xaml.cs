@@ -31,7 +31,7 @@ namespace DoctorCashWpf.Views
         logService serviceslog = new logService();
 
         private DataTable transactionsData;
-
+        public int id=-1;
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             double charged = 0, cash = 0, credit = 0, check = 0, change = 0;
@@ -39,7 +39,7 @@ namespace DoctorCashWpf.Views
             DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
             DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];            
             //dataClear();
-            int dato = Convert.ToInt32(item.Row.ItemArray[0]);
+            id = Convert.ToInt32(item.Row.ItemArray[0]);
             var registerID = fila["clt_reg_RegisterID"];
 
             var list = transaction.getTransactionsByRegisterID(registerID.ToString(), fromdate.Text, todate.Text);
@@ -81,8 +81,10 @@ namespace DoctorCashWpf.Views
             moneyService.convertComponentToMoneyFormat(txt_check2);
 
             dt.Rows.Add("Total´s", charged, cash, credit, check, change);
-            dataGridViewStatment.ItemsSource = dt.DefaultView;        
-           
+            
+            dataGridViewStatment.ItemsSource = dt.DefaultView;            
+            dataGridViewStatment.MaxHeight = 180;
+                            
         }
 
 
@@ -112,7 +114,7 @@ namespace DoctorCashWpf.Views
                 var list = response.list;
                 transactionsData = response.dataTable;
                 //dataClear();
-                dataGridViewClosedStatement.ItemsSource = null;                
+                dataGridViewClosedStatement.ItemsSource = null;
                 
                 if (transactionsData.Rows.Count == 0)
                 {
@@ -168,7 +170,8 @@ namespace DoctorCashWpf.Views
                     txt_credit2.Text = moneyService.convertComponentToMoneyFormat(credit.ToString()).txtComponent;
                     txt_check2.Text = moneyService.convertComponentToMoneyFormat(check.ToString()).txtComponent;
 
-                    dataGridViewClosedStatement.ItemsSource = dt.DefaultView;                    
+                    dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
+                    dataGridViewClosedStatement.MaxHeight = 140;
                 }                
             }
 
@@ -205,13 +208,25 @@ namespace DoctorCashWpf.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             dataClear();
-            dataGridViewClosedStatement.ItemsSource = null;
-            dataGridViewStatment.ItemsSource = null;
+            dataGridViewClosedStatement.ItemsSource = null;            
+            dataGridViewStatment.ItemsSource = null;            
         }
 
         private void txtbox_ID_KeyUp(object sender, KeyEventArgs e)
         {
             labelerror.Content = "";            
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (id != -1)
+            {
+
+            }
+            else
+            {
+                labelerror.Content = "Select a Transaction ID";
+            }
         }
     }
 }

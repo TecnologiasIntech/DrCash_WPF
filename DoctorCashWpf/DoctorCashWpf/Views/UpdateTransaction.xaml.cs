@@ -28,6 +28,7 @@ namespace DoctorCashWpf.Views
 
         private reportService getreport = new reportService();
         private logService serviceslog = new logService();
+        private transactionService servicestransaction = new transactionService();
 
 
         private void LoadInformation()
@@ -52,6 +53,7 @@ namespace DoctorCashWpf.Views
                     txtcredid.Text = list[i].credit.ToString();
                     txtcheck.Text = list[i].check.ToString().ToString();
                     txtchecknumber.Text = list[i].checkNumber.ToString();
+                    txtcomment.Text=list[i].comment;
                     break;
                 }                
             }
@@ -60,6 +62,30 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var trn = new transaction();
+
+            trn.patientFirstName = patienName.Text;
+            trn.amountCharged = (float)Convert.ToDouble(txtamountcharge.Text);
+            trn.cash = (float)Convert.ToDouble(txtcash.Text);
+            trn.credit = (float)Convert.ToDouble(txtcredid.Text);
+            trn.check = (float)Convert.ToDouble(txtcheck.Text);
+            trn.checkNumber = Convert.ToInt32(txtchecknumber.Text);
+            trn.copayment = (bool)chequedcopayment.IsChecked;
+            trn.selfPay = (bool)chequedselfpay.IsChecked;
+            trn.deductible = (bool)chequeddeductible.IsChecked;
+            trn.labs = (bool)chequedlaps.IsChecked;
+            trn.other = (bool)chequedother.IsChecked;
+            trn.otherComments = "";
+            trn.comment = txtcomment.Text;
+            trn.change = (float)Convert.ToDouble(txtchange.Text);
+
+            servicestransaction.updateTransaction(trn);
+
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = DateTime.Now.ToString();
+            items.log_Actions = "Transaction Updated by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName +" Transaction ID Modified: " + cashInUpdate.transactionID;
+            serviceslog.CreateLog(items);
 
         }
 

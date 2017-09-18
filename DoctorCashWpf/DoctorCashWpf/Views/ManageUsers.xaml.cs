@@ -103,6 +103,8 @@ namespace DoctorCashWpf.Views
             }
 
             grid_users.ItemsSource = dt.DefaultView;
+
+            grid_users.MaxHeight = 400;
         }
 
         private void saveTemporalDataUser()
