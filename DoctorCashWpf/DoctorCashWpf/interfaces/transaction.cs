@@ -14,6 +14,7 @@ namespace DoctorCashWpf
         public string comment;
         public int type;
         public float amountCharged;
+        public float initial_Cash;
         public float cash;
         public float credit;
         public float check;
@@ -30,5 +31,11 @@ namespace DoctorCashWpf
         public string registerId;
         public int modifiedById;
         public string modificationDate;
+
+
+        //dates for print information
+        public float total_cash;
+        public float total_amount;
+
     }
 }

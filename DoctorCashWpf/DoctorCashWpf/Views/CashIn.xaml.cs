@@ -203,7 +203,9 @@ namespace DoctorCashWpf
 
                     // Imprime Recibo
                     Print print = new Print();
-                    print.print();
+                    transaction.total_cash = (float)Convert.ToDouble(label_total.Text);
+                    transaction.total_amount = (float)Convert.ToDouble(label_amount.Text);
+                    print.printCashIn(transaction);
 
                     MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                 }

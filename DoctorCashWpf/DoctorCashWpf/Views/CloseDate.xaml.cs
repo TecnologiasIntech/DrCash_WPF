@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DoctorCashWpf.Printer;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +36,8 @@ namespace DoctorCashWpf.Views
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
+        private sqlQueryService createQuery = new sqlQueryService();
+        private createItemsForListService createItem = new createItemsForListService();
 
         private void setValuesInitials()
         {
@@ -571,6 +575,7 @@ namespace DoctorCashWpf.Views
             }
             else
             {
+                
                 labelerror.Content = "";
                 clDate.clt_100_bills = (float)Convert.ToDouble(label_bills100.Text.Remove(0, 1));
                 clDate.clt_50_bills = (float)Convert.ToDouble(label_bills50.Text.Remove(0, 1));
@@ -581,8 +586,10 @@ namespace DoctorCashWpf.Views
                 clDate.clt_total_cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
                 clDate.clt_total_check = (float)Convert.ToDouble(textbox_check.Text.Remove(0, 1));
                 clDate.clt_total_credit = (float)Convert.ToDouble(textbox_credit.Text.Remove(0, 1));
-
                 transaction.setClosedTransaction(clDate);
+
+                Print printer = new Print();
+                printer.printCloseDate(clDate);
 
                 var item = new log();
                 item.log_Username = userInformation.user.usr_Username;

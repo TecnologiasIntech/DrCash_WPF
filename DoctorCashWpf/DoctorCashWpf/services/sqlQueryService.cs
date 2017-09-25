@@ -280,6 +280,43 @@ namespace DoctorCashWpf
             return count;
         }
 
+        public int toMax(string column, string table, List<valuesWhere> valuesTermsArray)
+        {
+            int Max = 0;
+            string terms = "";
+
+            //En el caso de tener condiciones las guardamos para despues agregarla a la consulta
+            for (int i = 0; i < valuesTermsArray.Count(); i++)
+            {
+                if (i == 0)
+                {
+                    terms += " WHERE ";
+                }
+                if (valuesTermsArray[i].isTypeString)
+                {
+                    terms += valuesTermsArray[i].column + " " + getOperator(valuesTermsArray[i].Operator) + " '" + valuesTermsArray[i].value + "' " + getOperatorBoolean(valuesTermsArray[i].operationBool) + " ";
+                }
+                else
+                {
+                    terms += valuesTermsArray[i].column + " " + getOperator(valuesTermsArray[i].Operator) + " " + valuesTermsArray[i].value + " " + getOperatorBoolean(valuesTermsArray[i].operationBool) + " ";
+                }
+            }
+
+            //Creamos la consulta
+            string query = "SELECT MAX(" + column + ")" + "FROM " + table + terms;
+
+            //Abrimos una conexion
+            var conection = openConection();
+
+            //Creamos el comando ya con el query
+            var selectMax = createCommand(query, conection);
+
+            //Ejecutamos la consulta
+            Max = selectMax.ExecuteNonQuery();
+
+            return Max;
+        }
+
         //UPDATE table SET column= value, column= value  WHERE column = value 
         public void toUpdate(string table, List<columnsValues> columnsValuesArray, List<valuesWhere> valuesTermsArray)
         {

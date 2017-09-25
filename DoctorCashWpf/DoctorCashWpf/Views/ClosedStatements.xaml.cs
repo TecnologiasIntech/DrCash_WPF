@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoctorCashWpf.Printer;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -59,11 +60,11 @@ namespace DoctorCashWpf.Views
                 cash += list[i].cash;
                 credit += list[i].credit;
                 check += list[i].check;
-                change += list[i].change;
+                change += list[i].change;                
             }
+            txt_initialCash.Text = transaction.getInitialCash(registerID.ToString(), fromdate.Text, todate.Text).ToString();
             cash = cash - change;
-                     
-
+            moneyService.convertComponentToMoneyFormat(txt_initialCash);
             txt_cash.Text = cash.ToString();
             moneyService.convertComponentToMoneyFormat(txt_cash);
             txt_credit.Text = credit.ToString();
@@ -219,9 +220,23 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            var clDate = new closeDate();
             if (id != -1)
             {
-
+                clDate.clt_initial_cash = (float)Convert.ToDouble(txt_initialCash.Text.Remove(0, 1));
+                clDate.clt_100_bills = (float)Convert.ToDouble(txt_ciens.Text.Remove(0, 1));
+                clDate.clt_50_bills = (float)Convert.ToDouble(txt_cincuentas.Text.Remove(0, 1));
+                clDate.clt_20_bills = (float)Convert.ToDouble(txt_veintes.Text.Remove(0, 1));
+                clDate.clt_10_bills = (float)Convert.ToDouble(txt_diez.Text.Remove(0, 1));
+                clDate.clt_5_bills = (float)Convert.ToDouble(txt_cincos.Text.Remove(0, 1));
+                clDate.clt_1_bills = (float)Convert.ToDouble(txt_unos.Text.Remove(0, 1));
+                clDate.clt_total_cash = (float)Convert.ToDouble(txt_cash.Text.Remove(0, 1));
+                clDate.clt_total_check = (float)Convert.ToDouble(txt_check.Text.Remove(0, 1));
+                clDate.clt_total_credit = (float)Convert.ToDouble(txt_credit.Text.Remove(0, 1));
+                clDate.clt_checks_amount= (float)Convert.ToDouble(txt_amount.Text.Remove(0, 1));
+                clDate.clt_balance= (float)Convert.ToDouble(txt_balance.Text.Remove(0, 1));
+                Print printer = new Print();
+                printer.printClosedStatement(clDate);
             }
             else
             {

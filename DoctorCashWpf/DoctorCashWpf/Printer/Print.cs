@@ -44,6 +44,7 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight6());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.BarCode.Code128("12345"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.QrCode.Print("12345", PrinterUtility.Enums.QrCodeSize.Grande));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
             BytesValue = PrintExtensions.AddBytes(BytesValue, "-------------------Thank you for coming------------------------\n");
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
             BytesValue = PrintExtensions.AddBytes(BytesValue, CutPage());
@@ -52,7 +53,285 @@ namespace DoctorCashWpf.Printer
             if (File.Exists(".\\tmpPrint.print"))
                 File.Delete(".\\tmpPrint.print");
             File.WriteAllBytes(".\\tmpPrint.print", BytesValue);
-            RawPrinterHelper.SendFileToPrinter("CITIZENCT-S310II", ".\\tmpPrint.print");
+            RawPrinterHelper.SendFileToPrinter("CITIZEN CT-S310II", ".\\tmpPrint.print");
+            //RawPrinterHelper.SendStringToPrinter("CITIZEN CT-S310II", Encoding.ASCII.GetString(new byte[] { 27, 112, 1, 50, 250 }));
+
+            try
+            {
+                File.Delete(".\\tmpPrint.print");
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void printCashIn(transaction transaction)
+        {
+            //primera parte del ticket
+            PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
+            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            
+            //donde ira todo lo que le vamos a mandar a imprimir
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Cash In\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Patient Name", "", "", transaction.patientFirstName));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n","Amount Chanrge" , "", "", transaction.amountCharged));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Cash", "", "", transaction.cash));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Credit", "", "", transaction.credit));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Check", "", "", transaction.check));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Check #", "", "", transaction.checkNumber));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Copayment", "", "", transaction.copayment));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "SelfPay", "", "", transaction.selfPay));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Deductible", "", "", transaction.deductible));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Laps", "", "", transaction.labs));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Other", "", "", transaction.other));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Right());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Total  "+transaction.total_cash+"\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Amount  " + transaction.total_amount + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Change  " + transaction.change + "\n"));            
+
+
+            //parte final de ticket
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());            
+            
+            
+            //numero aleatorio para el codigo QR y Codigo de barra
+            Random rnd = new Random();
+            int number = rnd.Next();
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(number+"\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.BarCode.Code128(number.ToString()));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.QrCode.Print(number.ToString(), PrinterUtility.Enums.QrCodeSize.Grande));
+
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Printed by: " + userInformation.user.usr_Username + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Date: " + DateTime.Now.ToLongDateString() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, CutPage());
+
+            if (File.Exists(".\\tmpPrint.print"))
+                File.Delete(".\\tmpPrint.print");
+            File.WriteAllBytes(".\\tmpPrint.print", BytesValue);
+            RawPrinterHelper.SendFileToPrinter("CITIZEN CT-S310II", ".\\tmpPrint.print");
+            //RawPrinterHelper.SendStringToPrinter("CITIZEN CT-S310II", Encoding.ASCII.GetString(new byte[] { 27, 112, 1, 50, 250 }));
+
+            try
+            {
+                File.Delete(".\\tmpPrint.print");
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void printCashOut(transaction transaction)
+        {
+            //primera parte del ticket
+            PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
+            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+
+            //donde ira todo lo que le vamos a mandar a imprimir
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Cash Out\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Cash", "", "", transaction.cash));            
+
+
+            //parte final de ticket
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+
+
+            //numero aleatorio para el codigo QR y Codigo de barra
+            Random rnd = new Random();
+            int number = rnd.Next();
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(number + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.BarCode.Code128(number.ToString()));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.QrCode.Print(number.ToString(), PrinterUtility.Enums.QrCodeSize.Grande));
+
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Printed by: " + userInformation.user.usr_Username + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Date: " + DateTime.Now.ToLongDateString() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, CutPage());
+
+            if (File.Exists(".\\tmpPrint.print"))
+                File.Delete(".\\tmpPrint.print");
+            File.WriteAllBytes(".\\tmpPrint.print", BytesValue);
+            RawPrinterHelper.SendFileToPrinter("CITIZEN CT-S310II", ".\\tmpPrint.print");
+            //RawPrinterHelper.SendStringToPrinter("CITIZEN CT-S310II", Encoding.ASCII.GetString(new byte[] { 27, 112, 1, 50, 250 }));
+
+            try
+            {
+                File.Delete(".\\tmpPrint.print");
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void printCloseDate(closeDate transaction)
+        {
+            //primera parte del ticket
+            PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
+            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+
+            //donde ira todo lo que le vamos a mandar a imprimir
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Close Date\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Information\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "100´s", "", "", transaction.clt_100_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "50´s", "", "", transaction.clt_50_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "20´s", "", "", transaction.clt_20_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "10´s", "", "", transaction.clt_10_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "5´s", "", "", transaction.clt_5_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "1´s #", "", "", transaction.clt_1_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Total Cash", "", "", transaction.clt_total_cash));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Total Credit", "", "", transaction.clt_total_credit));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Total Check", "", "", transaction.clt_total_check));                       
+
+
+            //parte final de ticket
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+
+
+            //numero aleatorio para el codigo QR y Codigo de barra
+            Random rnd = new Random();
+            int number = rnd.Next();
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(number + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.BarCode.Code128(number.ToString()));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.QrCode.Print(number.ToString(), PrinterUtility.Enums.QrCodeSize.Grande));
+
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Printed by: " + userInformation.user.usr_Username + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Date: " + DateTime.Now.ToLongDateString() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, CutPage());
+
+            if (File.Exists(".\\tmpPrint.print"))
+                File.Delete(".\\tmpPrint.print");
+            File.WriteAllBytes(".\\tmpPrint.print", BytesValue);
+            RawPrinterHelper.SendFileToPrinter("CITIZEN CT-S310II", ".\\tmpPrint.print");
+            //RawPrinterHelper.SendStringToPrinter("CITIZEN CT-S310II", Encoding.ASCII.GetString(new byte[] { 27, 112, 1, 50, 250 }));
+
+            try
+            {
+                File.Delete(".\\tmpPrint.print");
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void printClosedStatement(closeDate transaction)
+        {
+            //primera parte del ticket
+            PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
+            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+
+            //donde ira todo lo que le vamos a mandar a imprimir
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Closing Statement\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Totals\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Initial Cash", "", "", transaction.clt_initial_cash));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Amount Charged", "", "", transaction.clt_checks_amount));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Cash", "", "", transaction.clt_total_cash));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Credit Card", "", "", transaction.clt_total_credit));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Check", "", "", transaction.clt_total_check));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Report\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "100´s", "", "", transaction.clt_100_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "50´s", "", "", transaction.clt_50_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "20´s", "", "", transaction.clt_20_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "10´s", "", "", transaction.clt_10_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "5´s", "", "", transaction.clt_5_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "1´s #", "", "", transaction.clt_1_bills));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Cash", "", "", transaction.clt_total_cash));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Credit Card", "", "", transaction.clt_total_credit));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "Check", "", "", transaction.clt_total_check));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, string.Format("{0,-40}{1,6}{2,9}{3,9:N2}\n", "BAlance", "", "", transaction.clt_balance));
+
+
+            //parte final de ticket
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+
+
+            //numero aleatorio para el codigo QR y Codigo de barra
+            Random rnd = new Random();
+            int number = rnd.Next();
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(number + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.BarCode.Code128(number.ToString()));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.QrCode.Print(number.ToString(), PrinterUtility.Enums.QrCodeSize.Grande));
+
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Printed by: " + userInformation.user.usr_Username + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Date: " + DateTime.Now + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, CutPage());
+
+            if (File.Exists(".\\tmpPrint.print"))
+                File.Delete(".\\tmpPrint.print");
+            File.WriteAllBytes(".\\tmpPrint.print", BytesValue);
+            RawPrinterHelper.SendFileToPrinter("CITIZEN CT-S310II", ".\\tmpPrint.print");
             //RawPrinterHelper.SendStringToPrinter("CITIZEN CT-S310II", Encoding.ASCII.GetString(new byte[] { 27, 112, 1, 50, 250 }));
 
             try

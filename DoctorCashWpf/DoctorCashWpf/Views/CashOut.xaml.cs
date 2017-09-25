@@ -372,7 +372,7 @@ namespace DoctorCashWpf.Views
                 serviceslog.CreateLog(item);
 
                 Print printer = new Print();
-                printer.print();
+                printer.printCashOut(items);                
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             } 
