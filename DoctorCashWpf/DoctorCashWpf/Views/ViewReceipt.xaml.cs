@@ -1,4 +1,5 @@
-﻿using iTextSharp.text;
+﻿using DoctorCashWpf.Printer;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -90,11 +91,13 @@ namespace DoctorCashWpf.Views
                     dt.Columns.Add("Transaction ID");
                     dt.Columns.Add("Patient Name");
                     dt.Columns.Add("Register");
-                    dt.Columns.Add("Date");
+                    dt.Columns.Add("Date");                    
+                                     
 
                     for (int i = 0; i < list.Count(); i++)
                     {
-                        dt.Rows.Add(list[i].trn_id, list[i].patientFirstName, list[i].modifiedById, list[i].dateRegistered);
+                        dt.Rows.Add(list[i].trn_id, list[i].patientFirstName, list[i].modifiedById, list[i].dateRegistered);                        
+
                     }
                     dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
                     dataGridViewClosedStatement.MaxHeight = 315;
@@ -163,6 +166,7 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            double total_sum=0;
             labelerror.Content = "";
             if (txtbox_question.Text == "" && fromdate.Text == "" && todate.Text == "")
             {
@@ -175,6 +179,21 @@ namespace DoctorCashWpf.Views
                 items.log_DateTime = DateTime.Now.ToString();
                 items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
+
+                //generamos el ticket con los totales de la seleccion
+                if (transactionID != -1)
+                {
+                    var item = new transaction();
+                    item.amountCharged= (float)Convert.ToDouble(amounChange.Text.Remove(0, 1));
+                    item.cash= (float)Convert.ToDouble(cash.Text.Remove(0, 1));
+                    item.credit= (float)Convert.ToDouble(creditCard.Text.Remove(0, 1));
+                    item.check= (float)Convert.ToDouble(check.Text.Remove(0, 1));
+                    total_sum = (float)Convert.ToDouble(total.Text.Remove(0, 1));
+                    item.change= (float)Convert.ToDouble(change.Text.Remove(0, 1));
+
+                    Print printer = new Print();
+                    printer.printViewReciept(item,total_sum);
+                }
 
                 var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;                
 
@@ -259,9 +278,7 @@ namespace DoctorCashWpf.Views
                             tblPrueba.AddCell(cltransaction);
                             tblPrueba.AddCell(clpatientname);
                             tblPrueba.AddCell(clregister);
-                            tblPrueba.AddCell(cldate);
-                            
-                            
+                            tblPrueba.AddCell(cldate);                                                        
                         }
                         else
                         {
@@ -274,8 +291,7 @@ namespace DoctorCashWpf.Views
                             tblPrueba.AddCell(cltransaction);
                             tblPrueba.AddCell(clpatientname);
                             tblPrueba.AddCell(clregister);
-                            tblPrueba.AddCell(cldate);
-                            
+                            tblPrueba.AddCell(cldate);                            
                         }
                     }
 

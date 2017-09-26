@@ -17,47 +17,7 @@ namespace DoctorCashWpf.Printer
             //Creamos un objeto de la clase StringBuilder, en este objeto agregaremos las lineas del ticket
             StringBuilder linea = new StringBuilder();
             //Creamos una variable para almacenar el numero maximo de caracteres que permitiremos en el ticket.
-            int maxCar = 48, cortar;//Total de caracteres del ticket
-
-            //Creamos el primer metodo, este dibujara lineas guion.
-            public string lineasGuio()
-            {
-                string lineasGuion = "";
-                for (int i = 0; i < maxCar; i++)
-                {
-                    lineasGuion += "-";//Agregara un guio hasta llegar la numero maximo de caracteres.
-                }
-                return linea.AppendLine(lineasGuion).ToString(); //Devolvemos la lineaGuion
-            }
-
-            //Metodo para dibujar una linea con asteriscos
-            public string lineasAsteriscos()
-            {
-                string lineasAsterisco = "";
-                for (int i = 0; i < maxCar; i++)
-                {
-                    lineasAsterisco += "*";//Agregara un asterisco hasta llegar la numero maximo de caracteres.
-                }
-                return linea.AppendLine(lineasAsterisco).ToString(); //Devolvemos la linea con asteriscos
-            }
-
-            //Realizamos el mismo procedimiento para dibujar una lineas con el signo igual
-            public string lineasIgual()
-            {
-                string lineasIgual = "";
-                for (int i = 0; i < maxCar; i++)
-                {
-                    lineasIgual += "=";//Agregara un igual hasta llegar la numero maximo de caracteres.
-                }
-                return linea.AppendLine(lineasIgual).ToString(); //Devolvemos la lienas con iguales
-            }
-
-            //Creamos el encabezado para los articulos
-            public void EncabezadoVenta()
-            {
-                //Escribimos los espacios para mostrar el articulo. En total tienen que ser 40 caracteres
-                linea.AppendLine("ARTÍCULO            |CANT|PRECIO|IMPORTE");
-            }
+            int maxCar = 48, cortar;//Total de caracteres del ticket           
 
             //Creamos un metodo para poner el texto a la izquierda
             public void TextoIzquierda(string texto)
@@ -197,165 +157,7 @@ namespace DoctorCashWpf.Printer
 
                 return textoCompleto;
             }
-
-            //Metodo para agregar los totales d ela venta
-            public void AgregarTotales(string texto, decimal total)
-            {
-                //Variables que usaremos
-                string resumen, valor, textoCompleto, espacios = "";
-
-                if (texto.Length > 25)//Si es mayor a 25 lo cortamos
-                {
-                    cortar = texto.Length - 25;
-                    resumen = texto.Remove(25, cortar);
-                }
-                else
-                { resumen = texto; }
-
-                textoCompleto = resumen;
-                valor = total.ToString("#,#.00");//Agregamos el total previo formateo.
-
-                //Obtenemos el numero de espacios restantes para alinearlos a la derecha
-                int nroEspacios = maxCar - (resumen.Length + valor.Length);
-                //agregamos los espacios
-                for (int i = 0; i < nroEspacios; i++)
-                {
-                    espacios += " ";
-                }
-                textoCompleto += espacios + valor;
-                linea.AppendLine(textoCompleto);
-            }
-
-            //Metodo para agreagar articulos al ticket de venta
-            public void AgregaArticulo(string articulo, int cant, decimal precio, decimal importe)
-            {
-                //Valida que cant precio e importe esten dentro del rango.
-                if (cant.ToString().Length <= 5 && precio.ToString().Length <= 7 && importe.ToString().Length <= 8)
-                {
-                    string elemento = "", espacios = "";
-                    bool bandera = false;//Indicara si es la primera linea que se escribe cuando bajemos a la segunda si el nombre del articulo no entra en la primera linea
-                    int nroEspacios = 0;
-
-                    //Si el nombre o descripcion del articulo es mayor a 20, bajar a la siguiente linea
-                    if (articulo.Length > 20)
-                    {
-                        //Colocar la cantidad a la derecha.
-                        nroEspacios = (5 - cant.ToString().Length);
-                        espacios = "";
-                        for (int i = 0; i < nroEspacios; i++)
-                        {
-                            espacios += " ";//Generamos los espacios necesarios para alinear a la derecha
-                        }
-                        elemento += espacios + cant.ToString();//agregamos la cantidad con los espacios
-
-                        //Colocar el precio a la derecha.
-                        nroEspacios = (7 - precio.ToString().Length);
-                        espacios = "";
-                        for (int i = 0; i < nroEspacios; i++)
-                        {
-                            espacios += " ";//Genera los espacios
-                        }
-                        //el operador += indica que agregar mas cadenas a lo que ya existe.
-                        elemento += espacios + precio.ToString();//Agregamos el precio a la variable elemento
-
-                        //Colocar el importe a la derecha.
-                        nroEspacios = (8 - importe.ToString().Length);
-                        espacios = "";
-                        for (int i = 0; i < nroEspacios; i++)
-                        {
-                            espacios += " ";
-                        }
-                        elemento += espacios + importe.ToString();//Agregamos el importe alineado a la derecha
-
-                        int caracterActual = 0;//Indicara en que caracter se quedo al bajae a la siguiente linea
-
-                        //Por cada 20 caracteres se agregara una linea siguiente
-                        for (int longitudTexto = articulo.Length; longitudTexto > 20; longitudTexto -= 20)
-                        {
-                            if (bandera == false)//si es false o la primera linea en recorrerer, continuar...
-                            {
-                                //agregamos los primeros 20 caracteres del nombre del articulos, mas lo que ya tiene la variable elemento
-                                linea.AppendLine(articulo.Substring(caracterActual, 20) + elemento);
-                                bandera = true;//cambiamos su valor a verdadero
-                            }
-                            else
-                                linea.AppendLine(articulo.Substring(caracterActual, 20));//Solo agrega el nombre del articulo
-
-                            caracterActual += 20;//incrementa en 20 el valor de la variable caracterActual
-                        }
-                        //Agrega el resto del fragmento del  nombre del articulo
-                        linea.AppendLine(articulo.Substring(caracterActual, articulo.Length - caracterActual));
-
-                    }
-                    else //Si no es mayor solo agregarlo, sin dar saltos de lineas
-                    {
-                        for (int i = 0; i < (20 - articulo.Length); i++)
-                        {
-                            espacios += " "; //Agrega espacios para completar los 20 caracteres
-                        }
-                        elemento = articulo + espacios;
-
-                        //Colocar la cantidad a la derecha.
-                        nroEspacios = (5 - cant.ToString().Length);// +(20 - elemento.Length);
-                        espacios = "";
-                        for (int i = 0; i < nroEspacios; i++)
-                        {
-                            espacios += " ";
-                        }
-                        elemento += espacios + cant.ToString();
-
-                        //Colocar el precio a la derecha.
-                        nroEspacios = (7 - precio.ToString().Length);
-                        espacios = "";
-                        for (int i = 0; i < nroEspacios; i++)
-                        {
-                            espacios += " ";
-                        }
-                        elemento += espacios + precio.ToString();
-
-                        //Colocar el importe a la derecha.
-                        nroEspacios = (8 - importe.ToString().Length);
-                        espacios = "";
-                        for (int i = 0; i < nroEspacios; i++)
-                        {
-                            espacios += " ";
-                        }
-                        elemento += espacios + importe.ToString();
-
-                        linea.AppendLine(elemento);//Agregamos todo el elemento: nombre del articulo, cant, precio, importe.
-                    }
-                }
-                else
-                {
-                    linea.AppendLine("Los valores ingresados para esta fila");
-                    linea.AppendLine("superan las columnas soportdas por éste.");
-                    throw new Exception("Los valores ingresados para algunas filas del ticket\nsuperan las columnas soportdas por éste.");
-                }
-            }
-
-            //Metodos para enviar secuencias de escape a la impresora
-            //Para cortar el ticket
-            public void CortaTicket()
-            {
-                linea.AppendLine("\x1B" + "m"); //Caracteres de corte. Estos comando varian segun el tipo de impresora
-                linea.AppendLine("\x1B" + "d" + "\x09"); //Avanza 9 renglones, Tambien varian
-            }
-            //Para abrir el cajon
-            public void AbreCajon()
-            {
-                //Estos tambien varian, tienen que ever el manual de la impresora para poner los correctos.
-                linea.AppendLine("\x1B" + "p" + "\x00" + "\x0F" + "\x96"); //Caracteres de apertura cajon 0
-                                                                           //linea.AppendLine("\x1B" + "p" + "\x01" + "\x0F" + "\x96"); //Caracteres de apertura cajon 1
-            }
-            //Para mandara a imprimir el texto a la impresora que le indiquemos.
-            public void ImprimirTicket(string impresora)
-            {
-                //Este metodo recibe el nombre de la impresora a la cual se mandara a imprimir y el texto que se imprimira.
-                //Usaremos un código que nos proporciona Microsoft. https://support.microsoft.com/es-es/kb/322091
-
-                RawPrinterHelper.SendStringToPrinter(impresora, linea.ToString()); //Imprime texto.
-                linea.Clear();//Al cabar de imprimir limpia la linea de todo el texto agregado.
-            }
+            
         }
         public void print()
         {
@@ -671,6 +473,77 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("total Check", transaction.clt_total_check.ToString())));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Balance", transaction.clt_balance.ToString())));
+
+
+            //parte final de ticket
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+
+
+            //numero aleatorio para el codigo QR y Codigo de barra
+            Random rnd = new Random();
+            int number = rnd.Next();
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(number + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.BarCode.Code128(number.ToString()));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.QrCode.Print(number.ToString(), PrinterUtility.Enums.QrCodeSize.Grande));
+
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Printed by: " + userInformation.user.usr_Username + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Date: " + DateTime.Now + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, CutPage());
+
+            if (File.Exists(".\\tmpPrint.print"))
+                File.Delete(".\\tmpPrint.print");
+            File.WriteAllBytes(".\\tmpPrint.print", BytesValue);
+            RawPrinterHelper.SendFileToPrinter("CITIZEN CT-S310II", ".\\tmpPrint.print");
+            //RawPrinterHelper.SendStringToPrinter("CITIZEN CT-S310II", Encoding.ASCII.GetString(new byte[] { 27, 112, 1, 50, 250 }));
+
+            try
+            {
+                File.Delete(".\\tmpPrint.print");
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void printViewReciept(transaction transaction,double total)
+        {
+
+            //para usar las otras funciones del metodo ticket
+            CrearTicket ticket = new CrearTicket();
+
+            //primera parte del ticket
+            PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
+            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+
+            //donde ira todo lo que le vamos a mandar a imprimir
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());                        
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Amount Charged", transaction.amountCharged.ToString())));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Cash", transaction.total_cash.ToString())));            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Credit Card", transaction.credit.ToString())));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Check", transaction.check.ToString())));            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());            
+            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Paid", total.ToString())));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Change", transaction.change.ToString())));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            
 
 
             //parte final de ticket
