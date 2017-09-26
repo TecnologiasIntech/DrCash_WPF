@@ -17,7 +17,7 @@ namespace DoctorCashWpf.Printer
             //Creamos un objeto de la clase StringBuilder, en este objeto agregaremos las lineas del ticket
             StringBuilder linea = new StringBuilder();
             //Creamos una variable para almacenar el numero maximo de caracteres que permitiremos en el ticket.
-            int maxCar = 48, cortar;//Total de caracteres del ticket           
+            int maxCar = 64, cortar;//Total de caracteres del ticket           
 
             //Creamos un metodo para poner el texto a la izquierda
             public void TextoIzquierda(string texto)
@@ -128,20 +128,20 @@ namespace DoctorCashWpf.Printer
                 string textoIzq, textoDer, textoCompleto = "", espacios = "";
 
                 //Si el texto que va a la izquierda es mayor a 18, cortamos el texto.
-                if (textoIzquierdo.Length > 22)
+                if (textoIzquierdo.Length > 30)
                 {
-                    cortar = textoIzquierdo.Length - 22;
-                    textoIzq = textoIzquierdo.Remove(22, cortar);
+                    cortar = textoIzquierdo.Length - 30;
+                    textoIzq = textoIzquierdo.Remove(30, cortar);
                 }
                 else
                 { textoIzq = textoIzquierdo; }
 
                 textoCompleto = textoIzq;//Agregamos el primer texto.
 
-                if (textoDerecho.Length > 24)//Si es mayor a 20 lo cortamos
+                if (textoDerecho.Length > 32)//Si es mayor a 20 lo cortamos
                 {
-                    cortar = textoDerecho.Length - 24;
-                    textoDer = textoDerecho.Remove(24, cortar);
+                    cortar = textoDerecho.Length - 32;
+                    textoDer = textoDerecho.Remove(32, cortar);
                 }
                 else
                 { textoDer = textoDerecho; }
@@ -157,7 +157,18 @@ namespace DoctorCashWpf.Printer
 
                 return textoCompleto;
             }
-            
+
+            //Realizamos el mismo procedimiento para dibujar una lineas con el signo igual
+            public string lineasIgual()
+            {
+                string lineasIgual = "";
+                for (int i = 0; i < maxCar; i++)
+                {
+                    lineasIgual += "=";//Agregara un igual hasta llegar la numero maximo de caracteres.
+                }
+                return linea.AppendLine(lineasIgual).ToString(); //Devolvemos la lienas con iguales
+            }
+
         }
         public void print()
         {
@@ -227,7 +238,8 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
-            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+
             //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
@@ -235,22 +247,26 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Patient Name", transaction.patientFirstName)));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Amount Chanrge", transaction.amountCharged.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Cash", transaction.cash.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Credit", transaction.credit.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Check", transaction.check.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Check #", transaction.checkNumber.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Copayment", transaction.copayment.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Selfpay", transaction.selfPay.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Deductible", transaction.deductible.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Labs", transaction.labs.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Other", transaction.other.ToString())));            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual()+"\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Patient Name", transaction.patientFirstName) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Amount Chanrge", transaction.amountCharged.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Cash", transaction.cash.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Credit", transaction.credit.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Check", transaction.check.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Check #", transaction.checkNumber.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Copayment", transaction.copayment.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Selfpay", transaction.selfPay.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Deductible", transaction.deductible.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Labs", transaction.labs.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Other", transaction.other.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Right());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total", transaction.total_cash.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Amount", transaction.total_amount.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Change", transaction.change.ToString())));                    
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total", transaction.total_cash.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Amount", transaction.total_amount.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Change", transaction.change.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
 
 
             //parte final de ticket
@@ -304,6 +320,7 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
 
             //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
@@ -312,7 +329,9 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Cash", transaction.cash.ToString())));                     
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Cash", transaction.cash.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
 
 
             //parte final de ticket
@@ -365,6 +384,7 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
 
             //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
@@ -376,16 +396,18 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Information\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("100's", transaction.clt_100_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("50's", transaction.clt_50_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("20's", transaction.clt_20_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("10's", transaction.clt_10_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("5's", transaction.clt_5_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("1's", transaction.clt_1_bills.ToString())));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("100's", transaction.clt_100_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("50's", transaction.clt_50_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("20's", transaction.clt_20_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("10's", transaction.clt_10_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("5's", transaction.clt_5_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("1's", transaction.clt_1_bills.ToString()) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Cash", transaction.clt_total_cash.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Credit", transaction.clt_total_credit.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("total Check", transaction.clt_total_check.ToString())));                               
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Cash", transaction.clt_total_cash.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Credit", transaction.clt_total_credit.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("total Check", transaction.clt_total_check.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
 
 
             //parte final de ticket
@@ -440,6 +462,7 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
 
             //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
@@ -451,28 +474,32 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Totals\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Initial Cash", transaction.clt_initial_cash.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Amount Charged", transaction.clt_checks_amount.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Cash", transaction.clt_total_cash.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Credit Card", transaction.clt_total_credit.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Check", transaction.clt_total_check.ToString())));            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Initial Cash", transaction.clt_initial_cash.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Amount Charged", transaction.clt_checks_amount.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Cash", transaction.clt_total_cash.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Credit Card", transaction.clt_total_credit.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Check", transaction.clt_total_check.ToString()) + "\n"));            
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Report\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("100's", transaction.clt_100_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("50's", transaction.clt_50_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("20's", transaction.clt_20_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("10's", transaction.clt_10_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("5's", transaction.clt_5_bills.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("1's", transaction.clt_1_bills.ToString())));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("100's", transaction.clt_100_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("50's", transaction.clt_50_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("20's", transaction.clt_20_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("10's", transaction.clt_10_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("5's", transaction.clt_5_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("1's", transaction.clt_1_bills.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Cash", transaction.clt_total_cash.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Credit", transaction.clt_total_credit.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("total Check", transaction.clt_total_check.ToString())));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Cash", transaction.clt_total_cash.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Credit", transaction.clt_total_credit.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("total Check", transaction.clt_total_check.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Balance", transaction.clt_balance.ToString())));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Balance", transaction.clt_balance.ToString()) + "\n"));
 
 
             //parte final de ticket
@@ -527,21 +554,26 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
 
             //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());            
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());            
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());            
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());                        
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Amount Charged", transaction.amountCharged.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Cash", transaction.total_cash.ToString())));            
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Credit Card", transaction.credit.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Check", transaction.check.ToString())));            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Amount Charged", transaction.amountCharged.ToString())+"\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Cash", transaction.total_cash.ToString()) + "\n"));            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Credit Card", transaction.credit.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Check", transaction.check.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());            
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());            
-            
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Paid", total.ToString())));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Change", transaction.change.ToString())));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Total Paid", total.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.TextoExtremos("Change", transaction.change.ToString()) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.lineasIgual() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             
 

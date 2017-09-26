@@ -141,7 +141,7 @@ namespace DoctorCashWpf.Views
                     cash.Text = list[i].cash.ToString();
                     creditCard.Text = list[i].credit.ToString();
                     check.Text = list[i].check.ToString();
-                    total.Text = list[i].cash.ToString();
+                    total.Text = (list[i].cash+list[i].credit+list[i].check).ToString();
                     change.Text = list[i].change.ToString();
                     break;
                 }
@@ -184,12 +184,12 @@ namespace DoctorCashWpf.Views
                 if (transactionID != -1)
                 {
                     var item = new transaction();
-                    item.amountCharged= (float)Convert.ToDouble(amounChange.Text.Remove(0, 1));
-                    item.cash= (float)Convert.ToDouble(cash.Text.Remove(0, 1));
-                    item.credit= (float)Convert.ToDouble(creditCard.Text.Remove(0, 1));
-                    item.check= (float)Convert.ToDouble(check.Text.Remove(0, 1));
-                    total_sum = (float)Convert.ToDouble(total.Text.Remove(0, 1));
-                    item.change= (float)Convert.ToDouble(change.Text.Remove(0, 1));
+                    item.amountCharged= (float)Convert.ToDouble(amounChange.Text);
+                    item.cash= (float)Convert.ToDouble(cash.Text);
+                    item.credit= (float)Convert.ToDouble(creditCard.Text);
+                    item.check= (float)Convert.ToDouble(check.Text);
+                    total_sum = (float)Convert.ToDouble(total.Text);
+                    item.change= (float)Convert.ToDouble(change.Text);
 
                     Print printer = new Print();
                     printer.printViewReciept(item,total_sum);
