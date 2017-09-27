@@ -42,8 +42,9 @@ namespace DoctorCashWpf.Views
             //dataClear();
             id = Convert.ToInt32(item.Row.ItemArray[0]);
             var registerID = fila["clt_reg_RegisterID"];
+            var DateOfSelection = fila["clt_Datetime"];
 
-            var list = transaction.getTransactionsByRegisterID(registerID.ToString(), fromdate.Text, todate.Text);
+            var list = transaction.getTransactionsByRegisterID(registerID.ToString(), DateOfSelection.ToString());
 
             DataTable dt = new DataTable();
             dt.Columns.Add("Transaction ID");
@@ -62,7 +63,7 @@ namespace DoctorCashWpf.Views
                 check += list[i].check;
                 change += list[i].change;                
             }
-            txt_initialCash.Text = transaction.getInitialCash(registerID.ToString(), fromdate.Text, todate.Text).ToString();
+            txt_initialCash.Text = transaction.getInitialCashbyRegisterID(registerID.ToString(), DateOfSelection.ToString()).ToString();
             cash = cash - change;
             moneyService.convertComponentToMoneyFormat(txt_initialCash);
             txt_cash.Text = cash.ToString();

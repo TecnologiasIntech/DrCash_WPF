@@ -90,7 +90,7 @@ namespace DoctorCashWpf
         {
             var listTerms = new List<valuesWhere>();
             listTerms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", dateInitial, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            //listTerms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.AND, (int)OPERATOR.INEGUALITY));
+            listTerms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.AND, (int)OPERATOR.INEGUALITY));
             listTerms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", dateEnd, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
 
             createQuery.toSelectAll("transactions", listTerms);
@@ -173,14 +173,14 @@ namespace DoctorCashWpf
             createQuery.toInsert("transactions", valuesArray);
         }
 
-        public double getInitialCash(string registerID, string fromDate, string toDate)
+        public double getInitialCashbyRegisterIDAndRange(string registerID, string fromDate, string toDate)
         {
             double cash=0;
             var columns = new List<string>();
             var terms = new List<valuesWhere>();
             columns.Add("trn_Cash");
             
-            terms.Add(createItem.ofTypeValuesWhere(true, "trn_RegisterID", registerID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_RegisterID", registerID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
             terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
             terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
             terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));            
@@ -193,6 +193,50 @@ namespace DoctorCashWpf
                  cash += (float)Convert.ToDouble(filas["trn_Cash"]);
             }
             return cash;           
+        }
+
+        public double getInitialCashbyRegisterID(string registerID, string Date)
+        {
+            double cash = 0;
+            var columns = new List<string>();
+            var terms = new List<valuesWhere>();
+            columns.Add("trn_Cash");
+
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_RegisterID", registerID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDate(Date), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(Date), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            var data = createQuery.toSelect(columns, "transactions", terms);
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+                cash += (float)Convert.ToDouble(filas["trn_Cash"]);
+            }
+            return cash;
+        }
+
+        public double getInitialCashbyLoginID()
+        {
+            double cash = 0;
+            var columns = new List<string>();
+            var terms = new List<valuesWhere>();
+            columns.Add("trn_Cash");
+
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_User_ID", userInformation.user.usr_ID.ToString(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDate(DateTime.Now.ToShortDateString()), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(DateTime.Now.ToShortDateString()), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            var data = createQuery.toSelect(columns, "transactions", terms);
+
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow filas = data.Rows[i];
+                cash += (float)Convert.ToDouble(filas["trn_Cash"]);
+            }
+            return cash;
         }
 
         public void setTransactionRefund(transaction trn)
@@ -217,8 +261,9 @@ namespace DoctorCashWpf
 
         public void setClosedTransaction(closeDate trn)
         {
+            int maxid = 0;
             var list = new List<columnsValues>();
-
+            
             var trns = getCurrentTransactions(userInformation.user.usr_ID);
             var checkCount = 0;
             var creditAmount = 0;
@@ -235,8 +280,10 @@ namespace DoctorCashWpf
 
                 totalCharged += trns[i].cash + trns[i].credit + trns[i].check;
             }
+            var lis = new List<valuesWhere>();
+            maxid =createQuery.toMax("clt_closed_ID", "ClosedTransactions", lis);
 
-            list.Add(createItem.ofTypeColumnsValues("clt_closed_ID", 1)); //Falta hacer un creador de ID
+            list.Add(createItem.ofTypeColumnsValues("clt_closed_ID", maxid)); 
             list.Add(createItem.ofTypeColumnsValues("clt_100_bills", (float)trn.clt_100_bills));
             list.Add(createItem.ofTypeColumnsValues("clt_50_bills", (float)trn.clt_50_bills));
             list.Add(createItem.ofTypeColumnsValues("clt_20_bills", (float)trn.clt_20_bills));
@@ -246,10 +293,10 @@ namespace DoctorCashWpf
             list.Add(createItem.ofTypeColumnsValues("clt_checks_amount", checkCount));
             list.Add(createItem.ofTypeColumnsValues("clt_total_charged", (float)totalCharged));
             list.Add(createItem.ofTypeColumnsValues("clt_credits_amount", creditAmount));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_cash", (float)trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_check", (float)trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_total_credit", (float)trn.clt_credits_amount));
-            list.Add(createItem.ofTypeColumnsValues("clt_initial_cash", (float)trn.clt_credits_amount));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_cash", (float)trn.clt_total_cash));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_check", (float)trn.clt_total_check));
+            list.Add(createItem.ofTypeColumnsValues("clt_total_credit", (float)trn.clt_total_credit));
+            list.Add(createItem.ofTypeColumnsValues("clt_initial_cash", (float)getInitialCashbyLoginID()));
             list.Add(createItem.ofTypeColumnsValues("clt_balance", (float)closeDateInformation.closeDate.clt_balance));
             list.Add(createItem.ofTypeColumnsValues("clt_transaction_count", (float)closeDateInformation.closeDate.clt_transaction_count));
             list.Add(createItem.ofTypeColumnsValues("clt_reg_RegisterID", 1)); // Falta guardar el ID de la caja registradora en la que se encuentra
@@ -263,8 +310,8 @@ namespace DoctorCashWpf
         {
             var terms = new List<valuesWhere>();
 
-            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", transactionID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
-            //terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", transactionID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
 
             var data = createQuery.toSelectAll("transactions", terms);
             var items = new transaction();
@@ -294,8 +341,8 @@ namespace DoctorCashWpf
             var terms = new List<valuesWhere>();
             var list = new List<transaction>();
 
-            terms.Add(createItem.ofTypeValuesWhere(false, "trn_User_ID", userID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
-            //terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_User_ID", userID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
 
             var data = createQuery.toSelectAll("transactions", terms);
 
@@ -322,8 +369,8 @@ namespace DoctorCashWpf
             var terms = new List<valuesWhere>();
             var list = new List<transaction>();
 
-            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", transactionID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
-            //terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", transactionID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
 
             var data = createQuery.toSelectAll("transactions", terms);
 
@@ -350,8 +397,8 @@ namespace DoctorCashWpf
             var terms = new List<valuesWhere>();
             var items = new transaction();
 
-            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", transactionID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
-            //terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", transactionID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
 
             var data = createQuery.toSelectAll("transactions", terms);
 
@@ -378,14 +425,14 @@ namespace DoctorCashWpf
             return items;
         }
 
-        public List<transaction> getTransactionsByRegisterID(string registerID, string fromDate, string toDate)
+        public List<transaction> getTransactionsByRegisterID(string registerID, string fromDate)
         {
             var terms = new List<valuesWhere>();
             var list = new List<transaction>();
 
-            terms.Add(createItem.ofTypeValuesWhere(true, "trn_RegisterID", registerID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_RegisterID", registerID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
             terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
             terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
 
             var data = createQuery.toSelectAll("transactions", terms);
@@ -397,8 +444,7 @@ namespace DoctorCashWpf
 
                 items.trn_id = Convert.ToInt32(filas["trn_ID"]);
                 items.amountCharged = Convert.ToInt32(filas["trn_AmountCharged"]);
-                items.cash = Convert.ToInt32(filas["trn_Cash"]);
-                //items.initial_Cash = Convert.ToInt32(filas["trn_Initial_Cash"]);
+                items.cash = Convert.ToInt32(filas["trn_Cash"]);                
                 items.credit = Convert.ToInt32(filas["trn_Credit"]);
                 items.check = Convert.ToInt32(filas["trn_Check"]);
                 items.change = Convert.ToInt32(filas["trn_Change"]);
@@ -414,10 +460,10 @@ namespace DoctorCashWpf
             var terms = new List<valuesWhere>();
             var list = new List<transaction>();
 
-            terms.Add(createItem.ofTypeValuesWhere(true, "trn_ID", registerID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(false, "trn_ID", registerID, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
             terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
-            //terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.INEGUALITY));
 
             var data = createQuery.toSelectAll("transactions", terms);
 

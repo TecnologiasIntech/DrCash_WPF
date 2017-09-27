@@ -531,7 +531,7 @@ namespace DoctorCashWpf.Views
             labelerror.Content = "";
             var clDate = new closeDate();
 
-            if (textbox_bills1.Text == "" || textbox_bills10.Text == "" || textbox_bills100.Text == "" || textbox_bills20.Text == "" || textbox_bills5.Text == "" || textbox_bills50.Text == ""||textbox_credit.Text== "$0,00" || textbox_check.Text== "$0,00" || textbox_leftInRegister.Text=="$0,00")
+            if (textbox_bills1.Text == "" && textbox_bills10.Text == "" && textbox_bills100.Text == "" && textbox_bills20.Text == "" && textbox_bills5.Text == "" && textbox_bills50.Text == "" && textbox_credit.Text== "$0,00" && textbox_check.Text== "$0,00" && textbox_leftInRegister.Text=="$0,00")
             {
                 #region Check                               
                 if (textbox_bills100.Text == "")

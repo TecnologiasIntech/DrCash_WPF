@@ -311,10 +311,10 @@ namespace DoctorCashWpf
             //Creamos el comando ya con el query
             var selectMax = createCommand(query, conection);
 
-            //Ejecutamos la consulta
-            Max = selectMax.ExecuteNonQuery();
+            //Ejecutamos la consulta            
+            Max=Convert.ToInt32(selectMax.ExecuteScalar());
 
-            return Max;
+            return (Max+1);
         }
 
         //UPDATE table SET column= value, column= value  WHERE column = value 
