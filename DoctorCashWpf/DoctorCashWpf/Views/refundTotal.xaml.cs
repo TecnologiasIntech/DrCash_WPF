@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoctorCashWpf.Printer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -110,6 +111,9 @@ namespace DoctorCashWpf.Views
                 items.log_DateTime = DateTime.Now.ToString();
                 items.log_Actions = "Print Information in RefundTotal with Transaction Number: " + txtbox_transactionNumber.Text + " by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
+
+                Print printer = new Print();
+                printer.printRefund(trn);
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
