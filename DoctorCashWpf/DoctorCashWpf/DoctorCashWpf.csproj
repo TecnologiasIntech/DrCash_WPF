@@ -140,6 +140,7 @@
     <Compile Include="statics\closeDT.cs" />
     <Compile Include="statics\createRefund.cs" />
     <Compile Include="statics\createUser.cs" />
+    <Compile Include="statics\MissingUser.cs" />
     <Compile Include="statics\userInformation.cs" />
     <Compile Include="Printer\Print.cs" />
     <Compile Include="Printer\RawPrinterHelper.cs" />
@@ -156,6 +157,9 @@
     </Compile>
     <Compile Include="Views\ClosedStatements.xaml.cs">
       <DependentUpon>ClosedStatements.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Credentials.xaml.cs">
+      <DependentUpon>Credentials.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DailyTransactions.xaml.cs">
       <DependentUpon>DailyTransactions.xaml</DependentUpon>
@@ -239,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ClosedStatements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Credentials.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
