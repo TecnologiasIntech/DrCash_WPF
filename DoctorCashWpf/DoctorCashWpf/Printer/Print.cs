@@ -17,6 +17,7 @@ namespace DoctorCashWpf.Printer
             
             StringBuilder line = new StringBuilder();
             
+            //long of ticket
             int maxCar = 64, cortar;
             
             public string LeftText(string text)
@@ -42,7 +43,6 @@ namespace DoctorCashWpf.Printer
                 }
                 return line.ToString();
             }
-
            
             public string RightText(string text)
             {
@@ -81,7 +81,6 @@ namespace DoctorCashWpf.Printer
                 }
                 return line.ToString();
             }
-
             
             public string CenterText(string text)
             {
@@ -125,7 +124,6 @@ namespace DoctorCashWpf.Printer
                 }
                 return line.ToString();
             }
-
             
             public string ExtremeText(string LeftText, string RightText)
             {
@@ -163,7 +161,6 @@ namespace DoctorCashWpf.Printer
 
                 return line.ToString();
             }
-
             
             public string EqualLines()
             {
