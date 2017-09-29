@@ -281,5 +281,47 @@ namespace DoctorCashWpf
 
         }
 
+        private void clearData()
+        {
+            dataGridView1.ItemsSource = null;
+            label_initialCash.Text = "$0.00";
+            label_cashIn.Text = "$0.00";
+            label_credit.Text = "$0.00";
+            label_checks.Text = "$0.00";
+            label_totalIn.Text = "$0.00";
+            label_cashOut.Text = "$0.00";
+            label_refounds.Text = "$0.00";
+            label_totalOut.Text = "$0.00";
+        }
+
+        private async void Look_Click(object sender, RoutedEventArgs e)
+        {
+            clearData();
+            MissingUser.missing.usr_Username = userInformation.user.usr_Username;
+            var credentials = new Credentials();                        
+            await DialogHost.Show(credentials, "RootDialog");
+
+
+            var transaction = new transactionService();
+
+            var list = transaction.getCurrentTransactions(userInformation.user.usr_ID);
+            bool initialCash = false;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].type == (int)TRANSACTIONTYPE.INITIAL)
+                {
+                    initialCash = true;
+                    break;
+                }
+            }
+
+            if (!initialCash)
+            {
+                await DialogHost.Show(new InitialCash(), "RootDialog");
+            }
+
+            chargeTransactionsList();
+        }
     }
 }

@@ -79,13 +79,23 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     <materialDesign:PackIcon Kind="Inbox" Height="70" Width="67" />
 
                 </Button>
+                <Button x:Name="Look" 
+                    Click="Look_Click"
+                    Background="CadetBlue"
+                    Width="100"
+                    Height="80"
+                        BorderThickness="0px"
+                    Margin="20,10">
+                    <materialDesign:PackIcon Kind="Logout" Height="70" Width="67" />
+
+                </Button>
                 <Button x:Name="CloseDateButton" 
                     Click="CloseDateButton_Click"
                     Background="#cc0000"
                     Width="100"
                     Height="80"
                         BorderThickness="0px"
-                    Margin="200,14">
+                    Margin="20,14">
                     <materialDesign:PackIcon Kind="Close" Height="70" Width="67" />
                 </Button>
 
@@ -273,6 +283,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                FontSize="14"
                                    HorizontalAlignment="Right"/>
                     </StackPanel>
+                    
                 </GroupBox>
 
             </StackPanel>

@@ -10,7 +10,7 @@ namespace DoctorCashWpf
     {
         public static bool isMissing = false;
 
-        public static missing missing = null;
+        public static missing missing = new missing();
     }
 
 
