@@ -188,7 +188,28 @@ namespace DoctorCashWpf.Views
 
         }
 
+        private void txtbox_email_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!txtbox_email.Text.Contains("@") || !txtbox_email.Text.Contains(".com"))
+            {
+                labelemail.Content = "Does not match an email";
+            }
+            else
+            {
+                labelemail.Content = "";
+            }
+        }
 
-       
+        private void txtbox_confirmpassword_KeyUp(object sender, KeyEventArgs e)
+        {            
+            if ((txtbox_confirmpassword.Password.ToString() != txtbox_newpassword.Password.ToString()) && (txtbox_confirmpassword.Password.ToString() != ""))
+            {
+                labelpassword.Content = "Password does not match";
+            }
+            else
+            {
+                labelpassword.Content = "";
+            }
+        }
     }
 }

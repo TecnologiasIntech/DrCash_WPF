@@ -94,5 +94,10 @@ namespace DoctorCashWpf.Views
                 verify();
             }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
     }
 }

@@ -9,45 +9,44 @@
              d:DesignHeight="800" Width="1000">
     <StackPanel Margin="50 35">
 
-        
+
         <!--#region User Profile/ Manage Users -->
         <Grid Loaded="loadeds">
-            
+
             <!--#region Grid Definition-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!--#endregion-->
-            
+
             <!-- User Profile -->
             <TextBlock Grid.Column="0" Text="User Profile" FontFamily="Roboto" FontSize="28" Margin="20" FontWeight="Bold"/>
-            
+
             <!-- Manage Users -->
 
             <Button Click="Manage_User_Button_Click" x:Name="btn_manageUsers" Grid.Column="1" Width="200" Height="40" Background="#6aa84f" BorderThickness="0" FontSize="22" HorizontalAlignment="Right">
-                    Manage Users     
+                Manage Users
             </Button>
 
         </Grid>
-        
+
         <!--#endregion-->
-        
+
         <!--#region User Info Card-->
         <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="140" />
                     <RowDefinition Height="*" />
-                        
                 </Grid.RowDefinitions>
 
                 <!--#region Box Header -->
-                    
+
                 <!--Background-->
                 <StackPanel Background="#2b78e4 " Height="200" />
 
-                 <!--Edit Button-->
+                <!--Edit Button-->
                 <Grid x:Name="EditButton" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 50 -35">
                     <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Height="70" Width="70" 
                             Background="#FFF" BorderThickness="0" BorderBrush="Transparent" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
@@ -58,7 +57,7 @@
                 </Grid>
 
 
-                 <!--Accept Button-->
+                <!--Accept Button-->
                 <Grid x:Name="AcceptButton" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 50 -35">
                     <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Height="70" Width="70" 
                             Background="#FFF" BorderThickness="0" BorderBrush="Transparent" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
@@ -68,7 +67,7 @@
                     </Button>
                 </Grid>
 
-                 <!--Close Button-->
+                <!--Close Button-->
                 <Grid x:Name="CancelButton" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 150 -35">
                     <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"  Height="70" Width="70" 
                             Background="#FFF" BorderThickness="0" BorderBrush="Transparent" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
@@ -77,7 +76,7 @@
                         <materialDesign:PackIcon Kind="Close" Height="35" Width="35" Foreground="#FFF"/>
                     </Button>
                 </Grid>
-                
+
                 <!-- User Icon-->
                 <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 -50">
                     <!-- White overlap Button Background-->
@@ -93,7 +92,7 @@
                     </Button>
                 </Grid>
 
-                
+
                 <!--#endregion-->
 
                 <!--#region User Information-->
@@ -116,34 +115,34 @@
 
                     <!--#endregion-->
 
-                     <!--Name--> 
+                    <!--Name-->
 
                     <TextBlock Grid.ColumnSpan="2" x:Name="label_userFullName" Text="Carlos Alatorre" FontSize="26" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Roboto" />
 
-                     <!--First Name--> 
+                    <!--First Name-->
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="1" FontSize="18" FontFamily="Roboto" Text="First Name:"/>
                     <TextBlock x:Name="label_firstName" Margin="20 0" Grid.Column="1" Grid.Row="1" FontSize="18" FontFamily="Roboto" Text="Carlos"/>
 
-                     <!--LastName--> 
+                    <!--LastName-->
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="2" FontSize="18" FontFamily="Roboto" Text="Last Name:"/>
                     <TextBlock x:Name="label_lastName" Margin="20 0" Grid.Column="1" Grid.Row="2" FontSize="18" FontFamily="Roboto" Text="Alatorre Parra"/>
 
-                     <!--Email--> 
+                    <!--Email-->
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="3" FontSize="18" FontFamily="Roboto" Text="Email:"/>
                     <TextBlock x:Name="label_email" Margin="20 0" Grid.Column="1" Grid.Row="3" FontSize="18" FontFamily="Roboto" Text="ejemplo@hotmail.com"/>
 
-                     <!--Security Question--> 
+                    <!--Security Question-->
 
                     <TextBlock Margin="20 0" Grid.Column="0" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="Security Question"/>
                     <TextBlock x:Name="label_securityQuestion" Margin="20 0" Grid.Column="1" Grid.Row="4" FontSize="18" FontFamily="Roboto" Text="????????????"/>
 
                 </Grid>
-                <!--#endregion--> 
+                <!--#endregion-->
 
-                <!--#region User Information Editable--> 
+                <!--#region User Information Editable-->
                 <Grid x:Name="UserEditInformation" Grid.Row="1" Width="650" Margin="0 50 0 30" Height="350">
 
                     <!--#region Grid Definitions-->
@@ -162,28 +161,28 @@
 
                     <!--#endregion-->
 
-                     <!--Name--> 
+                    <!--Name-->
 
                     <TextBlock Grid.ColumnSpan="3" x:Name="userFullName" Text="Carlos Alatorre" FontSize="26" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Roboto" />
 
-                     <!--First Name-->
+                    <!--First Name-->
                     <StackPanel Grid.Column="0" Grid.Row="1" Margin=" 15 0 25 0">
                         <TextBlock Foreground="#666666" Grid.Column="0" Grid.Row="1" FontSize="16" FontFamily="Roboto" Text="First Name:"/>
                         <TextBox x:Name="txtbox_firstname" Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="1" FontSize="15" FontFamily="Roboto" Text="Carlos"/>
                     </StackPanel>
-                    
+
                     <!--LastName-->
                     <StackPanel Grid.Column="0" Grid.Row="2" Margin=" 15 0 25 0">
                         <TextBlock Foreground="#666666" Grid.Column="0" Grid.Row="2" FontSize="16" FontFamily="Roboto" Text="Last Name:"/>
                         <TextBox x:Name="txtbox_lastname" Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="2" FontSize="15" FontFamily="Roboto" Text="Alatorre Parra"/>
                     </StackPanel>
-                    
+
                     <!--Email-->
                     <StackPanel Grid.Column="0" Grid.Row="3" Margin=" 15 0 25 0">
                         <TextBlock Foreground="#666666" Grid.Column="0" Grid.Row="3" FontSize="16" FontFamily="Roboto" Text="Email:"/>
-                        <TextBox x:Name="txtbox_email" Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="3" FontSize="15" FontFamily="Roboto" Text="ejemplo@hotmail.com" TextChanged="TextBox_TextChanged"/>
+                        <TextBox x:Name="txtbox_email" Foreground="#666666" Margin="10 10 0 20" Grid.Column="0" Grid.Row="3" FontSize="15" FontFamily="Roboto" Text="ejemplo@hotmail.com" TextChanged="TextBox_TextChanged" KeyUp="txtbox_email_KeyUp"/>
                     </StackPanel>
-                    
+
                     <!--Security Question-->
                     <StackPanel Grid.Column="1" Grid.Row="1" Margin=" 25 0 10 0">
                         <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="Security Question"/>
@@ -208,16 +207,21 @@
                     <!-- Confirm Password-->
                     <StackPanel Grid.Column="1" Grid.Row="3" Margin=" 25 0 10 0">
                         <TextBlock Foreground="#666666" FontSize="16" FontFamily="Roboto" Text="Confirm Password"/>
-                        <PasswordBox x:Name="txtbox_confirmpassword" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto" materialDesign:HintAssist.Hint="* * * * *"/>
+                        <PasswordBox x:Name="txtbox_confirmpassword" Margin="10 10 0 20" FontSize="15" FontFamily="Roboto" materialDesign:HintAssist.Hint="* * * * *" KeyUp="txtbox_confirmpassword_KeyUp"/>
                     </StackPanel>
 
 
 
-                </Grid>
-                <!--#endregion--> 
-                
+                </Grid>                
+                <!--#endregion-->
+
             </Grid>
         </materialDesign:Card>
+        <Grid>
+            
+        </Grid>
+        <Label Name="labelemail" Content="" HorizontalAlignment="Center" FontSize="12" Foreground="Red" Margin="-320,-49,40,5" Height="23"></Label>
+        <Label Name="labelpassword" Content="" HorizontalAlignment="Center" FontSize="12" Foreground="Red" Margin="650,-49,455,5" Height="23"></Label>
         <!--#endregion-->
 
 

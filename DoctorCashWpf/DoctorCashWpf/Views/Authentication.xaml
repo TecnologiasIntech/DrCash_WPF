@@ -28,7 +28,7 @@
         </Button>
 
         <!--Cancel Button-->
-        <Button Background="Transparent" BorderBrush="Transparent" Margin="0 10 0 0" Style="{DynamicResource MaterialDesignFlatButton}">
+        <Button Click="Button_Click_1" Background="Transparent" BorderBrush="Transparent" Margin="0 10 0 0" Style="{DynamicResource MaterialDesignFlatButton}">
             <TextBlock FontSize="16" Foreground="#666666">Cancel</TextBlock>
         </Button>
         
