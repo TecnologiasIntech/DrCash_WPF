@@ -144,14 +144,6 @@
     <Compile Include="statics\userInformation.cs" />
     <Compile Include="Printer\Print.cs" />
     <Compile Include="Printer\RawPrinterHelper.cs" />
-    <Compile Include="Reportings\DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reportings\Report1.xaml.cs">
-      <DependentUpon>Report1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Themes\Refund.xaml.cs">
       <DependentUpon>Refund.xaml</DependentUpon>
     </Compile>
@@ -234,10 +226,6 @@
     <Compile Include="Views\ViewReceipt.xaml.cs">
       <DependentUpon>ViewReceipt.xaml</DependentUpon>
     </Compile>
-    <Page Include="Reportings\Report1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Themes\Refund.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -384,22 +372,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportings\Report1.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reportings\DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="Reportings\DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reportings\DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
