@@ -164,5 +164,22 @@ namespace DoctorCashWpf
             return user;
         }
 
+        public void userNew(string password,string comboquestion, string question)
+        {
+            //aqui se mandaran los datos a actualizar
+            var Columns = new List<columnsValues>();
+            Columns.Add(createItem.ofTypeColumnsValues("usr_Password", password));
+            Columns.Add(createItem.ofTypeColumnsValues("usr_SecurityQuestion", comboquestion));
+            Columns.Add(createItem.ofTypeColumnsValues("usr_SecurityAnswer", question));
+            Columns.Add(createItem.ofTypeColumnsValues("usr_PasswordReset", false));
+
+            var listValuesTerms = new List<valuesWhere>();
+            listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_FirstName", userInformation.user.usr_FirstName, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_ID", userInformation.user.usr_ID.ToString(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
+            listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_LastName", userInformation.user.usr_LastName, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+
+            createQuery.toUpdate("users", Columns, listValuesTerms);
+        }
+
     }
 }

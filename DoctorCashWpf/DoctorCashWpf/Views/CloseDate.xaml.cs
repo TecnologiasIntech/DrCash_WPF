@@ -1,19 +1,11 @@
 ﻿using DoctorCashWpf.Printer;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DoctorCashWpf.Views
 {
@@ -38,6 +30,7 @@ namespace DoctorCashWpf.Views
         private logService serviceslog = new logService();
         private sqlQueryService createQuery = new sqlQueryService();
         private createItemsForListService createItem = new createItemsForListService();
+        private dateService date = new dateService();
 
         private void setValuesInitials()
         {
@@ -593,7 +586,7 @@ namespace DoctorCashWpf.Views
 
                 var item = new log();
                 item.log_Username = userInformation.user.usr_Username;
-                item.log_DateTime = DateTime.Now.ToString();
+                item.log_DateTime = date.getCurrentDate();
                 item.log_Actions = "Close Date Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash= "+label_totalCash;
                 serviceslog.CreateLog(item);
 
@@ -605,7 +598,7 @@ namespace DoctorCashWpf.Views
         {
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
-            items.log_DateTime = DateTime.Now.ToString();
+            items.log_DateTime = date.getCurrentDate();
             items.log_Actions = "Close Date Cancel by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName;
             serviceslog.CreateLog(items);
         }

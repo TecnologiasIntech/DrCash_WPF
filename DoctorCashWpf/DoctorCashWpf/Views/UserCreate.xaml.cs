@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DoctorCashWpf.Views
 {
@@ -27,6 +18,7 @@ namespace DoctorCashWpf.Views
         userService user = new userService();
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
+        private dateService date = new dateService();
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
@@ -75,7 +67,7 @@ namespace DoctorCashWpf.Views
 
                 var item = new log();
                 item.log_Username = txtbox_username.Text;
-                item.log_DateTime = DateTime.Now.ToString();
+                item.log_DateTime = date.getCurrentDate();
                 item.log_Actions = "New User Created= ( "+txtbox_firtname.Text+" "+txtbox_lastname.Text+" ) by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
                 serviceslog.CreateLog(item);
 
@@ -155,7 +147,7 @@ namespace DoctorCashWpf.Views
         {
             var item = new log();
             item.log_Username = txtbox_username.Text;
-            item.log_DateTime = DateTime.Now.ToString();
+            item.log_DateTime = date.getCurrentDate();
             item.log_Actions = "User Creation Canceled by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
             serviceslog.CreateLog(item);
         }

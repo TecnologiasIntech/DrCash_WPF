@@ -1,18 +1,8 @@
 ﻿using DoctorCashWpf.Printer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DoctorCashWpf.Views
 {
@@ -33,6 +23,7 @@ namespace DoctorCashWpf.Views
         private transaction transactionInfo = new transaction();
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private logService serviceslog = new logService();
+        private dateService date = new dateService();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -47,7 +38,7 @@ namespace DoctorCashWpf.Views
 
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = DateTime.Now.ToString();
+                items.log_DateTime = date.getCurrentDate();
                 items.log_Actions = "Search Information in RefundTotal with Transaction Number: "+txtbox_transactionNumber.Text+" by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
             }
@@ -108,7 +99,7 @@ namespace DoctorCashWpf.Views
 
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = DateTime.Now.ToString();
+                items.log_DateTime = date.getCurrentDate();
                 items.log_Actions = "Print Information in RefundTotal with Transaction Number: " + txtbox_transactionNumber.Text + " by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
 
