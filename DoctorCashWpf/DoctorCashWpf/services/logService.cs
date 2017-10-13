@@ -82,8 +82,8 @@ namespace DoctorCashWpf
         {            
             var terms = new List<valuesWhere>();
             terms.Add(createItem.ofTypeValuesWhere(true, "log_Username", proccessedBy, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
-            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", fromDate, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", toDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
 
             return createQuery.toSelectAll("Log", terms);
         }
@@ -99,22 +99,22 @@ namespace DoctorCashWpf
         private DataTable getLogOnlyByRange(string fromDate,string toDate)
         {
             var terms = new List<valuesWhere>();
-            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", fromDate, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", toDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
             return createQuery.toSelectAll("Log", terms);
         }
 
         private DataTable getLogOnlyByfromDate(string fromDate)
         {
             var terms = new List<valuesWhere>();
-            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", fromDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.GREATER_THAN_OR_EQUAL));            
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.GREATER_THAN_OR_EQUAL));            
             return createQuery.toSelectAll("Log", terms);
         }
 
         private DataTable getLogOnlyBytoDate( string toDate)
         {
             var terms = new List<valuesWhere>();            
-            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", toDate, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "log_DateTime", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.LESS_THAN_OR_EQUAL));
             return createQuery.toSelectAll("Log", terms);
         }
 

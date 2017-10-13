@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using PrinterUtility;
 using System.Collections;
 using System.Drawing;
@@ -12,10 +10,11 @@ namespace DoctorCashWpf.Printer
 {
     class Print
     {
+        private dateService date = new dateService();
         private class CrearTicket
         {
             
-            StringBuilder line = new StringBuilder();
+            StringBuilder line = new StringBuilder();            
             
             //long of ticket
             int maxCar = 64, cortar;

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DoctorCashWpf.Views
 {
@@ -30,6 +21,7 @@ namespace DoctorCashWpf.Views
         private sqlQueryService createQuery = new sqlQueryService();
         private createItemsForListService createItem = new createItemsForListService();
         private logService serviceslog = new logService();
+        private dateService date = new dateService();
 
         private void txtbox_Confirm_Password_KeyUp(object sender, KeyEventArgs e)
         {
@@ -68,23 +60,12 @@ namespace DoctorCashWpf.Views
             {
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = DateTime.Now.ToString();
+                items.log_DateTime = date.getCurrentDate();
                 items.log_Actions = "Reset User: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
 
-                //aqui se mandaran los datos a actualizar
-                var Columns = new List<columnsValues>();
-                Columns.Add(createItem.ofTypeColumnsValues("usr_Password", txtbox_password.Password.ToString()));
-                Columns.Add(createItem.ofTypeColumnsValues("usr_SecurityQuestion", Combo_question.Text));
-                Columns.Add(createItem.ofTypeColumnsValues("usr_SecurityAnswer", txtbox_question.Text));
-                Columns.Add(createItem.ofTypeColumnsValues("usr_PasswordReset", false));                
+                user.userNew(txtbox_password.Password.ToString(), Combo_question.Text, txtbox_question.Text);
 
-                var listValuesTerms = new List<valuesWhere>();
-                listValuesTerms.Add(createItem.ofTypeValuesWhere(true,"usr_FirstName",userInformation.user.usr_FirstName, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
-                listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_ID", userInformation.user.usr_ID.ToString(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
-                listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_LastName", userInformation.user.usr_LastName, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));                
-                
-                createQuery.toUpdate("users", Columns,listValuesTerms);
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
         }

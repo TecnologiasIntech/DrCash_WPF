@@ -1,17 +1,9 @@
 ﻿using DoctorCashWpf.Printer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DoctorCashWpf
 {
@@ -37,6 +29,7 @@ namespace DoctorCashWpf
         private BrushConverter brushConverter = new BrushConverter();
         private transactionService transaction = new transactionService();
         private logService serviceslog = new logService();
+        private dateService date = new dateService();
 
         private void loadValuesToUpdate(int transactionID)
         {
@@ -197,7 +190,7 @@ namespace DoctorCashWpf
 
                     var items = new log();
                     items.log_Username = userInformation.user.usr_Username;
-                    items.log_DateTime = DateTime.Now.ToString();
+                    items.log_DateTime = date.getCurrentDate();
                     items.log_Actions = "Cash In Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total= " + label_total + ", Amount=" + label_amount + ", Change= " + label_change;                    
                     serviceslog.CreateLog(items);
 
@@ -432,7 +425,7 @@ namespace DoctorCashWpf
 
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
-            items.log_DateTime = DateTime.Now.ToString();
+            items.log_DateTime = date.getCurrentDate();
             items.log_Actions = "Cash In Cancel by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data Captured: Total= " + label_total.Text + ", Amount= " + label_amount.Text + ", Change= " + label_change.Text;
             MessageBox.Show(items.log_Actions);
             serviceslog.CreateLog(items);

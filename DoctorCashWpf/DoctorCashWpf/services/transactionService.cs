@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 
 namespace DoctorCashWpf
@@ -225,8 +223,8 @@ namespace DoctorCashWpf
             columns.Add("trn_Cash");
 
             terms.Add(createItem.ofTypeValuesWhere(false, "trn_User_ID", userInformation.user.usr_ID.ToString(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
-            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDate(DateTime.Now.ToShortDateString()), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
-            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.convertToFormatDateFinal(DateTime.Now.ToShortDateString()), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.getInitialDate(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            terms.Add(createItem.ofTypeValuesWhere(true, "trn_DateRegistered", date.getEndDate(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
             terms.Add(createItem.ofTypeValuesWhere(true, "trn_Comment", "Initial Cash", (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
 
             var data = createQuery.toSelect(columns, "transactions", terms);

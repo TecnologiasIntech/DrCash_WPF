@@ -1,19 +1,10 @@
 ﻿using DoctorCashWpf.Printer;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DoctorCashWpf.Views
 {
@@ -26,10 +17,12 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
         }
-        MoneyComponentService moneyService = new MoneyComponentService();
-        reportService getreport = new reportService();
-        transactionService transaction = new transactionService();
-        logService serviceslog = new logService();
+
+        private MoneyComponentService moneyService = new MoneyComponentService();
+        private reportService getreport = new reportService();
+        private transactionService transaction = new transactionService();
+        private logService serviceslog = new logService();
+        private dateService date = new dateService();
 
         private DataTable transactionsData;
         public int id=-1;
@@ -107,7 +100,7 @@ namespace DoctorCashWpf.Views
             {
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = DateTime.Now.ToString();
+                items.log_DateTime = date.getCurrentDate();
                 items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Closed Statement, Search Data: Transaction Number= " + txtbox_ID.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 

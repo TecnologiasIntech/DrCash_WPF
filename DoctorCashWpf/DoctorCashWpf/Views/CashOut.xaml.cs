@@ -1,19 +1,10 @@
 ﻿using DoctorCashWpf.Printer;
 using MaterialDesignColors.WpfExample.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DoctorCashWpf.Views
 {
@@ -33,6 +24,8 @@ namespace DoctorCashWpf.Views
         MoneyComponentService moneyComponent = new MoneyComponentService();
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
+        private dateService date = new dateService();
+
         private void setValuesInitials()
         {
             moneyComponent.convertComponentToMoneyFormat(label_totalCash);
@@ -367,7 +360,7 @@ namespace DoctorCashWpf.Views
 
                 var item = new log();
                 item.log_Username = userInformation.user.usr_Username;
-                item.log_DateTime = DateTime.Now.ToString();
+                item.log_DateTime = date.getCurrentDate();
                 item.log_Actions = "Cash Out Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash= "+label_totalCash;
                 serviceslog.CreateLog(item);
 
@@ -413,7 +406,7 @@ namespace DoctorCashWpf.Views
         {
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
-            items.log_DateTime = DateTime.Now.ToString();
+            items.log_DateTime = date.getCurrentDate();
             items.log_Actions = "Cash Out Cancel by UserName= "+userInformation.user.usr_Username+", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash Captured= "+label_totalCash;
             serviceslog.CreateLog(items);
         }

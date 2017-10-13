@@ -1,23 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 using System.Data;
 using MaterialDesignColors.WpfExample.Domain;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using MaterialDesignDemo.Domain;
 using DoctorCashWpf.Views;
 
 namespace DoctorCashWpf
@@ -40,6 +29,7 @@ namespace DoctorCashWpf
         private userService user = new userService();
         private transactionService transactionService = new transactionService();
         private List<transaction> transactionList = new List<transaction>();
+        private dateService date = new dateService();
 
         private async void ExecuteRunDialog(object o)
         {
@@ -284,14 +274,14 @@ namespace DoctorCashWpf
         private void clearData()
         {
             dataGridView1.ItemsSource = null;
-            label_initialCash.Text = "$0.00";
-            label_cashIn.Text = "$0.00";
-            label_credit.Text = "$0.00";
-            label_checks.Text = "$0.00";
-            label_totalIn.Text = "$0.00";
-            label_cashOut.Text = "$0.00";
-            label_refounds.Text = "$0.00";
-            label_totalOut.Text = "$0.00";
+            moneyComponent.getMoneyComponentInZero(label_initialCash);
+            moneyComponent.getMoneyComponentInZero(label_cashIn);
+            moneyComponent.getMoneyComponentInZero(label_credit);
+            moneyComponent.getMoneyComponentInZero(label_checks);
+            moneyComponent.getMoneyComponentInZero(label_totalIn);
+            moneyComponent.getMoneyComponentInZero(label_cashOut);
+            moneyComponent.getMoneyComponentInZero(label_refounds);
+            moneyComponent.getMoneyComponentInZero(label_totalOut);
         }
 
         private async void Look_Click(object sender, RoutedEventArgs e)

@@ -1,25 +1,14 @@
 ﻿using DoctorCashWpf.Printer;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using MaterialDesignThemes.Wpf;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DoctorCashWpf.Views
 {
@@ -37,6 +26,7 @@ namespace DoctorCashWpf.Views
 
         private reportService getreport = new reportService();
         private logService serviceslog = new logService();
+        private dateService date = new dateService();
         private int transactionID = -1;
 
         private void loadValuesOfSearch()
@@ -176,7 +166,7 @@ namespace DoctorCashWpf.Views
             {
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = DateTime.Now.ToString();
+                items.log_DateTime = date.getCurrentDate();
                 items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 

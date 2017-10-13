@@ -1,20 +1,9 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace DoctorCashWpf.Views
 {
@@ -35,6 +24,7 @@ namespace DoctorCashWpf.Views
         private logService serviceslog = new logService();
         private int userID;
         private DataTable usersData;
+        private dateService date = new dateService();
 
         int uID;
         string firstName;
@@ -65,7 +55,7 @@ namespace DoctorCashWpf.Views
 
             var item = new log();
             item.log_Username = userInformation.user.usr_Username;
-            item.log_DateTime = DateTime.Now.ToString();
+            item.log_DateTime = date.getCurrentDate();
             item.log_Actions = "User Update Before: ( "+ uID+", "+firstName+", "+lastName+", "+passwordReset.ToString()+", "+activeAcount.ToString()+", "+security1+", "+email+" ), Now: ( "+items.usr_ID+", "+items.usr_FirstName+", "+items.usr_LastName+", "+items.usr_Password+", "+items.usr_ActiveAccount+", "+items.usr_SecurityLevel+" ) by UserName= " + userInformation.user.usr_Username + ", Full Name= " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in ManageUser";
             serviceslog.CreateLog(item);
 

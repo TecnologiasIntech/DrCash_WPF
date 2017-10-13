@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DoctorCashWpf.Views
 {
@@ -29,6 +20,7 @@ namespace DoctorCashWpf.Views
         private userService user = new userService();
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
+        private dateService date = new dateService();
 
         private  void authentification()
         {
@@ -40,7 +32,7 @@ namespace DoctorCashWpf.Views
 
                 var items = new log();
                 items.log_Username = userData.usr_Username;
-                items.log_DateTime = DateTime.Now.ToString();
+                items.log_DateTime = date.getCurrentDate();
                 items.log_Actions = "Loging of missing user: " + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
 
@@ -56,7 +48,7 @@ namespace DoctorCashWpf.Views
 
                 var items = new log();
                 items.log_Username = userData.usr_Username;
-                items.log_DateTime = DateTime.Now.ToString();
+                items.log_DateTime = date.getCurrentDate();
                 items.log_Actions = "Intent To Login Not Authorized, Data to Access: UserName= " + txtbox_username.Text + ", PassWord= " + txtbox_password.Password.ToString();
                 serviceslog.CreateLog(items);
 

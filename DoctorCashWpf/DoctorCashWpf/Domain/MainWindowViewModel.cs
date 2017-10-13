@@ -1,10 +1,4 @@
-﻿using System.Configuration;
-using MaterialDesignDemo;
-using MaterialDesignDemo.Domain;
-using MaterialDesignThemes.Wpf;
-using MaterialDesignThemes.Wpf.Transitions;
-using System.Windows.Controls;
-using DoctorCashWpf;
+﻿using DoctorCashWpf;
 using DoctorCashWpf.Views;
 
 namespace MaterialDesignColors.WpfExample.Domain
