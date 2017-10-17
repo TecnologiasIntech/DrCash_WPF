@@ -27,44 +27,29 @@ namespace DoctorCashWpf.Views
 
             if (userData != null)
             {
-                labelError.Content = "";
-                // Abrir Initial Cash
-                /* userInformation.userName = userData.usr_Username;
-                 userInformation.userID = userData.usr_ID;*/
-                var items = new log();
-                items.log_Username = txtbox_username.Text;
-                items.log_DateTime = date.getCurrentDate();
-                items.log_Actions = "Login of: " + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
-                serviceslog.CreateLog(items);
-                  
-                                                                                 
+                labelError.Content = String.Empty;
+                setLog(userData);
                 userInformation.user = userData;
-                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+                closeDialog();
             }
             else
-            {
-                //Mensaje de error por datos incorrectos
-                //poner que no se encontro el usuario       
+            {   
                 labelError.Content = "                    Verify Data"+"\n"+
-                                     "Username or Password is Incorrect";
+                        "Username or Password is Incorrect";
             }
         }
 
-        private void verify()
+        private void verifyFields()
         {
-            if (txtbox_username.Text == "")
+            if (txtbox_username.Text == String.Empty)
             {
                 txtbox_username.Focus();
-               
-                txtbox_username.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
-                labelError.Content = "Complete the fields marked";
+                showErrorAndFocusField(txtbox_username);
             }
             else if (txtbox_password.Password.ToString() == "")
             {
                 txtbox_password.Focus();
-
-                txtbox_password.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
-                labelError.Content = "Complete the fields marked";
+                showErrorAndFocusField(txtbox_password);
             }
             else
             {
@@ -72,18 +57,43 @@ namespace DoctorCashWpf.Views
             }
         }
 
+        private void showErrorAndFocusField(TextBox txtBox)
+        {
+            txtBox.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+            labelError.Content = "Complete the fields marked";
+        }
+
+        private void showErrorAndFocusField(PasswordBox txtBox)
+        {
+            txtBox.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+            labelError.Content = "Complete the fields marked";
+        }
+
+        private void closeDialog()
+        {
+            MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+        }
+
+        private void setLog(user userData)
+        {
+            var items = new log();
+            items.log_Username = txtbox_username.Text;
+            items.log_DateTime = date.getCurrentDate();
+            items.log_Actions = "Login of: " + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
+            serviceslog.CreateLog(items);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            verify();
-            //Console.WriteLine(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
+            verifyFields();
         }
 
         private void authentification_KeyUp(object sender, KeyEventArgs e)
         {
-            labelError.Content = "";
+            labelError.Content = String.Empty;
             if (e.Key == Key.Enter)
             {
-                verify();
+                verifyFields();
             }
         }
 
