@@ -19,8 +19,8 @@
                    Margin="0 6 0 0"
                    FontSize="24" Grid.Row="0"/>
 
-        <TextBox x:Name="txtbox_initialCash" KeyUp="setInitialCash_KeyUp" Text="{Binding Path=Txt, StringFormat=C}" FontSize="20"  Grid.Row="1" Margin="0,14,0,0" HorizontalContentAlignment="Center" materialDesign:HintAssist.Hint="$0.00"  LostFocus="txtbox_initialCash_LostFocus" Height="30" VerticalAlignment="Top" />
-        <Label Grid.Row="2" x:Name="labelCash" Margin="0,0,0,67" Content="" FontSize="11" Foreground="Red" HorizontalAlignment="Center"/>
+        <TextBox x:Name="txtbox_initialCash" Text="{Binding Path=Txt, StringFormat=C}" FontSize="20"  Grid.Row="1" Margin="0,14,0,0" HorizontalContentAlignment="Center" materialDesign:HintAssist.Hint="$0.00" Height="30" VerticalAlignment="Top" />
+        <Label Grid.Row="2" x:Name="labelInitialCashError" Margin="0,0,0,67" Content="" FontSize="11" Foreground="Red" HorizontalAlignment="Center"/>
         <Button  Name="BtnAgree" Click="BtnAgree_Click" Grid.Row="2" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}" FontSize="11" HorizontalAlignment="Left" Margin="12,45,0,46" Height="Auto" Width="81">
             Agree
         </Button>

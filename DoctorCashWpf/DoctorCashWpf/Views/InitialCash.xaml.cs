@@ -11,22 +11,20 @@ namespace DoctorCashWpf.Views
     /// </summary>
     public partial class InitialCash : UserControl
     {
-        public InitialCash()
-        {
-            InitializeComponent();
-            hiddenAndCollapsed();
-            if (!checkInitialTransaction())
-            {
-                //No pedir la transaccion inicial o cerrar este dialogo
-            }
-        }
         private BrushConverter brushConverter = new BrushConverter();
         private transactionService transaction = new transactionService();
         private MoneyComponentService moneyComponent = new MoneyComponentService();
         private dateService date = new dateService();
-        logService serviceslog = new logService();
+        private logService serviceslog = new logService();
+        private static double INITIAL_CASH_BASE = 120;
 
-        private void hiddenAndCollapsed()
+        public InitialCash()
+        {
+            InitializeComponent();
+            hiddenAndCollapsedButtonsAgreeAndDisagree();
+        }
+
+        private void hiddenAndCollapsedButtonsAgreeAndDisagree()
         {
             BtnAgree.Visibility = Visibility.Hidden;
             BtnAgree.Visibility = Visibility.Collapsed;
@@ -34,30 +32,10 @@ namespace DoctorCashWpf.Views
             BtnDisagree.Visibility = Visibility.Collapsed;
         }
 
-        private void visibility()
+        private void showButtonsAgreeAndDisagree()
         {
             BtnAgree.Visibility = Visibility.Visible;            
             BtnDisagree.Visibility = Visibility.Visible;           
-        }
-
-        private bool checkInitialTransaction()
-        {
-            bool check = false;
-
-            var list = transaction.getCurrentTransactions(4); //Obtener ID de login
-            for (int i = 0; i < list.Count; i++)
-            {
-                if(list[i].type == (int)TRANSACTIONTYPE.INITIAL)
-                { 
-                    check = true;
-                    break;
-                }
-                else
-                {
-                    check = false;
-                }               
-            }
-            return check;
         }
 
         private void setInitialCash()
@@ -93,69 +71,57 @@ namespace DoctorCashWpf.Views
             txtbox_initialCash.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");            
         }
 
-        private void verifyCash()
+        private void verifyInitialCash(Double initialcash)
         {
-            string dat1 = "120";            
-            dat1 = moneyComponent.convertComponentToMoneyFormat(dat1).txtComponent;
 
-            if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == 0)
+            double initialCashBase = Convert.ToDouble(moneyComponent.AddFloatToComponent(INITIAL_CASH_BASE.ToString()));
+
+            if (initialcash == 0)
             {
-                labelCash.Content = "Insert initial Cash";
+                labelInitialCashError.Content = "Insert initial Cash";
                 designOfAlertInError();
             }
-            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) == Convert.ToDouble(dat1.Remove(0, 1)))
+            else if (initialcash == initialCashBase)
             {
-                labelCash.Content = "";                
+                labelInitialCashError.Content = "";                
                 moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
                 setInitialCash();
             }
-            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) > Convert.ToDouble(dat1.Remove(0, 1)))
+            else if (initialcash > initialCashBase)
             {
-                labelCash.Content = "Are you sure to enter more "+"\n"+"     than $120 in the box?";                               
-                visibility();
+                labelInitialCashError.Content = "Are you sure to enter more "+"\n"+"     than $120 in the box?";                               
+                showButtonsAgreeAndDisagree();
 
             }
-            else if (Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1)) < Convert.ToDouble(dat1.Remove(0, 1)))
+            else if (initialcash < initialCashBase)
             {              
-                labelCash.Content = "Are you sure to enter " +"\n  "+ txtbox_initialCash.Text + " in the box?";                
-                visibility();
+                labelInitialCashError.Content = "Are you sure to enter " +"\n  "+ txtbox_initialCash.Text + " in the box?";                
+                showButtonsAgreeAndDisagree();
             }
 
-        }
-
-        private void setInitialCash_KeyUp(object sender, KeyEventArgs e)
-        {
-            labelCash.Content = "";
         }
 
         private void setInitialCash_click(object sender, RoutedEventArgs e)
         {
-            verifyCash();                      
-        }
-
-        private void txtbox_initialCash_LostFocus(object sender, RoutedEventArgs e)
-        {
             moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+            double initialCash = Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1));
+            verifyInitialCash(initialCash);                      
         }
 
         private void BtnAgree_Click(object sender, RoutedEventArgs e)
         {
-            /*labelCash.Content = "";
-                var response = moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
-                txtbox_initialCash = response.TextboxComponent;
-                labelCash.Content = response.error;*/
             moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
             setInitialCash();
-            labelCash.Content = "";
-            hiddenAndCollapsed();
+            labelInitialCashError.Content = "";
+            hiddenAndCollapsedButtonsAgreeAndDisagree();
         }
 
         private void BtnDisagree_Click(object sender, RoutedEventArgs e)
         {
             txtbox_initialCash.Focus();
             txtbox_initialCash.Clear();
-            labelCash.Content = "";
-            hiddenAndCollapsed();
+            labelInitialCashError.Content = "";
+            hiddenAndCollapsedButtonsAgreeAndDisagree();
         }
     }
 }
