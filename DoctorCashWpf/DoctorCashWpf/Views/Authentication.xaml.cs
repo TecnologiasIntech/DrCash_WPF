@@ -35,9 +35,6 @@ namespace DoctorCashWpf.Views
             if (userData != null)
             {
                 labelError.Content = "";
-                // Abrir Initial Cash
-                /* userInformation.userName = userData.usr_Username;
-                 userInformation.userID = userData.usr_ID;*/
                 userInformation.user = userData;
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
