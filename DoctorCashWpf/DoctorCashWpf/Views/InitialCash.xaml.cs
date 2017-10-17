@@ -40,28 +40,16 @@ namespace DoctorCashWpf.Views
 
         private void setInitialCash()
         {
-            
-            if (txtbox_initialCash.Text != "$0.00")
-            {                
-                var items = new transaction();
-                var cash = txtbox_initialCash.Text.Remove(0, 1);
-                cash = cash.Remove(cash.Length - 3, 3);
-                items.cash = (float)Convert.ToDouble(cash);
-                items.type = (int)TRANSACTIONTYPE.INITIAL;
-                items.comment = "Initial Cash";
-                items.userId = userInformation.user.usr_ID;
-                items.registerId = userInformation.user.usr_Username;
+          
+            transaction.setTransactionInitialCash(txtbox_initialCash.Text);
 
-                transaction.setTransactionInitialCash(items);
+            var item = new log();
+            item.log_Username = userInformation.user.usr_Username;
+            item.log_DateTime = date.getCurrentDate();
+            item.log_Actions = "Set Initial Cash by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " For= " + txtbox_initialCash.Text;
+            serviceslog.CreateLog(item);
 
-                var item = new log();
-                item.log_Username = userInformation.user.usr_Username;
-                item.log_DateTime = date.getCurrentDate();
-                item.log_Actions = "Set Initial Cash by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " For= " + txtbox_initialCash.Text;
-                serviceslog.CreateLog(item);
-
-                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
-            }
+            MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
         private void designOfAlertInError()

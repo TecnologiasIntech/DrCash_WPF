@@ -150,23 +150,33 @@ namespace DoctorCashWpf
             createQuery.toInsert("transactions", valuesArray);
         }
 
-        public void setTransactionInitialCash(transaction transactionArray)
+        public void setTransactionInitialCash(string initialCash)
         {
+            
+            var transaction = new transaction();
+            initialCash = initialCash.Remove(0, 1);
+
+            transaction.cash = (float)Convert.ToDouble(initialCash);
+            transaction.type = (int)TRANSACTIONTYPE.INITIAL;
+            transaction.comment = "Initial Cash";
+            transaction.userId = userInformation.user.usr_ID;
+            transaction.registerId = userInformation.user.usr_Username;
+
             List<columnsValues> valuesArray = new List<columnsValues>();
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_User_ID", transaction.userId));
             //valuesArray.Add(createItem.ofTypeColumnsValues("trn_DateRegistered", date.getCurrentDate()));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Type", transactionArray.type));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Comment", transaction.comment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Type", transaction.type));
             //valuesArray.Add(createItem.ofTypeColumnsValues("trn_Initial_Cash", transactionArray.cash));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Cash", transactionArray.cash));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_CheckNumber", transactionArray.checkNumber));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Copayment", transactionArray.copayment));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_SelfPay", transactionArray.selfPay));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Deductible", transactionArray.deductible));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Labs", transactionArray.labs));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Other", transactionArray.other));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Closed", transactionArray.closed));
-            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", "1")); //cambiar esto
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Cash", transaction.cash));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_CheckNumber", transaction.checkNumber));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Copayment", transaction.copayment));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_SelfPay", transaction.selfPay));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Deductible", transaction.deductible));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Labs", transaction.labs));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Other", transaction.other));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_Closed", transaction.closed));
+            valuesArray.Add(createItem.ofTypeColumnsValues("trn_RegisterID", "1")); //TODO: cambiar esto
 
             createQuery.toInsert("transactions", valuesArray);
         }

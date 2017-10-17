@@ -39,29 +39,28 @@ namespace DoctorCashWpf
 
             if (txtBox.Text != "")
             {
-                if (txtBox.Text[0] != '$')
+                if (txtBox.Text[0] == '$')
                 {
-                    if (!Char.IsNumber(txtBox.Text[0]))
-                    {
-                        txtBox.Text = "$0" + separator + "00";
-                        error = "Only Numbers";
-                    }else if(txtBox.Text[0] == '-')
-                    {
-                        txtBox.Text = "$0" + separator + "00";
-                        error = "Negative Values";
-                    }
-                    else
-                    {
-                        txtBox.Text = "$" + txtBox.Text + separator + "00";
-                    }
+                    txtBox.Text = txtBox.Text.Remove(0, 1);
+                }
+
+                if (containLetter(txtBox.Text))
+                {
+                    txtBox.Text = "$0" + separator + "00";
+                    error = "Only Numbers";
+                }
+                else if (txtBox.Text[0] == '-')
+                {
+                    txtBox.Text = "$0" + separator + "00";
+                    error = "Negative Values";
+                }
+                else if (containFloat(txtBox.Text))
+                {
+                    txtBox.Text = "$" + changeFloat(txtBox.Text);
                 }
                 else
                 {
-                    if (!Char.IsNumber(txtBox.Text.Remove(0, 1)[0]))
-                    {
-                        txtBox.Text = "$0"+ separator + "00";
-                        error = "Only Numbers";
-                    }
+                    txtBox.Text = "$" + txtBox.Text + separator + "00";
                 }
             }
             else
@@ -76,7 +75,49 @@ namespace DoctorCashWpf
             item.TextboxComponent = txtBox;
 
             return item;
-        }        
+        }    
+        
+        private bool containLetter( string text )
+        {
+            bool isLetter = false;
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (Char.IsLetter(text[i]))
+                {
+                    isLetter = true;
+                }
+            }
+
+            return isLetter;
+        }
+
+        private bool containFloat(string text)
+        {
+            bool isFloat = false;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text[i] == ',' || text[i] == '.')
+                {
+                    isFloat = true;
+                }
+            }
+
+            return isFloat;
+        }
+
+        private string changeFloat(string text)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text[i] == ',' || text[i] == '.')
+                {
+                    text = text.Replace(text[i], Convert.ToChar(separator));
+                }
+            }
+
+            return text;
+        }
 
         public moneyComponent convertComponentToMoneyFormat(TextBlock txtBox)
         {
