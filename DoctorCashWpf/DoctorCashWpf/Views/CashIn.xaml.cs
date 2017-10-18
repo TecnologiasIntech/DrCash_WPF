@@ -195,7 +195,7 @@ namespace DoctorCashWpf
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
             items.log_DateTime = date.getCurrentDate();
-            items.log_Actions = "Cash In Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total= " + label_total + ", Amount=" + label_amount + ", Change= " + label_change;
+            items.log_Actions = "Cash In Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total= " + label_total.Text + ", Amount=" + label_amount.Text + ", Change= " + label_change.Text;
             serviceslog.CreateLog(items);
         }
 
