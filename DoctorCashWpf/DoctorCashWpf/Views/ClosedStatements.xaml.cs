@@ -18,7 +18,7 @@ namespace DoctorCashWpf.Views
             InitializeComponent();
         }
 
-        private MoneyComponentService moneyService = new MoneyComponentService();
+        private MoneyFormatService moneyService = new MoneyFormatService();
         private reportService getreport = new reportService();
         private transactionService transaction = new transactionService();
         private logService serviceslog = new logService();
@@ -49,7 +49,7 @@ namespace DoctorCashWpf.Views
 
             for (int i = 0; i < list.Count(); i++)
             {
-                dt.Rows.Add(list[i].trn_id, moneyService.convertComponentToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].cash.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].credit.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].check.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].change.ToString()).txtComponent);
+                dt.Rows.Add(list[i].trn_id, moneyService.convertToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, moneyService.convertToMoneyFormat(list[i].cash.ToString()).txtComponent, moneyService.convertToMoneyFormat(list[i].credit.ToString()).txtComponent, moneyService.convertToMoneyFormat(list[i].check.ToString()).txtComponent, moneyService.convertToMoneyFormat(list[i].change.ToString()).txtComponent);
                 charged += list[i].amountCharged;
                 cash += list[i].cash;
                 credit += list[i].credit;
@@ -58,22 +58,22 @@ namespace DoctorCashWpf.Views
             }
             txt_initialCash.Text = transaction.getInitialCashbyRegisterID(registerID.ToString(), DateOfSelection.ToString()).ToString();
             cash = cash - change;
-            moneyService.convertComponentToMoneyFormat(txt_initialCash);
+            moneyService.convertToMoneyFormat(txt_initialCash);
             txt_cash.Text = cash.ToString();
-            moneyService.convertComponentToMoneyFormat(txt_cash);
+            moneyService.convertToMoneyFormat(txt_cash);
             txt_credit.Text = credit.ToString();
-            moneyService.convertComponentToMoneyFormat(txt_credit);
+            moneyService.convertToMoneyFormat(txt_credit);
             txt_check.Text =  check.ToString();
-            moneyService.convertComponentToMoneyFormat(txt_check);
+            moneyService.convertToMoneyFormat(txt_check);
             txt_amount.Text = charged.ToString();
-            moneyService.convertComponentToMoneyFormat(txt_amount);
+            moneyService.convertToMoneyFormat(txt_amount);
 
             txt_cash2.Text =  cash.ToString();
-            moneyService.convertComponentToMoneyFormat(txt_cash2);
+            moneyService.convertToMoneyFormat(txt_cash2);
             txt_credit2.Text = credit.ToString();
-            moneyService.convertComponentToMoneyFormat(txt_credit2);
+            moneyService.convertToMoneyFormat(txt_credit2);
             txt_check2.Text = check.ToString();
-            moneyService.convertComponentToMoneyFormat(txt_check2);
+            moneyService.convertToMoneyFormat(txt_check2);
 
             dt.Rows.Add("Total´s", charged, cash, credit, check, change);
             
@@ -147,23 +147,23 @@ namespace DoctorCashWpf.Views
 
 
                     }
-                    txt_initialCash.Text = moneyService.convertComponentToMoneyFormat(initial_cash.ToString()).txtComponent;
+                    txt_initialCash.Text = moneyService.convertToMoneyFormat(initial_cash.ToString()).txtComponent;
 
-                    txt_cash.Text = moneyService.convertComponentToMoneyFormat(cash.ToString()).txtComponent;
-                    txt_credit.Text = moneyService.convertComponentToMoneyFormat(credit.ToString()).txtComponent;
-                    txt_check.Text = moneyService.convertComponentToMoneyFormat(check.ToString()).txtComponent;
-                    txt_amount.Text = moneyService.convertComponentToMoneyFormat(amount.ToString()).txtComponent;
-                    txt_ciens.Text = moneyService.convertComponentToMoneyFormat(cien.ToString()).txtComponent;
-                    txt_cincuentas.Text = moneyService.convertComponentToMoneyFormat(cincuenta.ToString()).txtComponent;
-                    txt_veintes.Text = moneyService.convertComponentToMoneyFormat(veinte.ToString()).txtComponent;
-                    txt_diez.Text = moneyService.convertComponentToMoneyFormat(diez.ToString()).txtComponent;
-                    txt_cincos.Text = moneyService.convertComponentToMoneyFormat(cinco.ToString()).txtComponent;
-                    txt_unos.Text = moneyService.convertComponentToMoneyFormat(uno.ToString()).txtComponent;
-                    txt_balance.Text = moneyService.convertComponentToMoneyFormat(balance.ToString()).txtComponent;
+                    txt_cash.Text = moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;
+                    txt_credit.Text = moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;
+                    txt_check.Text = moneyService.convertToMoneyFormat(check.ToString()).txtComponent;
+                    txt_amount.Text = moneyService.convertToMoneyFormat(amount.ToString()).txtComponent;
+                    txt_ciens.Text = moneyService.convertToMoneyFormat(cien.ToString()).txtComponent;
+                    txt_cincuentas.Text = moneyService.convertToMoneyFormat(cincuenta.ToString()).txtComponent;
+                    txt_veintes.Text = moneyService.convertToMoneyFormat(veinte.ToString()).txtComponent;
+                    txt_diez.Text = moneyService.convertToMoneyFormat(diez.ToString()).txtComponent;
+                    txt_cincos.Text = moneyService.convertToMoneyFormat(cinco.ToString()).txtComponent;
+                    txt_unos.Text = moneyService.convertToMoneyFormat(uno.ToString()).txtComponent;
+                    txt_balance.Text = moneyService.convertToMoneyFormat(balance.ToString()).txtComponent;
 
-                    txt_cash2.Text = moneyService.convertComponentToMoneyFormat(cash.ToString()).txtComponent;
-                    txt_credit2.Text = moneyService.convertComponentToMoneyFormat(credit.ToString()).txtComponent;
-                    txt_check2.Text = moneyService.convertComponentToMoneyFormat(check.ToString()).txtComponent;
+                    txt_cash2.Text = moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;
+                    txt_credit2.Text = moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;
+                    txt_check2.Text = moneyService.convertToMoneyFormat(check.ToString()).txtComponent;
 
                     dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
                     dataGridViewClosedStatement.MaxHeight = 140;
@@ -178,23 +178,23 @@ namespace DoctorCashWpf.Views
             txtbox_ID.Clear();
             fromdate.Text = "";
             todate.Text = "";
-            txt_initialCash =moneyService.getMoneyComponentInZero(txt_initialCash);
-            txt_amount= moneyService.getMoneyComponentInZero(txt_amount);
-            txt_cash = moneyService.getMoneyComponentInZero(txt_cash);
-            txt_credit = moneyService.getMoneyComponentInZero(txt_credit);
-            txt_check = moneyService.getMoneyComponentInZero(txt_check);
+            txt_initialCash =moneyService.getMoneyFormatInZero(txt_initialCash);
+            txt_amount= moneyService.getMoneyFormatInZero(txt_amount);
+            txt_cash = moneyService.getMoneyFormatInZero(txt_cash);
+            txt_credit = moneyService.getMoneyFormatInZero(txt_credit);
+            txt_check = moneyService.getMoneyFormatInZero(txt_check);
 
-            txt_ciens = moneyService.getMoneyComponentInZero(txt_ciens);
-            txt_cincuentas = moneyService.getMoneyComponentInZero(txt_cincuentas);
-            txt_veintes = moneyService.getMoneyComponentInZero(txt_veintes);
-            txt_diez = moneyService.getMoneyComponentInZero(txt_diez);
-            txt_cincos = moneyService.getMoneyComponentInZero(txt_cincos);
-            txt_unos = moneyService.getMoneyComponentInZero(txt_unos);
-            txt_balance = moneyService.getMoneyComponentInZero(txt_balance);
+            txt_ciens = moneyService.getMoneyFormatInZero(txt_ciens);
+            txt_cincuentas = moneyService.getMoneyFormatInZero(txt_cincuentas);
+            txt_veintes = moneyService.getMoneyFormatInZero(txt_veintes);
+            txt_diez = moneyService.getMoneyFormatInZero(txt_diez);
+            txt_cincos = moneyService.getMoneyFormatInZero(txt_cincos);
+            txt_unos = moneyService.getMoneyFormatInZero(txt_unos);
+            txt_balance = moneyService.getMoneyFormatInZero(txt_balance);
 
-            txt_cash2 = moneyService.getMoneyComponentInZero(txt_cash2);
-            txt_credit2 = moneyService.getMoneyComponentInZero(txt_credit2);
-            txt_check2 = moneyService.getMoneyComponentInZero(txt_check2);
+            txt_cash2 = moneyService.getMoneyFormatInZero(txt_cash2);
+            txt_credit2 = moneyService.getMoneyFormatInZero(txt_credit2);
+            txt_check2 = moneyService.getMoneyFormatInZero(txt_check2);
 
             dataGridViewClosedStatement.ItemsSource = null;
             dataGridViewStatment.ItemsSource = null;

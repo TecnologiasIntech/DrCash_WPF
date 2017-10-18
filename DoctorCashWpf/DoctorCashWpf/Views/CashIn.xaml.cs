@@ -25,7 +25,7 @@ namespace DoctorCashWpf
 
         }
 
-        private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private MoneyFormatService moneyComponent = new MoneyFormatService();
         private BrushConverter brushConverter = new BrushConverter();
         private transactionService transaction = new transactionService();
         private logService serviceslog = new logService();
@@ -68,18 +68,18 @@ namespace DoctorCashWpf
 
         private void setValesInitials()
         {
-            moneyComponent.convertComponentToMoneyFormat(label_amount);
-            moneyComponent.convertComponentToMoneyFormat(label_change);
-            moneyComponent.convertComponentToMoneyFormat(label_total);
+            moneyComponent.convertToMoneyFormat(label_amount);
+            moneyComponent.convertToMoneyFormat(label_change);
+            moneyComponent.convertToMoneyFormat(label_total);
 
 
-            moneyComponent.convertComponentToMoneyFormat(txtbox_cash, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_cash, () => { });
 
 
 
-            moneyComponent.convertComponentToMoneyFormat(txtbox_credit, () => { });
-            moneyComponent.convertComponentToMoneyFormat(txtbox_check, () => { });
-            moneyComponent.convertComponentToMoneyFormat(txtbox_amountCharge, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_credit, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_check, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_amountCharge, () => { });
         }
 
         public bool ready = false;
@@ -208,17 +208,17 @@ namespace DoctorCashWpf
         private void clearInputs()
         {
             labelerror.Content = "";
-            txtbox_amountCharge = moneyComponent.getMoneyComponentInZero(txtbox_amountCharge);
-            txtbox_cash = moneyComponent.getMoneyComponentInZero(txtbox_cash);
-            txtbox_credit = moneyComponent.getMoneyComponentInZero(txtbox_credit);
-            txtbox_check = moneyComponent.getMoneyComponentInZero(txtbox_check);
+            txtbox_amountCharge = moneyComponent.getMoneyFormatInZero(txtbox_amountCharge);
+            txtbox_cash = moneyComponent.getMoneyFormatInZero(txtbox_cash);
+            txtbox_credit = moneyComponent.getMoneyFormatInZero(txtbox_credit);
+            txtbox_check = moneyComponent.getMoneyFormatInZero(txtbox_check);
             txtbox_numberChecks.Text = "0";
             txtbox_patientFirstName.Text = "";
             txtbox_comment.Text = "";
 
-            label_amount = moneyComponent.getMoneyComponentInZero(label_amount);
-            label_change = moneyComponent.getMoneyComponentInZero(label_change);
-            label_total= moneyComponent.getMoneyComponentInZero(label_total);
+            label_amount = moneyComponent.getMoneyFormatInZero(label_amount);
+            label_change = moneyComponent.getMoneyFormatInZero(label_change);
+            label_total= moneyComponent.getMoneyFormatInZero(label_total);
 
             checkbox_copayment.IsChecked = false;
             checkbox_deductible.IsChecked = false;
@@ -250,19 +250,19 @@ namespace DoctorCashWpf
 
             label_change.Text = "$" + ( total - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1)) ).ToString();
 
-            moneyComponent.AddFloatToComponent(label_change);
-            moneyComponent.AddFloatToComponent(label_total);
+            moneyComponent.AddFloat(label_change);
+            moneyComponent.AddFloat(label_total);
         }
 
         private void txtbox_amountCharge_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertComponentToMoneyFormat(txtbox_amountCharge, ()=> { });
+            moneyComponent.convertToMoneyFormat(txtbox_amountCharge, ()=> { });
 
             label_amount.Text = txtbox_amountCharge.Text;
             label_change.Text = "$" + (Convert.ToDouble(label_total.Text.Remove(0, 1)) - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1))).ToString();
 
-            moneyComponent.AddFloatToComponent(label_change);
+            moneyComponent.AddFloat(label_change);
         }
 
         private void txtbox_amountCharge_KeyUp(object sender, KeyEventArgs e)
@@ -270,12 +270,12 @@ namespace DoctorCashWpf
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertComponentToMoneyFormat(txtbox_amountCharge, () => { });
+                moneyComponent.convertToMoneyFormat(txtbox_amountCharge, () => { });
 
                 label_amount.Text = txtbox_amountCharge.Text;
                 label_change.Text = "$" + (Convert.ToDouble(label_total.Text.Remove(0, 1)) - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1))).ToString();
 
-                moneyComponent.AddFloatToComponent(label_change);
+                moneyComponent.AddFloat(label_change);
             }
         }
 
@@ -284,7 +284,7 @@ namespace DoctorCashWpf
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertComponentToMoneyFormat(txtbox_cash, () => { });
+                moneyComponent.convertToMoneyFormat(txtbox_cash, () => { });
                 getTotal_amount_change();
             }
         }
@@ -292,7 +292,7 @@ namespace DoctorCashWpf
         private void txtbox_cash_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertComponentToMoneyFormat(txtbox_cash, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_cash, () => { });
             getTotal_amount_change();
         }
 
@@ -301,7 +301,7 @@ namespace DoctorCashWpf
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertComponentToMoneyFormat(txtbox_credit, () => { });
+                moneyComponent.convertToMoneyFormat(txtbox_credit, () => { });
                 getTotal_amount_change();
             }
         }
@@ -309,7 +309,7 @@ namespace DoctorCashWpf
         private void txtbox_credit_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertComponentToMoneyFormat(txtbox_credit, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_credit, () => { });
             getTotal_amount_change();
         }
 
@@ -318,7 +318,7 @@ namespace DoctorCashWpf
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertComponentToMoneyFormat(txtbox_check, () => { });
+                moneyComponent.convertToMoneyFormat(txtbox_check, () => { });
                 getTotal_amount_change();
             }
         }
@@ -326,7 +326,7 @@ namespace DoctorCashWpf
         private void txtbox_check_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertComponentToMoneyFormat(txtbox_check, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_check, () => { });
             getTotal_amount_change();
         }
 

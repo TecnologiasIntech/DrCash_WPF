@@ -25,7 +25,7 @@ namespace DoctorCashWpf.Views
         }
 
         private transactionService transaction = new transactionService();
-        private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private MoneyFormatService moneyComponent = new MoneyFormatService();
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
         private sqlQueryService createQuery = new sqlQueryService();
@@ -34,19 +34,19 @@ namespace DoctorCashWpf.Views
 
         private void setValuesInitials()
         {
-            moneyComponent.convertComponentToMoneyFormat(label_totalCash);
-            moneyComponent.convertComponentToMoneyFormat(label_bills1);
-            moneyComponent.convertComponentToMoneyFormat(label_bills5);
-            moneyComponent.convertComponentToMoneyFormat(label_bills20);
-            moneyComponent.convertComponentToMoneyFormat(label_bills50);
-            moneyComponent.convertComponentToMoneyFormat(label_bills100);
-            moneyComponent.convertComponentToMoneyFormat(label_bills10);
-            moneyComponent.convertComponentToMoneyFormat(label_totalEntered);
-            moneyComponent.convertComponentToMoneyFormat(label_totalRegistered);
-            moneyComponent.convertComponentToMoneyFormat(label_short);
-            moneyComponent.convertComponentToMoneyFormat(textbox_credit, () => { });
-            moneyComponent.convertComponentToMoneyFormat(textbox_leftInRegister, () => { });
-            moneyComponent.convertComponentToMoneyFormat(textbox_check, () => { });
+            moneyComponent.convertToMoneyFormat(label_totalCash);
+            moneyComponent.convertToMoneyFormat(label_bills1);
+            moneyComponent.convertToMoneyFormat(label_bills5);
+            moneyComponent.convertToMoneyFormat(label_bills20);
+            moneyComponent.convertToMoneyFormat(label_bills50);
+            moneyComponent.convertToMoneyFormat(label_bills100);
+            moneyComponent.convertToMoneyFormat(label_bills10);
+            moneyComponent.convertToMoneyFormat(label_totalEntered);
+            moneyComponent.convertToMoneyFormat(label_totalRegistered);
+            moneyComponent.convertToMoneyFormat(label_short);
+            moneyComponent.convertToMoneyFormat(textbox_credit, () => { });
+            moneyComponent.convertToMoneyFormat(textbox_leftInRegister, () => { });
+            moneyComponent.convertToMoneyFormat(textbox_check, () => { });
         }
 
         private void plusOrLess(TextBox txtbox, TextBlock label, int Operator, int typeBills)
@@ -73,7 +73,7 @@ namespace DoctorCashWpf.Views
                 }
 
                 label.Text = (Convert.ToInt32(txtbox.Text) * typeBills).ToString();
-                label = moneyComponent.convertComponentToMoneyFormat(label).labelComponent;
+                label = moneyComponent.convertToMoneyFormat(label).labelComponent;
 
                 txtbox.Text = txtbox.Text;
 
@@ -87,7 +87,7 @@ namespace DoctorCashWpf.Views
             else
             {
                 txtbox.Text = "";
-                label= moneyComponent.getMoneyComponentInZero(label);
+                label= moneyComponent.getMoneyFormatInZero(label);
                 getTotalCash();
             }
         }
@@ -127,13 +127,13 @@ namespace DoctorCashWpf.Views
             }
 
             label_totalCash.Text = totalCash.ToString();
-            label_totalCash = moneyComponent.convertComponentToMoneyFormat(label_totalCash).labelComponent;
+            label_totalCash = moneyComponent.convertToMoneyFormat(label_totalCash).labelComponent;
 
             label_totalEntered.Text = (Convert.ToDouble(label_totalCash.Text.Remove(0, 1)) + Convert.ToDouble(textbox_credit.Text.Remove(0, 1)) + Convert.ToDouble(textbox_check.Text.Remove(0, 1)) + Convert.ToDouble(textbox_leftInRegister.Text.Remove(0, 1))).ToString();
-            label_totalEntered = moneyComponent.convertComponentToMoneyFormat(label_totalEntered).labelComponent;
+            label_totalEntered = moneyComponent.convertToMoneyFormat(label_totalEntered).labelComponent;
 
             label_short.Text = (Convert.ToDouble(label_totalEntered.Text.Remove(0, 1)) - Convert.ToDouble(label_totalRegistered.Text.Remove(0, 1))).ToString();
-            label_short = moneyComponent.convertComponentToMoneyFormat(label_short).labelComponent;
+            label_short = moneyComponent.convertToMoneyFormat(label_short).labelComponent;
         }
 
         private void getCurrentTransactions()
@@ -166,9 +166,9 @@ namespace DoctorCashWpf.Views
 
             label_short.Text = "$" + (totalEntered - totalRegistered).ToString();
 
-            moneyComponent.AddFloatToComponent(label_totalEntered);
-            moneyComponent.AddFloatToComponent(label_totalRegistered);
-            moneyComponent.AddFloatToComponent(label_short);
+            moneyComponent.AddFloat(label_totalEntered);
+            moneyComponent.AddFloat(label_totalRegistered);
+            moneyComponent.AddFloat(label_short);
         }
 
        /* private void isFloat(TextBox txtbox)
@@ -224,12 +224,12 @@ namespace DoctorCashWpf.Views
             textbox_bills5.Text = "";
             textbox_bills1.Text = "";
 
-            label_totalCash= moneyComponent.getMoneyComponentInZero(label_totalCash);
-            textbox_credit = moneyComponent.getMoneyComponentInZero(textbox_credit);
-            textbox_check= moneyComponent.getMoneyComponentInZero(textbox_check);
-            label_totalEntered = moneyComponent.getMoneyComponentInZero(label_totalEntered);
-            textbox_leftInRegister = moneyComponent.getMoneyComponentInZero(textbox_leftInRegister);
-            label_short= moneyComponent.getMoneyComponentInZero(label_short);
+            label_totalCash= moneyComponent.getMoneyFormatInZero(label_totalCash);
+            textbox_credit = moneyComponent.getMoneyFormatInZero(textbox_credit);
+            textbox_check= moneyComponent.getMoneyFormatInZero(textbox_check);
+            label_totalEntered = moneyComponent.getMoneyFormatInZero(label_totalEntered);
+            textbox_leftInRegister = moneyComponent.getMoneyFormatInZero(textbox_leftInRegister);
+            label_short= moneyComponent.getMoneyFormatInZero(label_short);
 
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.EQUALITY, 0);
             plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.EQUALITY, 0);
@@ -411,7 +411,7 @@ namespace DoctorCashWpf.Views
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertComponentToMoneyFormat(textbox_credit, () => { getCurrentTransactions(); });
+                moneyComponent.convertToMoneyFormat(textbox_credit, () => { getCurrentTransactions(); });
                // verifyTxtBox(textbox_credit);
             }
         }
@@ -419,7 +419,7 @@ namespace DoctorCashWpf.Views
         private void textbox_credit_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertComponentToMoneyFormat(textbox_credit, () => { getCurrentTransactions(); });
+            moneyComponent.convertToMoneyFormat(textbox_credit, () => { getCurrentTransactions(); });
         }
 
         private void textbox_check_KeyUp(object sender, KeyEventArgs e)
@@ -427,7 +427,7 @@ namespace DoctorCashWpf.Views
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertComponentToMoneyFormat(textbox_check, () => { getCurrentTransactions(); });
+                moneyComponent.convertToMoneyFormat(textbox_check, () => { getCurrentTransactions(); });
             }
             
         }
@@ -435,7 +435,7 @@ namespace DoctorCashWpf.Views
         private void textbox_check_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertComponentToMoneyFormat(textbox_check, () => { getCurrentTransactions(); });
+            moneyComponent.convertToMoneyFormat(textbox_check, () => { getCurrentTransactions(); });
         }
 
         private void textbox_leftRegister_KeyUp(object sender, KeyEventArgs e)
@@ -443,14 +443,14 @@ namespace DoctorCashWpf.Views
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertComponentToMoneyFormat(textbox_leftInRegister, () => { getCurrentTransactions(); });
+                moneyComponent.convertToMoneyFormat(textbox_leftInRegister, () => { getCurrentTransactions(); });
             }
         }
 
         private void textbox_leftRegister_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertComponentToMoneyFormat(textbox_leftInRegister, () => { getCurrentTransactions(); });
+            moneyComponent.convertToMoneyFormat(textbox_leftInRegister, () => { getCurrentTransactions(); });
         }
 
         private void textbox_credit_GotFocus(object sender, RoutedEventArgs e)

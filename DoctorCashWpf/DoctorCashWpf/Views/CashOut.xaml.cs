@@ -18,23 +18,23 @@ namespace DoctorCashWpf.Views
             InitializeComponent();
             DataContext = new TextFieldsViewModel();
 
-            setValuesInitials();
+            setInitialValues();
         }
 
-        MoneyComponentService moneyComponent = new MoneyComponentService();
+        MoneyFormatService moneyComponent = new MoneyFormatService();
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
         private dateService date = new dateService();
 
-        private void setValuesInitials()
+        private void setInitialValues()
         {
-            moneyComponent.convertComponentToMoneyFormat(label_totalCash);
-            moneyComponent.convertComponentToMoneyFormat(label_1);
-            moneyComponent.convertComponentToMoneyFormat(label_10);
-            moneyComponent.convertComponentToMoneyFormat(label_20);
-            moneyComponent.convertComponentToMoneyFormat(label_50);
-            moneyComponent.convertComponentToMoneyFormat(label_100);
-            moneyComponent.convertComponentToMoneyFormat(label_5);
+            moneyComponent.convertToMoneyFormat(label_totalCash);
+            moneyComponent.convertToMoneyFormat(label_1);
+            moneyComponent.convertToMoneyFormat(label_10);
+            moneyComponent.convertToMoneyFormat(label_20);
+            moneyComponent.convertToMoneyFormat(label_50);
+            moneyComponent.convertToMoneyFormat(label_100);
+            moneyComponent.convertToMoneyFormat(label_5);
 
         }
 
@@ -62,7 +62,7 @@ namespace DoctorCashWpf.Views
                 }
 
                 label.Text = (Convert.ToInt32(txtbox.Text) * typeBills).ToString();
-                label = moneyComponent.convertComponentToMoneyFormat(label).labelComponent;
+                label = moneyComponent.convertToMoneyFormat(label).labelComponent;
 
                 txtbox.Text = txtbox.Text;
 
@@ -76,7 +76,7 @@ namespace DoctorCashWpf.Views
             else
             {
                 txtbox.Text = "";
-                label = moneyComponent.getMoneyComponentInZero(label);
+                label = moneyComponent.getMoneyFormatInZero(label);
                 getTotalCash();
             }
         }
@@ -116,7 +116,7 @@ namespace DoctorCashWpf.Views
             }
 
             label_totalCash.Text = totalCash.ToString();
-            label_totalCash = moneyComponent.convertComponentToMoneyFormat(label_totalCash).labelComponent;
+            label_totalCash = moneyComponent.convertToMoneyFormat(label_totalCash).labelComponent;
         }
 
         private void clearInputs()

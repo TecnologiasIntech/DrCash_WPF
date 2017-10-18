@@ -163,7 +163,7 @@
       <DependentUpon>Refund.xaml</DependentUpon>
     </Compile>
     <Compile Include="services\dateService.cs" />
-    <Compile Include="services\MoneyComponentService.cs" />
+    <Compile Include="services\MoneyFormatService.cs" />
     <Compile Include="services\reportService.cs" />
     <Compile Include="Views\Authentication.xaml.cs">
       <DependentUpon>Authentication.xaml</DependentUpon>

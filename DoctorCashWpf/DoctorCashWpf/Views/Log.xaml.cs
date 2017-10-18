@@ -19,7 +19,7 @@ namespace DoctorCashWpf.Views
             InitializeComponent();
         }
         private reportService getreport = new reportService();
-        MoneyComponentService moneyService = new MoneyComponentService();
+        MoneyFormatService moneyService = new MoneyFormatService();
         logService serviceslog = new logService();
         private dateService date = new dateService();
 
