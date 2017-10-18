@@ -77,7 +77,7 @@ namespace DoctorCashWpf
             return item;
         }    
         
-        private bool containLetter( string text )
+        public bool containLetter( string text )
         {
             bool isLetter = false;
 

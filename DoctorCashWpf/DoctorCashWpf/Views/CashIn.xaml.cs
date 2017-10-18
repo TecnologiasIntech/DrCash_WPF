@@ -18,10 +18,10 @@ namespace DoctorCashWpf
 
             if (cashInUpdate.isUpdate)
             {
-                loadValuesToUpdate(cashInUpdate.transactionID);
+                loadValuesToUpdateTransaction(cashInUpdate.transactionID);
             }
 
-            setValesInitials();
+            setInitialValues();
 
         }
 
@@ -31,7 +31,7 @@ namespace DoctorCashWpf
         private logService serviceslog = new logService();
         private dateService date = new dateService();
 
-        private void loadValuesToUpdate(int transactionID)
+        private void loadValuesToUpdateTransaction(int transactionID)
         {
             var trn = transaction.getObjTransactionByTransactionID(transactionID.ToString());
 
@@ -66,46 +66,41 @@ namespace DoctorCashWpf
             }
         }
 
-        private void setValesInitials()
+        private void setInitialValues()
         {
             moneyFormatService.convertToMoneyFormat(label_amount);
             moneyFormatService.convertToMoneyFormat(label_change);
             moneyFormatService.convertToMoneyFormat(label_total);
-
-
             moneyFormatService.convertToMoneyFormat(txtbox_cash, () => { });
-
-
-
             moneyFormatService.convertToMoneyFormat(txtbox_credit, () => { });
             moneyFormatService.convertToMoneyFormat(txtbox_check, () => { });
             moneyFormatService.convertToMoneyFormat(txtbox_amountCharge, () => { });
         }
 
-        public bool ready = false;
-        private bool verifyTransactionsType()
-        {            
+        private bool isCheckedTransactionType()
+        {
+            bool isChecked = false;  
             if (checkbox_copayment.IsChecked != false)
             {
-                ready = true;
+                isChecked = true;
             }
             if (checkbox_deductible.IsChecked != false)
             {
-                ready = true;
+                isChecked = true;
             }
             if (checkbox_labs.IsChecked != false)
             {
-                ready = true;
+                isChecked = true;
             }
             if (checkbox_other.IsChecked != false)
             {
-                ready = true;
+                isChecked = true;
             }
             if (checkbox_selfPay.IsChecked != false)
             {
-                ready = true;
+                isChecked = true;
             }
-            return ready;
+            return isChecked;
         }
 
         private void ApplyDesignForError(TextBox value)
@@ -118,27 +113,22 @@ namespace DoctorCashWpf
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
+
             if (txtbox_patientFirstName.Text == "")
             {
                 ApplyDesignForError(txtbox_patientFirstName);
             }
-            else if (txtbox_amountCharge.Text == "$0,00")
+            else if (txtbox_amountCharge.Text == moneyFormatService.getMoneyFormatInZero())
             {
                 ApplyDesignForError(txtbox_amountCharge);
             }
-            else if (txtbox_cash.Text == "$0,00")
+
+            else if (txtbox_cash.Text == moneyFormatService.getMoneyFormatInZero() && txtbox_credit.Text == moneyFormatService.getMoneyFormatInZero()&& txtbox_check.Text == moneyFormatService.getMoneyFormatInZero())
             {
-                ApplyDesignForError(txtbox_cash);
+                labelerror.Content = "Complete One Field Cash, Credit Or Check";
             }
-            else if (txtbox_credit.Text == "$0,00")
-            {
-                ApplyDesignForError(txtbox_credit);
-            }
-            else if (txtbox_check.Text == "$0,00")
-            {
-                ApplyDesignForError(txtbox_check);
-            }
-            else if (txtbox_numberChecks.Text == "0")
+
+            else if (txtbox_check.Text != moneyFormatService.getMoneyFormatInZero() && txtbox_numberChecks.Text == "0")
             {
                 ApplyDesignForError(txtbox_numberChecks);
             }
@@ -148,8 +138,8 @@ namespace DoctorCashWpf
             }
             else
             {
-                verifyTransactionsType();
-                if (ready == false)
+                
+                if (!isCheckedTransactionType())
                 {
                     checkbox_copayment.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
                     checkbox_deductible.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
@@ -160,49 +150,61 @@ namespace DoctorCashWpf
                 }
                 else
                 {
-                    var transactionService = new transactionService();
-                    var transaction = new transaction();
-
-                    transaction.userId = userInformation.user.usr_ID;
-                    //transaction.dateRegistered = DateTime.Today.ToString("d");
-                    transaction.comment = txtbox_comment.Text;
-                    transaction.type = (int)TRANSACTIONTYPE.IN;
-
-                    transaction.amountCharged = (float)Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1));
-                    transaction.cash = (float)Convert.ToDouble(txtbox_cash.Text.Remove(0, 1));
-                    transaction.credit = (float)Convert.ToDouble(txtbox_credit.Text.Remove(0, 1));
-                    transaction.check = (float)Convert.ToDouble(txtbox_check.Text.Remove(0, 1));
-                    transaction.checkNumber = Convert.ToInt32(txtbox_numberChecks.Text);
-                    transaction.change = (float)Convert.ToDouble(label_change.Text.Remove(0, 1));
-                    transaction.patientFirstName = txtbox_patientFirstName.Text;
-                    transaction.copayment = (bool)checkbox_copayment.IsChecked;
-                    transaction.selfPay = (bool)checkbox_selfPay.IsChecked; ;
-                    transaction.deductible = (bool)checkbox_deductible.IsChecked; ;
-                    transaction.labs = (bool)checkbox_labs.IsChecked; ;
-                    transaction.other = (bool)checkbox_other.IsChecked; ;
-                    transaction.closed = false;
-                    transaction.registerId = userInformation.user.usr_Username;
-                    transaction.modifiedById = userInformation.user.usr_ID;
-                    transaction.type = (int)TRANSACTIONTYPE.IN;
-
-                    transactionService.setTransaction(transaction);
-
-
-                    var items = new log();
-                    items.log_Username = userInformation.user.usr_Username;
-                    items.log_DateTime = date.getCurrentDate();
-                    items.log_Actions = "Cash In Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total= " + label_total + ", Amount=" + label_amount + ", Change= " + label_change;                    
-                    serviceslog.CreateLog(items);
-
-                    // Imprime Recibo
-                    Print print = new Print();
-                    transaction.total_cash = (float)Convert.ToDouble(label_total.Text.Remove(0,1));
-                    transaction.total_amount = (float)Convert.ToDouble(label_amount.Text.Remove(0,1));
-                    print.printCashIn(transaction);
+                    setTransactionAndPrintReceip();
+                    setLog();
 
                     MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                 }
             }
+        }
+
+        private void setTransactionAndPrintReceip()
+        {
+            var transactionService = new transactionService();
+            var transaction = new transaction();
+
+            transaction.userId = userInformation.user.usr_ID;
+            //transaction.dateRegistered = DateTime.Today.ToString("d");
+            transaction.comment = txtbox_comment.Text;
+            transaction.type = (int)TRANSACTIONTYPE.IN;
+
+            transaction.amountCharged = (float)Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1));
+            transaction.cash = (float)Convert.ToDouble(txtbox_cash.Text.Remove(0, 1));
+            transaction.credit = (float)Convert.ToDouble(txtbox_credit.Text.Remove(0, 1));
+            transaction.check = (float)Convert.ToDouble(txtbox_check.Text.Remove(0, 1));
+            transaction.checkNumber = Convert.ToInt32(txtbox_numberChecks.Text);
+            transaction.change = (float)Convert.ToDouble(label_change.Text.Remove(0, 1));
+            transaction.patientFirstName = txtbox_patientFirstName.Text;
+            transaction.copayment = (bool)checkbox_copayment.IsChecked;
+            transaction.selfPay = (bool)checkbox_selfPay.IsChecked; ;
+            transaction.deductible = (bool)checkbox_deductible.IsChecked; ;
+            transaction.labs = (bool)checkbox_labs.IsChecked; ;
+            transaction.other = (bool)checkbox_other.IsChecked; ;
+            transaction.closed = false;
+            transaction.registerId = userInformation.user.usr_Username;
+            transaction.modifiedById = userInformation.user.usr_ID;
+            transaction.type = (int)TRANSACTIONTYPE.IN;
+
+            transactionService.setTransaction(transaction);
+
+            printReceip(transaction);
+        }
+
+        private void setLog()
+        {
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = date.getCurrentDate();
+            items.log_Actions = "Cash In Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total= " + label_total + ", Amount=" + label_amount + ", Change= " + label_change;
+            serviceslog.CreateLog(items);
+        }
+
+        private void printReceip(transaction transaction)
+        {
+            Print print = new Print();
+            transaction.total_cash = (float)Convert.ToDouble(label_total.Text.Remove(0, 1));
+            transaction.total_amount = (float)Convert.ToDouble(label_amount.Text.Remove(0, 1));
+            print.printCashIn(transaction);
         }
 
         private void clearInputs()
@@ -246,12 +248,8 @@ namespace DoctorCashWpf
                 total += Convert.ToDouble(txtbox_check.Text.Remove(0, 1));
             }
 
-            label_total.Text = "$" + total.ToString();
-
-            label_change.Text = "$" + ( total - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1)) ).ToString();
-
-            moneyFormatService.AddFloat(label_change);
-            moneyFormatService.AddFloat(label_total);
+            label_total.Text = moneyFormatService.convertToMoneyFormat(total.ToString()).txtComponent;
+            label_change.Text = moneyFormatService.convertToMoneyFormat((total - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1))).ToString()).txtComponent;
         }
 
         private void txtbox_amountCharge_LostFocus(object sender, RoutedEventArgs e)
@@ -260,9 +258,7 @@ namespace DoctorCashWpf
             moneyFormatService.convertToMoneyFormat(txtbox_amountCharge, ()=> { });
 
             label_amount.Text = txtbox_amountCharge.Text;
-            label_change.Text = "$" + (Convert.ToDouble(label_total.Text.Remove(0, 1)) - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1))).ToString();
-
-            moneyFormatService.AddFloat(label_change);
+            label_change.Text = moneyFormatService.convertToMoneyFormat((Convert.ToDouble(label_total.Text.Remove(0, 1)) - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1))).ToString()).txtComponent;
         }
 
         private void txtbox_amountCharge_KeyUp(object sender, KeyEventArgs e)
@@ -273,9 +269,7 @@ namespace DoctorCashWpf
                 moneyFormatService.convertToMoneyFormat(txtbox_amountCharge, () => { });
 
                 label_amount.Text = txtbox_amountCharge.Text;
-                label_change.Text = "$" + (Convert.ToDouble(label_total.Text.Remove(0, 1)) - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1))).ToString();
-
-                moneyFormatService.AddFloat(label_change);
+                label_change.Text = moneyFormatService.convertToMoneyFormat((Convert.ToDouble(label_total.Text.Remove(0, 1)) - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1))).ToString()).txtComponent;
             }
         }
 
@@ -335,19 +329,19 @@ namespace DoctorCashWpf
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                if (!Char.IsNumber(txtbox_numberChecks.Text[0]))
+                if (moneyFormatService.containLetter(txtbox_numberChecks.Text))
                 {
-                    txtbox_numberChecks.Text = 0.ToString();
-                }
+                    txtbox_numberChecks.Text = "0";
+                } 
             }
         }
 
         private void txtbox_numberChecks_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            if (!Char.IsNumber(txtbox_numberChecks.Text[0]))
+            if (moneyFormatService.containLetter(txtbox_numberChecks.Text))
             {
-                txtbox_numberChecks.Text = 0.ToString();
+                txtbox_numberChecks.Text = "0";
             }
         }
 
