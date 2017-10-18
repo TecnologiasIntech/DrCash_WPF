@@ -25,7 +25,7 @@ namespace DoctorCashWpf
 
         }
 
-        private MoneyFormatService moneyComponent = new MoneyFormatService();
+        private MoneyFormatService moneyFormatService = new MoneyFormatService();
         private BrushConverter brushConverter = new BrushConverter();
         private transactionService transaction = new transactionService();
         private logService serviceslog = new logService();
@@ -68,18 +68,18 @@ namespace DoctorCashWpf
 
         private void setValesInitials()
         {
-            moneyComponent.convertToMoneyFormat(label_amount);
-            moneyComponent.convertToMoneyFormat(label_change);
-            moneyComponent.convertToMoneyFormat(label_total);
+            moneyFormatService.convertToMoneyFormat(label_amount);
+            moneyFormatService.convertToMoneyFormat(label_change);
+            moneyFormatService.convertToMoneyFormat(label_total);
 
 
-            moneyComponent.convertToMoneyFormat(txtbox_cash, () => { });
+            moneyFormatService.convertToMoneyFormat(txtbox_cash, () => { });
 
 
 
-            moneyComponent.convertToMoneyFormat(txtbox_credit, () => { });
-            moneyComponent.convertToMoneyFormat(txtbox_check, () => { });
-            moneyComponent.convertToMoneyFormat(txtbox_amountCharge, () => { });
+            moneyFormatService.convertToMoneyFormat(txtbox_credit, () => { });
+            moneyFormatService.convertToMoneyFormat(txtbox_check, () => { });
+            moneyFormatService.convertToMoneyFormat(txtbox_amountCharge, () => { });
         }
 
         public bool ready = false;
@@ -196,8 +196,8 @@ namespace DoctorCashWpf
 
                     // Imprime Recibo
                     Print print = new Print();
-                    transaction.total_cash = (float)Convert.ToDouble(label_total.Text);
-                    transaction.total_amount = (float)Convert.ToDouble(label_amount.Text);
+                    transaction.total_cash = (float)Convert.ToDouble(label_total.Text.Remove(0,1));
+                    transaction.total_amount = (float)Convert.ToDouble(label_amount.Text.Remove(0,1));
                     print.printCashIn(transaction);
 
                     MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
@@ -208,17 +208,17 @@ namespace DoctorCashWpf
         private void clearInputs()
         {
             labelerror.Content = "";
-            txtbox_amountCharge = moneyComponent.getMoneyFormatInZero(txtbox_amountCharge);
-            txtbox_cash = moneyComponent.getMoneyFormatInZero(txtbox_cash);
-            txtbox_credit = moneyComponent.getMoneyFormatInZero(txtbox_credit);
-            txtbox_check = moneyComponent.getMoneyFormatInZero(txtbox_check);
+            txtbox_amountCharge = moneyFormatService.getMoneyFormatInZero(txtbox_amountCharge);
+            txtbox_cash = moneyFormatService.getMoneyFormatInZero(txtbox_cash);
+            txtbox_credit = moneyFormatService.getMoneyFormatInZero(txtbox_credit);
+            txtbox_check = moneyFormatService.getMoneyFormatInZero(txtbox_check);
             txtbox_numberChecks.Text = "0";
             txtbox_patientFirstName.Text = "";
             txtbox_comment.Text = "";
 
-            label_amount = moneyComponent.getMoneyFormatInZero(label_amount);
-            label_change = moneyComponent.getMoneyFormatInZero(label_change);
-            label_total= moneyComponent.getMoneyFormatInZero(label_total);
+            label_amount = moneyFormatService.getMoneyFormatInZero(label_amount);
+            label_change = moneyFormatService.getMoneyFormatInZero(label_change);
+            label_total= moneyFormatService.getMoneyFormatInZero(label_total);
 
             checkbox_copayment.IsChecked = false;
             checkbox_deductible.IsChecked = false;
@@ -250,19 +250,19 @@ namespace DoctorCashWpf
 
             label_change.Text = "$" + ( total - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1)) ).ToString();
 
-            moneyComponent.AddFloat(label_change);
-            moneyComponent.AddFloat(label_total);
+            moneyFormatService.AddFloat(label_change);
+            moneyFormatService.AddFloat(label_total);
         }
 
         private void txtbox_amountCharge_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertToMoneyFormat(txtbox_amountCharge, ()=> { });
+            moneyFormatService.convertToMoneyFormat(txtbox_amountCharge, ()=> { });
 
             label_amount.Text = txtbox_amountCharge.Text;
             label_change.Text = "$" + (Convert.ToDouble(label_total.Text.Remove(0, 1)) - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1))).ToString();
 
-            moneyComponent.AddFloat(label_change);
+            moneyFormatService.AddFloat(label_change);
         }
 
         private void txtbox_amountCharge_KeyUp(object sender, KeyEventArgs e)
@@ -270,12 +270,12 @@ namespace DoctorCashWpf
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertToMoneyFormat(txtbox_amountCharge, () => { });
+                moneyFormatService.convertToMoneyFormat(txtbox_amountCharge, () => { });
 
                 label_amount.Text = txtbox_amountCharge.Text;
                 label_change.Text = "$" + (Convert.ToDouble(label_total.Text.Remove(0, 1)) - Convert.ToDouble(txtbox_amountCharge.Text.Remove(0, 1))).ToString();
 
-                moneyComponent.AddFloat(label_change);
+                moneyFormatService.AddFloat(label_change);
             }
         }
 
@@ -284,7 +284,7 @@ namespace DoctorCashWpf
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertToMoneyFormat(txtbox_cash, () => { });
+                moneyFormatService.convertToMoneyFormat(txtbox_cash, () => { });
                 getTotal_amount_change();
             }
         }
@@ -292,7 +292,7 @@ namespace DoctorCashWpf
         private void txtbox_cash_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertToMoneyFormat(txtbox_cash, () => { });
+            moneyFormatService.convertToMoneyFormat(txtbox_cash, () => { });
             getTotal_amount_change();
         }
 
@@ -301,7 +301,7 @@ namespace DoctorCashWpf
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertToMoneyFormat(txtbox_credit, () => { });
+                moneyFormatService.convertToMoneyFormat(txtbox_credit, () => { });
                 getTotal_amount_change();
             }
         }
@@ -309,7 +309,7 @@ namespace DoctorCashWpf
         private void txtbox_credit_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertToMoneyFormat(txtbox_credit, () => { });
+            moneyFormatService.convertToMoneyFormat(txtbox_credit, () => { });
             getTotal_amount_change();
         }
 
@@ -318,7 +318,7 @@ namespace DoctorCashWpf
             labelerror.Content = "";
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertToMoneyFormat(txtbox_check, () => { });
+                moneyFormatService.convertToMoneyFormat(txtbox_check, () => { });
                 getTotal_amount_change();
             }
         }
@@ -326,7 +326,7 @@ namespace DoctorCashWpf
         private void txtbox_check_LostFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
-            moneyComponent.convertToMoneyFormat(txtbox_check, () => { });
+            moneyFormatService.convertToMoneyFormat(txtbox_check, () => { });
             getTotal_amount_change();
         }
 
@@ -427,7 +427,6 @@ namespace DoctorCashWpf
             items.log_Username = userInformation.user.usr_Username;
             items.log_DateTime = date.getCurrentDate();
             items.log_Actions = "Cash In Cancel by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data Captured: Total= " + label_total.Text + ", Amount= " + label_amount.Text + ", Change= " + label_change.Text;
-            MessageBox.Show(items.log_Actions);
             serviceslog.CreateLog(items);
 
         }

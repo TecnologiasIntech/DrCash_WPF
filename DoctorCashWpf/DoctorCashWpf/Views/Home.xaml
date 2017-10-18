@@ -114,7 +114,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     Margin="8"
                     Padding="12">
             <Grid>
-                <DataGrid Name="dataGridView1"
+                <DataGrid Name="dataGridCurrentTransactions"
                           IsReadOnly="True"/>
             </Grid>
         </materialDesign:Card>

@@ -25,11 +25,11 @@ namespace DoctorCashWpf
         }
 
         public ICommand mostrar => new AnotherCommandImplementation(ExecuteRunDialog);
-        private MoneyFormatService moneyComponent = new MoneyFormatService();
-        private userService user = new userService();
+        private MoneyFormatService moneyFormatService = new MoneyFormatService();
+        private userService userService = new userService();
         private transactionService transactionService = new transactionService();
         private List<transaction> transactionList = new List<transaction>();
-        private dateService date = new dateService();
+        private dateService dateService = new dateService();
 
         private async void ExecuteRunDialog(object o)
         {
@@ -43,17 +43,11 @@ namespace DoctorCashWpf
             Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
         }
 
-        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
+        public void loadTransactionsList()
         {
-            Console.WriteLine("You can intercept the closing event, and cancel here.");
-        }
-
-        public void chargeTransactionsList()
-        {
-
             transactionList = transactionService.getCurrentTransactions(userInformation.user.usr_ID);
             
-            dataGridView1.ItemsSource = null;
+            dataGridCurrentTransactions.ItemsSource = null;
             
             DataTable dt = new DataTable();
             dt.Columns.Add("Transactions");
@@ -62,65 +56,72 @@ namespace DoctorCashWpf
 
             for (int i = 0; i < transactionList.Count(); i++)
             {
-                var response = user.getUserByID((transactionList[i].userId).ToString());
+                user user = userService.getUserByID((transactionList[i].userId).ToString());
                
-                dt.Rows.Add(getTransactionComment(transactionList[i]), response.usr_FirstName + " " + response.usr_LastName, transactionList[i].dateRegistered);
+                dt.Rows.Add(getTransactionComment(transactionList[i]), user.usr_FirstName + " " + user.usr_LastName, transactionList[i].dateRegistered);
             }
 
-            dataGridView1.ItemsSource = dt.DefaultView;
-            dataGridView1.MaxHeight = 470;
+            getSumOfTransactionsAndChangeTotalLabels();
 
-            getSumOfTransactions();
-
+            dataGridCurrentTransactions.ItemsSource = dt.DefaultView;
+            dataGridCurrentTransactions.MaxHeight = 470;
         }
 
         private string getTransactionComment(transaction trn)
         {
-            var comment = "";
+            string transactionComment = "";
+            string amount = "";
 
             switch (trn.type)
             {
                 case (int)TRANSACTIONTYPE.INITIAL:
-                    comment = "Initial Cash In for total amount: $" + trn.cash + ".00";
+
+                    amount = moneyFormatService.AddFloat(trn.cash.ToString());
+                    transactionComment = "Initial Cash In for total amount: $" + amount;
                     break;
 
                 case (int)TRANSACTIONTYPE.IN:
 
+                    amount = moneyFormatService.AddFloat(getTotalAmount(trn).ToString());
+
                     if (trn.copayment)
                     {
-                        comment = "Payment for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                        
+                        transactionComment = "Payment for total amount: $";
                     }
                     else if (trn.selfPay)
                     {
-                        comment = "SelPay for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                        transactionComment = "SelPay for total amount: $";
                     }
                     else if (trn.deductible)
                     {
-                        comment = "Deductible for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                        transactionComment = "Deductible for total amount: $";
                     }
                     else if (trn.other)
                     {
-                        comment = trn.otherComments + " for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                        transactionComment = trn.otherComments + " for total amount: $";
                     }
                     else if (trn.labs)
                     {
-                        comment = "Labs for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                        transactionComment = "Labs for total amount: $";
                     }
+
+                    transactionComment += amount;
 
                     break;
 
                 case (int)TRANSACTIONTYPE.REFOUND:
-                    comment = "Refound for total amount: $" + trn.amountCharged + ".00";
+                    amount = moneyFormatService.AddFloat(trn.amountCharged.ToString());
+                    transactionComment = "Refound for total amount: $" + amount;
                     break;
 
                 case (int)TRANSACTIONTYPE.OUT:
-                    comment = "Cash out for total amount: $" + getTotalAmount(trn).ToString() + ".00";
+                    amount = moneyFormatService.AddFloat(getTotalAmount(trn).ToString());
+                    transactionComment = "Cash out for total amount: $" + amount;
                     break;
             }
 
-            
-
-            return comment;
+            return transactionComment;
         }
 
         private float getTotalAmount(transaction trn)
@@ -128,67 +129,66 @@ namespace DoctorCashWpf
             return trn.cash + trn.credit + trn.check;
         }
 
-        private void getSumOfTransactions()
+        private void getSumOfTransactionsAndChangeTotalLabels()
         {
-            float cashIn = 0, credit = 0, checks = 0, cashOut = 0, initialCash = 0, refound = 0;
+            float totalCashIn = 0, totalCredit = 0, totalChecks = 0, totalCashOut = 0, totalInitialCash = 0, totalRefound = 0;
 
             for (int i = 0; i < transactionList.Count(); i++)
             {
                 if(transactionList[i].type == (int)TRANSACTIONTYPE.IN)
                 {
-                    cashIn += transactionList[i].cash;
-                    credit += transactionList[i].credit;
-                    checks += transactionList[i].check;
+                    totalCashIn += transactionList[i].cash;
+                    totalCredit += transactionList[i].credit;
+                    totalChecks += transactionList[i].check;
                 }
                 else if(transactionList[i].type == (int)TRANSACTIONTYPE.OUT)
                 {
-                    cashOut += transactionList[i].cash;
+                    totalCashOut += transactionList[i].cash;
                 }else if(transactionList[i].type == (int)TRANSACTIONTYPE.INITIAL)
                 {
-                    initialCash = transactionList[i].cash;
+                    totalInitialCash = transactionList[i].cash;
                 }else if(transactionList[i].type == (int)TRANSACTIONTYPE.REFOUND)
                 {
-                    refound += transactionList[i].amountCharged;
+                    totalRefound += transactionList[i].amountCharged; //TODO verificar que está bien esto
                 }
             }
 
-            label_cashIn.Text = cashIn.ToString();
-            label_credit.Text = credit.ToString();
-            label_checks.Text = checks.ToString();
-            label_refounds.Text = refound.ToString();
-            label_balance.Text = (initialCash + cashIn + credit + checks - cashOut - refound).ToString();
+            label_cashIn.Text = totalCashIn.ToString();
+            label_credit.Text = totalCredit.ToString();
+            label_checks.Text = totalChecks.ToString();
+            label_refounds.Text = totalRefound.ToString();
+            label_balance.Text = (((totalInitialCash + totalCashIn + totalCredit + totalChecks) - totalCashOut) - totalRefound).ToString();
 
-            label_totalIn.Text = (cashIn + credit + checks).ToString();
+            label_totalIn.Text = (totalCashIn + totalCredit + totalChecks).ToString();
 
-            label_cashOut.Text = (cashOut + refound).ToString();
+            label_cashOut.Text = (totalCashOut + totalRefound).ToString();
 
-            label_totalOut.Text = (cashOut).ToString();
+            label_totalOut.Text = (totalCashOut).ToString();
 
-            label_initialCash.Text = initialCash.ToString();
-            label_initialCash = moneyComponent.convertToMoneyFormat(label_initialCash).labelComponent;
+            label_initialCash.Text = totalInitialCash.ToString();
+            label_initialCash = moneyFormatService.convertToMoneyFormat(label_initialCash).labelComponent;
 
             if(label_balance.Text[0] == '-')
             {
                 label_balance.Text = label_balance.Text.Remove(0, 1);
-                moneyComponent.convertToMoneyFormat(label_balance);
-                label_balance.Text = label_balance.Text.Remove(0, 1);
-                label_balance.Text = "- $" + label_balance.Text;
+                moneyFormatService.convertToMoneyFormat(label_balance);
+                label_balance.Text = "- " + label_balance.Text;
             }
             else
             {
-                moneyComponent.convertToMoneyFormat(label_balance);
+                moneyFormatService.convertToMoneyFormat(label_balance);
             }
 
-            moneyComponent.convertToMoneyFormat(label_cashIn);
-            moneyComponent.convertToMoneyFormat(label_credit);
-            moneyComponent.convertToMoneyFormat(label_checks);
-            moneyComponent.convertToMoneyFormat(label_totalIn);
-            moneyComponent.convertToMoneyFormat(label_cashOut);
-            moneyComponent.convertToMoneyFormat(label_totalOut);
-            moneyComponent.convertToMoneyFormat(label_refounds);
+            moneyFormatService.convertToMoneyFormat(label_cashIn);
+            moneyFormatService.convertToMoneyFormat(label_credit);
+            moneyFormatService.convertToMoneyFormat(label_checks);
+            moneyFormatService.convertToMoneyFormat(label_totalIn);
+            moneyFormatService.convertToMoneyFormat(label_cashOut);
+            moneyFormatService.convertToMoneyFormat(label_totalOut);
+            moneyFormatService.convertToMoneyFormat(label_refounds);
 
-            closeDateInformation.closeDate.clt_balance = (float)(initialCash + cashIn + credit + checks - cashOut - refound);
-            closeDateInformation.closeDate.clt_initial_cash = (float)(initialCash);
+            closeDateInformation.closeDate.clt_balance = (float)(totalInitialCash + totalCashIn + totalCredit + totalChecks - totalCashOut - totalRefound);
+            closeDateInformation.closeDate.clt_initial_cash = (float)(totalInitialCash);
         }
 
         private async void CashInButton_Click(object sender, RoutedEventArgs e)
@@ -198,7 +198,7 @@ namespace DoctorCashWpf
 
             await DialogHost.Show(cashInWindow, "RootDialog");
 
-            chargeTransactionsList();
+            loadTransactionsList();
 
         }
 
@@ -209,7 +209,7 @@ namespace DoctorCashWpf
 
             await DialogHost.Show(cashOut, "RootDialog");
 
-            chargeTransactionsList();
+            loadTransactionsList();
         }
 
         private async void RefundButton_Click(object sender, RoutedEventArgs e)
@@ -223,7 +223,7 @@ namespace DoctorCashWpf
                 createRefund.isRefund = false;
                 await DialogHost.Show(new refundTotal(), "RootDialog");
 
-                chargeTransactionsList();
+                loadTransactionsList();
             }
 
         }
@@ -267,21 +267,21 @@ namespace DoctorCashWpf
                 await DialogHost.Show(new InitialCash(), "RootDialog");
             }
 
-            chargeTransactionsList();
+            loadTransactionsList();
 
         }
 
         private void clearData()
         {
-            dataGridView1.ItemsSource = null;
-            moneyComponent.getMoneyFormatInZero(label_initialCash);
-            moneyComponent.getMoneyFormatInZero(label_cashIn);
-            moneyComponent.getMoneyFormatInZero(label_credit);
-            moneyComponent.getMoneyFormatInZero(label_checks);
-            moneyComponent.getMoneyFormatInZero(label_totalIn);
-            moneyComponent.getMoneyFormatInZero(label_cashOut);
-            moneyComponent.getMoneyFormatInZero(label_refounds);
-            moneyComponent.getMoneyFormatInZero(label_totalOut);
+            dataGridCurrentTransactions.ItemsSource = null;
+            moneyFormatService.getMoneyFormatInZero(label_initialCash);
+            moneyFormatService.getMoneyFormatInZero(label_cashIn);
+            moneyFormatService.getMoneyFormatInZero(label_credit);
+            moneyFormatService.getMoneyFormatInZero(label_checks);
+            moneyFormatService.getMoneyFormatInZero(label_totalIn);
+            moneyFormatService.getMoneyFormatInZero(label_cashOut);
+            moneyFormatService.getMoneyFormatInZero(label_refounds);
+            moneyFormatService.getMoneyFormatInZero(label_totalOut);
         }
 
         private async void Look_Click(object sender, RoutedEventArgs e)
@@ -311,7 +311,7 @@ namespace DoctorCashWpf
                 await DialogHost.Show(new InitialCash(), "RootDialog");
             }
 
-            chargeTransactionsList();
+            loadTransactionsList();
         }
     }
 }
