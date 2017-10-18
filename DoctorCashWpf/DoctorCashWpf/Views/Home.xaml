@@ -41,7 +41,6 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      materialDesign:ShadowAssist.ShadowDepth="Depth1"
                     Grid.Column="0"
                     Grid.Row="1"
-                    Grid.ColumnSpan="2"
                     Background="White"
                     Margin="4,4,4,0"
                     Padding="12" Height="133"
@@ -123,11 +122,11 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
 
         <!--#region Transactions Reciept-->
-
         <materialDesign:Card 
                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                     Grid.Column="1" 
                     Grid.Row="0"
+                    Grid.RowSpan="2"
                     Background="White"
                     Margin="8"
                     Padding="12">
@@ -290,5 +289,6 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
             <!--#endregion-->
         </materialDesign:Card>
+        
     </Grid>
 </UserControl>
