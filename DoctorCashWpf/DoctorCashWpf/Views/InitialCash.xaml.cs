@@ -13,7 +13,7 @@ namespace DoctorCashWpf.Views
     {
         private BrushConverter brushConverter = new BrushConverter();
         private transactionService transaction = new transactionService();
-        private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private MoneyFormatService moneyComponent = new MoneyFormatService();
         private dateService date = new dateService();
         private logService serviceslog = new logService();
         private static double INITIAL_CASH_BASE = 120;
@@ -62,7 +62,7 @@ namespace DoctorCashWpf.Views
         private void verifyInitialCash(Double initialcash)
         {
 
-            double initialCashBase = Convert.ToDouble(moneyComponent.AddFloatToComponent(INITIAL_CASH_BASE.ToString()));
+            double initialCashBase = Convert.ToDouble(moneyComponent.AddFloat(INITIAL_CASH_BASE.ToString()));
 
             if (initialcash == 0)
             {
@@ -72,7 +72,7 @@ namespace DoctorCashWpf.Views
             else if (initialcash == initialCashBase)
             {
                 labelInitialCashError.Content = "";                
-                moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+                moneyComponent.convertToMoneyFormat(txtbox_initialCash, () => { });
                 setInitialCash();
             }
             else if (initialcash > initialCashBase)
@@ -91,14 +91,14 @@ namespace DoctorCashWpf.Views
 
         private void setInitialCash_click(object sender, RoutedEventArgs e)
         {
-            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_initialCash, () => { });
             double initialCash = Convert.ToDouble(txtbox_initialCash.Text.Remove(0, 1));
             verifyInitialCash(initialCash);                      
         }
 
         private void BtnAgree_Click(object sender, RoutedEventArgs e)
         {
-            moneyComponent.convertComponentToMoneyFormat(txtbox_initialCash, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_initialCash, () => { });
             setInitialCash();
             labelInitialCashError.Content = "";
             hiddenAndCollapsedButtonsAgreeAndDisagree();

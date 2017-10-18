@@ -25,7 +25,7 @@ namespace DoctorCashWpf
         }
 
         public ICommand mostrar => new AnotherCommandImplementation(ExecuteRunDialog);
-        private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private MoneyFormatService moneyComponent = new MoneyFormatService();
         private userService user = new userService();
         private transactionService transactionService = new transactionService();
         private List<transaction> transactionList = new List<transaction>();
@@ -165,27 +165,27 @@ namespace DoctorCashWpf
             label_totalOut.Text = (cashOut).ToString();
 
             label_initialCash.Text = initialCash.ToString();
-            label_initialCash = moneyComponent.convertComponentToMoneyFormat(label_initialCash).labelComponent;
+            label_initialCash = moneyComponent.convertToMoneyFormat(label_initialCash).labelComponent;
 
             if(label_balance.Text[0] == '-')
             {
                 label_balance.Text = label_balance.Text.Remove(0, 1);
-                moneyComponent.convertComponentToMoneyFormat(label_balance);
+                moneyComponent.convertToMoneyFormat(label_balance);
                 label_balance.Text = label_balance.Text.Remove(0, 1);
                 label_balance.Text = "- $" + label_balance.Text;
             }
             else
             {
-                moneyComponent.convertComponentToMoneyFormat(label_balance);
+                moneyComponent.convertToMoneyFormat(label_balance);
             }
 
-            moneyComponent.convertComponentToMoneyFormat(label_cashIn);
-            moneyComponent.convertComponentToMoneyFormat(label_credit);
-            moneyComponent.convertComponentToMoneyFormat(label_checks);
-            moneyComponent.convertComponentToMoneyFormat(label_totalIn);
-            moneyComponent.convertComponentToMoneyFormat(label_cashOut);
-            moneyComponent.convertComponentToMoneyFormat(label_totalOut);
-            moneyComponent.convertComponentToMoneyFormat(label_refounds);
+            moneyComponent.convertToMoneyFormat(label_cashIn);
+            moneyComponent.convertToMoneyFormat(label_credit);
+            moneyComponent.convertToMoneyFormat(label_checks);
+            moneyComponent.convertToMoneyFormat(label_totalIn);
+            moneyComponent.convertToMoneyFormat(label_cashOut);
+            moneyComponent.convertToMoneyFormat(label_totalOut);
+            moneyComponent.convertToMoneyFormat(label_refounds);
 
             closeDateInformation.closeDate.clt_balance = (float)(initialCash + cashIn + credit + checks - cashOut - refound);
             closeDateInformation.closeDate.clt_initial_cash = (float)(initialCash);
@@ -274,14 +274,14 @@ namespace DoctorCashWpf
         private void clearData()
         {
             dataGridView1.ItemsSource = null;
-            moneyComponent.getMoneyComponentInZero(label_initialCash);
-            moneyComponent.getMoneyComponentInZero(label_cashIn);
-            moneyComponent.getMoneyComponentInZero(label_credit);
-            moneyComponent.getMoneyComponentInZero(label_checks);
-            moneyComponent.getMoneyComponentInZero(label_totalIn);
-            moneyComponent.getMoneyComponentInZero(label_cashOut);
-            moneyComponent.getMoneyComponentInZero(label_refounds);
-            moneyComponent.getMoneyComponentInZero(label_totalOut);
+            moneyComponent.getMoneyFormatInZero(label_initialCash);
+            moneyComponent.getMoneyFormatInZero(label_cashIn);
+            moneyComponent.getMoneyFormatInZero(label_credit);
+            moneyComponent.getMoneyFormatInZero(label_checks);
+            moneyComponent.getMoneyFormatInZero(label_totalIn);
+            moneyComponent.getMoneyFormatInZero(label_cashOut);
+            moneyComponent.getMoneyFormatInZero(label_refounds);
+            moneyComponent.getMoneyFormatInZero(label_totalOut);
         }
 
         private async void Look_Click(object sender, RoutedEventArgs e)

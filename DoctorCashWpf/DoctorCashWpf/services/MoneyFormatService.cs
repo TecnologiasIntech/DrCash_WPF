@@ -3,11 +3,11 @@ using System.Windows.Controls;
 
 namespace DoctorCashWpf
 {
-    class MoneyComponentService
+    class MoneyFormatService
     {
         private string separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator;
         
-        public void AddFloatToComponent(TextBox txtbox)
+        public void AddFloat(TextBox txtbox)
         {
             if (!txtbox.Text.Contains(separator))
             {
@@ -15,7 +15,7 @@ namespace DoctorCashWpf
             }
         }
 
-        public void AddFloatToComponent(TextBlock txtbock)
+        public void AddFloat(TextBlock txtbock)
         {
             if (!txtbock.Text.Contains(separator))
             {
@@ -23,7 +23,7 @@ namespace DoctorCashWpf
             }
         }
 
-        public string AddFloatToComponent(string txtbock)
+        public string AddFloat(string txtbock)
         {
             if (!txtbock.Contains(separator))
             {
@@ -32,7 +32,7 @@ namespace DoctorCashWpf
             return txtbock;
         }
 
-        public moneyComponent convertComponentToMoneyFormat(TextBox txtBox, Action function)
+        public moneyComponent convertToMoneyFormat(TextBox txtBox, Action function)
         {
             var error = "";
             var item = new moneyComponent();
@@ -70,7 +70,7 @@ namespace DoctorCashWpf
 
             function();
 
-            AddFloatToComponent(txtBox);
+            AddFloat(txtBox);
             item.error = error;
             item.TextboxComponent = txtBox;
 
@@ -119,7 +119,7 @@ namespace DoctorCashWpf
             return text;
         }
 
-        public moneyComponent convertComponentToMoneyFormat(TextBlock txtBox)
+        public moneyComponent convertToMoneyFormat(TextBlock txtBox)
         {
             var error = "";
             var item = new moneyComponent();
@@ -157,13 +157,13 @@ namespace DoctorCashWpf
                 txtBox.Text = "$0" + separator + "00";
             }
 
-            AddFloatToComponent(txtBox);
+            AddFloat(txtBox);
             item.error = error;
             item.labelComponent = txtBox;
 
             return item;
         }
-        public moneyComponent convertComponentToMoneyFormat(string txt)
+        public moneyComponent convertToMoneyFormat(string txt)
         {
             var error = "";
             var item = new moneyComponent();
@@ -201,26 +201,26 @@ namespace DoctorCashWpf
                 txt = "$0" + separator + "00";
             }
 
-            txt=AddFloatToComponent(txt);
+            txt=AddFloat(txt);
             item.error = error;
             item.txtComponent = txt;
 
             return item;
         }
 
-        public TextBlock getMoneyComponentInZero(TextBlock txt)
+        public TextBlock getMoneyFormatInZero(TextBlock txt)
         {
             txt.Text = "$0" + separator + "00";
             return txt;
         }
 
-        public TextBox getMoneyComponentInZero(TextBox txt)
+        public TextBox getMoneyFormatInZero(TextBox txt)
         {
             txt.Text = "$0" + separator + "00";
             return txt;
         }
 
-        public string getFormatMoneyComponentInZero()
+        public string getMoneyFormatInZero()
         {
             return "$0" + separator + "00";
         }

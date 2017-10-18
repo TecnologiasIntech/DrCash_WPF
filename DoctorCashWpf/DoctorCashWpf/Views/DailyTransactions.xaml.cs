@@ -22,7 +22,7 @@ namespace DoctorCashWpf.Views
         }
 
         private reportService getreport = new reportService();
-        MoneyComponentService moneyService = new MoneyComponentService();
+        MoneyFormatService moneyService = new MoneyFormatService();
         logService serviceslog = new logService();
         private dateService date = new dateService();
 
@@ -68,7 +68,7 @@ namespace DoctorCashWpf.Views
 
                     for (int i = 0; i < list.Count(); i++)
                     {
-                        dt.Rows.Add(list[i].trn_id, list[i].userId, list[i].dateRegistered, list[i].patientFirstName, list[i].type, moneyService.convertComponentToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].cash.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].credit.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].check.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(list[i].change.ToString()).txtComponent, list[i].checkNumber, list[i].closed, list[i].registerId);
+                        dt.Rows.Add(list[i].trn_id, list[i].userId, list[i].dateRegistered, list[i].patientFirstName, list[i].type, moneyService.convertToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, moneyService.convertToMoneyFormat(list[i].cash.ToString()).txtComponent, moneyService.convertToMoneyFormat(list[i].credit.ToString()).txtComponent, moneyService.convertToMoneyFormat(list[i].check.ToString()).txtComponent, moneyService.convertToMoneyFormat(list[i].change.ToString()).txtComponent, list[i].checkNumber, list[i].closed, list[i].registerId);
                         charge += list[i].amountCharged;
                         cash += list[i].cash;
                         Credit += list[i].credit;
@@ -77,7 +77,7 @@ namespace DoctorCashWpf.Views
                     }
 
 
-                    dt.Rows.Add("Total´s", "", "", "", "", moneyService.convertComponentToMoneyFormat(charge.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(cash.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(Credit.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(Check.ToString()).txtComponent, moneyService.convertComponentToMoneyFormat(Change.ToString()).txtComponent, "", "", "");
+                    dt.Rows.Add("Total´s", "", "", "", "", moneyService.convertToMoneyFormat(charge.ToString()).txtComponent, moneyService.convertToMoneyFormat(cash.ToString()).txtComponent, moneyService.convertToMoneyFormat(Credit.ToString()).txtComponent, moneyService.convertToMoneyFormat(Check.ToString()).txtComponent, moneyService.convertToMoneyFormat(Change.ToString()).txtComponent, "", "", "");
 
                     dataGridViewDailyTransactions.ItemsSource = dt.DefaultView;
 
@@ -230,11 +230,11 @@ namespace DoctorCashWpf.Views
                             cldate = new PdfPCell(new Phrase(list[i].dateRegistered.ToString(), _standardFont)); cldate.BorderWidth = 0; cldate.BorderWidthBottom = 0.75f;
                             clpatientname = new PdfPCell(new Phrase(list[i].patientFirstName.ToString(), _standardFont)); clpatientname.BorderWidth = 0; clpatientname.BorderWidthBottom = 0.75f;
                             cltype = new PdfPCell(new Phrase(list[i].type.ToString(), _standardFont)); cltype.BorderWidth = 0; cltype.BorderWidthBottom = 0.75f;
-                            clcharge = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, _standardFont)); clcharge.BorderWidth = 0; clcharge.BorderWidthBottom = 0.75f;
-                            clcash = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].cash.ToString()).txtComponent, _standardFont)); clcash.BorderWidth = 0; clcash.BorderWidthBottom = 0.75f;
-                            clcredit = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].credit.ToString()).txtComponent, _standardFont)); clcredit.BorderWidth = 0; clcredit.BorderWidthBottom = 0.75f;
-                            clcheck = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].check.ToString()).txtComponent, _standardFont)); clcheck.BorderWidth = 0; clcheck.BorderWidthBottom = 0.75f;
-                            clchange = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].change.ToString()).txtComponent, _standardFont)); clchange.BorderWidth = 0; clchange.BorderWidthBottom = 0.75f;
+                            clcharge = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, _standardFont)); clcharge.BorderWidth = 0; clcharge.BorderWidthBottom = 0.75f;
+                            clcash = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].cash.ToString()).txtComponent, _standardFont)); clcash.BorderWidth = 0; clcash.BorderWidthBottom = 0.75f;
+                            clcredit = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].credit.ToString()).txtComponent, _standardFont)); clcredit.BorderWidth = 0; clcredit.BorderWidthBottom = 0.75f;
+                            clcheck = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].check.ToString()).txtComponent, _standardFont)); clcheck.BorderWidth = 0; clcheck.BorderWidthBottom = 0.75f;
+                            clchange = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].change.ToString()).txtComponent, _standardFont)); clchange.BorderWidth = 0; clchange.BorderWidthBottom = 0.75f;
                             clchecknumber = new PdfPCell(new Phrase(list[i].checkNumber.ToString(), _standardFont)); clchecknumber.BorderWidth = 0; clchecknumber.BorderWidthBottom = 0.75f;
                             clclosed = new PdfPCell(new Phrase(list[i].closed.ToString(), _standardFont)); clclosed.BorderWidth = 0; clclosed.BorderWidthBottom = 0.75f;
                             clregister = new PdfPCell(new Phrase(list[i].registerId.ToString(), _standardFont)); clregister.BorderWidth = 0; clregister.BorderWidthBottom = 0.75f;
@@ -265,11 +265,11 @@ namespace DoctorCashWpf.Views
                             cldate = new PdfPCell(new Phrase("", _standardFont)); cldate.BorderWidth = 0;
                             clpatientname = new PdfPCell(new Phrase("", _standardFont)); clpatientname.BorderWidth = 0;
                             cltype = new PdfPCell(new Phrase("", _standardFont)); cltype.BorderWidth = 0;
-                            clcharge = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(charge.ToString()).txtComponent, _standardFont2)); clcharge.BorderWidth = 0;
-                            clcash = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(cash.ToString()).txtComponent, _standardFont2)); clcash.BorderWidth = 0;
-                            clcredit = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(Credit.ToString()).txtComponent, _standardFont2)); clcredit.BorderWidth = 0;
-                            clcheck = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(Check.ToString()).txtComponent, _standardFont2)); clcheck.BorderWidth = 0;
-                            clchange = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(Change.ToString()).txtComponent, _standardFont2)); clchange.BorderWidth = 0;
+                            clcharge = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(charge.ToString()).txtComponent, _standardFont2)); clcharge.BorderWidth = 0;
+                            clcash = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(cash.ToString()).txtComponent, _standardFont2)); clcash.BorderWidth = 0;
+                            clcredit = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(Credit.ToString()).txtComponent, _standardFont2)); clcredit.BorderWidth = 0;
+                            clcheck = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(Check.ToString()).txtComponent, _standardFont2)); clcheck.BorderWidth = 0;
+                            clchange = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(Change.ToString()).txtComponent, _standardFont2)); clchange.BorderWidth = 0;
                             clchecknumber = new PdfPCell(new Phrase("", _standardFont)); clchecknumber.BorderWidth = 0;
                             clclosed = new PdfPCell(new Phrase("", _standardFont)); clclosed.BorderWidth = 0;
                             clregister = new PdfPCell(new Phrase("", _standardFont)); clregister.BorderWidth = 0;
@@ -295,11 +295,11 @@ namespace DoctorCashWpf.Views
                             cldate = new PdfPCell(new Phrase(list[i].dateRegistered.ToString(), _standardFont)); cldate.BorderWidth = 0;
                             clpatientname = new PdfPCell(new Phrase(list[i].patientFirstName.ToString(), _standardFont)); clpatientname.BorderWidth = 0;
                             cltype = new PdfPCell(new Phrase(list[i].type.ToString(), _standardFont)); cltype.BorderWidth = 0;
-                            clcharge = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, _standardFont)); clcharge.BorderWidth = 0;
-                            clcash = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].cash.ToString()).txtComponent, _standardFont)); clcash.BorderWidth = 0;
-                            clcredit = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].credit.ToString()).txtComponent, _standardFont)); clcredit.BorderWidth = 0;
-                            clcheck = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].check.ToString()).txtComponent, _standardFont)); clcheck.BorderWidth = 0;
-                            clchange = new PdfPCell(new Phrase(moneyService.convertComponentToMoneyFormat(list[i].change.ToString()).txtComponent, _standardFont)); clchange.BorderWidth = 0;
+                            clcharge = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].amountCharged.ToString()).txtComponent, _standardFont)); clcharge.BorderWidth = 0;
+                            clcash = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].cash.ToString()).txtComponent, _standardFont)); clcash.BorderWidth = 0;
+                            clcredit = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].credit.ToString()).txtComponent, _standardFont)); clcredit.BorderWidth = 0;
+                            clcheck = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].check.ToString()).txtComponent, _standardFont)); clcheck.BorderWidth = 0;
+                            clchange = new PdfPCell(new Phrase(moneyService.convertToMoneyFormat(list[i].change.ToString()).txtComponent, _standardFont)); clchange.BorderWidth = 0;
                             clchecknumber = new PdfPCell(new Phrase(list[i].checkNumber.ToString(), _standardFont)); clchecknumber.BorderWidth = 0;
                             clclosed = new PdfPCell(new Phrase(list[i].closed.ToString(), _standardFont)); clclosed.BorderWidth = 0;
                             clregister = new PdfPCell(new Phrase(list[i].registerId.ToString(), _standardFont)); clregister.BorderWidth = 0;

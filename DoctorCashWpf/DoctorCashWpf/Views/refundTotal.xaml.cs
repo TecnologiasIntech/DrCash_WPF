@@ -15,13 +15,13 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
 
-            label_amountCharged = moneyComponent.getMoneyComponentInZero(label_amountCharged);
-            txtbox_amountRefund = moneyComponent.getMoneyComponentInZero(txtbox_amountRefund);
+            label_amountCharged = moneyComponent.getMoneyFormatInZero(label_amountCharged);
+            txtbox_amountRefund = moneyComponent.getMoneyFormatInZero(txtbox_amountRefund);
         }
 
         private transactionService transaction = new transactionService();
         private transaction transactionInfo = new transaction();
-        private MoneyComponentService moneyComponent = new MoneyComponentService();
+        private MoneyFormatService moneyComponent = new MoneyFormatService();
         private logService serviceslog = new logService();
         private dateService date = new dateService();
 
@@ -34,7 +34,7 @@ namespace DoctorCashWpf.Views
                 label_amountCharged.Text = transactionInfo.amountCharged.ToString();
                 txtbox_log.Text = getTransactionComment(transactionInfo);
 
-                moneyComponent.convertComponentToMoneyFormat(label_amountCharged);
+                moneyComponent.convertToMoneyFormat(label_amountCharged);
 
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
@@ -119,13 +119,13 @@ namespace DoctorCashWpf.Views
         {
             if (e.Key == Key.Enter)
             {
-                moneyComponent.convertComponentToMoneyFormat(txtbox_amountRefund, () => { });
+                moneyComponent.convertToMoneyFormat(txtbox_amountRefund, () => { });
             }
         }
 
         private void txtbox_amountRefund_LostFocus(object sender, RoutedEventArgs e)
         {
-            moneyComponent.convertComponentToMoneyFormat(txtbox_amountRefund, () => { });
+            moneyComponent.convertToMoneyFormat(txtbox_amountRefund, () => { });
         }
 
         private void txtbox_amountRefund_GotFocus(object sender, RoutedEventArgs e)
@@ -135,8 +135,8 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            label_amountCharged = moneyComponent.getMoneyComponentInZero(label_amountCharged);
-            txtbox_amountRefund = moneyComponent.getMoneyComponentInZero(txtbox_amountRefund);
+            label_amountCharged = moneyComponent.getMoneyFormatInZero(label_amountCharged);
+            txtbox_amountRefund = moneyComponent.getMoneyFormatInZero(txtbox_amountRefund);
 
             txtbox_transactionNumber.Text = "";
             txtbox_newLog.Text = "";
