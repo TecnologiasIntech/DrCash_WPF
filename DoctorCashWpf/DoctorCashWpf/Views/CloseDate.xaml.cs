@@ -56,35 +56,39 @@ namespace DoctorCashWpf.Views
                 txtbox.Text = 0.ToString();
             }
 
-            if (Convert.ToInt32(txtbox.Text) >= 0)
+            try
             {
-                switch (Operator)
+                if (Convert.ToInt32(txtbox.Text) >= 0)
                 {
-                    case (int)OPERATOR.SUM:
-                        txtbox.Text = (Convert.ToInt32(txtbox.Text) + 1).ToString();
-                        break;
+                    switch (Operator)
+                    {
+                        case (int)OPERATOR.SUM:
+                            txtbox.Text = (Convert.ToInt32(txtbox.Text) + 1).ToString();
+                            break;
 
-                    case (int)OPERATOR.REMOVE:
-                        txtbox.Text = (Convert.ToInt32(txtbox.Text) - 1).ToString();
-                        break;
+                        case (int)OPERATOR.REMOVE:
+                            txtbox.Text = (Convert.ToInt32(txtbox.Text) - 1).ToString();
+                            break;
 
-                    case (int)OPERATOR.EQUALITY:
-                        break;
+                        case (int)OPERATOR.EQUALITY:
+                            break;
+                    }
+
+                    label.Text = (Convert.ToInt32(txtbox.Text) * typeBills).ToString();
+                    label = moneyComponent.convertToMoneyFormat(label).labelComponent;
+
+                    txtbox.Text = txtbox.Text;
+
+                    if (txtbox.Text == 0.ToString())
+                    {
+                        txtbox.Text = "";
+                    }
+
+                    getTotalCash();
                 }
-
-                label.Text = (Convert.ToInt32(txtbox.Text) * typeBills).ToString();
-                label = moneyComponent.convertToMoneyFormat(label).labelComponent;
-
-                txtbox.Text = txtbox.Text;
-
-                if (txtbox.Text == 0.ToString())
-                {
-                    txtbox.Text = "";
-                }
-
-                getTotalCash();
             }
-            else
+            // TODO: Temperal: Bad practice exceptions should be more specific
+            catch (Exception e)
             {
                 txtbox.Text = "";
                 label= moneyComponent.getMoneyFormatInZero(label);
