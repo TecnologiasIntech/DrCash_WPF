@@ -68,8 +68,8 @@
             <Grid Margin="30">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="291*" />
-                    <ColumnDefinition Width="134*"/>
+                    <ColumnDefinition Width="280*" />
+                    <ColumnDefinition Width="130*"/>
                     <ColumnDefinition Width="315*"/>
                 </Grid.ColumnDefinitions>
 
@@ -202,20 +202,20 @@
 
                 <!--#region Total-->
 
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="Total" FontFamily="Roboto" HorizontalAlignment="Center"  FontSize="18" FontWeight="Bold" Foreground="#FF666666" Margin="55,0,39,0" Width="40"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Total" FontFamily="Roboto" HorizontalAlignment="Center"  FontSize="18" FontWeight="Bold" Foreground="#FF666666"/>
 
                 <TextBlock x:Name="label_bills100" Grid.Column="1" Grid.Row="1"
-                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24"/>
                 <TextBlock x:Name="label_bills50" Grid.Column="1" Grid.Row="2"
-                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24"/>
                 <TextBlock x:Name="label_bills20" Grid.Column="1" Grid.Row="3"
-                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24"/>
                 <TextBlock x:Name="label_bills10" Grid.Column="1" Grid.Row="4"
-                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24"/>
                 <TextBlock x:Name="label_bills5" Grid.Column="1" Grid.Row="5"
-                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24"/>
                 <TextBlock x:Name="label_bills1" Grid.Column="1" Grid.Row="6"
-                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24" Margin="51,20,37,20" Width="46"/>
+                           Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="#FF666666" Height="24"/>
 
                 <!--#endregion-->
 
