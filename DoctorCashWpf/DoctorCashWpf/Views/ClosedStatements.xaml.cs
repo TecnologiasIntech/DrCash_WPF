@@ -28,11 +28,9 @@ namespace DoctorCashWpf.Views
         public int id=-1;
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            double charged = 0, cash = 0, credit = 0, check = 0, change = 0;
-            //var dato = dataGridViewClosedStatement.SelectedItem;
+            double charged = 0, cash = 0, credit = 0, check = 0, change = 0;            
             DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
-            DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];            
-            //dataClear();
+            DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];                        
             id = Convert.ToInt32(item.Row.ItemArray[0]);
             var registerID = fila["clt_reg_RegisterID"];
             var DateOfSelection = fila["clt_Datetime"];
@@ -59,21 +57,13 @@ namespace DoctorCashWpf.Views
             txt_initialCash.Text = transaction.getInitialCashbyRegisterID(registerID.ToString(), DateOfSelection.ToString()).ToString();
             cash = cash - change;
             moneyService.convertToMoneyFormat(txt_initialCash);
-            txt_cash.Text = cash.ToString();
-            moneyService.convertToMoneyFormat(txt_cash);
-            txt_credit.Text = credit.ToString();
-            moneyService.convertToMoneyFormat(txt_credit);
-            txt_check.Text =  check.ToString();
-            moneyService.convertToMoneyFormat(txt_check);
-            txt_amount.Text = charged.ToString();
-            moneyService.convertToMoneyFormat(txt_amount);
-
-            txt_cash2.Text =  cash.ToString();
-            moneyService.convertToMoneyFormat(txt_cash2);
-            txt_credit2.Text = credit.ToString();
-            moneyService.convertToMoneyFormat(txt_credit2);
-            txt_check2.Text = check.ToString();
-            moneyService.convertToMoneyFormat(txt_check2);
+            txt_cash.Text = moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;            
+            txt_credit.Text = moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;            
+            txt_check.Text = moneyService.convertToMoneyFormat(check.ToString()).txtComponent;
+            txt_amount.Text = moneyService.convertToMoneyFormat(charged.ToString()).txtComponent;
+            txt_cash2.Text =moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;
+            txt_credit2.Text =moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;
+            txt_check2.Text =moneyService.convertToMoneyFormat(check.ToString()).txtComponent;
 
             dt.Rows.Add("Total´s", charged, cash, credit, check, change);
             
@@ -98,17 +88,12 @@ namespace DoctorCashWpf.Views
             }
             else
             {
-                var items = new log();
-                items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = date.getCurrentDate();
-                items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Closed Statement, Search Data: Transaction Number= " + txtbox_ID.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
-                serviceslog.CreateLog(items);
+                setLog();
 
                 double initial_cash = 0, amount = 0, cash = 0, credit = 0, check = 0, balance = 0, cien = 0, cincuenta = 0, veinte = 0, diez = 0, cinco = 0, uno = 0;
                 var response = getreport.getCloseTransactions(txtbox_ID.Text, fromdate.Text, todate.Text);
                 var list = response.list;
-                transactionsData = response.dataTable;
-                //dataClear();
+                transactionsData = response.dataTable;                
                 dataGridViewClosedStatement.ItemsSource = null;
                 
                 if (transactionsData.Rows.Count == 0)
@@ -126,17 +111,13 @@ namespace DoctorCashWpf.Views
                     for (int i = 0; i < transactionsData.Rows.Count; i++)
                     {
                         DataRow filas = transactionsData.Rows[i];
-
                         dt.Rows.Add(filas["clt_closed_ID"], filas["clt_reg_RegisterID"], filas["clt_Username"], filas["clt_Datetime"]);
 
                         initial_cash += list[i].clt_initial_cash;
-
                         amount += list[i].clt_checks_amount + list[i].clt_credits_amount;
-
                         cash += list[i].clt_total_cash;
                         credit += list[i].clt_total_credit;
                         check += list[i].clt_total_check;
-
                         cien += list[i].clt_100_bills;
                         cincuenta += list[i].clt_50_bills;
                         veinte += list[i].clt_20_bills;
@@ -144,11 +125,9 @@ namespace DoctorCashWpf.Views
                         cinco += list[i].clt_5_bills;
                         uno += list[i].clt_1_bills;
                         balance += list[i].clt_balance;
-
-
                     }
-                    txt_initialCash.Text = moneyService.convertToMoneyFormat(initial_cash.ToString()).txtComponent;
 
+                    txt_initialCash.Text = moneyService.convertToMoneyFormat(initial_cash.ToString()).txtComponent;
                     txt_cash.Text = moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;
                     txt_credit.Text = moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;
                     txt_check.Text = moneyService.convertToMoneyFormat(check.ToString()).txtComponent;
@@ -160,7 +139,6 @@ namespace DoctorCashWpf.Views
                     txt_cincos.Text = moneyService.convertToMoneyFormat(cinco.ToString()).txtComponent;
                     txt_unos.Text = moneyService.convertToMoneyFormat(uno.ToString()).txtComponent;
                     txt_balance.Text = moneyService.convertToMoneyFormat(balance.ToString()).txtComponent;
-
                     txt_cash2.Text = moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;
                     txt_credit2.Text = moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;
                     txt_check2.Text = moneyService.convertToMoneyFormat(check.ToString()).txtComponent;
@@ -183,7 +161,6 @@ namespace DoctorCashWpf.Views
             txt_cash = moneyService.getMoneyFormatInZero(txt_cash);
             txt_credit = moneyService.getMoneyFormatInZero(txt_credit);
             txt_check = moneyService.getMoneyFormatInZero(txt_check);
-
             txt_ciens = moneyService.getMoneyFormatInZero(txt_ciens);
             txt_cincuentas = moneyService.getMoneyFormatInZero(txt_cincuentas);
             txt_veintes = moneyService.getMoneyFormatInZero(txt_veintes);
@@ -191,13 +168,21 @@ namespace DoctorCashWpf.Views
             txt_cincos = moneyService.getMoneyFormatInZero(txt_cincos);
             txt_unos = moneyService.getMoneyFormatInZero(txt_unos);
             txt_balance = moneyService.getMoneyFormatInZero(txt_balance);
-
             txt_cash2 = moneyService.getMoneyFormatInZero(txt_cash2);
             txt_credit2 = moneyService.getMoneyFormatInZero(txt_credit2);
             txt_check2 = moneyService.getMoneyFormatInZero(txt_check2);
 
             dataGridViewClosedStatement.ItemsSource = null;
             dataGridViewStatment.ItemsSource = null;
+        }
+
+        private void setLog()
+        {
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = date.getCurrentDate();
+            items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Closed Statement, Search Data: Transaction Number= " + txtbox_ID.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
+            serviceslog.CreateLog(items);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
