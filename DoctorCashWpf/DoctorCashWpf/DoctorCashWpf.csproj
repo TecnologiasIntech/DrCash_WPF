@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Custom-Icon-Cash.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.12\lib\itextsharp.dll</HintPath>
@@ -208,6 +211,9 @@
     <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings_General.xaml.cs">
+      <DependentUpon>Settings_General.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Settings_Register.xaml.cs">
       <DependentUpon>Settings_Register.xaml</DependentUpon>
     </Compile>
@@ -332,6 +338,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Settings_General.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Settings_Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -398,12 +408,13 @@
     <Resource Include="Images\Refund_96px.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Chartridge046_small.jpg" />
-    <Resource Include="Resources\Contact.png" />
-    <Resource Include="Resources\favicon.ico" />
-    <Resource Include="Resources\ms-icon-310x310.png" />
-    <Resource Include="Resources\ProfilePic.jpg" />
+    <Resource Include="coins.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Custom-Icon-Cash.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Custom-Icon-Cash.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
