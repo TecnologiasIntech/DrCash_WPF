@@ -14,6 +14,14 @@ namespace DoctorCashWpf.Views
     /// </summary>
     public partial class CloseDate : UserControl
     {
+        private transactionService transaction = new transactionService();
+        private MoneyFormatService moneyComponent = new MoneyFormatService();
+        private BrushConverter brushConverter = new BrushConverter();
+        private logService serviceslog = new logService();
+        private sqlQueryService createQuery = new sqlQueryService();
+        private createItemsForListService createItem = new createItemsForListService();
+        private dateService date = new dateService();
+
         public CloseDate()
         {
             InitializeComponent();
@@ -23,14 +31,6 @@ namespace DoctorCashWpf.Views
             getCurrentTransactions();
 
         }
-
-        private transactionService transaction = new transactionService();
-        private MoneyFormatService moneyComponent = new MoneyFormatService();
-        private BrushConverter brushConverter = new BrushConverter();
-        private logService serviceslog = new logService();
-        private sqlQueryService createQuery = new sqlQueryService();
-        private createItemsForListService createItem = new createItemsForListService();
-        private dateService date = new dateService();
 
         private void setValuesInitials()
         {
@@ -170,50 +170,7 @@ namespace DoctorCashWpf.Views
             moneyComponent.AddFloat(label_totalRegistered);
             moneyComponent.AddFloat(label_short);
         }
-
-       /* private void isFloat(TextBox txtbox)
-        {
-            if (!txtbox.Text.Contains('.'))
-            {
-                txtbox.Text = txtbox.Text + ".00";
-            }
-        }
-
-        private void isFloat(TextBlock label)
-        {
-            if (!label.Text.Contains('.'))
-            {
-                label.Text = label.Text + ".00";
-            }
-        }
-
-        private void verifyTxtBox(TextBox txtBox)
-        {
-            if (txtBox.Text[0] != '$')
-            {
-                if (Char.IsNumber(txtBox.Text[0]))
-                {
-
-                    txtBox.Text = "$" + txtBox.Text;
-                }
-                else
-                {
-                    txtBox.Text = "$0.00";
-                }
-            }
-            else
-            {
-                if (!Char.IsNumber(txtBox.Text.Remove(0, 1)[0]))
-                {
-                    txtBox.Text = "$0.00";
-                }
-            }
-
-            getCurrentTransactions();
-
-            isFloat(txtBox);
-        }*/
-
+        
         private void clearInputs()
         {
             labelerror.Content = "";
@@ -239,73 +196,73 @@ namespace DoctorCashWpf.Views
             plusOrLess(textbox_bills1, label_bills1, (int)OPERATOR.EQUALITY, 0);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_Subtract_100_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.REMOVE, 100);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_Add_100_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.SUM, 100);
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_Subtract_50_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.REMOVE, 50);
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void Button_Click_Add_50_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.SUM, 50);
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void Button_Click_Subtract_20_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills20, label_bills20, (int)OPERATOR.REMOVE, 20);
         }
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
+        private void Button_Click_Add_20_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills20, label_bills20, (int)OPERATOR.SUM, 20);
         }
 
-        private void Button_Click_6(object sender, RoutedEventArgs e)
+        private void Button_Click_Subtract_10_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills10, label_bills10, (int)OPERATOR.REMOVE, 10);
         }
 
-        private void Button_Click_7(object sender, RoutedEventArgs e)
+        private void Button_Click_Add_10_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills10, label_bills10, (int)OPERATOR.SUM, 10);
         }
 
-        private void Button_Click_8(object sender, RoutedEventArgs e)
+        private void Button_Click_Subtract_5_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills5, label_bills5, (int)OPERATOR.REMOVE, 5);
         }
 
-        private void Button_Click_9(object sender, RoutedEventArgs e)
+        private void Button_Click_Add_5_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills5, label_bills5, (int)OPERATOR.SUM, 5);
         }
 
-        private void Button_Click_10(object sender, RoutedEventArgs e)
+        private void Button_Click_Subtract_1_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills1, label_bills1, (int)OPERATOR.REMOVE, 1);
         }
 
-        private void Button_Click_11(object sender, RoutedEventArgs e)
+        private void Button_Click_Add_1_Dollar(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             plusOrLess(textbox_bills1, label_bills1, (int)OPERATOR.SUM, 1);
@@ -326,7 +283,7 @@ namespace DoctorCashWpf.Views
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.EQUALITY, 100);
         }
 
-        private void Button_Click_12(object sender, RoutedEventArgs e)
+        private void Button_Click_Clear(object sender, RoutedEventArgs e)
         {
             clearInputs();
         }
@@ -507,11 +464,6 @@ namespace DoctorCashWpf.Views
             textbox_bills1.SelectAll();
         }
 
-        private void textbox_bills100_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void applydesign(TextBox value)
         {            
             value.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
@@ -519,7 +471,7 @@ namespace DoctorCashWpf.Views
             labelerror.Content = "Complete Field";
         }
 
-        private void Button_Click_13(object sender, RoutedEventArgs e)
+        private void Button_Click_Print(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
             var clDate = new closeDate();
@@ -594,7 +546,7 @@ namespace DoctorCashWpf.Views
             }            
         }
 
-        private void Button_Click_14(object sender, RoutedEventArgs e)
+        private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
@@ -602,5 +554,6 @@ namespace DoctorCashWpf.Views
             items.log_Actions = "Close Date Cancel by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName;
             serviceslog.CreateLog(items);
         }
+
     }
 }
