@@ -89,7 +89,7 @@
                 <!--Bills 100's -->
                 <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000" Click="Button_Click">
+                    <Button Background="#cc0000" Click="Button_Click_Subtract_100_Dollar">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
@@ -97,9 +97,9 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills100" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" GotFocus="textbox_bills100_GotFocus" />
+                                   materialDesign:HintAssist.Hint="100's" HorizontalContentAlignment="Center" KeyUp="textbox_bills100_KeyUp" LostFocus="textbox_bills100_LostFocus" GotFocus="textbox_bills100_GotFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f " Click="Button_Click_1">
+                    <Button Background="#6aa84f " Click="Button_Click_Add_100_Dollar">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
 
@@ -108,7 +108,7 @@
                 <!--Bills 50's-->
                 <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000" Click="Button_Click_2">
+                    <Button Background="#cc0000" Click="Button_Click_Subtract_50_Dollar">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
@@ -116,9 +116,9 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills50" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="50's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills50_KeyUp" LostFocus="textbox_bills50_LostFocus" GotFocus="textbox_bills50_GotFocus" />
+                                   materialDesign:HintAssist.Hint="50's" HorizontalContentAlignment="Center" KeyUp="textbox_bills50_KeyUp" LostFocus="textbox_bills50_LostFocus" GotFocus="textbox_bills50_GotFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f " Click="Button_Click_3">
+                    <Button Background="#6aa84f " Click="Button_Click_Add_50_Dollar">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
@@ -126,7 +126,7 @@
                 <!--Bills 20's-->
                 <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000" Click="Button_Click_4">
+                    <Button Background="#cc0000" Click="Button_Click_Subtract_20_Dollar">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
@@ -134,9 +134,9 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills20" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="20's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills20_KeyUp" LostFocus="textbox_bills20_LostFocus" GotFocus="textbox_bills20_GotFocus" />
+                                   materialDesign:HintAssist.Hint="20's" HorizontalContentAlignment="Center" KeyUp="textbox_bills20_KeyUp" LostFocus="textbox_bills20_LostFocus" GotFocus="textbox_bills20_GotFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f " Click="Button_Click_5">
+                    <Button Background="#6aa84f " Click="Button_Click_Add_20_Dollar">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
@@ -144,7 +144,7 @@
                 <!--Bills 10's-->
                 <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000" Click="Button_Click_6">
+                    <Button Background="#cc0000" Click="Button_Click_Subtract_10_Dollar">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
@@ -152,9 +152,9 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills10" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="10's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills10_KeyUp" LostFocus="textbox_bills10_LostFocus" GotFocus="textbox_bills10_GotFocus" />
+                                   materialDesign:HintAssist.Hint="10's" HorizontalContentAlignment="Center" KeyUp="textbox_bills10_KeyUp" LostFocus="textbox_bills10_LostFocus" GotFocus="textbox_bills10_GotFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f " Click="Button_Click_7">
+                    <Button Background="#6aa84f " Click="Button_Click_Add_10_Dollar">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
@@ -162,7 +162,7 @@
                 <!--Bills 5's-->
                 <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000" Click="Button_Click_8">
+                    <Button Background="#cc0000" Click="Button_Click_Subtract_5_Dollar">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
@@ -170,9 +170,9 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills5" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="5's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills5_KeyUp" LostFocus="textbox_bills5_LostFocus" GotFocus="textbox_bills5_GotFocus" />
+                                   materialDesign:HintAssist.Hint="5's" HorizontalContentAlignment="Center" KeyUp="textbox_bills5_KeyUp" LostFocus="textbox_bills5_LostFocus" GotFocus="textbox_bills5_GotFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f " Click="Button_Click_9">
+                    <Button Background="#6aa84f " Click="Button_Click_Add_5_Dollar">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
@@ -180,7 +180,7 @@
                 <!--Bills 1's-->
                 <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="42,0,43,0" Width="206">
                     <!--Subtract-->
-                    <Button Background="#cc0000" Click="Button_Click_10">
+                    <Button Background="#cc0000" Click="Button_Click_Subtract_1_Dollar">
                         <materialDesign:PackIcon Kind="Minus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Button>
 
@@ -188,9 +188,9 @@
                     <!--Input-->
                     <TextBox x:Name="textbox_bills1" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="5 16 5 0"
                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                   materialDesign:HintAssist.Hint="1's" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_bills1_KeyUp" LostFocus="textbox_bills1_LostFocus" GotFocus="textbox_bills1_GotFocus" />
+                                   materialDesign:HintAssist.Hint="1's" HorizontalContentAlignment="Center" KeyUp="textbox_bills1_KeyUp" LostFocus="textbox_bills1_LostFocus" GotFocus="textbox_bills1_GotFocus" />
                     <!--Addition-->
-                    <Button Background="#6aa84f " Click="Button_Click_11">
+                    <Button Background="#6aa84f " Click="Button_Click_Add_1_Dollar">
                         <materialDesign:PackIcon Kind="Plus" Foreground="White"  VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
                     </Button>
                 </StackPanel>
@@ -252,19 +252,19 @@
                     <!-- Credit-->
                     <TextBlock Grid.Column="0"  Grid.Row="0" Text="Credit: " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
                     <TextBox x:Name="textbox_credit" Text="0" Grid.Column="1"  Grid.Row="0" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
-                                   materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_credit_KeyUp" LostFocus="textbox_credit_LostFocus" GotFocus="textbox_credit_GotFocus" />
+                                   materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" KeyUp="textbox_credit_KeyUp" LostFocus="textbox_credit_LostFocus" GotFocus="textbox_credit_GotFocus" />
 
 
                     <!-- Check-->
                     <TextBlock Grid.Column="0"  Grid.Row="1" Text="Check:  " Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
                     <TextBox x:Name="textbox_check" Text="0" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
-                                   materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_check_KeyUp" LostFocus="textbox_check_LostFocus" GotFocus="textbox_check_GotFocus" />
+                                   materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" KeyUp="textbox_check_KeyUp" LostFocus="textbox_check_LostFocus" GotFocus="textbox_check_GotFocus" />
 
 
                     <!-- Check #-->
                     <TextBlock Grid.Column="0"  Grid.Row="2" Text="Left in Register" Foreground="#FF666666  " FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Roboto"/>
                     <TextBox x:Name="textbox_leftInRegister" Text="0" Grid.Column="1"  Grid.Row="2" VerticalAlignment="Top"  Width="100" HorizontalAlignment="Center" Margin="5 0 5 0"
-                                   materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" TextChanged="textbox_bills100_TextChanged" KeyUp="textbox_leftRegister_KeyUp" LostFocus="textbox_leftRegister_LostFocus" GotFocus="textbox_leftInRegister_GotFocus" />
+                                   materialDesign:HintAssist.Hint="$0.00" HorizontalContentAlignment="Center" KeyUp="textbox_leftRegister_KeyUp" LostFocus="textbox_leftRegister_LostFocus" GotFocus="textbox_leftInRegister_GotFocus" />
 
 
                     <!-- Total Entered-->
@@ -309,16 +309,16 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Background="Transparent" BorderBrush="Transparent"
-                            Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_12">
+                            Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_Clear">
                         <TextBlock Text="Clear" Foreground="#e06666  " FontSize="18"/>
                     </Button>
 
-                    <Button Click="Button_Click_14" Grid.Column="1" Margin="10 0 5 0" Background="Transparent" BorderBrush="Transparent"
+                    <Button Click="Button_Click_Cancel" Grid.Column="1" Margin="10 0 5 0" Background="Transparent" BorderBrush="Transparent"
                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
                         <TextBlock Text="Cancel" Foreground="#666666 " FontSize="18"/>
                     </Button>
                     <Button Grid.Column="2" Margin="5 0 10 0" Background="Transparent" BorderBrush="Transparent"
-                            Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_13">
+                            Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_Print">
                         <TextBlock Text="Print" Foreground="#6aa84f " FontSize="18"/>
                     </Button>
                 </Grid>
