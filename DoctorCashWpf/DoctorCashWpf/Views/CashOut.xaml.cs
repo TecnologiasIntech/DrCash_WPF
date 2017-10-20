@@ -45,13 +45,15 @@ namespace DoctorCashWpf.Views
                 txtbox.Text = "0";
             }
 
-            if (Convert.ToInt32(txtbox.Text) >= 0)
+            try
             {
-                switch (Operator)
+                if (Convert.ToInt32(txtbox.Text) >= 0)
                 {
-                    case (int)OPERATOR.SUM:
-                        txtbox.Text = (Convert.ToInt32(txtbox.Text) + 1).ToString();
-                        break;
+                    switch (Operator)
+                    {
+                        case (int)OPERATOR.SUM:
+                            txtbox.Text = (Convert.ToInt32(txtbox.Text) + 1).ToString();
+                            break;
 
                     case (int)OPERATOR.REMOVE:
                         txtbox.Text = (Convert.ToInt32(txtbox.Text) - 1).ToString();
@@ -66,9 +68,11 @@ namespace DoctorCashWpf.Views
                     txtbox.Text = "";
                 }
 
-                getTotalCash();
+                    getTotalCash();
+                }
             }
-            else
+            // TODO: Tempral fix for bad practice
+            catch (Exception e)
             {
                 txtbox.Text = "";
                 label = moneyFormatService.getMoneyFormatInZero(label);

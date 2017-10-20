@@ -22,19 +22,33 @@ namespace DoctorCashWpf.Views
         private logService serviceslog = new logService();
         private dateService date = new dateService();
 
-        private  void authentification()
+        private void setLog(user userData)
         {
-            var userData = user.authentication(txtbox_username.Text, txtbox_password.Password.ToString());
-
-            //En esta parte se verificara si es admin o supervisor
             if (userData != null)
-            {                
-
+            {
                 var items = new log();
                 items.log_Username = userData.usr_Username;
                 items.log_DateTime = date.getCurrentDate();
                 items.log_Actions = "Loging of missing user: " + userData.usr_FirstName + " " + userData.usr_LastName + ", Level of user: " + userData.usr_SecurityLevel;
                 serviceslog.CreateLog(items);
+            }
+            else
+            {
+                var items = new log();
+                items.log_Username = userData.usr_Username;
+                items.log_DateTime = date.getCurrentDate();
+                items.log_Actions = "Intent To Login Not Authorized, Data to Access: UserName= " + txtbox_username.Text + ", PassWord= " + txtbox_password.Password.ToString();
+                serviceslog.CreateLog(items);
+            }
+        }
+
+        private  void authentification()
+        {
+            var userData = user.authentication(txtbox_username.Text, txtbox_password.Password.ToString());
+            if (userData != null)
+            {
+
+                setLog(userData);
 
                 MissingUser.isMissing = false;
                 userInformation.user = userData;
@@ -46,11 +60,7 @@ namespace DoctorCashWpf.Views
                 txtbox_password.Focus();
                 txtbox_password.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
 
-                var items = new log();
-                items.log_Username = userData.usr_Username;
-                items.log_DateTime = date.getCurrentDate();
-                items.log_Actions = "Intent To Login Not Authorized, Data to Access: UserName= " + txtbox_username.Text + ", PassWord= " + txtbox_password.Password.ToString();
-                serviceslog.CreateLog(items);
+                setLog(userData);
 
             }
         }
@@ -60,7 +70,6 @@ namespace DoctorCashWpf.Views
             if (txtbox_password.Password.ToString() == "")
             {
                 txtbox_password.Focus();
-
                 txtbox_password.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
                 labelError.Content = "Complete the fields marked";
             }
