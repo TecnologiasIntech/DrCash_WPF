@@ -19,28 +19,24 @@ namespace DoctorCashWpf.Views
             txtbox_amountRefund = moneyComponent.getMoneyFormatInZero(txtbox_amountRefund);
         }
 
-        private transactionService transaction = new transactionService();
+        private transactionService transactionservice = new transactionService();
         private transaction transactionInfo = new transaction();
         private MoneyFormatService moneyComponent = new MoneyFormatService();
         private logService serviceslog = new logService();
-        private dateService date = new dateService();
+        private dateService dateservice = new dateService();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if(txtbox_transactionNumber.Text != "")
             {
-                transactionInfo = transaction.getTransactionByTrnID(txtbox_transactionNumber.Text);
+                transactionInfo = transactionservice.getTransactionByTrnID(txtbox_transactionNumber.Text);
 
                 label_amountCharged.Text = transactionInfo.amountCharged.ToString();
                 txtbox_log.Text = getTransactionComment(transactionInfo);
 
                 moneyComponent.convertToMoneyFormat(label_amountCharged);
 
-                var items = new log();
-                items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = date.getCurrentDate();
-                items.log_Actions = "Search Information in RefundTotal with Transaction Number: "+txtbox_transactionNumber.Text+" by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
-                serviceslog.CreateLog(items);
+                setLog("Search");
             }
         }
 
@@ -84,6 +80,24 @@ namespace DoctorCashWpf.Views
             return trn.cash + trn.credit + trn.check;
         }
 
+        private void setLog(string Value)
+        {
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = dateservice.getCurrentDate();
+
+            if (Value == "Print")
+            {                
+                items.log_Actions = "Print Information in RefundTotal with Transaction Number: " + txtbox_transactionNumber.Text + " by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                serviceslog.CreateLog(items);
+            }
+            if (Value == "Search")
+            {
+                items.log_Actions = "Search Information in RefundTotal with Transaction Number: " + txtbox_transactionNumber.Text + " by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                serviceslog.CreateLog(items);
+            }
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if(txtbox_amountRefund.Text != "")
@@ -95,13 +109,9 @@ namespace DoctorCashWpf.Views
                 trn.type = (int)TRANSACTIONTYPE.REFOUND;
                 trn.userId = userInformation.user.usr_ID;
 
-                transaction.setTransactionRefund(trn);
+                transactionservice.setTransactionRefund(trn);
 
-                var items = new log();
-                items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = date.getCurrentDate();
-                items.log_Actions = "Print Information in RefundTotal with Transaction Number: " + txtbox_transactionNumber.Text + " by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
-                serviceslog.CreateLog(items);
+                setLog("Print");
 
                 Print printer = new Print();
                 printer.printRefund(trn);
@@ -144,4 +154,3 @@ namespace DoctorCashWpf.Views
         }
     }
 }
-// refundTotal
