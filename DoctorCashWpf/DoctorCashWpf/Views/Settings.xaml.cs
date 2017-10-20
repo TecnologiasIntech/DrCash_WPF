@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using DoctorCashWpf.Views;
+using MaterialDesignThemes.Wpf;
+using System.Windows.Controls;
 
 namespace DoctorCashWpf
 {
@@ -11,5 +13,13 @@ namespace DoctorCashWpf
         {
             InitializeComponent();
         }
+
+        private async void Button_Click_Register(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var DailyTransacions = new Settings_Register();
+
+            await DialogHost.Show(DailyTransacions, "RootDialog");
+        }
+
     }
 }
