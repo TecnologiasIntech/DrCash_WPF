@@ -4,25 +4,69 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DoctorCashWpf"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="800" d:DesignWidth="800">
+
     <StackPanel>
-        <TextBlock Text="Reports"/>
-        <Button Click="Button_Click">
-            Daily Transaction
-        </Button>
 
-        <Button Click="Button_Click_1">
-            Closed Statements
-        </Button>
+        <TextBlock FontFamily="Roboto" FontSize="48">Reports</TextBlock>
+        
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--<TextBlock Text="Reports"/>-->
 
 
-        <Button Click="Button_Click_2">
-            Log
-        </Button>
+            <Grid Grid.Column="0" Grid.Row="0" Margin="30">
 
-        <Button Click="Button_Click_3">
-            Recepit
-        </Button>
+                    <Button Click="Button_Click_Daily_Transacions" Height="Auto" Background="#6aa84f" Padding="30">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Transfer" Foreground="White" Height="50" Width="50" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+                        <TextBlock FontSize="18">Daily Transactions</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+
+            <Grid Grid.Column="0" Grid.Row="1" Margin="30">
+                    <Button  Click="Button_Click_Closed_Statements" Height="Auto" Background="#597eaa" Padding="30">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="WindowClosed" Foreground="White" Height="50" Width="50" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+                        <TextBlock FontSize="18">Closed Statements</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0" Margin="30">
+                    <Button Click="Button_Click_Log" Height="Auto" Background="#f1c232" Padding="30">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="LoginVariant" Foreground="White" Height="50" Width="50" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+                        <TextBlock FontSize="18">Log</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Column="2" Grid.Row="0" Margin="30">
+                    <Button  Click="Button_Click_View_Receipt" Height="Auto"  Background="#cc0000" Padding="30">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Receipt" Foreground="White" Height="50" Width="50" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+                        <TextBlock FontSize="18">Receipt</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Grid>
+
     </StackPanel>
+
 </UserControl>

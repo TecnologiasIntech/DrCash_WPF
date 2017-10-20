@@ -15,26 +15,26 @@ namespace DoctorCashWpf
             InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click_Daily_Transacions(object sender, RoutedEventArgs e)
         {
             var DailyTransacions = new DailyTransactions(); 
 
             await DialogHost.Show(DailyTransacions, "RootDialog");
         }
 
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        private async void Button_Click_Closed_Statements(object sender, RoutedEventArgs e)
         {
             var ClosedStatements = new ClosedStatements();
             await DialogHost.Show(ClosedStatements, "RootDialog");
         }
 
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void Button_Click_Log(object sender, RoutedEventArgs e)
         {
             var Log = new Log();
             await DialogHost.Show(Log, "RootDialog");
         }
 
-        private async void Button_Click_3(object sender, RoutedEventArgs e)
+        private async void Button_Click_View_Receipt(object sender, RoutedEventArgs e)
         {
             var ViewReceipt = new ViewReceipt();
             await DialogHost.Show(ViewReceipt, "RootDialog");
@@ -45,7 +45,7 @@ namespace DoctorCashWpf
 
                 cashInUpdate.isUpdate = false;
 
-                Button_Click_3(null, null);
+                Button_Click_View_Receipt(null, null);
             }
         }
     }
