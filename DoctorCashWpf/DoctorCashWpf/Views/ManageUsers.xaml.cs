@@ -16,23 +16,23 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
 
-            getUsers();
+            getUsersAndLoadUserTable();
         }
 
-        private userService user = new userService();
+        private userService userService = new userService();
         private BrushConverter brushConverter = new BrushConverter();
-        private logService serviceslog = new logService();
+        private logService logService = new logService();
         private int userID;
-        private DataTable usersData;
-        private dateService date = new dateService();
+        private DataTable usersTable;
+        private dateService dateService = new dateService();
 
-        int uID;
-        string firstName;
-        string lastName;
-        string email;
-        bool passwordReset;
-        bool activeAcount;
-        string security,security1;
+        int userIdLog;
+        string firstNameLog;
+        string lastNameLog;
+        string emailLog;
+        bool passwordResetLog;
+        bool activeAcountLog;
+        string securityLevel, securityLevelLog;
 
         private void Apply_Changes_Click(object sender, RoutedEventArgs e)
         {
@@ -46,18 +46,18 @@ namespace DoctorCashWpf.Views
             items.usr_Email = txtbox_email.Text;
             items.usr_ID = userID;
 
-            user.updateUser(items);
+            userService.updateUser(items);
 
-            getUsers();
+            getUsersAndLoadUserTable();
 
             label_applyChanges.Foreground = (Brush)brushConverter.ConvertFrom("#FFFFFF");
             Apply_Changes.Background = (Brush)brushConverter.ConvertFrom("#27ae60");
 
             var item = new log();
             item.log_Username = userInformation.user.usr_Username;
-            item.log_DateTime = date.getCurrentDate();
-            item.log_Actions = "User Update Before: ( "+ uID+", "+firstName+", "+lastName+", "+passwordReset.ToString()+", "+activeAcount.ToString()+", "+security1+", "+email+" ), Now: ( "+items.usr_ID+", "+items.usr_FirstName+", "+items.usr_LastName+", "+items.usr_Password+", "+items.usr_ActiveAccount+", "+items.usr_SecurityLevel+" ) by UserName= " + userInformation.user.usr_Username + ", Full Name= " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in ManageUser";
-            serviceslog.CreateLog(item);
+            item.log_DateTime = dateService.getCurrentDate();
+            item.log_Actions = "User Update Before: ( " + userIdLog + ", " + firstNameLog + ", " + lastNameLog + ", " + passwordResetLog.ToString() + ", " + activeAcountLog.ToString() + ", " + securityLevelLog + ", " + emailLog + " ), Now: ( " + items.usr_ID + ", " + items.usr_FirstName + ", " + items.usr_LastName + ", " + items.usr_Password + ", " + items.usr_ActiveAccount + ", " + items.usr_SecurityLevel + " ) by UserName= " + userInformation.user.usr_Username + ", Full Name= " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in ManageUser";
+            logService.CreateLog(item);
 
         }
 
@@ -66,7 +66,8 @@ namespace DoctorCashWpf.Views
             if (radio_user.IsChecked == true)
             {
                 return (int)SECURIRYLEVEL.USER;
-            }else if(radio_super.IsChecked == true)
+            }
+            else if (radio_super.IsChecked == true)
             {
                 return (int)SECURIRYLEVEL.SUPERVISOR;
             }
@@ -76,18 +77,18 @@ namespace DoctorCashWpf.Views
             }
         }
 
-        private void getUsers()
+        private void getUsersAndLoadUserTable()
         {
-            usersData = user.getUsers();
+            usersTable = userService.getUsers();
 
             grid_users.ItemsSource = null;
 
             DataTable dt = new DataTable();
             dt.Columns.Add("Username");
 
-            for (int i = 0; i < usersData.Rows.Count; i++)
+            for (int i = 0; i < usersTable.Rows.Count; i++)
             {
-                DataRow filas = usersData.Rows[i];
+                DataRow filas = usersTable.Rows[i];
 
                 dt.Rows.Add(filas["usr_Username"]);
             }
@@ -97,25 +98,25 @@ namespace DoctorCashWpf.Views
             grid_users.MaxHeight = 400;
         }
 
-        private void saveTemporalDataUser()
+        private void saveTemporalUserInfo()
         {
-            DataRow fila = usersData.Rows[grid_users.SelectedIndex];
+            DataRow fila = usersTable.Rows[grid_users.SelectedIndex];
 
-            uID = (int)fila["usr_ID"];
-            firstName = fila["usr_FirstName"].ToString();
-            lastName = fila["usr_LastName"].ToString();
-            email = (string)fila["usr_Email"];
-            passwordReset = (bool)fila["usr_PasswordReset"];
-            activeAcount = (bool)fila["usr_ActiveAccount"];
+            userIdLog = (int)fila["usr_ID"];
+            firstNameLog = fila["usr_FirstName"].ToString();
+            lastNameLog = fila["usr_LastName"].ToString();
+            emailLog = (string)fila["usr_Email"];
+            passwordResetLog = (bool)fila["usr_PasswordReset"];
+            activeAcountLog = (bool)fila["usr_ActiveAccount"];
             setSecurityLevel((int)fila["usr_SecurityLevel"]);
-            security1 = security;
+            securityLevelLog = securityLevel;
 
         }
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DataRow fila = usersData.Rows[grid_users.SelectedIndex];
-            saveTemporalDataUser();
+            DataRow fila = usersTable.Rows[grid_users.SelectedIndex];
+            saveTemporalUserInfo();
             userID = (int)fila["usr_ID"];
             txtbox_firstName.Text = fila["usr_FirstName"].ToString();
             txtbox_lastName.Text = fila["usr_LastName"].ToString();
@@ -135,24 +136,24 @@ namespace DoctorCashWpf.Views
             {
                 case (int)SECURIRYLEVEL.USER:
                     radio_user.IsChecked = true;
-                    security = "User";
+                    this.securityLevel = "User";
                     break;
 
                 case (int)SECURIRYLEVEL.SUPERVISOR:
                     radio_super.IsChecked = true;
-                    security = "Supervisor";
+                    this.securityLevel = "Supervisor";
                     break;
 
                 case (int)SECURIRYLEVEL.ADMINISTRATOR:
                     radio_admin.IsChecked = true;
-                    security = "Administrator";
+                    this.securityLevel = "Administrator";
                     break;
             }
         }
 
         private void txtbox_email_KeyUp(object sender, KeyEventArgs e)
         {
-            if (!txtbox_email.Text.Contains("@")||!txtbox_email.Text.Contains(".com"))
+            if (!txtbox_email.Text.Contains("@") || !txtbox_email.Text.Contains(".com"))
             {
                 labelerror.Content = "Does not match an email";
             }

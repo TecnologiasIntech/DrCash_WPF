@@ -26,7 +26,7 @@ namespace DoctorCashWpf.Views
 
         private reportService getreport = new reportService();
         private logService serviceslog = new logService();
-        private dateService date = new dateService();
+        private dateService dateService = new dateService();
         private int transactionID = -1;
 
         private void loadValuesOfSearch()
@@ -62,7 +62,7 @@ namespace DoctorCashWpf.Views
             {
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = DateTime.Now.ToString();
+                items.log_DateTime = dateService.getCurrentDate();
                 items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 
@@ -166,7 +166,7 @@ namespace DoctorCashWpf.Views
             {
                 var items = new log();
                 items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = date.getCurrentDate();
+                items.log_DateTime = dateService.getCurrentDate();
                 items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 
