@@ -21,20 +21,20 @@ namespace DoctorCashWpf.Views
             setInitialValues();
         }
 
-        MoneyFormatService moneyComponent = new MoneyFormatService();
+        MoneyFormatService moneyFormatService = new MoneyFormatService();
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
         private dateService date = new dateService();
 
         private void setInitialValues()
         {
-            moneyComponent.convertToMoneyFormat(label_totalCash);
-            moneyComponent.convertToMoneyFormat(label_1);
-            moneyComponent.convertToMoneyFormat(label_10);
-            moneyComponent.convertToMoneyFormat(label_20);
-            moneyComponent.convertToMoneyFormat(label_50);
-            moneyComponent.convertToMoneyFormat(label_100);
-            moneyComponent.convertToMoneyFormat(label_5);
+            moneyFormatService.convertToMoneyFormat(label_totalCash);
+            moneyFormatService.convertToMoneyFormat(label_1);
+            moneyFormatService.convertToMoneyFormat(label_10);
+            moneyFormatService.convertToMoneyFormat(label_20);
+            moneyFormatService.convertToMoneyFormat(label_50);
+            moneyFormatService.convertToMoneyFormat(label_100);
+            moneyFormatService.convertToMoneyFormat(label_5);
 
         }
 
@@ -42,7 +42,7 @@ namespace DoctorCashWpf.Views
         {
             if (txtbox.Text == "")
             {
-                txtbox.Text = 0.ToString();
+                txtbox.Text = "0";
             }
 
             try
@@ -55,23 +55,18 @@ namespace DoctorCashWpf.Views
                             txtbox.Text = (Convert.ToInt32(txtbox.Text) + 1).ToString();
                             break;
 
-                        case (int)OPERATOR.REMOVE:
-                            txtbox.Text = (Convert.ToInt32(txtbox.Text) - 1).ToString();
-                            break;
+                    case (int)OPERATOR.REMOVE:
+                        txtbox.Text = (Convert.ToInt32(txtbox.Text) - 1).ToString();
+                        break;
+                }
 
-                        case (int)OPERATOR.EQUALITY:
-                            break;
-                    }
+                label.Text = (Convert.ToInt32(txtbox.Text) * typeBills).ToString();
+                label = moneyFormatService.convertToMoneyFormat(label).labelComponent;
 
-                    label.Text = (Convert.ToInt32(txtbox.Text) * typeBills).ToString();
-                    label = moneyComponent.convertToMoneyFormat(label).labelComponent;
-
-                    txtbox.Text = txtbox.Text;
-
-                    if (txtbox.Text == 0.ToString())
-                    {
-                        txtbox.Text = "";
-                    }
+                if (txtbox.Text == "0")
+                {
+                    txtbox.Text = "";
+                }
 
                     getTotalCash();
                 }
@@ -80,7 +75,7 @@ namespace DoctorCashWpf.Views
             catch (Exception e)
             {
                 txtbox.Text = "";
-                label = moneyComponent.getMoneyFormatInZero(label);
+                label = moneyFormatService.getMoneyFormatInZero(label);
                 getTotalCash();
             }
         }
@@ -88,8 +83,8 @@ namespace DoctorCashWpf.Views
         private void getTotalCash()
         {
             double totalCash = 0;
-            
-            if(textbox_bills100.Text != "")
+
+            if (textbox_bills100.Text != "")
             {
                 totalCash += Convert.ToDouble(label_100.Text.Remove(0, 1));
             }
@@ -120,7 +115,7 @@ namespace DoctorCashWpf.Views
             }
 
             label_totalCash.Text = totalCash.ToString();
-            label_totalCash = moneyComponent.convertToMoneyFormat(label_totalCash).labelComponent;
+            label_totalCash = moneyFormatService.convertToMoneyFormat(label_totalCash).labelComponent;
         }
 
         private void clearInputs()
@@ -227,12 +222,12 @@ namespace DoctorCashWpf.Views
 
         private void textbox_bills100_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
         }
 
         private void textbox_bills100_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 plusOrLess(textbox_bills100, label_100, (int)OPERATOR.EQUALITY, 100);
             }
@@ -308,47 +303,17 @@ namespace DoctorCashWpf.Views
             plusOrLess(textbox_bills1, label_1, (int)OPERATOR.EQUALITY, 1);
         }
 
-        private void applydesign(TextBox value)
-        {            
-            value.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+        private void applydesign(TextBox textBoxBills)
+        {
+            textBoxBills.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
         }
 
         private void Button_Click_13(object sender, RoutedEventArgs e)
         {
-            if (textbox_bills1.Text==""||textbox_bills10.Text==""||textbox_bills100.Text==""||textbox_bills20.Text==""||textbox_bills5.Text==""||textbox_bills50.Text==""||textbox_comment.Text=="")
+
+            if (label_totalCash.Text == moneyFormatService.getMoneyFormatInZero())
             {
-                #region Check
-
-                if (textbox_bills100.Text == "")
-                {
-                    applydesign(textbox_bills100);
-                }
-                else if (textbox_bills50.Text == "")
-                {
-                    applydesign(textbox_bills50);
-                }
-                else if (textbox_bills20.Text == "")
-                {
-                    applydesign(textbox_bills20);
-                }                
-                else if (textbox_bills10.Text == "")
-                {
-                    applydesign(textbox_bills10);
-                }                                
-                else if (textbox_bills5.Text == "")
-                {
-                    applydesign(textbox_bills5);
-                }
-                else if (textbox_bills1.Text == "")
-                {
-                    applydesign(textbox_bills1);
-                }
-                else if (textbox_comment.Text == "")
-                {
-                    applydesign(textbox_comment);
-                }
-
-                #endregion
+                applydesign(textbox_bills100);
             }
             else
             {
@@ -365,14 +330,14 @@ namespace DoctorCashWpf.Views
                 var item = new log();
                 item.log_Username = userInformation.user.usr_Username;
                 item.log_DateTime = date.getCurrentDate();
-                item.log_Actions = "Cash Out Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash= "+label_totalCash;
+                item.log_Actions = "Cash Out Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Cash= " + label_totalCash;
                 serviceslog.CreateLog(item);
 
                 Print printer = new Print();
-                printer.printCashOut(items);                
+                printer.printCashOut(items);
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
-            } 
+            }
 
         }
 
@@ -411,7 +376,7 @@ namespace DoctorCashWpf.Views
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
             items.log_DateTime = date.getCurrentDate();
-            items.log_Actions = "Cash Out Cancel by UserName= "+userInformation.user.usr_Username+", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash Captured= "+label_totalCash;
+            items.log_Actions = "Cash Out Cancel by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Cash Captured= " + label_totalCash;
             serviceslog.CreateLog(items);
         }
     }

@@ -15,10 +15,10 @@ namespace DoctorCashWpf.Views
         {
             InitializeComponent();
         }
-        userService user = new userService();
+        userService userservice = new userService();
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
-        private dateService date = new dateService();
+        private dateService dateservice = new dateService();
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
@@ -36,58 +36,72 @@ namespace DoctorCashWpf.Views
             }
         }
 
+        private void showErrorAndFocusField(TextBox txtBox)
+        {
+            txtBox.Focus();
+            txtBox.Foreground= (Brush)brushConverter.ConvertFrom("#e74c3c");
+            labeldata.Content = "Complete the fields marked";
+        }
+
+        private void setLog(string vulueString)
+        {
+            var item = new log();
+            item.log_Username = txtbox_username.Text;
+            item.log_DateTime = dateservice.getCurrentDate();
+
+            if (vulueString== "Create")
+            {
+                item.log_Actions = "User Creation Canceled by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                serviceslog.CreateLog(item);
+            }
+            if (vulueString == "Cancel")
+            {
+                item.log_Actions = "New User Created= ( " + txtbox_firtname.Text + " " + txtbox_lastname.Text + " ) by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+                serviceslog.CreateLog(item);
+            }
+        }
+
+        private void setUser()
+        {
+            var items = new user();
+            items.usr_Username = txtbox_username.Text;
+            items.usr_FirstName = txtbox_firtname.Text;
+            items.usr_LastName = txtbox_lastname.Text;
+            items.usr_Email = txtbox_email.Text;
+            items.usr_SecurityLevel = getSecurityLevel();
+            items.usr_Password = "";
+            userservice.createUser(items);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (txtbox_username.Text == "")
             {
-                txtbox_username.Focus();
-                txtbox_username.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
-                labeldata.Content = "Complete the fields marked";
+                showErrorAndFocusField(txtbox_username);                
             }
             else if (txtbox_firtname.Text == "")
             {
-                txtbox_firtname.Focus();
-                txtbox_firtname.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
-                labeldata.Content = "Complete the fields marked";
+                showErrorAndFocusField(txtbox_firtname);
             }
             else if (txtbox_lastname.Text == "")
             {
-                txtbox_lastname.Focus();
-                txtbox_lastname.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
-                labeldata.Content = "Complete the fields marked";
+                showErrorAndFocusField(txtbox_lastname);
             }
             else if (txtbox_email.Text == "")
             {
-                txtbox_email.Focus();
-                txtbox_email.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
-                labeldata.Content = "Complete the fields marked";
+                showErrorAndFocusField(txtbox_email);
             }            
             else
             {
-
-                var item = new log();
-                item.log_Username = txtbox_username.Text;
-                item.log_DateTime = date.getCurrentDate();
-                item.log_Actions = "New User Created= ( "+txtbox_firtname.Text+" "+txtbox_lastname.Text+" ) by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
-                serviceslog.CreateLog(item);
-
-
-                var items = new user();
-                items.usr_Username = txtbox_username.Text;
-                items.usr_FirstName = txtbox_firtname.Text;
-                items.usr_LastName = txtbox_lastname.Text;
-                items.usr_Email = txtbox_email.Text;
-                items.usr_SecurityLevel = getSecurityLevel();
-                items.usr_Password = "";
-
-                user.createUser(items);
-
+                setLog("Create");
+                setUser();
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }        
         }
-        public string password;
+        
         private string PassWord(string firtsname, string lastname)
         {
+            string password;
             Random rnd = new Random();
             password = "";
             password += onlyFirstLastName(lastname);
@@ -97,11 +111,10 @@ namespace DoctorCashWpf.Views
 
            // MessageBox.Show(password);
             return password;
-        }
-        public string value;
+        }        
         private string onlyFirstLastName(string lastname)
         {
-            
+            string value="";
             for (int i = 0; i < lastname.Length; i++)
             {
                 if(!lastname.Contains(" "))
@@ -145,11 +158,7 @@ namespace DoctorCashWpf.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var item = new log();
-            item.log_Username = txtbox_username.Text;
-            item.log_DateTime = date.getCurrentDate();
-            item.log_Actions = "User Creation Canceled by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
-            serviceslog.CreateLog(item);
+            setLog("Cancel");
         }
     }
 }

@@ -14,13 +14,13 @@ namespace DoctorCashWpf.Views
     /// </summary>
     public partial class CloseDate : UserControl
     {
-        private transactionService transaction = new transactionService();
+        private transactionService transactionservice = new transactionService();
         private MoneyFormatService moneyComponent = new MoneyFormatService();
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
         private sqlQueryService createQuery = new sqlQueryService();
         private createItemsForListService createItem = new createItemsForListService();
-        private dateService date = new dateService();
+        private dateService dateservice = new dateService();
 
         public CloseDate()
         {
@@ -146,7 +146,7 @@ namespace DoctorCashWpf.Views
 
             var listCurrentTransactions = new List<transaction>();
 
-            listCurrentTransactions = transaction.getCurrentTransactions(currentUserID);
+            listCurrentTransactions = transactionservice.getCurrentTransactions(currentUserID);
 
             float totalCash = 0, totalCredit = 0, totalChecks = 0, totalNumberChecks = 0, totalEntered = 0, totalRegistered = 0;
 
@@ -535,14 +535,14 @@ namespace DoctorCashWpf.Views
                 clDate.clt_total_cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
                 clDate.clt_total_check = (float)Convert.ToDouble(textbox_check.Text.Remove(0, 1));
                 clDate.clt_total_credit = (float)Convert.ToDouble(textbox_credit.Text.Remove(0, 1));
-                transaction.setClosedTransaction(clDate);
+                transactionservice.setClosedTransaction(clDate);
 
                 Print printer = new Print();
                 printer.printCloseDate(clDate);
 
                 var item = new log();
                 item.log_Username = userInformation.user.usr_Username;
-                item.log_DateTime = date.getCurrentDate();
+                item.log_DateTime = dateservice.getCurrentDate();
                 item.log_Actions = "Close Date Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash= "+label_totalCash;
                 serviceslog.CreateLog(item);
 
@@ -554,7 +554,7 @@ namespace DoctorCashWpf.Views
         {
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
-            items.log_DateTime = date.getCurrentDate();
+            items.log_DateTime = dateservice.getCurrentDate();
             items.log_Actions = "Close Date Cancel by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName;
             serviceslog.CreateLog(items);
         }

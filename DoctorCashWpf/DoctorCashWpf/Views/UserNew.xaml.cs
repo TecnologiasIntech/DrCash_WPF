@@ -17,11 +17,11 @@ namespace DoctorCashWpf.Views
         }
 
         private BrushConverter brushConverter = new BrushConverter();
-        private userService user = new userService();
+        private userService userservice = new userService();
         private sqlQueryService createQuery = new sqlQueryService();
         private createItemsForListService createItem = new createItemsForListService();
         private logService serviceslog = new logService();
-        private dateService date = new dateService();
+        private dateService dateservice = new dateService();
 
         private void txtbox_Confirm_Password_KeyUp(object sender, KeyEventArgs e)
         {
@@ -36,19 +36,32 @@ namespace DoctorCashWpf.Views
             }
         }
 
+        private void showErrorAndFocusField(PasswordBox txtBox)
+        {
+            txtBox.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
+            txtBox.Focus();
+            labelError.Content = "Complete the fields marked";
+        }
+
+
+        private void setLog()
+        {
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = dateservice.getCurrentDate();
+            items.log_Actions = "Reset User: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+            serviceslog.CreateLog(items);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (txtbox_password.Password.ToString() == "")
             {
-                labelError.Content = "Complete the fields marked";
-                txtbox_password.Focus();                
-                txtbox_password.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");                
+                showErrorAndFocusField(txtbox_password);                
             }
             else if (txtbox_Confirm_Password.Password.ToString() == "")
             {
-                labelError.Content = "Complete the fields marked";
-                txtbox_Confirm_Password.Focus();               
-                txtbox_Confirm_Password.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");                
+                showErrorAndFocusField(txtbox_Confirm_Password);                
             }
             else if (txtbox_question.Text == "")
             {
@@ -58,23 +71,20 @@ namespace DoctorCashWpf.Views
             }
             else
             {
-                var items = new log();
-                items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = date.getCurrentDate();
-                items.log_Actions = "Reset User: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
-                serviceslog.CreateLog(items);
+                setLog();
 
-                user.userNew(txtbox_password.Password.ToString(), Combo_question.Text, txtbox_question.Text);
+                userservice.userNew(txtbox_password.Password.ToString(), Combo_question.Text, txtbox_question.Text);
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
         }
 
-        public char xcaracter;
-        public int valor = 0;
-        public int text; 
         private void txtbox_password_KeyUp(object sender, KeyEventArgs e)
         {
+
+            char xcaracter;
+            int valor = 0;
+            int text;
             labelError.Content = "";
             valor = 0;
             progressbar.Foreground = (Brush)brushConverter.ConvertFrom("#ffffff");
