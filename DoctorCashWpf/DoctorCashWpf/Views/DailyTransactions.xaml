@@ -69,7 +69,7 @@
         <!--#region  Body-->
 
 
-        <StackPanel Grid.Row="1" Margin="30">
+        <StackPanel Grid.Row="1" Margin="30,30,30,0">
 
             <!--#region Query Table -->
             <Grid>
@@ -107,11 +107,11 @@
 
                     <!--Date From-->
                     <StackPanel Grid.Column="3" Margin="15">
-                        <DatePicker KeyUp="txtbox_question_KeyUp" Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker GotFocus="todate_GotFocus" Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
                     <!--Date To-->
                     <StackPanel Grid.Column="4" Margin="15">
-                        <DatePicker KeyUp="txtbox_question_KeyUp" Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker GotFocus="todate_GotFocus" Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
 
                     <!--Search Button-->
@@ -151,12 +151,13 @@
                 </Grid>
             </materialDesign:Card>
             
-            
+
             <!--#endregion-->
             <!--#region Save Cancel Buttons-->
-            
+
             <!--#endregion-->
-            <Label Content="" Foreground="Red" Name="labelerror" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,220,15,15"></Label>
+            <Label Content="" Foreground="Red" Name="labelerror" VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="0,150,0,15"></Label>
+            
 
         </StackPanel>
 
@@ -177,6 +178,7 @@
                             Style="{DynamicResource MaterialDesignFlatButton}">
                     <TextBlock x:Name="btn_print" Text="Print" Foreground="#6aa84f " FontSize="18"/>
                 </Button>
+                
             </Grid>
         </Grid>
 

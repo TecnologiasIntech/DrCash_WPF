@@ -27,7 +27,7 @@ namespace DoctorCashWpf.Views
 
         private reportService reportService = new reportService();
         private logService serviceslog = new logService();
-        private dateService dateService = new dateService();
+        private dateService dateservice = new dateService();
         private int transactionID = -1;
 
         private void loadValuesOfSearch()

@@ -33,6 +33,25 @@ namespace DoctorCashWpf.Views
             labelerror.Content = "";
         }
 
+        private void setLog(string stringValue)
+        {
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = dateservice.getCurrentDate();
+            if (stringValue == "Search")
+            {
+                items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed by= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
+                serviceslog.CreateLog(items);
+            }
+            if (stringValue == "Print")
+            {
+
+                items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed by= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
+                serviceslog.CreateLog(items);
+            }
+
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
@@ -43,11 +62,7 @@ namespace DoctorCashWpf.Views
             }
             else
             {
-                var items = new log();
-                items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = dateservice.getCurrentDate();
-                items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed by= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
-                serviceslog.CreateLog(items);                
+                setLog("Search");                
 
                 var list = serviceslog.getLogs(txtbox_question.Text, fromdate.Text, todate.Text).list;
 
@@ -91,11 +106,7 @@ namespace DoctorCashWpf.Views
                 }
                 else
                 {
-                    var items = new log();
-                    items.log_Username = userInformation.user.usr_Username;
-                    items.log_DateTime = dateservice.getCurrentDate();
-                    items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Log, Search Data: Processed by= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
-                    serviceslog.CreateLog(items);
+                    setLog("Print");
 
                     createPDF(list);
                 }

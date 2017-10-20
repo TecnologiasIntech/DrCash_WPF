@@ -43,7 +43,7 @@ namespace DoctorCashWpf.Views
                 serviceslog.CreateLog(items);
 
                 double charge = 0, cash = 0, Credit = 0, Check = 0, Change = 0;
-                var list = getreport.getTransactionsByRangeAndTransactionId(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
+                var list = reportservice.getTransactionsByRangeAndTransactionId(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
                 dataGridViewDailyTransactions.ItemsSource = null;                              
 
                 if (list.Count() == 0)
@@ -99,7 +99,7 @@ namespace DoctorCashWpf.Views
             else
             {
 
-                var list = getreport.getTransactionsByRangeAndTransactionId(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
+                var list = reportservice.getTransactionsByRangeAndTransactionId(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
 
                 if (list.Count() == 0)
                 {
@@ -346,6 +346,11 @@ namespace DoctorCashWpf.Views
         }
 
         private void txtbox_question_KeyUp(object sender, KeyEventArgs e)
+        {
+            labelerror.Content = "";
+        }
+
+        private void todate_GotFocus(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
         }
