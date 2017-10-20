@@ -10,29 +10,51 @@
              Height="240" Width="250">
 
     <Grid Margin="18,1" RenderTransformOrigin="0.469,0.496" >
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="69*" />
             <RowDefinition Height="54*" />
-            <RowDefinition Height="115*" />
+            <RowDefinition Height="80*" />
+            <RowDefinition Height="55*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Initial Cash"
-                   Margin="0 6 0 0"
-                   FontSize="24" Grid.Row="0"/>
+        
+        <!--#region Initial Cash Label-->
+        <TextBlock Text="Initial Cash" Margin="0 6 0 0" FontSize="24" Grid.Row="0"/>
+        <!--#endregion-->
+        
+        <!--#region Initial Cash Input-->
+        <TextBox x:Name="txtbox_initialCash" Text="{Binding Path=Txt, StringFormat=C}" FontSize="20"  Grid.Row="1" Margin="0,14,0,0" 
+                 HorizontalContentAlignment="Center" materialDesign:HintAssist.Hint="$0.00" Height="30" VerticalAlignment="Top" />
+        <!--#endregion-->
+        
+        <!--#region Agree and Disagree Component-->
+        <StackPanel Grid.Row="2">
+            <!--#region Initial Cash Error Prompt-->
+            <Label x:Name="labelInitialCashError"  Content="" FontSize="12" Foreground="Red" HorizontalAlignment="Center"/>
+            <!--#endregion-->
 
-        <TextBox x:Name="txtbox_initialCash" Text="{Binding Path=Txt, StringFormat=C}" FontSize="20"  Grid.Row="1" Margin="0,14,0,0" HorizontalContentAlignment="Center" materialDesign:HintAssist.Hint="$0.00" Height="30" VerticalAlignment="Top" />
-        <Label Grid.Row="2" x:Name="labelInitialCashError" Margin="0,0,0,67" Content="" FontSize="11" Foreground="Red" HorizontalAlignment="Center"/>
-        <Button  Name="BtnAgree" Click="BtnAgree_Click" Grid.Row="2" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}" FontSize="11" HorizontalAlignment="Left" Margin="12,45,0,46" Height="Auto" Width="81">
-            Agree
-        </Button>
-        <Button Name="BtnDisagree" Click="BtnDisagree_Click" Grid.Row="2" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}" FontSize="11" HorizontalAlignment="Right" Margin="0,45,19,46" Height="Auto" Width="81">
-            Disagree
-        </Button>
-        <Button Grid.Row="2" 
-                IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
-                HorizontalAlignment="Right"
-                Margin="0,0,16,15"
+            <Grid x:Name="Component_Agree_Disagree">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Name="BtnAgree" Grid.Column="0" Click="BtnAgree_Click" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}" FontSize="11">
+                Agree
+            </Button>
+            <Button Name="BtnDisagree" Grid.Column="1" Click="BtnDisagree_Click" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}" FontSize="11">
+                Disagree
+            </Button>
+        </Grid>
+        </StackPanel>
+        <!--#endregion-->
+        
+        <!--#region Accept Button-->
+        <Button Grid.Row="3" IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Margin="0,0,16,15"
                 Click="setInitialCash_click" Height="0,25" Width="95" VerticalAlignment="Bottom" >
             ACCEPT
         </Button>
+        <!--#endregion-->
     </Grid>
 </UserControl>
