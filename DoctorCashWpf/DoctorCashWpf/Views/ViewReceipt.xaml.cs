@@ -24,7 +24,7 @@ namespace DoctorCashWpf.Views
             loadValuesOfSearch();
         }
 
-        private reportService getreport = new reportService();
+        private reportService reportService = new reportService();
         private logService serviceslog = new logService();
         private dateService dateService = new dateService();
         private int transactionID = -1;
@@ -66,7 +66,7 @@ namespace DoctorCashWpf.Views
                 items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
                 serviceslog.CreateLog(items);
 
-                var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
+                var list = reportService.getTransactionsByRangeAndTransactionId(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
                 dataGridViewClosedStatement.ItemsSource = null;
                 
 
@@ -122,7 +122,7 @@ namespace DoctorCashWpf.Views
             //var dato = dataGridViewClosedStatement.SelectedItem;
             DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
             transactionID = Convert.ToInt32(item.Row.ItemArray[0]);
-            var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
+            var list = reportService.getTransactionsByRangeAndTransactionId(txtbox_question.Text, "", fromdate.Text, todate.Text).list;
             for (int i = 0; i < list.Count(); i++)
             {
                 if (list[i].trn_id == transactionID)
@@ -185,7 +185,7 @@ namespace DoctorCashWpf.Views
                     printer.printViewReciept(item,total_sum);
                 }
 
-                var list = getreport.getDailyTransactions(txtbox_question.Text, "", fromdate.Text, todate.Text).list;                
+                var list = reportService.getTransactionsByRangeAndTransactionId(txtbox_question.Text, "", fromdate.Text, todate.Text).list;                
 
                 if (list.Count() == 0)
                 {

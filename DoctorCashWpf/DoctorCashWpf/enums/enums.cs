@@ -25,7 +25,7 @@
     {
         AND,
         OR,
-        NINGUNO
+        NONE
     }
 
     enum TRANSACTIONTYPE

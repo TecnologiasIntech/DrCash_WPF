@@ -65,7 +65,7 @@
                         <!--Amount-->
                         <StackPanel Margin="0 0 0 0" Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Amount Charge" FontSize="15" FontWeight="Medium"/>
-                            <TextBox Name="txtamountcharge" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="50 0 0 0" FontSize="15" FontWeight="Medium"/>
+                            <TextBox Name="txtamountcharge" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="50 0 0 0" FontSize="15" FontWeight="Medium" GotFocus="txtamountcharge_GotFocus" LostFocus="txtamountcharge_LostFocus"/>
                         </StackPanel>
                           
                         <!--Total-->
@@ -88,19 +88,19 @@
                         <!--Cash-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Cash" FontSize="15" FontWeight="Medium"/>
-                            <TextBox Name="txtcash" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="15" FontWeight="Medium"/>
+                            <TextBox Name="txtcash" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="15" FontWeight="Medium" LostFocus="txtcash_LostFocus" GotFocus="txtcash_GotFocus"/>
                         </StackPanel>
 
                         <!--Credit-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Credit" FontSize="15" FontWeight="Medium"/>
-                            <TextBox Name="txtcredid" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="15" FontWeight="Medium"/>
+                            <TextBox Name="txtcredid" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="15" FontWeight="Medium" GotFocus="txtcredid_GotFocus" LostFocus="txtcredid_LostFocus"/>
                         </StackPanel>
 
                         <!--Check-->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="Check" FontSize="15" FontWeight="Medium"/>
-                            <TextBox Name="txtcheck" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="15" FontWeight="Medium"/>
+                            <TextBox Name="txtcheck" Text="$0.00" Width="100" HorizontalContentAlignment="Right" Margin="20 0 0 0" FontSize="15" FontWeight="Medium" GotFocus="txtcheck_GotFocus" LostFocus="txtcheck_LostFocus"/>
                         </StackPanel>
 
                         <!--Check #-->
@@ -132,14 +132,13 @@
                     <CheckBox Name="chequedlaps" Height="30" Margin="30 30">
                         <TextBlock Text="Labs" FontSize="15"/>
                     </CheckBox>
-
-                    <CheckBox Name="chequedother" Height="30" Margin="30 30">
+                    <CheckBox x:Name="chequedother" Height="30" Margin="30 30" Checked="chequedother_Checked" Unchecked="chequedother_Unchecked">
                         <TextBlock Text="Other" FontSize="15"/>
                     </CheckBox>
 
                 </StackPanel>
 
-                <TextBox Margin="30 -15" Height="23" IsEnabled="False" BorderBrush="#89000000"/>
+                <TextBox Margin="30 -15" Height="23" BorderBrush="#89000000" x:Name="txtBoxOtherComment" IsEnabled="False"/>
 
                 <!--#endregion-->
                 

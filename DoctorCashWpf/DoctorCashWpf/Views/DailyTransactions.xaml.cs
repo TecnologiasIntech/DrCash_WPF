@@ -42,7 +42,7 @@ namespace DoctorCashWpf.Views
                 serviceslog.CreateLog(items);
 
                 double charge = 0, cash = 0, Credit = 0, Check = 0, Change = 0;
-                var list = getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
+                var list = getreport.getTransactionsByRangeAndTransactionId(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
                 dataGridViewDailyTransactions.ItemsSource = null;                              
 
                 if (list.Count() == 0)
@@ -98,7 +98,7 @@ namespace DoctorCashWpf.Views
             else
             {                
 
-                var list = getreport.getDailyTransactions(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
+                var list = getreport.getTransactionsByRangeAndTransactionId(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
 
                 if (list.Count() == 0)
                 {

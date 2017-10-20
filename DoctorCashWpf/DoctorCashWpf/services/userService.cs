@@ -149,7 +149,7 @@ namespace DoctorCashWpf
             columns.Add("usr_FirstName");
             columns.Add("usr_LastName");
 
-            terms.Add(createItem.ofTypeValuesWhere(false, "usr_ID", userID, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+            terms.Add(createItem.ofTypeValuesWhere(false, "usr_ID", userID, (int)OPERATORBOOLEAN.NONE, (int)OPERATOR.EQUALITY));
 
             var data = createQuery.toSelect(columns, "users", terms);
 
@@ -176,7 +176,7 @@ namespace DoctorCashWpf
             var listValuesTerms = new List<valuesWhere>();
             listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_FirstName", userInformation.user.usr_FirstName, (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
             listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_ID", userInformation.user.usr_ID.ToString(), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.EQUALITY));
-            listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_LastName", userInformation.user.usr_LastName, (int)OPERATORBOOLEAN.NINGUNO, (int)OPERATOR.EQUALITY));
+            listValuesTerms.Add(createItem.ofTypeValuesWhere(true, "usr_LastName", userInformation.user.usr_LastName, (int)OPERATORBOOLEAN.NONE, (int)OPERATOR.EQUALITY));
 
             createQuery.toUpdate("users", Columns, listValuesTerms);
         }
