@@ -126,12 +126,12 @@ namespace DoctorCashWpf
 
         private float getTotalAmount(transaction trn)
         {
-            return trn.cash + trn.credit + trn.check;
+            return trn.cash + trn.credit + trn.check - trn.change;
         }
 
         private void getSumOfTransactionsAndChangeTotalLabels()
         {
-            float totalCashIn = 0, totalCredit = 0, totalChecks = 0, totalCashOut = 0, totalInitialCash = 0, totalRefound = 0;
+            float totalCashIn = 0, totalCredit = 0, totalChecks = 0, totalCashOut = 0, totalInitialCash = 0, totalRefound = 0, totalChange = 0;
 
             for (int i = 0; i < transactionList.Count(); i++)
             {
@@ -140,6 +140,7 @@ namespace DoctorCashWpf
                     totalCashIn += transactionList[i].cash;
                     totalCredit += transactionList[i].credit;
                     totalChecks += transactionList[i].check;
+                    totalChange += transactionList[i].change;
                 }
                 else if(transactionList[i].type == (int)TRANSACTIONTYPE.OUT)
                 {
@@ -157,13 +158,13 @@ namespace DoctorCashWpf
             label_credit.Text = totalCredit.ToString();
             label_checks.Text = totalChecks.ToString();
             label_refounds.Text = totalRefound.ToString();
-            label_balance.Text = (((totalInitialCash + totalCashIn + totalCredit + totalChecks) - totalCashOut) - totalRefound).ToString();
+            label_balance.Text = (((totalInitialCash + totalCashIn + totalCredit + totalChecks) - totalCashOut) - totalRefound - totalChange).ToString();
 
-            label_totalIn.Text = (totalCashIn + totalCredit + totalChecks).ToString();
+            label_totalIn.Text = (totalCashIn + totalCredit + totalChecks - totalChange).ToString();
 
-            label_cashOut.Text = (totalCashOut + totalRefound).ToString();
+            label_cashOut.Text = (totalCashOut).ToString();
 
-            label_totalOut.Text = (totalCashOut).ToString();
+            label_totalOut.Text = (totalCashOut + totalRefound).ToString();
 
             label_initialCash.Text = totalInitialCash.ToString();
             label_initialCash = moneyFormatService.convertToMoneyFormat(label_initialCash).labelComponent;

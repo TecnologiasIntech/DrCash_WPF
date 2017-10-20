@@ -9,7 +9,7 @@
              xmlns:local="clr-namespace:DoctorCashWpf.Views"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="1280"
-             Width="1280" Height="500">
+             Width="1200" Height="500">
 
 
 
