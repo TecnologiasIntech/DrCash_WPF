@@ -67,7 +67,10 @@ namespace DoctorCashWpf.Views
                             break;
 
                         case (int)OPERATOR.REMOVE:
-                            txtbox.Text = (Convert.ToInt32(txtbox.Text) - 1).ToString();
+                            if (txtbox.Text != "0")
+                            {
+                                txtbox.Text = (Convert.ToInt32(txtbox.Text) - 1).ToString();
+                            }
                             break;
 
                         case (int)OPERATOR.EQUALITY:
@@ -137,7 +140,15 @@ namespace DoctorCashWpf.Views
             label_totalEntered = moneyComponent.convertToMoneyFormat(label_totalEntered).labelComponent;
 
             label_short.Text = (Convert.ToDouble(label_totalEntered.Text.Remove(0, 1)) - Convert.ToDouble(label_totalRegistered.Text.Remove(0, 1))).ToString();
-            label_short = moneyComponent.convertToMoneyFormat(label_short).labelComponent;
+            if(label_short.Text[0] == '-')
+            {
+                label_short.Text = "$" + label_short.Text;
+                moneyComponent.AddFloat(label_short);
+            }
+            else
+            {
+                label_short = moneyComponent.convertToMoneyFormat(label_short).labelComponent;
+            }
         }
 
         private void getCurrentTransactions()
@@ -148,7 +159,7 @@ namespace DoctorCashWpf.Views
 
             listCurrentTransactions = transactionservice.getCurrentTransactions(currentUserID);
 
-            float totalCash = 0, totalCredit = 0, totalChecks = 0, totalNumberChecks = 0, totalEntered = 0, totalRegistered = 0;
+            float totalCash = 0, totalCredit = 0, totalChecks = 0, totalNumberChecks = 0, totalEntered = 0, totalRegistered = 0, totalOutAndRefound = 0, totalChange = 0;
 
             for (int i = 0; i < listCurrentTransactions.Count(); i++)
             {
@@ -157,11 +168,23 @@ namespace DoctorCashWpf.Views
                     totalCredit += listCurrentTransactions[i].credit;
                     totalChecks += listCurrentTransactions[i].check;
                     totalCash += listCurrentTransactions[i].cash;
-                    totalNumberChecks += listCurrentTransactions[i].checkNumber;
+                    totalNumberChecks += listCurrentTransactions[i].checkNumber; 
+                    totalChange += listCurrentTransactions[i].change;
+                }
+                else if(listCurrentTransactions[i].type == (int)TRANSACTIONTYPE.OUT)
+                {
+                    totalOutAndRefound += listCurrentTransactions[i].cash;
+                }else if(listCurrentTransactions[i].type == (int)TRANSACTIONTYPE.REFOUND)
+                {
+                    totalOutAndRefound += listCurrentTransactions[i].amountCharged;
+                }
+                else
+                {
+                    totalCash += listCurrentTransactions[i].cash;
                 }
             }
 
-            totalRegistered = totalCredit + totalChecks + totalCash;
+            totalRegistered = totalCredit + totalChecks + totalCash - totalOutAndRefound - totalChange;
             totalEntered = (float)(Convert.ToDouble(textbox_credit.Text.Remove(0, 1)) + Convert.ToDouble(textbox_check.Text.Remove(0, 1)) + Convert.ToDouble(textbox_leftInRegister.Text.Remove(0, 1)) + Convert.ToDouble(label_totalCash.Text.Remove(0, 1)));
 
             label_totalEntered.Text = "$" + totalEntered.ToString();
@@ -546,7 +569,7 @@ namespace DoctorCashWpf.Views
                 item.log_Actions = "Close Date Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash= "+label_totalCash;
                 serviceslog.CreateLog(item);
 
-                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+                App.Current.Shutdown();
             }            
         }
 
