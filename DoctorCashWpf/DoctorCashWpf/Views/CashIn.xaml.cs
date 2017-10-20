@@ -1,5 +1,6 @@
 ﻿using DoctorCashWpf.Printer;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -30,6 +31,7 @@ namespace DoctorCashWpf
         private transactionService transaction = new transactionService();
         private logService serviceslog = new logService();
         private dateService date = new dateService();
+        private sqlQueryService sqlservice = new sqlQueryService();
 
         private void loadValuesToUpdateTransaction(int transactionID)
         {
@@ -182,6 +184,10 @@ namespace DoctorCashWpf
             transaction.type = (int)TRANSACTIONTYPE.IN;
 
             transactionService.setTransaction(transaction);
+
+            var lis = new List<valuesWhere>();
+            int maxid = sqlservice.toMax("trn_ID", "transactions", lis);
+            transaction.trn_id = maxid;
 
             printReceip(transaction);
         }

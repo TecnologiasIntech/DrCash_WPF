@@ -94,9 +94,11 @@ namespace DoctorCashWpf
             createQuery.toSelectAll("transactions", listTerms);
         }
 
+
         public void setTransaction(transaction transactionArray)
         {
-            List<columnsValues> valuesArray = new List<columnsValues>();
+            List<columnsValues> valuesArray = new List<columnsValues>();            
+
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_User_ID", transactionArray.userId));
             //valuesArray.Add(createList.ofTypeColumnsValues("trn_DateRegistered", transactionArray.dateRegistered));
             valuesArray.Add(createItem.ofTypeColumnsValues("trn_Comment", transactionArray.comment));
@@ -291,7 +293,7 @@ namespace DoctorCashWpf
             var lis = new List<valuesWhere>();
             maxid =createQuery.toMax("clt_closed_ID", "ClosedTransactions", lis);
 
-            list.Add(createItem.ofTypeColumnsValues("clt_closed_ID", maxid)); 
+            list.Add(createItem.ofTypeColumnsValues("clt_closed_ID", maxid+1)); 
             list.Add(createItem.ofTypeColumnsValues("clt_100_bills", (float)trn.clt_100_bills));
             list.Add(createItem.ofTypeColumnsValues("clt_50_bills", (float)trn.clt_50_bills));
             list.Add(createItem.ofTypeColumnsValues("clt_20_bills", (float)trn.clt_20_bills));
