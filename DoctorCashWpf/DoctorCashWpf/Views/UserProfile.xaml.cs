@@ -17,8 +17,8 @@ namespace DoctorCashWpf.Views
             InitializeVisualComponent();            
         }
 
-        private userService user = new userService();
-        private dateService date = new dateService();
+        private userService userservice = new userService();
+        private dateService dateservice = new dateService();
         private logService serviceslog = new logService();
 
 
@@ -88,7 +88,7 @@ namespace DoctorCashWpf.Views
             items.usr_LastName = txtbox_lastname.Text;
             items.usr_SecurityQuestion = Combo_question.Text;
             items.usr_ModifiedBy = userInformation.user.usr_ID;
-            items.usr_ModificationDate = date.getCurrentDate();
+            items.usr_ModificationDate = dateservice.getCurrentDate();
 
             if (txtbox_newpassword.Password == txtbox_confirmpassword.Password && txtbox_newpassword.Password != "")
             {
@@ -99,18 +99,23 @@ namespace DoctorCashWpf.Views
                 items.usr_Password = null;
             }
 
-            var item = new log();
-            item.log_Username = userInformation.user.usr_Username;
-            item.log_DateTime = date.getCurrentDate();
-            item.log_Actions = "The ( " + txtbox_firstname.Text + " " + txtbox_lastname.Text + " ) Information Was Modified by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
-            serviceslog.CreateLog(item);
+            setLog();
 
-            user.updateBasicInformation(items);
+            userservice.updateBasicInformation(items);
 
             UserInformationShow();
 
             txtbox_newpassword.Password = "";
             txtbox_confirmpassword.Password = "";
+        }
+
+        private void setLog()
+        {
+            var item = new log();
+            item.log_Username = userInformation.user.usr_Username;
+            item.log_DateTime = dateservice.getCurrentDate();
+            item.log_Actions = "The ( " + txtbox_firstname.Text + " " + txtbox_lastname.Text + " ) Information Was Modified by: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Level of user: " + userInformation.user.usr_SecurityLevel;
+            serviceslog.CreateLog(item);
         }
 
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
