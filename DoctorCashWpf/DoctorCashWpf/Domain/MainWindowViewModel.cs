@@ -11,11 +11,8 @@ namespace MaterialDesignColors.WpfExample.Domain
             {
                 new DemoItem("Home", new Home()),
                 new DemoItem("Reports", new Reports()),
-                new DemoItem("Statistics", new Statistics()),
                 new DemoItem("User", new UserProfile()),
                 new DemoItem("Settings", new Settings()),
-                new DemoItem("Help", new Help())/*,
-                new DemoItem("Look", new Credentials())*/
             };
         }
 
