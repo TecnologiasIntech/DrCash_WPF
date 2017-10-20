@@ -25,12 +25,12 @@ namespace DoctorCashWpf.Views
         private dateService date = new dateService();
 
         private DataTable transactionsData;
-        public int id=-1;
+        public int id = -1;
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            double charged = 0, cash = 0, credit = 0, check = 0, change = 0;            
+            double charged = 0, cash = 0, credit = 0, check = 0, change = 0;
             DataRowView item = dataGridViewClosedStatement.SelectedItem as DataRowView;
-            DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];                        
+            DataRow fila = transactionsData.Rows[dataGridViewClosedStatement.SelectedIndex];
             id = Convert.ToInt32(item.Row.ItemArray[0]);
             var registerID = fila["clt_reg_RegisterID"];
             var DateOfSelection = fila["clt_Datetime"];
@@ -52,28 +52,28 @@ namespace DoctorCashWpf.Views
                 cash += list[i].cash;
                 credit += list[i].credit;
                 check += list[i].check;
-                change += list[i].change;                
+                change += list[i].change;
             }
             txt_initialCash.Text = transaction.getInitialCashbyRegisterID(registerID.ToString(), DateOfSelection.ToString()).ToString();
             cash = cash - change;
             moneyService.convertToMoneyFormat(txt_initialCash);
-            txt_cash.Text = moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;            
-            txt_credit.Text = moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;            
+            txt_cash.Text = moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;
+            txt_credit.Text = moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;
             txt_check.Text = moneyService.convertToMoneyFormat(check.ToString()).txtComponent;
             txt_amount.Text = moneyService.convertToMoneyFormat(charged.ToString()).txtComponent;
-            txt_cash2.Text =moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;
-            txt_credit2.Text =moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;
-            txt_check2.Text =moneyService.convertToMoneyFormat(check.ToString()).txtComponent;
+            txt_cash2.Text = moneyService.convertToMoneyFormat(cash.ToString()).txtComponent;
+            txt_credit2.Text = moneyService.convertToMoneyFormat(credit.ToString()).txtComponent;
+            txt_check2.Text = moneyService.convertToMoneyFormat(check.ToString()).txtComponent;
 
             dt.Rows.Add("Total´s", charged, cash, credit, check, change);
-            
-            dataGridViewStatment.ItemsSource = dt.DefaultView;            
+
+            dataGridViewStatment.ItemsSource = dt.DefaultView;
             dataGridViewStatment.MaxHeight = 180;
-                            
+
         }
 
 
-        private void Row_DoubleClick1(object sender,MouseButtonEventArgs e)
+        private void Row_DoubleClick1(object sender, MouseButtonEventArgs e)
         {
 
         }
@@ -82,8 +82,8 @@ namespace DoctorCashWpf.Views
         {
 
             labelerror.Content = "";
-            if (todate.Text == "" && fromdate.Text == "" && txtbox_ID.Text == "") 
-            { 
+            if (todate.Text == "" && fromdate.Text == "" && txtbox_ID.Text == "")
+            {
                 labelerror.Content = "Complete the Date or ID fields";
             }
             else
@@ -93,9 +93,9 @@ namespace DoctorCashWpf.Views
                 double initial_cash = 0, amount = 0, cash = 0, credit = 0, check = 0, balance = 0, bills100 = 0, bills50 = 0, bills20 = 0, bills10 = 0, bills5 = 0, bills1 = 0;
                 var response = getreport.getCloseTransactions(txtbox_ID.Text, fromdate.Text, todate.Text);
                 var list = response.list;
-                transactionsData = response.dataTable;                
+                transactionsData = response.dataTable;
                 dataGridViewClosedStatement.ItemsSource = null;
-                
+
                 if (transactionsData.Rows.Count == 0)
                 {
                     labelerror.Content = "Data Not Found";
@@ -145,7 +145,7 @@ namespace DoctorCashWpf.Views
 
                     dataGridViewClosedStatement.ItemsSource = dt.DefaultView;
                     dataGridViewClosedStatement.MaxHeight = 140;
-                }                
+                }
             }
 
         }
@@ -156,8 +156,8 @@ namespace DoctorCashWpf.Views
             txtbox_ID.Clear();
             fromdate.Text = "";
             todate.Text = "";
-            txt_initialCash =moneyService.getMoneyFormatInZero(txt_initialCash);
-            txt_amount= moneyService.getMoneyFormatInZero(txt_amount);
+            txt_initialCash = moneyService.getMoneyFormatInZero(txt_initialCash);
+            txt_amount = moneyService.getMoneyFormatInZero(txt_amount);
             txt_cash = moneyService.getMoneyFormatInZero(txt_cash);
             txt_credit = moneyService.getMoneyFormatInZero(txt_credit);
             txt_check = moneyService.getMoneyFormatInZero(txt_check);
@@ -188,13 +188,13 @@ namespace DoctorCashWpf.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             dataClear();
-            dataGridViewClosedStatement.ItemsSource = null;            
-            dataGridViewStatment.ItemsSource = null;            
+            dataGridViewClosedStatement.ItemsSource = null;
+            dataGridViewStatment.ItemsSource = null;
         }
 
         private void txtbox_ID_KeyUp(object sender, KeyEventArgs e)
         {
-            labelerror.Content = "";            
+            labelerror.Content = "";
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -212,8 +212,8 @@ namespace DoctorCashWpf.Views
                 clDate.clt_total_cash = (float)Convert.ToDouble(txt_cash.Text.Remove(0, 1));
                 clDate.clt_total_check = (float)Convert.ToDouble(txt_check.Text.Remove(0, 1));
                 clDate.clt_total_credit = (float)Convert.ToDouble(txt_credit.Text.Remove(0, 1));
-                clDate.clt_checks_amount= (float)Convert.ToDouble(txt_amount.Text.Remove(0, 1));
-                clDate.clt_balance= (float)Convert.ToDouble(txt_balance.Text.Remove(0, 1));
+                clDate.clt_checks_amount = (float)Convert.ToDouble(txt_amount.Text.Remove(0, 1));
+                clDate.clt_balance = (float)Convert.ToDouble(txt_balance.Text.Remove(0, 1));
                 Print printer = new Print();
                 printer.printClosedStatement(clDate);
             }
@@ -221,6 +221,11 @@ namespace DoctorCashWpf.Views
             {
                 labelerror.Content = "Select a Transaction ID";
             }
+        }
+
+        private void fromdate_GotFocus(object sender, RoutedEventArgs e)
+        {
+            labelerror.Content = "";
         }
     }
 }

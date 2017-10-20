@@ -8,7 +8,7 @@
              xmlns:domain1="clr-namespace:MaterialDesignDemo.Domain" 
              xmlns:local="clr-namespace:DoctorCashWpf.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1500"
+             d:DesignHeight="600" d:DesignWidth="1200"
              Height="600" Width="1200">
 
 
@@ -94,7 +94,7 @@
 
                             <!--Transaction #-->
                             <StackPanel Grid.Column="0" Margin="15 0">
-                                <TextBox x:Name="txtbox_question"
+                                <TextBox x:Name="txtbox_question" KeyUp="txtbox_question_KeyUp"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                             materialDesign:HintAssist.Hint="Transaction Number" FontFamily="Roboto" FontSize="14" Width="173"/>
                             </StackPanel>
@@ -102,11 +102,11 @@
 
                             <!--Date From-->
                             <StackPanel Grid.Column="1" Margin="15">
-                                <DatePicker x:Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                <DatePicker GotFocus="fromdate_GotFocus" x:Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             </StackPanel>
                             <!--Date To-->
                             <StackPanel Grid.Column="2" Margin="15">
-                                <DatePicker x:Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                <DatePicker GotFocus="fromdate_GotFocus" x:Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             </StackPanel>
 
                             <!--Search Button-->
@@ -154,7 +154,7 @@
 
                 </StackPanel>
 
-                <Label Name="labelerror" Content="" Foreground="Red" Margin="270" HorizontalAlignment="Center"></Label>
+                <Label Name="labelerror" Content="" Foreground="Red" Margin="230" HorizontalAlignment="Center"></Label>
 
                 <!--TODO-->
 
