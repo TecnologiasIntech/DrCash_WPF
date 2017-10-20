@@ -132,10 +132,6 @@ namespace DoctorCashWpf
             {
                 ApplyDesignForError(txtbox_numberChecks);
             }
-            else if (txtbox_comment.Text == "")
-            {
-                ApplyDesignForError(txtbox_comment);
-            }
             else
             {
                 
@@ -151,7 +147,7 @@ namespace DoctorCashWpf
                 else
                 {
                     setTransactionAndPrintReceip();
-                    setLog();
+                    setLog("Create");
 
                     MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                 }
@@ -190,13 +186,22 @@ namespace DoctorCashWpf
             printReceip(transaction);
         }
 
-        private void setLog()
+        private void setLog(string stringvalue)
         {
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
             items.log_DateTime = date.getCurrentDate();
-            items.log_Actions = "Cash In Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total= " + label_total.Text + ", Amount=" + label_amount.Text + ", Change= " + label_change.Text;
-            serviceslog.CreateLog(items);
+
+            if (stringvalue == "Cancel")
+            {
+                items.log_Actions = "Cash In Cancel by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data Captured: Total= " + label_total.Text + ", Amount= " + label_amount.Text + ", Change= " + label_change.Text;
+                serviceslog.CreateLog(items);
+            }
+            if (stringvalue == "Create")
+            {
+                items.log_Actions = "Cash In Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total= " + label_total.Text + ", Amount=" + label_amount.Text + ", Change= " + label_change.Text;
+                serviceslog.CreateLog(items);
+            }            
         }
 
         private void printReceip(transaction transaction)
@@ -417,11 +422,7 @@ namespace DoctorCashWpf
 
             transaction.updateTransaction(trn);
 
-            var items = new log();
-            items.log_Username = userInformation.user.usr_Username;
-            items.log_DateTime = date.getCurrentDate();
-            items.log_Actions = "Cash In Cancel by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data Captured: Total= " + label_total.Text + ", Amount= " + label_amount.Text + ", Change= " + label_change.Text;
-            serviceslog.CreateLog(items);
+            setLog("Cancel");
 
         }
 

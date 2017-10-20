@@ -83,7 +83,7 @@ namespace DoctorCashWpf.Views
                     }
 
                     dataGridViewLog.ItemsSource = datatable.DefaultView;
-                    dataGridViewLog.MaxHeight = 300;
+                    dataGridViewLog.MaxHeight = 285;
                 }
             }           
         }
@@ -194,6 +194,16 @@ namespace DoctorCashWpf.Views
             Process.Start(@"C:/DrCash_WPF/DoctorCashWpf/ArchiveLog" + nomber + ".pdf");
 
             #endregion
+        }
+
+        private void txtbox_question_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            labelerror.Content = "";
+        }
+
+        private void fromdate_GotFocus(object sender, RoutedEventArgs e)
+        {
+            labelerror.Content = "";
         }
     }
 }

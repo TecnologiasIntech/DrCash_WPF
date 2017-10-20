@@ -27,6 +27,24 @@ namespace DoctorCashWpf.Views
         logService serviceslog = new logService();
         private dateService dateservice = new dateService();
 
+        private void setLog(string stringvalue)
+        {
+            var items = new log();
+            items.log_Username = userInformation.user.usr_Username;
+            items.log_DateTime = dateservice.getCurrentDate();
+
+            if (stringvalue == "Search")
+            {
+                items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
+                serviceslog.CreateLog(items);
+            }
+            if (stringvalue == "Print")
+            {
+                items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
+                serviceslog.CreateLog(items);
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             labelerror.Content = "";
@@ -36,11 +54,7 @@ namespace DoctorCashWpf.Views
             }
             else
             {
-                var items = new log();
-                items.log_Username = userInformation.user.usr_Username;
-                items.log_DateTime = dateservice.getCurrentDate();
-                items.log_Actions = "Search Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
-                serviceslog.CreateLog(items);
+                setLog("Search");
 
                 double charge = 0, cash = 0, Credit = 0, Check = 0, Change = 0;
                 var list = reportservice.getTransactionsByRangeAndTransactionId(txtbox_question.Text, Patient_Name.Text, fromdate.Text, todate.Text).list;
@@ -107,11 +121,7 @@ namespace DoctorCashWpf.Views
                 }
                 else
                 {
-                    var items = new log();
-                    items.log_Username = userInformation.user.usr_Username;
-                    items.log_DateTime = dateservice.getCurrentDate();
-                    items.log_Actions = "Print Information by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " in Daily Transactions, Search Data: Transaction Number= " + txtbox_question.Text + ", Dates: From= " + fromdate.Text + ", To= " + todate.Text;
-                    serviceslog.CreateLog(items);
+                    setLog("Print");
 
                     createPDF(list);
 

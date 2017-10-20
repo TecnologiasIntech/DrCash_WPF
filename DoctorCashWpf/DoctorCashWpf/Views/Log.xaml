@@ -88,19 +88,19 @@
 
                     <!--Proccesd By-->
                     <StackPanel Grid.Column="0" Margin="15 0">
-                        <TextBox x:Name="txtbox_question"
+                        <TextBox x:Name="txtbox_question" KeyUp="txtbox_question_KeyUp"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                        materialDesign:HintAssist.Hint="Processed By" FontFamily="Roboto" FontSize="14" Width="173"/>
                     </StackPanel>
 
                     <!--Date From-->
                     <StackPanel Grid.Column="1" Margin="15">
-                        <DatePicker Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker GotFocus="fromdate_GotFocus" Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
                     
                     <!--Date To-->
                     <StackPanel Grid.Column="2" Margin="15">
-                        <DatePicker Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <DatePicker GotFocus="fromdate_GotFocus" Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </StackPanel>
 
                     <!--Search Button-->
