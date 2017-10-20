@@ -6,72 +6,100 @@
              xmlns:local="clr-namespace:DoctorCashWpf.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             Height="600" Width="800">
+
     <Grid>
 
-        <StackPanel>
-            <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-            
-                <StackPanel Grid.Column="0">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock>Register Number</TextBlock>
-                        <TextBlock>1</TextBlock>
-                    </StackPanel>
 
-                    <CheckBox>Actvive Register</CheckBox>
+        <!--#region Title Bar-->
+        <Grid Grid.Row="0" Background="#FFC107  ">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <!--Modal Icon-->
+            <materialDesign:PackIcon Kind="AutoUpload"  Grid.Column="0" Foreground="White" Height="40" Width="40" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+            <!--Title-->
+            <TextBlock Text="Register" Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="28" FontWeight="Bold"/>
+        </Grid>
+        <!--#endregion-->
+
+
+        <Grid Grid.Row="1">
+
+            <StackPanel Margin="25">
                 
-                </StackPanel>
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Button>Add Register</Button>
-                    <Button>Edit Register</Button>
-                </StackPanel>
-            </Grid>
+                <!--#region First Row-->
+                <Grid Margin="0 0 0 20">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <!--#region Register Status-->
+                    <StackPanel Grid.Column="0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="18" Margin="0 0 30 0">Register Number</TextBlock>
+                            <TextBlock FontSize="18" FontWeight="Bold">1</TextBlock>
+                        </StackPanel>
+                        <CheckBox Margin="0 20 0 0" FontSize="18">Actvive Register</CheckBox>
+                    </StackPanel>
+                    <!--#endregion-->
+                    
+                    <!--#region Add && Edit Register-->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Margin="0 0 20 0">Add Register</Button>
+                        <Button>Edit Register</Button>
+                    </StackPanel>
+                    <!--#endregion-->
+                    
+                </Grid>
+                <!--#endregion-->
 
-                <TextBlock Grid.Column="0">Machine Name</TextBlock>
-                <TextBox Grid.Column="1">CGD-CHECKIN2</TextBox>
-                <Button Grid.Column="2">Get Computer Name</Button>
-            </Grid>
-            
-            
-            <!--#region Grid-->
+                <!--#region Enter Machine Name-->
+                <Grid Margin="0 0 0 20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
 
-            <materialDesign:Card 
+                    <TextBlock Grid.Column="0" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center">Machine Name</TextBlock>
+                    <TextBox Grid.Column="1" FontSize="16" Margin="20 0"></TextBox>
+                    <Button Grid.Column="2" FontSize="14">Get Computer Name</Button>
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region Grid-->
+                <materialDesign:Card 
                     Grid.Column="0" 
                     Grid.Row="0"
                     Background="White"
-                    Margin="6"
-                    Padding="9">
-                <Grid>
-                    <DataGrid IsReadOnly="True"/>
-                </Grid>
-            </materialDesign:Card>
-            <!--#endregion-->
+                    Margin="0 15"
+                    Padding="5">
+                    <Grid>
+                        <DataGrid IsReadOnly="True"/>
+                    </Grid>
+                </materialDesign:Card>
+                <!--#endregion-->
 
-            <!-- Save Button / Cancel Button-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                <!--#region Save Button / Cancel Button-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Padding="50 0" Margin="0 0 30 0">Save</Button>
+                    <Button Padding="50 0" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Cancel</Button>
+                </StackPanel>
+                <!--#endregion-->
 
-                <Button Grid.Column="0">Save</Button>
-                <Button Grid.Column="1">Cancel</Button>
+            </StackPanel>
 
-            </Grid>
-            
-        </StackPanel>
+        </Grid>
 
     </Grid>
 </UserControl>
