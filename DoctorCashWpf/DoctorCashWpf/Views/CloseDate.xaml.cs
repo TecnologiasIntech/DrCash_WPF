@@ -558,28 +558,46 @@ namespace DoctorCashWpf.Views
                 clDate.clt_total_cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
                 clDate.clt_total_check = (float)Convert.ToDouble(textbox_check.Text.Remove(0, 1));
                 clDate.clt_total_credit = (float)Convert.ToDouble(textbox_credit.Text.Remove(0, 1));
+
                 transactionservice.setClosedTransaction(clDate);
+
+                setLog("Close");
+
+                var lis = new List<valuesWhere>();
+                int maxid = createQuery.toMax("clt_closed_ID", "ClosedTransactions", lis);
+                clDate.clt_closed_ID = maxid;
 
                 Print printer = new Print();
                 printer.printCloseDate(clDate);
 
-                var item = new log();
-                item.log_Username = userInformation.user.usr_Username;
-                item.log_DateTime = dateservice.getCurrentDate();
-                item.log_Actions = "Close Date Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash= "+label_totalCash;
-                serviceslog.CreateLog(item);
+
 
                 App.Current.Shutdown();
             }            
         }
 
+        private void setLog(string stringvalue)
+        {
+            var item = new log();
+            item.log_Username = userInformation.user.usr_Username;
+            item.log_DateTime = dateservice.getCurrentDate();
+
+            if (stringvalue == "Close")
+            {
+                item.log_Actions = "Close Date Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Cash= " + label_totalCash;
+                serviceslog.CreateLog(item);
+            }
+
+            if (stringvalue == "Cancel")
+            {
+                item.log_Actions = "Close Date Cancel by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName;
+                serviceslog.CreateLog(item);
+            }
+        }
+
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
-            var items = new log();
-            items.log_Username = userInformation.user.usr_Username;
-            items.log_DateTime = dateservice.getCurrentDate();
-            items.log_Actions = "Close Date Cancel by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName;
-            serviceslog.CreateLog(items);
+            setLog("Cancel");
         }
 
     }
