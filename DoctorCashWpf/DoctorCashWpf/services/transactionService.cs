@@ -94,7 +94,6 @@ namespace DoctorCashWpf
             createQuery.toSelectAll("transactions", listTerms);
         }
 
-
         public void setTransaction(transaction transactionArray)
         {
             List<columnsValues> valuesArray = new List<columnsValues>();            
