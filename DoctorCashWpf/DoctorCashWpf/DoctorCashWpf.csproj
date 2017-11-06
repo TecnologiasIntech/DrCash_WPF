@@ -423,5 +423,8 @@
   <ItemGroup>
     <Resource Include="Resources\Custom-Icon-Cash.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logo.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

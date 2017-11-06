@@ -234,7 +234,7 @@ namespace DoctorCashWpf.Printer
 
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
-            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");            
+            var BytesValue = Encoding.ASCII.GetBytes(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.jpg");            
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
@@ -321,7 +321,7 @@ namespace DoctorCashWpf.Printer
             CrearTicket ticket = new CrearTicket();
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
-            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");
+            var BytesValue = Encoding.ASCII.GetBytes(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.jpg");
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
@@ -385,7 +385,7 @@ namespace DoctorCashWpf.Printer
             CrearTicket ticket = new CrearTicket();
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
-            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");
+            var BytesValue = Encoding.ASCII.GetBytes(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.jpg");
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
@@ -463,7 +463,7 @@ namespace DoctorCashWpf.Printer
 
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
-            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");
+            var BytesValue = Encoding.ASCII.GetBytes(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.jpg");
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
@@ -632,7 +632,7 @@ namespace DoctorCashWpf.Printer
 
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
-            var BytesValue = Encoding.ASCII.GetBytes(@"D:\logo.bmp");
+            var BytesValue = Encoding.ASCII.GetBytes(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.jpg");
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
