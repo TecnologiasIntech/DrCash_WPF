@@ -252,23 +252,23 @@ namespace DoctorCashWpf.Printer
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
             var BytesValue = Encoding.ASCII.GetBytes("");
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.bmp"));            
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logoTexto.bmp"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
-
-            //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));            
+
+            //donde ira todo lo que le vamos a mandar a imprimir            
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Cash In\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines()+"\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Patient Name", transaction.patientFirstName) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Amount Chanrge", money.convertToMoneyFormat(transaction.amountCharged.ToString()).txtComponent) + "\n"));
@@ -284,10 +284,10 @@ namespace DoctorCashWpf.Printer
             if (transaction.labs) BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.RightText("Labs\n")));
             if (transaction.other) BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.RightText("Other\n")));
 
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Right());
-            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));            
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Total", money.convertToMoneyFormat(transaction.total_cash.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Amount", money.convertToMoneyFormat(transaction.total_amount.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Change", money.convertToMoneyFormat(transaction.change.ToString()).txtComponent) + "\n"));
@@ -340,23 +340,24 @@ namespace DoctorCashWpf.Printer
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
             var BytesValue = Encoding.ASCII.GetBytes("");
-            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.bmp"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logoTexto.bmp"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
-
-            //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));            
+
+            //donde ira todo lo que le vamos a mandar a imprimir            
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Cash Out\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Cash", money.convertToMoneyFormat(transaction.cash.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
@@ -405,25 +406,26 @@ namespace DoctorCashWpf.Printer
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
             var BytesValue = Encoding.ASCII.GetBytes("");
-            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.bmp"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logoTexto.bmp"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
-
-            //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));            
+
+            //donde ira todo lo que le vamos a mandar a imprimir            
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Close Date\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Information\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("100's", money.convertToMoneyFormat(transaction.clt_100_bills.ToString()).txtComponent) + "\n"));
@@ -432,7 +434,8 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("10's", money.convertToMoneyFormat(transaction.clt_10_bills.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("5's", money.convertToMoneyFormat(transaction.clt_5_bills.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("1's", money.convertToMoneyFormat(transaction.clt_1_bills.ToString()).txtComponent) + "\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Total Cash", money.convertToMoneyFormat(transaction.clt_total_cash.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Total Credit", money.convertToMoneyFormat(transaction.clt_total_credit.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("total Check", money.convertToMoneyFormat(transaction.clt_total_check.ToString()).txtComponent) + "\n"));
@@ -484,18 +487,19 @@ namespace DoctorCashWpf.Printer
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
             var BytesValue = Encoding.ASCII.GetBytes("");
-            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.bmp"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logoTexto.bmp"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
-
-            //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));            
+
+            //donde ira todo lo que le vamos a mandar a imprimir            
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Closing Statement\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
@@ -503,7 +507,7 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Totals\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Initial Cash", money.convertToMoneyFormat(transaction.clt_initial_cash.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Amount Charged", money.convertToMoneyFormat(transaction.clt_checks_amount.ToString()).txtComponent) + "\n"));
@@ -514,22 +518,26 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Report\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("100's", money.convertToMoneyFormat(transaction.clt_100_bills.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("50's", money.convertToMoneyFormat(transaction.clt_50_bills.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("20's", money.convertToMoneyFormat(transaction.clt_20_bills.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("10's", money.convertToMoneyFormat(transaction.clt_10_bills.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("5's", money.convertToMoneyFormat(transaction.clt_5_bills.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("1's", money.convertToMoneyFormat(transaction.clt_1_bills.ToString()).txtComponent) + "\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Total Cash", money.convertToMoneyFormat(transaction.clt_total_cash.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Total Credit", money.convertToMoneyFormat(transaction.clt_total_credit.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("total Check", money.convertToMoneyFormat(transaction.clt_total_check.ToString()).txtComponent) + "\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            ////BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Balance", money.convertToMoneyFormat(transaction.clt_balance.ToString()).txtComponent) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
 
 
             //parte final de ticket
@@ -577,18 +585,19 @@ namespace DoctorCashWpf.Printer
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
             var BytesValue = Encoding.ASCII.GetBytes("");
-            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.bmp"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logoTexto.bmp"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
-
-            //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));            
+
+            //donde ira todo lo que le vamos a mandar a imprimir            
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Reciept\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
@@ -599,15 +608,15 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Total Cash", money.convertToMoneyFormat(transaction.total_cash.ToString()).txtComponent) + "\n"));            
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Credit Card", money.convertToMoneyFormat(transaction.credit.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Check", transaction.check.ToString()) + "\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());            
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());            
+            
 
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Total Paid", money.convertToMoneyFormat(total.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Change", money.convertToMoneyFormat(transaction.change.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
             
 
 
@@ -655,18 +664,19 @@ namespace DoctorCashWpf.Printer
             //primera parte del ticket
             PrinterUtility.EscPosEpsonCommands.EscPosEpson obj = new PrinterUtility.EscPosEpsonCommands.EscPosEpson();
             var BytesValue = Encoding.ASCII.GetBytes("");
-            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logo.bmp"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
-            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
-            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, GetLogo(@"C:\DrCash_WPF\DoctorCashWpf\DoctorCashWpf\Resources\logoTexto.bmp"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
-
-            //donde ira todo lo que le vamos a mandar a imprimir
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth6());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.FontSelect.FontA());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));            
+
+            //donde ira todo lo que le vamos a mandar a imprimir            
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Refund\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
@@ -800,9 +810,10 @@ namespace DoctorCashWpf.Printer
         {
             using (var bitmap = (Bitmap)Bitmap.FromFile(bmpFileName))
             {
+                /*obtiene el tamaño del logo*/
                 var threshold = 127;
                 var index = 0;
-                double multiplier = 200; // this depends on your printer model. for Beiyang you should use 1000
+                double multiplier = 570; // this depends on your printer model. for Beiyang you should use 1000
                 double scale = (double)(multiplier / (double)bitmap.Width);
                 int xheight = (int)(bitmap.Height * scale);
                 int xwidth = (int)(bitmap.Width * scale);
