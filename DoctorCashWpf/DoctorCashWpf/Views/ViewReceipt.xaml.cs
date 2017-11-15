@@ -130,6 +130,10 @@ namespace DoctorCashWpf.Views
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
 
             }
+            else
+            {
+                labelerror.Content = "Select a transaction ID";
+            }
 
         }
 
@@ -286,6 +290,16 @@ namespace DoctorCashWpf.Views
 
             Process.Start(@"C:/DrCash_WPF/DoctorCashWpf/Transaction" + nomber + ".pdf");
             #endregion
+        }
+
+        private void txtbox_question_KeyUp(object sender, KeyEventArgs e)
+        {
+            labelerror.Content = "";
+        }
+
+        private void fromdate_GotFocus(object sender, RoutedEventArgs e)
+        {
+            labelerror.Content = "";
         }
     }
 }

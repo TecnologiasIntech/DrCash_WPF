@@ -3,17 +3,32 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Web.Script.Serialization;
+using System.IO;
 
 namespace DoctorCashWpf.Views
 {
     /// <summary>
     /// Interaction logic for Authentication.xaml
     /// </summary>
+    /// 
+
+    class Person
+    {
+        public string name { get; set; }
+        public int age { get; set; }
+        public override string ToString()
+        {
+            return "Nombre: " + name + "\nEdad: " + age;
+        }
+    }
+
     public partial class Authentication : UserControl
     {
         public Authentication()
         {
             InitializeComponent();
+            generar();
         }
 
         private userService user = new userService();
@@ -100,6 +115,15 @@ namespace DoctorCashWpf.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
+        }
+
+        private void generar()
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            string outputJSON = File.ReadAllText("MiPrimerJSON.json");
+            Person p1 = ser.Deserialize<Person>(outputJSON);
+            Console.WriteLine(p1.age.ToString());
+            Console.ReadLine();
         }
     }
 }

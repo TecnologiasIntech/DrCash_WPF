@@ -67,7 +67,10 @@ namespace DoctorCashWpf.Views
                             break;
 
                         case (int)OPERATOR.REMOVE:
-                            txtbox.Text = (Convert.ToInt32(txtbox.Text) - 1).ToString();
+                            if (txtbox.Text != "0")
+                            {
+                                txtbox.Text = (Convert.ToInt32(txtbox.Text) - 1).ToString();
+                            }
                             break;
 
                         case (int)OPERATOR.EQUALITY:
@@ -137,7 +140,15 @@ namespace DoctorCashWpf.Views
             label_totalEntered = moneyComponent.convertToMoneyFormat(label_totalEntered).labelComponent;
 
             label_short.Text = (Convert.ToDouble(label_totalEntered.Text.Remove(0, 1)) - Convert.ToDouble(label_totalRegistered.Text.Remove(0, 1))).ToString();
-            label_short = moneyComponent.convertToMoneyFormat(label_short).labelComponent;
+            if(label_short.Text[0] == '-')
+            {
+                label_short.Text = "$" + label_short.Text;
+                moneyComponent.AddFloat(label_short);
+            }
+            else
+            {
+                label_short = moneyComponent.convertToMoneyFormat(label_short).labelComponent;
+            }
         }
 
         private void getCurrentTransactions()
@@ -148,7 +159,7 @@ namespace DoctorCashWpf.Views
 
             listCurrentTransactions = transactionservice.getCurrentTransactions(currentUserID);
 
-            float totalCash = 0, totalCredit = 0, totalChecks = 0, totalNumberChecks = 0, totalEntered = 0, totalRegistered = 0;
+            float totalCash = 0, totalCredit = 0, totalChecks = 0, totalNumberChecks = 0, totalEntered = 0, totalRegistered = 0, totalOutAndRefound = 0, totalChange = 0;
 
             for (int i = 0; i < listCurrentTransactions.Count(); i++)
             {
@@ -157,11 +168,23 @@ namespace DoctorCashWpf.Views
                     totalCredit += listCurrentTransactions[i].credit;
                     totalChecks += listCurrentTransactions[i].check;
                     totalCash += listCurrentTransactions[i].cash;
-                    totalNumberChecks += listCurrentTransactions[i].checkNumber;
+                    totalNumberChecks += listCurrentTransactions[i].checkNumber; 
+                    totalChange += listCurrentTransactions[i].change;
+                }
+                else if(listCurrentTransactions[i].type == (int)TRANSACTIONTYPE.OUT)
+                {
+                    totalOutAndRefound += listCurrentTransactions[i].cash;
+                }else if(listCurrentTransactions[i].type == (int)TRANSACTIONTYPE.REFOUND)
+                {
+                    totalOutAndRefound += listCurrentTransactions[i].amountCharged;
+                }
+                else
+                {
+                    totalCash += listCurrentTransactions[i].cash;
                 }
             }
 
-            totalRegistered = totalCredit + totalChecks + totalCash;
+            totalRegistered = totalCredit + totalChecks + totalCash - totalOutAndRefound - totalChange;
             totalEntered = (float)(Convert.ToDouble(textbox_credit.Text.Remove(0, 1)) + Convert.ToDouble(textbox_check.Text.Remove(0, 1)) + Convert.ToDouble(textbox_leftInRegister.Text.Remove(0, 1)) + Convert.ToDouble(label_totalCash.Text.Remove(0, 1)));
 
             label_totalEntered.Text = "$" + totalEntered.ToString();
@@ -535,28 +558,46 @@ namespace DoctorCashWpf.Views
                 clDate.clt_total_cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
                 clDate.clt_total_check = (float)Convert.ToDouble(textbox_check.Text.Remove(0, 1));
                 clDate.clt_total_credit = (float)Convert.ToDouble(textbox_credit.Text.Remove(0, 1));
+
                 transactionservice.setClosedTransaction(clDate);
+
+                setLog("Close");
+
+                var lis = new List<valuesWhere>();
+                int maxid = createQuery.toMax("clt_closed_ID", "ClosedTransactions", lis);
+                clDate.clt_closed_ID = maxid;
 
                 Print printer = new Print();
                 printer.printCloseDate(clDate);
 
-                var item = new log();
-                item.log_Username = userInformation.user.usr_Username;
-                item.log_DateTime = dateservice.getCurrentDate();
-                item.log_Actions = "Close Date Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName+", Cash= "+label_totalCash;
-                serviceslog.CreateLog(item);
 
-                MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
+
+                App.Current.Shutdown();
             }            
+        }
+
+        private void setLog(string stringvalue)
+        {
+            var item = new log();
+            item.log_Username = userInformation.user.usr_Username;
+            item.log_DateTime = dateservice.getCurrentDate();
+
+            if (stringvalue == "Close")
+            {
+                item.log_Actions = "Close Date Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Cash= " + label_totalCash;
+                serviceslog.CreateLog(item);
+            }
+
+            if (stringvalue == "Cancel")
+            {
+                item.log_Actions = "Close Date Cancel by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName;
+                serviceslog.CreateLog(item);
+            }
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
-            var items = new log();
-            items.log_Username = userInformation.user.usr_Username;
-            items.log_DateTime = dateservice.getCurrentDate();
-            items.log_Actions = "Close Date Cancel by UserName=" + userInformation.user.usr_Username + ", Full Name" + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName;
-            serviceslog.CreateLog(items);
+            setLog("Cancel");
         }
 
     }

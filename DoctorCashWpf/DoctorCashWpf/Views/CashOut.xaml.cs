@@ -1,6 +1,7 @@
 ﻿using DoctorCashWpf.Printer;
 using MaterialDesignColors.WpfExample.Domain;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,6 +26,7 @@ namespace DoctorCashWpf.Views
         private BrushConverter brushConverter = new BrushConverter();
         private logService serviceslog = new logService();
         private dateService date = new dateService();
+        private sqlQueryService sqlservice = new sqlQueryService();
 
         private void setInitialValues()
         {
@@ -317,28 +319,41 @@ namespace DoctorCashWpf.Views
             }
             else
             {
-                var transaction = new transactionService();
-                var items = new transaction();
-                items.registerId = userInformation.user.usr_Username;
-                items.userId = userInformation.user.usr_ID;
-                items.cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
-                items.comment = textbox_comment.Text;
-                items.type = (int)TRANSACTIONTYPE.OUT;
-
-                transaction.setTransactionOut(items);
-
-                var item = new log();
-                item.log_Username = userInformation.user.usr_Username;
-                item.log_DateTime = date.getCurrentDate();
-                item.log_Actions = "Cash Out Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Cash= " + label_totalCash;
-                serviceslog.CreateLog(item);
-
-                Print printer = new Print();
-                printer.printCashOut(items);
+                setTransactionOutAndPrint();
 
                 MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
             }
 
+        }
+
+        private void setTransactionOutAndPrint()
+        {
+            var transaction = new transactionService();
+            var items = new transaction();
+            items.registerId = userInformation.user.usr_Username;
+            items.userId = userInformation.user.usr_ID;
+            items.cash = (float)Convert.ToDouble(label_totalCash.Text.Remove(0, 1));
+            items.comment = textbox_comment.Text;
+            items.type = (int)TRANSACTIONTYPE.OUT;
+
+            transaction.setTransactionOut(items);
+            setLog();
+
+            var lis = new List<valuesWhere>();
+            int maxid = sqlservice.toMax("trn_ID", "transactions", lis);
+            items.trn_id = maxid;
+            
+            Print printer = new Print();
+            printer.printCashOut(items);
+        }
+
+        private void setLog()
+        {
+            var item = new log();
+            item.log_Username = userInformation.user.usr_Username;
+            item.log_DateTime = date.getCurrentDate();
+            item.log_Actions = "Cash Out Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + ", Cash= " + label_totalCash;
+            serviceslog.CreateLog(item);
         }
 
         private void textbox_bills100_GotFocus(object sender, RoutedEventArgs e)

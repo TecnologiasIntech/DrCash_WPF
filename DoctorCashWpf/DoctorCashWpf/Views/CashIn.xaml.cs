@@ -1,5 +1,6 @@
 ﻿using DoctorCashWpf.Printer;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -30,6 +31,7 @@ namespace DoctorCashWpf
         private transactionService transaction = new transactionService();
         private logService serviceslog = new logService();
         private dateService date = new dateService();
+        private sqlQueryService sqlservice = new sqlQueryService();
 
         private void loadValuesToUpdateTransaction(int transactionID)
         {
@@ -132,10 +134,6 @@ namespace DoctorCashWpf
             {
                 ApplyDesignForError(txtbox_numberChecks);
             }
-            else if (txtbox_comment.Text == "")
-            {
-                ApplyDesignForError(txtbox_comment);
-            }
             else
             {
                 
@@ -151,7 +149,7 @@ namespace DoctorCashWpf
                 else
                 {
                     setTransactionAndPrintReceip();
-                    setLog();
+                    setLog("Create");
 
                     MaterialDesignThemes.Wpf.DialogHost.CloseDialogCommand.Execute(null, null);
                 }
@@ -187,16 +185,29 @@ namespace DoctorCashWpf
 
             transactionService.setTransaction(transaction);
 
+            var lis = new List<valuesWhere>();
+            int maxid = sqlservice.toMax("trn_ID", "transactions", lis);
+            transaction.trn_id = maxid;
+
             printReceip(transaction);
         }
 
-        private void setLog()
+        private void setLog(string stringvalue)
         {
             var items = new log();
             items.log_Username = userInformation.user.usr_Username;
             items.log_DateTime = date.getCurrentDate();
-            items.log_Actions = "Cash In Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total= " + label_total.Text + ", Amount=" + label_amount.Text + ", Change= " + label_change.Text;
-            serviceslog.CreateLog(items);
+
+            if (stringvalue == "Cancel")
+            {
+                items.log_Actions = "Cash In Cancel by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data Captured: Total= " + label_total.Text + ", Amount= " + label_amount.Text + ", Change= " + label_change.Text;
+                serviceslog.CreateLog(items);
+            }
+            if (stringvalue == "Create")
+            {
+                items.log_Actions = "Cash In Created by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data: Total= " + label_total.Text + ", Amount=" + label_amount.Text + ", Change= " + label_change.Text;
+                serviceslog.CreateLog(items);
+            }            
         }
 
         private void printReceip(transaction transaction)
@@ -417,11 +428,7 @@ namespace DoctorCashWpf
 
             transaction.updateTransaction(trn);
 
-            var items = new log();
-            items.log_Username = userInformation.user.usr_Username;
-            items.log_DateTime = date.getCurrentDate();
-            items.log_Actions = "Cash In Cancel by UserName= " + userInformation.user.usr_Username + ", Full Name: " + userInformation.user.usr_FirstName + " " + userInformation.user.usr_LastName + " Data Captured: Total= " + label_total.Text + ", Amount= " + label_amount.Text + ", Change= " + label_change.Text;
-            serviceslog.CreateLog(items);
+            setLog("Cancel");
 
         }
 

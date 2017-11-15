@@ -99,11 +99,11 @@
 
                             <!--Date From-->
                             <StackPanel Grid.Column="1" Margin="15">
-                                <DatePicker KeyUp="txtbox_ID_KeyUp" Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                <DatePicker GotFocus="fromdate_GotFocus" Name="fromdate" materialDesign:HintAssist.Hint="Date From" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             </StackPanel>
                             <!--Date To-->
                             <StackPanel Grid.Column="2" Margin="15">
-                                <DatePicker KeyUp="txtbox_ID_KeyUp" Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                <DatePicker GotFocus="fromdate_GotFocus" Name="todate" materialDesign:HintAssist.Hint="Date To" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             </StackPanel>
 
                             <!--Search Button-->
@@ -149,6 +149,7 @@
                             </DataGrid>
                         </Grid>
                     </materialDesign:Card>
+                    
 
 
                     <!--#endregion-->
@@ -176,11 +177,12 @@
                     </Grid>
                 </materialDesign:Card>
                 <!--#endregion-->
-
-
+                
 
             </Grid>
-            <Label Name="labelerror" Margin="0,410,0,80" Content="" HorizontalAlignment="Center" Foreground="Red"></Label>
+            <!--poner en esta parte el mensaje-->
+            <Label Name="labelerror" Margin="0,400,0,0" Content="" HorizontalAlignment="Center" Foreground="Red" VerticalAlignment="Top"></Label>
+
             <!--#endregion-->
 
             <StackPanel Grid.Column="1"  Margin="25,15,25,10">

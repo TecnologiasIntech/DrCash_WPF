@@ -1,5 +1,6 @@
 ﻿using DoctorCashWpf.Printer;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -24,6 +25,7 @@ namespace DoctorCashWpf.Views
         private MoneyFormatService moneyComponent = new MoneyFormatService();
         private logService serviceslog = new logService();
         private dateService dateservice = new dateService();
+        private sqlQueryService sqlservice = new sqlQueryService();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -112,6 +114,10 @@ namespace DoctorCashWpf.Views
                 transactionservice.setTransactionRefund(trn);
 
                 setLog("Print");
+
+                var lis = new List<valuesWhere>();
+                int maxid = sqlservice.toMax("trn_ID", "transactions", lis);
+                trn.trn_id = maxid;
 
                 Print printer = new Print();
                 printer.printRefund(trn);

@@ -312,7 +312,7 @@ namespace DoctorCashWpf
             //Ejecutamos la consulta            
             Max=Convert.ToInt32(selectMax.ExecuteScalar());
 
-            return (Max+1);
+            return (Max);
         }
 
         //UPDATE table SET column= value, column= value  WHERE column = value 
