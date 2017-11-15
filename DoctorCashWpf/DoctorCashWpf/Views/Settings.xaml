@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:DoctorCashWpf"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <StackPanel>
         <TextBlock Text="Settings"/>
 
         <Button Click="Button_Click_Register">Register</Button>
-    </Grid>
+        <Button Click="Button_Click_General">General</Button>
+    </StackPanel>
 </UserControl>

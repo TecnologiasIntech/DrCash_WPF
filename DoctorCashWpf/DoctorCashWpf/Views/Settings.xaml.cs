@@ -16,10 +16,16 @@ namespace DoctorCashWpf
 
         private async void Button_Click_Register(object sender, System.Windows.RoutedEventArgs e)
         {
-            var DailyTransacions = new Settings_Register();
+            var settings_Register = new Settings_Register();
 
-            await DialogHost.Show(DailyTransacions, "RootDialog");
+            await DialogHost.Show(settings_Register, "RootDialog");
         }
 
+        private async void Button_Click_General(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var settings_General = new Settings_General();
+
+            await DialogHost.Show(settings_General, "RootDialog");
+        }
     }
 }
