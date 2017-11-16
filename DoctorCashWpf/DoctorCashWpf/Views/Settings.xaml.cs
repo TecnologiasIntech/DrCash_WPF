@@ -27,5 +27,14 @@ namespace DoctorCashWpf
 
             await DialogHost.Show(settings_General, "RootDialog");
         }
+
+
+        private async void Button_Click_SMPT(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var settings_SMPT = new Settings_SMPT();
+
+            await DialogHost.Show(settings_SMPT, "RootDialog");
+        }
+
     }
 }
