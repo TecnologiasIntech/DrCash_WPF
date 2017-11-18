@@ -147,9 +147,14 @@ namespace DoctorCashWpf.Printer
                     //}
 
                 }
+                for (int i = leftext.Length; i < 30; i++)
+                {
+                    spaces += " ";
+                }
+                leftext = spaces + leftext;
 
                 fulltext = leftext;
-
+                spaces = "";
 
                 if (RightText.Length > 32)
                 {
@@ -169,7 +174,8 @@ namespace DoctorCashWpf.Printer
                 int spacesnumbers = maxCar - (leftext.Length + rightext.Length);
                 for (int i = 0; i < spacesnumbers; i++)
                 {
-                    spaces += ".";
+                    //spaces += ".";
+                    spaces += " ";
                 }
                 fulltext += spaces + RightText;
                 line.AppendLine(fulltext);
@@ -261,7 +267,7 @@ namespace DoctorCashWpf.Printer
             //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Clinica\n"));
             //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleWidth4());
             //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("La familia\n"));            
-
+            /*
             //donde ira todo lo que le vamos a mandar a imprimir            
             //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
             BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
@@ -292,7 +298,36 @@ namespace DoctorCashWpf.Printer
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Amount", money.convertToMoneyFormat(transaction.total_amount.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Change", money.convertToMoneyFormat(transaction.change.ToString()).txtComponent) + "\n"));
             BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            */
+            //donde ira todo lo que le vamos a mandar a imprimir            
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.DoubleHeight2());
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes("Reciept\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.CharSize.Nomarl());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Center());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Alignment.Left());
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Amount Charged", money.convertToMoneyFormat(transaction.amountCharged.ToString()).txtComponent) + "\n"));
 
+            //verificar de que es y poner ese nomas
+            if (transaction.copayment) BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.RightText("Copayment\n")));
+            if (transaction.selfPay) BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.RightText("Selfpay\n")));
+            if (transaction.deductible) BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.RightText("Deductible\n")));
+            if (transaction.labs) BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.RightText("Labs\n")));
+            if (transaction.other) BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.RightText("Other\n")));
+
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Total Cash", money.convertToMoneyFormat(transaction.total_cash.ToString()).txtComponent) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Credit Card", money.convertToMoneyFormat(transaction.credit.ToString()).txtComponent) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Check", transaction.check.ToString()) + "\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());            
+
+
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Total Paid", money.convertToMoneyFormat(transaction.amountCharged.ToString()).txtComponent) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.ExtremeText("Change", money.convertToMoneyFormat(transaction.change.ToString()).txtComponent) + "\n"));
+            BytesValue = PrintExtensions.AddBytes(BytesValue, Encoding.ASCII.GetBytes(ticket.EqualLines() + "\n"));
+            //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Lf());
 
             //parte final de ticket
             //BytesValue = PrintExtensions.AddBytes(BytesValue, obj.Separator());

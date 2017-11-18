@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Web.Script.Serialization;
+//using System.Web.Script.Serialization;
 using System.IO;
 
 namespace DoctorCashWpf.Views
@@ -28,7 +28,7 @@ namespace DoctorCashWpf.Views
         public Authentication()
         {
             InitializeComponent();
-            generar();
+           // generar();
         }
 
         private userService user = new userService();
@@ -117,13 +117,13 @@ namespace DoctorCashWpf.Views
             App.Current.Shutdown();
         }
 
-        private void generar()
-        {
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            string outputJSON = File.ReadAllText("MiPrimerJSON.json");
-            Person p1 = ser.Deserialize<Person>(outputJSON);
-            Console.WriteLine(p1.age.ToString());
-            Console.ReadLine();
-        }
+        //private void generar()
+        //{
+        //    JavaScriptSerializer ser = new JavaScriptSerializer();
+        //    string outputJSON = File.ReadAllText("MiPrimerJSON.json");
+        //    Person p1 = ser.Deserialize<Person>(outputJSON);
+        //    Console.WriteLine(p1.age.ToString());
+        //    Console.ReadLine();
+        //}
     }
 }

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataSet1" msprop:Generator_TableClassName="DataSet1DataTable" msprop:Generator_TableVarName="tableDataSet1" msprop:Generator_TablePropName="_DataSet1" msprop:Generator_RowDeletingName="DataSet1RowDeleting" msprop:Generator_RowChangingName="DataSet1RowChanging" msprop:Generator_RowEvHandlerName="DataSet1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataSet1RowDeleted" msprop:Generator_UserTableName="DataSet1" msprop:Generator_RowChangedName="DataSet1RowChanged" msprop:Generator_RowEvArgName="DataSet1RowChangeEvent" msprop:Generator_RowClassName="DataSet1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="clt_100_bills" msprop:Generator_ColumnVarNameInTable="columnclt_100_bills" msprop:Generator_ColumnPropNameInRow="clt_100_bills" msprop:Generator_ColumnPropNameInTable="clt_100_billsColumn" msprop:Generator_UserColumnName="clt_100_bills" type="xs:decimal" minOccurs="0" />
+              <xs:element name="clt_50_bills" msprop:Generator_ColumnVarNameInTable="columnclt_50_bills" msprop:Generator_ColumnPropNameInRow="clt_50_bills" msprop:Generator_ColumnPropNameInTable="clt_50_billsColumn" msprop:Generator_UserColumnName="clt_50_bills" type="xs:decimal" minOccurs="0" />
+              <xs:element name="clt_20_bills" msprop:Generator_ColumnVarNameInTable="columnclt_20_bills" msprop:Generator_ColumnPropNameInRow="clt_20_bills" msprop:Generator_ColumnPropNameInTable="clt_20_billsColumn" msprop:Generator_UserColumnName="clt_20_bills" type="xs:decimal" minOccurs="0" />
+              <xs:element name="clt_10_bills" msprop:Generator_ColumnVarNameInTable="columnclt_10_bills" msprop:Generator_ColumnPropNameInRow="clt_10_bills" msprop:Generator_ColumnPropNameInTable="clt_10_billsColumn" msprop:Generator_UserColumnName="clt_10_bills" type="xs:decimal" minOccurs="0" />
+              <xs:element name="clt_5_bills" msprop:Generator_ColumnVarNameInTable="columnclt_5_bills" msprop:Generator_ColumnPropNameInRow="clt_5_bills" msprop:Generator_ColumnPropNameInTable="clt_5_billsColumn" msprop:Generator_UserColumnName="clt_5_bills" type="xs:decimal" minOccurs="0" />
+              <xs:element name="clt_1_bills" msprop:Generator_ColumnVarNameInTable="columnclt_1_bills" msprop:Generator_ColumnPropNameInRow="clt_1_bills" msprop:Generator_ColumnPropNameInTable="clt_1_billsColumn" msprop:Generator_UserColumnName="clt_1_bills" type="xs:decimal" minOccurs="0" />
+              <xs:element name="clt_Username" msprop:Generator_ColumnVarNameInTable="columnclt_Username" msprop:Generator_ColumnPropNameInRow="clt_Username" msprop:Generator_ColumnPropNameInTable="clt_UsernameColumn" msprop:Generator_UserColumnName="clt_Username" type="xs:string" minOccurs="0" />
+              <xs:element name="clt_total_cash" msprop:Generator_ColumnVarNameInTable="columnclt_total_cash" msprop:Generator_ColumnPropNameInRow="clt_total_cash" msprop:Generator_ColumnPropNameInTable="clt_total_cashColumn" msprop:Generator_UserColumnName="clt_total_cash" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

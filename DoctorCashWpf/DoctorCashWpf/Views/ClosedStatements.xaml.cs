@@ -214,7 +214,7 @@ namespace DoctorCashWpf.Views
                 clDate.clt_total_credit = (float)Convert.ToDouble(txt_credit.Text.Remove(0, 1));
                 clDate.clt_checks_amount = (float)Convert.ToDouble(txt_amount.Text.Remove(0, 1));
                 clDate.clt_balance = (float)Convert.ToDouble(txt_balance.Text.Remove(0, 1));
-                Print printer = new Print();
+                Print printer = new Print();            
                 printer.printClosedStatement(clDate);
             }
             else

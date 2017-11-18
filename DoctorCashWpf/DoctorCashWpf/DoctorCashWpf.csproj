@@ -136,6 +136,15 @@
     <Compile Include="interfaces\logObj.cs" />
     <Compile Include="interfaces\transactionsObj.cs" />
     <Compile Include="interfaces\moneyComponent.cs" />
+    <Compile Include="Printer\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Printer\PrinterCloseDate.cs" />
+    <Compile Include="Printer\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
     <Compile Include="services\logService.cs" />
     <Compile Include="statics\cashInUpdate.cs" />
     <Compile Include="statics\closeDate.cs" />
@@ -238,6 +247,10 @@
     <Compile Include="Views\ViewReceipt.xaml.cs">
       <DependentUpon>ViewReceipt.xaml</DependentUpon>
     </Compile>
+    <Page Include="Printer\Report.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Refund.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -392,11 +405,26 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Printer\Report1.rdlc" />
+    <EmbeddedResource Include="Printer\ReportCloseDate.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Printer\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Printer\DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Printer\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\DoctorCashWpf.Printer.PrinterCloseDate.datasource" />
+    <None Include="Properties\DataSources\DoctorCashWpf.Views.CloseDate.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

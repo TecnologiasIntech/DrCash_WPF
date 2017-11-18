@@ -1,0 +1,18 @@
+﻿<Window x:Class="DoctorCashWpf.Printer.Report"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoctorCashWpf.Printer"
+        xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+        mc:Ignorable="d"
+        Title="Report" Height="315.789" Width="435.339">
+    <Grid>
+        <WindowsFormsHost HorizontalAlignment="Left" Height="265" Margin="10,10,0,0" VerticalAlignment="Top" Width="407">
+            <rv:ReportViewer x:Name="ReportViewerDemo">
+                
+            </rv:ReportViewer>
+        </WindowsFormsHost>
+
+    </Grid>
+</Window>

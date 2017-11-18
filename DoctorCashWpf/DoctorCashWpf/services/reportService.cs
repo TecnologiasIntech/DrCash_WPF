@@ -129,6 +129,25 @@ namespace DoctorCashWpf
             return createQuery.toSelectAll("ClosedTransactions", termsList);
         }
 
+        public DataTable getLastInformation(string ID)
+        {
+            var columns = new List<string>();
+            columns.Add("clt_100_bills");
+            columns.Add("clt_50_bills");
+            columns.Add("clt_20_bills");
+            columns.Add("clt_10_bills");
+            columns.Add("clt_5_bills");
+            columns.Add("clt_1_bills");            
+            columns.Add("clt_Username");
+            columns.Add("clt_total_cash");
+            var termsList = new List<valuesWhere>();
+            //termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDate(fromDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.GREATER_THAN_OR_EQUAL));
+            //termsList.Add(createItem.ofTypeValuesWhere(true, "clt_Datetime", date.convertToFormatDateFinal(toDate), (int)OPERATORBOOLEAN.AND, (int)OPERATOR.LESS_THAN_OR_EQUAL));
+            termsList.Add(createItem.ofTypeValuesWhere(false, "clt_closed_ID", ID, (int)OPERATORBOOLEAN.NONE, (int)OPERATOR.EQUALITY));
+
+            return createQuery.toSelect(columns, "ClosedTransactions", termsList);            
+        }
+
         private DataTable getDailyTransactionsByOnlyRange(string fromDate, string toDate)
         {
             var columns = getTransactionsColumns();

@@ -301,7 +301,7 @@ namespace DoctorCashWpf
             }
 
             //Creamos la consulta
-            string query = "SELECT MAX(" + column + ")" + "FROM " + table + terms;
+            string query = "SELECT COUNT(" + column + ")" + "FROM " + table + terms;
 
             //Abrimos una conexion
             var conection = openConection();

@@ -1,6 +1,11 @@
 ﻿using DoctorCashWpf.Printer;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +26,7 @@ namespace DoctorCashWpf.Views
         private sqlQueryService createQuery = new sqlQueryService();
         private createItemsForListService createItem = new createItemsForListService();
         private dateService dateservice = new dateService();
+        private reportService report = new reportService();
 
         public CloseDate()
         {
@@ -94,7 +100,7 @@ namespace DoctorCashWpf.Views
             catch (Exception e)
             {
                 txtbox.Text = "";
-                label= moneyComponent.getMoneyFormatInZero(label);
+                label = moneyComponent.getMoneyFormatInZero(label);
                 getTotalCash();
             }
         }
@@ -140,7 +146,7 @@ namespace DoctorCashWpf.Views
             label_totalEntered = moneyComponent.convertToMoneyFormat(label_totalEntered).labelComponent;
 
             label_short.Text = (Convert.ToDouble(label_totalEntered.Text.Remove(0, 1)) - Convert.ToDouble(label_totalRegistered.Text.Remove(0, 1))).ToString();
-            if(label_short.Text[0] == '-')
+            if (label_short.Text[0] == '-')
             {
                 label_short.Text = "$" + label_short.Text;
                 moneyComponent.AddFloat(label_short);
@@ -168,13 +174,14 @@ namespace DoctorCashWpf.Views
                     totalCredit += listCurrentTransactions[i].credit;
                     totalChecks += listCurrentTransactions[i].check;
                     totalCash += listCurrentTransactions[i].cash;
-                    totalNumberChecks += listCurrentTransactions[i].checkNumber; 
+                    totalNumberChecks += listCurrentTransactions[i].checkNumber;
                     totalChange += listCurrentTransactions[i].change;
                 }
-                else if(listCurrentTransactions[i].type == (int)TRANSACTIONTYPE.OUT)
+                else if (listCurrentTransactions[i].type == (int)TRANSACTIONTYPE.OUT)
                 {
                     totalOutAndRefound += listCurrentTransactions[i].cash;
-                }else if(listCurrentTransactions[i].type == (int)TRANSACTIONTYPE.REFOUND)
+                }
+                else if (listCurrentTransactions[i].type == (int)TRANSACTIONTYPE.REFOUND)
                 {
                     totalOutAndRefound += listCurrentTransactions[i].amountCharged;
                 }
@@ -197,7 +204,7 @@ namespace DoctorCashWpf.Views
             moneyComponent.AddFloat(label_totalRegistered);
             moneyComponent.AddFloat(label_short);
         }
-        
+
         private void clearInputs()
         {
             labelerror.Content = "";
@@ -208,12 +215,12 @@ namespace DoctorCashWpf.Views
             textbox_bills5.Text = "";
             textbox_bills1.Text = "";
 
-            label_totalCash= moneyComponent.getMoneyFormatInZero(label_totalCash);
+            label_totalCash = moneyComponent.getMoneyFormatInZero(label_totalCash);
             textbox_credit = moneyComponent.getMoneyFormatInZero(textbox_credit);
-            textbox_check= moneyComponent.getMoneyFormatInZero(textbox_check);
+            textbox_check = moneyComponent.getMoneyFormatInZero(textbox_check);
             label_totalEntered = moneyComponent.getMoneyFormatInZero(label_totalEntered);
             textbox_leftInRegister = moneyComponent.getMoneyFormatInZero(textbox_leftInRegister);
-            label_short= moneyComponent.getMoneyFormatInZero(label_short);
+            label_short = moneyComponent.getMoneyFormatInZero(label_short);
 
             plusOrLess(textbox_bills100, label_bills100, (int)OPERATOR.EQUALITY, 0);
             plusOrLess(textbox_bills50, label_bills50, (int)OPERATOR.EQUALITY, 0);
@@ -396,7 +403,7 @@ namespace DoctorCashWpf.Views
             if (e.Key == Key.Enter)
             {
                 moneyComponent.convertToMoneyFormat(textbox_credit, () => { getCurrentTransactions(); });
-               // verifyTxtBox(textbox_credit);
+                // verifyTxtBox(textbox_credit);
             }
         }
 
@@ -413,7 +420,7 @@ namespace DoctorCashWpf.Views
             {
                 moneyComponent.convertToMoneyFormat(textbox_check, () => { getCurrentTransactions(); });
             }
-            
+
         }
 
         private void textbox_check_LostFocus(object sender, RoutedEventArgs e)
@@ -492,7 +499,7 @@ namespace DoctorCashWpf.Views
         }
 
         private void applydesign(TextBox value)
-        {            
+        {
             value.Foreground = (Brush)brushConverter.ConvertFrom("#e74c3c");
             value.Focus();
             labelerror.Content = "Complete Field";
@@ -503,14 +510,14 @@ namespace DoctorCashWpf.Views
             labelerror.Content = "";
             var clDate = new closeDate();
 
-            if (textbox_bills1.Text == "" && textbox_bills10.Text == "" && textbox_bills100.Text == "" && textbox_bills20.Text == "" && textbox_bills5.Text == "" && textbox_bills50.Text == "" && textbox_credit.Text== "$0,00" && textbox_check.Text== "$0,00" && textbox_leftInRegister.Text=="$0,00")
+            if (textbox_bills1.Text == "" && textbox_bills10.Text == "" && textbox_bills100.Text == "" && textbox_bills20.Text == "" && textbox_bills5.Text == "" && textbox_bills50.Text == "" && textbox_credit.Text == "$0,00" && textbox_check.Text == "$0,00" && textbox_leftInRegister.Text == "$0,00")
             {
                 #region Check                               
                 if (textbox_bills100.Text == "")
                 {
                     applydesign(textbox_bills100);
                 }
-                               
+
                 else if (textbox_bills50.Text == "")
                 {
                     applydesign(textbox_bills50);
@@ -547,7 +554,7 @@ namespace DoctorCashWpf.Views
             }
             else
             {
-                
+
                 labelerror.Content = "";
                 clDate.clt_100_bills = (float)Convert.ToDouble(label_bills100.Text.Remove(0, 1));
                 clDate.clt_50_bills = (float)Convert.ToDouble(label_bills50.Text.Remove(0, 1));
@@ -561,6 +568,8 @@ namespace DoctorCashWpf.Views
 
                 transactionservice.setClosedTransaction(clDate);
 
+               
+
                 setLog("Close");
 
                 var lis = new List<valuesWhere>();
@@ -570,10 +579,11 @@ namespace DoctorCashWpf.Views
                 Print printer = new Print();
                 printer.printCloseDate(clDate);
 
-
+                Printer.Report miventana = new Printer.Report(maxid);
+                miventana.ShowDialog();
 
                 App.Current.Shutdown();
-            }            
+            }
         }
 
         private void setLog(string stringvalue)
