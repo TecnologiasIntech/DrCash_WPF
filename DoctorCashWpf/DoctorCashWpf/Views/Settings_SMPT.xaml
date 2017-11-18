@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="DoctorCashWpf.Views.Settings_SMPT"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DoctorCashWpf.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Height="350" Width="600"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+
+        <!--#region Title Bar-->
+        <Grid Grid.Row="0" Background="#CDDC39">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <!--Modal Icon-->
+            <materialDesign:PackIcon Kind="Settings"  Grid.Column="0" Foreground="White" Height="40" Width="40" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+            <!--Title-->
+            <TextBlock Text="SMPT" Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="28" FontWeight="Bold"/>
+        </Grid>
+        <!--#endregion-->
+
+
+        <StackPanel Grid.Row="1" Margin="10">
+
+            <!--#region Row 1-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" Margin="5">
+                    <TextBlock>Server Name</TextBlock>
+                    <TextBox></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="5">
+                    <TextBlock>Port Number</TextBlock>
+                    <TextBox></TextBox>
+                </StackPanel>
+            </Grid>
+            <!--#endregion-->
+
+
+            <!--#region Row 2-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="5">
+                    <TextBlock>SMPT Username</TextBlock>
+                    <TextBox></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="5">
+                    <TextBlock>SMPT Password</TextBlock>
+                    <TextBox></TextBox>
+                </StackPanel>
+            </Grid>
+            <!--#endregion-->
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Column="0" Grid.Row="0" Margin="5">
+                    <TextBlock>Email From</TextBlock>
+                    <TextBox></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
+                    <TextBlock>Email BCC</TextBlock>
+                    <TextBox></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Grid.Row="1" Margin="5">
+                    <Button>Test Email</Button>
+                </StackPanel>
+            </Grid>
+
+            <!--#region Save/ Cancel Button-->
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                
+                <Button Width="200" Background="Transparent" BorderBrush="Transparent"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                    <TextBlock Text="Save" Foreground="#6aa84f  " FontSize="18"/>
+                </Button>
+
+                <Button Width="200" Background="Transparent" BorderBrush="Transparent"
+                           Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
+                    <TextBlock Text="Cancel" Foreground="#666666 " FontSize="18"/>
+                </Button>
+
+            </StackPanel>
+            <!--#endregion-->
+
+        </StackPanel>
+
+
+
+    </Grid>
+</UserControl>

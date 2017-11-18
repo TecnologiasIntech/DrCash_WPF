@@ -4,29 +4,151 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DoctorCashWpf.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             Height="500" Width="600"
              d:DesignHeight="600" d:DesignWidth="800">
-    <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
 
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+
+        <!--#region Title Bar-->
+        <Grid Grid.Row="0" Background="#CDDC39">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <!--Modal Icon-->
+            <materialDesign:PackIcon Kind="Settings"  Grid.Column="0" Foreground="White" Height="40" Width="40" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  />
+            <!--Title-->
+            <TextBlock Text="General" Grid.Column="1" Foreground="White" VerticalAlignment="Center" FontSize="28" FontWeight="Bold"/>
+        </Grid>
+        <!--#endregion-->
+
+
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <CheckBox>Lock the application in</CheckBox>
-            <CheckBox>Refresh summary in </CheckBox>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBox>1</TextBox>
+                <GroupBox Grid.Column="0" Margin="10">
+                    <StackPanel>
+                        <Grid>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <CheckBox Grid.Column="0">Lock the application in </CheckBox>
+                            <TextBox Grid.Column="1"/>
+                            <TextBlock Grid.Column="2">minutes</TextBlock>
+                        </Grid>
+                
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <CheckBox Grid.Column="0">Refresh summary in</CheckBox>
+                            <TextBox Grid.Column="1"/>
+                            <TextBlock Grid.Column="2">minutes</TextBlock>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+                
+                <GroupBox Grid.Column="1" Margin="10">
+                    <StackPanel>
+                        <RadioButton Margin="0 0 0 5" GroupName="leave_money_in_register" Content="Leave Money in Register."/>
+                        <RadioButton GroupName="leave_money_in_register" Content="Leave the Register empty."/>
+                    </StackPanel>
+                </GroupBox>
+
+            </Grid>
+
+            <!--#region Restore Password-->
+            <GroupBox Grid.Row="1" Margin="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton GroupName="Password_Restore" Grid.Column="0" IsChecked="True">Send the Password through Email.</RadioButton>
+                    <RadioButton GroupName="Password_Restore" Grid.Column="1">Show the Password in the Screen.</RadioButton>
+                </Grid>
+            </GroupBox>
+            <!--#endregion-->
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--#region Default Password-->
+                <GroupBox Grid.Column="0" Margin="10">
+                    <StackPanel >
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton GroupName="Default_Password">Use default Password.</RadioButton>
+                            <TextBox Margin="20 0 0 0" Width="200">newpassword1</TextBox>
+                        </StackPanel>
+                        <RadioButton GroupName="Default_Password">The Application generate a temporary password.</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+                <!--#endregion-->
+                
+                <!--#region Upload Image-->
+                <GroupBox Grid.Column="1" Margin="10">
+                    <StackPanel>
+                        <!-- Load Image Button-->
+                        <Button>Load Logo</Button>
+                        <!--Selected Image-->
+                    
+                    </StackPanel>
+                </GroupBox>
+                <!--#endregion-->
+                
+            </Grid>            
+            
+            <!--#region Save/ Cancel Button-->
+            <StackPanel Orientation="Horizontal" Grid.Row="4">
+
+                <Button Width="200" Background="Transparent" BorderBrush="Transparent"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                    <TextBlock Text="Save" Foreground="#6aa84f  " FontSize="18"/>
+                </Button>
+
+                <Button Width="200" Background="Transparent" BorderBrush="Transparent"
+                           Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}">
+                    <TextBlock Text="Cancel" Foreground="#666666 " FontSize="18"/>
+                </Button>
+
+            </StackPanel>
+            <!--#endregion-->
             
             
+
         </Grid>
-           
-    
+
+
+
     </Grid>
 </UserControl>

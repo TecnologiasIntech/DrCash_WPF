@@ -229,6 +229,9 @@
     <Compile Include="Views\Settings_Register_Add.xaml.cs">
       <DependentUpon>Settings_Register_Add.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings_SMPT.xaml.cs">
+      <DependentUpon>Settings_SMPT.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
@@ -363,6 +366,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings_Register_Add.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings_SMPT.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
